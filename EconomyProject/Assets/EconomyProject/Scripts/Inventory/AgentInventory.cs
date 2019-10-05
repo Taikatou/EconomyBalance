@@ -2,28 +2,31 @@
 using System.Linq;
 using UnityEngine;
 
-public class AgentInventory : MonoBehaviour
+namespace Assets.EconomyProject.Scripts.Inventory
 {
-    private List<InventoryItem> _items;
-    void Start()
+    public class AgentInventory : MonoBehaviour
     {
-        _items = new List<InventoryItem>();
-    }
-
-    public void AddItem(InventoryItem item)
-    {
-        _items.Add(item);
-    }
-
-    public InventoryItem EquipedItem
-    {
-        get
+        private List<InventoryItem> _items;
+        void Start()
         {
-            var max = _items.Max(x => x.Dmg);
-            var maxWeapon = _items.First(x => x.Dmg == max);
-            return maxWeapon;
+            _items = new List<InventoryItem>();
         }
-    }
 
-    public int Damage => EquipedItem.Dmg;
+        public void AddItem(InventoryItem item)
+        {
+            _items.Add(item);
+        }
+
+        public InventoryItem EquipedItem
+        {
+            get
+            {
+                var max = _items.Max(x => x.dmg);
+                var maxWeapon = _items.First(x => x.dmg == max);
+                return maxWeapon;
+            }
+        }
+
+        public int Damage => EquipedItem.dmg;
+    }
 }

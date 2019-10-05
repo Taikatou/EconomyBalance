@@ -1,54 +1,56 @@
 ﻿using System.Collections.Generic;
+using Assets.EconomyProject.Scripts.Inventory;
+using Assets.EconomyProject.Scripts.MLAgents;
 using UnityEngine;
 
-public class GameQuests : EconomySystem
+namespace Assets.EconomyProject.Scripts.GameEconomy
 {
-    private float QuestSuccessProb = 0.9f;
-
-    public bool RanQuests = false;
-
-    public List<InventoryItem> Items = new List<InventoryItem>();
-
-    private void Start()
+    public class GameQuests : EconomySystem
     {
-        actionChoice = AgentActionChoice.Quest;
-    }
+        private float QuestSuccessProb = 0.9f;
 
-    public bool RunQuests()
-    {
-        if (!RanQuests)
+        public bool ranQuests;
+
+        public List<InventoryItem> items = new List<InventoryItem>();
+
+        private void Start()
         {
-            foreach (var agent in CurrentPlayers)
+            actionChoice = AgentActionChoice.Quest;
+        }
+
+        public bool RunQuests()
+        {
+            if (!ranQuests)
             {
-                bool questSuccess = Random.value < QuestSuccessProb;
-                if (questSuccess)
+                foreach (var agent in CurrentPlayers)
                 {
-                    int damage = agent.GetComponent<AgentInventory>().Damage;
-                    QuestSuccess(damage);
+                    bool questSuccess = Random.value < QuestSuccessProb;
+                    if (true)
+                    {
+                        QuestSuccess(0);
+                    }
                 }
+                ranQuests = true;
             }
-            RanQuests = true;
+            return ranQuests;
         }
-        return RanQuests;
-    }
 
-    private void QuestSuccess(int Damage)
-    {
-        InventoryItem generatedItem = null;
-        while(!generatedItem && (generatedItem.Dmg > Damage))
+        private void QuestSuccess(int damage)
         {
+            InventoryItem generatedItem = null;
             System.Random rand = new System.Random();
-            // Generate a random index less than the size of the array.  
-            int index = rand.Next(Items.Count);
-            generatedItem = new InventoryItem(Items[index]);
-        }
-        
-        GameAuction auction = GetComponent<GameAuction>();
-        auction.AddAuctionItem(generatedItem);
-    }
 
-    public void Reset()
-    {
-        RanQuests = false;
+            // Generate a random index less than the size of the array.  
+            int index = rand.Next(items.Count);
+            generatedItem = new InventoryItem(items[index]);
+
+            GameAuction auction = GetComponent<GameAuction>();
+            auction.AddAuctionItem(generatedItem);
+        }
+
+        public void Reset()
+        {
+            ranQuests = false;
+        }
     }
 }

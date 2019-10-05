@@ -1,67 +1,80 @@
-﻿using UnityEngine;
+﻿using Assets.EconomyProject.Scripts.MLAgents;
+using UnityEngine;
 
-public enum GameState { ChooseAction, AuctionOrQuest }
-public class GameEconomy : MonoBehaviour
+namespace Assets.EconomyProject.Scripts.GameEconomy
 {
-    public GameState State = GameState.ChooseAction;
-
-    public GameAuction GameAuction => FindObjectOfType<GameAuction>();
-
-    public GameQuests GameQuest => FindObjectOfType<GameQuests>();
-
-    public EconomyAgent [] CurrentPlayers => FindObjectsOfType<EconomyAgent>();
-    public bool EveryPlayerReady
+    public enum GameState { ChooseAction, AuctionOrQuest }
+    public class GameEconomy : MonoBehaviour
     {
-        get
+        public GameState state = GameState.ChooseAction;
+
+        public GameAuction GameAuction => FindObjectOfType<GameAuction>();
+
+        public GameQuests GameQuest => FindObjectOfType<GameQuests>();
+
+        public EconomyAgent [] CurrentPlayers => FindObjectsOfType<EconomyAgent>();
+        public bool EveryPlayerReady
         {
-            bool ready = true;
-            foreach(var agent in CurrentPlayers)
+            get
             {
-                if (!agent.Ready)
+                bool ready = true;
+                foreach(var agent in CurrentPlayers)
                 {
-                    ready = false;
+                    if (!agent.ready)
+                    {
+                        ready = false;
+                    }
                 }
+                return ready;
             }
-            return ready;
         }
-    }
 
-    private void Update()
-    {
-        switch (State)
+        private void Update()
         {
-            case GameState.ChooseAction:
-                if (EveryPlayerReady)
-                {
-                    State = GameState.AuctionOrQuest;
-                    ResetPlayers();
-                }
-                break;
-            case GameState.AuctionOrQuest:
-                bool questOver = GameQuest.RunQuests();
-                bool auctionOver = GameAuction.RunAuction();
-                if(questOver && auctionOver)
-                {
-                    ResetPlayers();
-                }
-                break;
-            default:
-                break;
+            switch (state)
+            {
+                case GameState.ChooseAction:
+                    if (EveryPlayerReady)
+                    {
+                        state = GameState.AuctionOrQuest;
+                        GameAuction.SetupAuction();
+                        SetUi();
+                    }
+                    break;
+                case GameState.AuctionOrQuest:
+                    bool questOver = GameQuest.RunQuests();
+                    bool auctionOver = GameAuction.RunAuction(Time.deltaTime);
+                    if(questOver && auctionOver)
+                    {
+                        ResetPlayers();
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
-    }
 
-    public void ResetPlayers()
-    {
-        foreach (var player in CurrentPlayers)
+        public void ResetPlayers()
         {
-            player.Ready = false;
+            foreach (var player in CurrentPlayers)
+            {
+                player.ready = false;
+            }
         }
-    }
 
-    public void ResetTurn()
-    {
-        State = GameState.ChooseAction;
+        public void SetUi()
+        {
+            foreach (var player in CurrentPlayers)
+            {
+                player.SetUi();
+            }
+        }
 
-        GameQuest.Reset();
+        public void ResetTurn()
+        {
+            state = GameState.ChooseAction;
+
+            GameQuest.Reset();
+        }
     }
 }

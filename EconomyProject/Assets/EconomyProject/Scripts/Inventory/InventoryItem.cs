@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu]
-public class InventoryItem : ScriptableObject
+namespace Assets.EconomyProject.Scripts.Inventory
 {
-    public readonly float BaseBidPrice;
-
-    public readonly string Name;
-
-    public readonly int Dmg;
-
-    public InventoryItem(float baseBidPrice, string name, int dmg)
+    [CreateAssetMenu]
+    public class InventoryItem : ScriptableObject
     {
-        BaseBidPrice = baseBidPrice;
-        Name = name;
-        Dmg = dmg;
-    }
+        public readonly float baseBidPrice;
 
-    public InventoryItem(InventoryItem item) : this(item.BaseBidPrice, item.Name, item.Dmg)
-    {
+        public readonly string Name;
+
+        public readonly int dmg;
+
+        public InventoryItem(float baseBidPrice, string name, int dmg)
+        {
+            this.baseBidPrice = baseBidPrice;
+            Name = name;
+            this.dmg = dmg;
+        }
+
+        public InventoryItem(InventoryItem item) : this(item.baseBidPrice, item.Name, item.dmg)
+        {
         
+        }
     }
 }

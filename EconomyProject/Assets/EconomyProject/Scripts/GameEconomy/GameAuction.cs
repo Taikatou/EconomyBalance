@@ -1,134 +1,99 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+using Assets.EconomyProject.Scripts.Inventory;
+using Assets.EconomyProject.Scripts.MLAgents;
 
-public class GameAuction : EconomySystem
+namespace Assets.EconomyProject.Scripts.GameEconomy
 {
-    private List<InventoryItem> _inventoryItems;
-
-    public int ItemCount => _inventoryItems.Count;
-
-    public float BidIncrement = 5.0f;
-
-    public bool AuctionStarted = false;
-
-    public InventoryItem AuctionedItem;
-
-    public float CurrentItemPrice;
-
-    public Dictionary<InventoryItem, int> SaleAttempt;
-
-    public int SaleAttempts = 3;
-
-    public void AddAuctionItem(InventoryItem item)
+    public class GameAuction : EconomySystem
     {
-        _inventoryItems.Add(item);
-    }
+        private List<InventoryItem> _inventoryItems;
 
-    private void Start()
-    {
-        _inventoryItems = new List<InventoryItem>();
+        public int ItemCount => _inventoryItems.Count;
 
-        SaleAttempt = new Dictionary<InventoryItem, int>();
+        public float bidIncrement = 5.0f;
 
-        actionChoice = AgentActionChoice.Auction;
-    }
+        public InventoryItem auctionedItem;
 
-    public bool AllReady
-    {
-        get
+        public float currentItemPrice;
+
+        public EconomyAgent currentHighestBidder;
+
+        private float _auctionTime = 3.0f;
+
+        public float currentAuctionTime;
+
+        public bool sold;
+
+        public void SetupAuction()
         {
-            bool ready = true;
-            foreach(var play in CurrentPlayers)
+            currentAuctionTime = 0.0f;
+            SetAuctionItem();
+            sold = false;
+        }
+
+        public void SetAuctionItem()
+        {
+            if (_inventoryItems.Count > 0)
             {
-                if(!play.Ready)
+                System.Random rnd = new System.Random();
+
+                int index = rnd.Next(_inventoryItems.Count);
+
+                auctionedItem = _inventoryItems[index];
+            }
+        }
+
+        public void AddAuctionItem(InventoryItem item)
+        {
+            _inventoryItems.Add(item);
+        }
+
+        private void Start()
+        {
+            _inventoryItems = new List<InventoryItem>();
+
+            actionChoice = AgentActionChoice.Auction;
+        }
+
+        public bool AllReady
+        {
+            get
+            {
+                bool ready = true;
+                foreach (var play in CurrentPlayers)
                 {
-                    ready = false;
+                    if (!play.ready)
+                    {
+                        ready = false;
+                    }
                 }
+
+                return ready;
             }
-            return ready;
         }
-    }
 
-    // Returns if the auction is over
-    public bool RunAuction()
-    {
-        if(_inventoryItems.Count > 0)
+        // Returns if the auction is over
+        public bool RunAuction(float time)
         {
-            if (!AuctionStarted)
+            if (_inventoryItems.Count > 0)
             {
-                AuctionStarted = true;
+                currentAuctionTime += time;
+                if (currentAuctionTime >= _auctionTime)
+                {
+                    _inventoryItems.Remove(auctionedItem);
+
+                    SetAuctionItem();
+                }
+                return _inventoryItems.Count == 0;
             }
-
-            System.Random rnd = new System.Random();
-            
-            int index = rnd.Next(_inventoryItems.Count);
-
-            AuctionedItem = _inventoryItems[index];
-
-            bool sold = AuctionItem(AuctionedItem);
-
-            bool toRemove = CheckResale(AuctionedItem, sold);
-
-            if(toRemove)
-            {
-                _inventoryItems.Remove(AuctionedItem);
-                SaleAttempt.Remove(AuctionedItem);
-            }
-
-            return _inventoryItems.Count == 0;
-        }
-        else
-        {
             return true;
         }
-    }
 
-    private bool CheckResale(InventoryItem item, bool sold)
-    {
-        if (!sold)
+        public void Bid(EconomyAgent player)
         {
-            bool contains = SaleAttempt.ContainsKey(AuctionedItem);
-            if (contains)
-            {
-                SaleAttempt[item] = SaleAttempt[item] + 1;
-            }
-            else
-            {
-                SaleAttempt.Add(item, 1);
-            }
-            return SaleAttempt[item] > 3;
+            currentHighestBidder = player;
+            currentItemPrice += bidIncrement;
+            sold = true;
         }
-        return true;
-    }
-
-    private bool AuctionItem(InventoryItem inventoryItem)
-    {
-        float itemPrice = inventoryItem.BaseBidPrice;
-        EconomyAgent highestBidder = null;
-        bool GotBid = false;
-
-        bool bidComplete = false;
-        while(bidComplete)
-        {
-            bidComplete = true;
-            foreach (EconomyAgent agent in CurrentPlayers)
-            {
-                if (agent.Bid(inventoryItem, itemPrice))
-                {
-                    GotBid = true;
-                    bidComplete = false;
-
-                    highestBidder = agent;
-                    itemPrice += BidIncrement;
-                }
-            }
-        }
-
-        if(GotBid)
-        {
-            AgentInventory aInventory = highestBidder.GetComponent<AgentInventory>();
-            aInventory?.AddItem(inventoryItem);
-        }
-        return GotBid;
     }
 }

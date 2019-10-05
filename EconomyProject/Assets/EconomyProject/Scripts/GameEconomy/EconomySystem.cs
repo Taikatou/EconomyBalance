@@ -1,18 +1,22 @@
 ﻿using System;
+using Assets.EconomyProject.Scripts.MLAgents;
 using UnityEngine;
 
-public class EconomySystem : MonoBehaviour
+namespace Assets.EconomyProject.Scripts.GameEconomy
 {
-    // Start is called before the first frame update
-    protected AgentActionChoice actionChoice;
-
-
-    public EconomyAgent[] CurrentPlayers
+    public class EconomySystem : MonoBehaviour
     {
-        get
+        // Start is called before the first frame update
+        protected AgentActionChoice actionChoice;
+
+
+        public EconomyAgent[] CurrentPlayers
         {
-            EconomyAgent[] playerAgents = FindObjectsOfType<EconomyAgent>();
-            return Array.FindAll(playerAgents, element => element.ChoosenChoice == actionChoice);
+            get
+            {
+                EconomyAgent[] playerAgents = FindObjectsOfType<EconomyAgent>();
+                return Array.FindAll(playerAgents, element => element.chosenChoice == actionChoice);
+            }
         }
     }
 }
