@@ -9,30 +9,41 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
     {
         private float QuestSuccessProb = 0.9f;
 
-        public bool ranQuests;
-
         public List<InventoryItem> items = new List<InventoryItem>();
+
+        private float _spawnTime = 3.0f;
+
+        public float currentTime;
 
         private void Start()
         {
             actionChoice = AgentActionChoice.Quest;
+            currentTime = 0.0f;
         }
 
-        public bool RunQuests()
+        private void Update()
         {
-            if (!ranQuests)
+            currentTime += Time.deltaTime;
+            if(currentTime > _spawnTime)
             {
                 foreach (var agent in CurrentPlayers)
                 {
-                    bool questSuccess = Random.value < QuestSuccessProb;
-                    if (true)
-                    {
-                        QuestSuccess(0);
-                    }
+                    RunQuests(agent);
                 }
-                ranQuests = true;
+                currentTime = 0.0f;
             }
-            return ranQuests;
+        }
+
+        public void RunQuests(EconomyAgent agent)
+        {
+            foreach (var var in CurrentPlayers)
+            {
+                bool questSuccess = Random.value < QuestSuccessProb;
+                if (true)
+                {
+                    QuestSuccess(0);
+                }
+            }
         }
 
         private void QuestSuccess(int damage)
@@ -42,15 +53,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
             // Generate a random index less than the size of the array.  
             int index = rand.Next(items.Count);
-            generatedItem = new InventoryItem(items[index]);
+            generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
+
+            generatedItem.Init(items[index]);
 
             GameAuction auction = GetComponent<GameAuction>();
             auction.AddAuctionItem(generatedItem);
-        }
-
-        public void Reset()
-        {
-            ranQuests = false;
         }
     }
 }

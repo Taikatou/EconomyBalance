@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents;
+using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy
 {
@@ -12,34 +13,38 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public float bidIncrement = 5.0f;
 
+        [HideInInspector]
         public InventoryItem auctionedItem;
 
+        [HideInInspector]
         public float currentItemPrice;
 
+        [HideInInspector]
         public EconomyAgent currentHighestBidder;
 
-        private float _auctionTime = 3.0f;
+        private float _auctionTime = 40.0f;
 
+        [HideInInspector]
         public float currentAuctionTime;
 
         public bool sold;
 
-        public void SetupAuction()
-        {
-            currentAuctionTime = 0.0f;
-            SetAuctionItem();
-            sold = false;
-        }
+        public bool AuctionOn = false;
 
         public void SetAuctionItem()
         {
-            if (_inventoryItems.Count > 0)
+            AuctionOn = _inventoryItems.Count > 0;
+            if (AuctionOn)
             {
                 System.Random rnd = new System.Random();
 
                 int index = rnd.Next(_inventoryItems.Count);
 
                 auctionedItem = _inventoryItems[index];
+
+                currentAuctionTime = 0.0f;
+                SetAuctionItem();
+                sold = false;
             }
         }
 
@@ -55,38 +60,19 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             actionChoice = AgentActionChoice.Auction;
         }
 
-        public bool AllReady
-        {
-            get
-            {
-                bool ready = true;
-                foreach (var play in CurrentPlayers)
-                {
-                    if (!play.ready)
-                    {
-                        ready = false;
-                    }
-                }
-
-                return ready;
-            }
-        }
-
         // Returns if the auction is over
-        public bool RunAuction(float time)
+        private void Update()
         {
-            if (_inventoryItems.Count > 0)
+            if (ItemCount > 0)
             {
-                currentAuctionTime += time;
+                currentAuctionTime += Time.deltaTime;
                 if (currentAuctionTime >= _auctionTime)
                 {
                     _inventoryItems.Remove(auctionedItem);
 
                     SetAuctionItem();
                 }
-                return _inventoryItems.Count == 0;
             }
-            return true;
         }
 
         public void Bid(EconomyAgent player)

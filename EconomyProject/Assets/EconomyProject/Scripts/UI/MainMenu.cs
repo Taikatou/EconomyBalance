@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using Assets.EconomyProject.Scripts.MLAgents;
+using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI
 {
-    enum MenuOpen { Main, Auction, Quest }
     public class MainMenu : MonoBehaviour
     {
         public GameObject auctionMenu;
@@ -11,24 +11,24 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public void SwitchToAuction()
         {
-            SwitchMenu(MenuOpen.Auction);
+            SwitchMenu(AgentActionChoice.Auction);
         }
 
         public void SwitchToMain()
         {
-            SwitchMenu(MenuOpen.Main);
+            SwitchMenu(AgentActionChoice.Main);
         }
 
         public void SwitchToQuest()
         {
-            SwitchMenu(MenuOpen.Quest);
+            SwitchMenu(AgentActionChoice.Quest);
         }
 
-        private void SwitchMenu(MenuOpen whichMenu)
+        public void SwitchMenu(AgentActionChoice whichMenu)
         {
-            auctionMenu?.SetActive(whichMenu == MenuOpen.Auction);
-            gameObject?.SetActive(whichMenu == MenuOpen.Main);
-            questMenu?.SetActive(whichMenu == MenuOpen.Quest);
+            auctionMenu?.SetActive(whichMenu == AgentActionChoice.Auction);
+            gameObject?.SetActive(whichMenu == AgentActionChoice.Main);
+            questMenu?.SetActive(whichMenu == AgentActionChoice.Quest);
         }
     }
 }

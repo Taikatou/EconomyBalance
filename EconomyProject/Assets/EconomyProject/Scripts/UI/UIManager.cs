@@ -16,6 +16,11 @@ namespace Assets.EconomyProject.Scripts.UI
             playerAgent.SetAgentAction(AgentActionChoice.Quest);
         }
 
+        public void MainMenu()
+        {
+            playerAgent.SetAgentAction(AgentActionChoice.Main);
+        }
+
         public void Bid()
         {
             playerAgent.SetRunningAction(AgentAuctionChoice.Bid);

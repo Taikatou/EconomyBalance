@@ -5,22 +5,22 @@ namespace Assets.EconomyProject.Scripts.Inventory
     [CreateAssetMenu]
     public class InventoryItem : ScriptableObject
     {
-        public readonly float baseBidPrice;
+        public float baseBidPrice;
 
-        public readonly string Name;
+        public string Name;
 
-        public readonly int dmg;
+        public int dmg;
 
-        public InventoryItem(float baseBidPrice, string name, int dmg)
+        public void Init(float baseBidPrice, string name, int dmg)
         {
             this.baseBidPrice = baseBidPrice;
             Name = name;
             this.dmg = dmg;
         }
 
-        public InventoryItem(InventoryItem item) : this(item.baseBidPrice, item.Name, item.dmg)
+        public void Init(InventoryItem item)
         {
-        
+            Init(item.baseBidPrice, item.Name, item.dmg);
         }
     }
 }
