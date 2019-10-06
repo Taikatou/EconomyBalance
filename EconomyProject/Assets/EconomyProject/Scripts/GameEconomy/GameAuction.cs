@@ -22,19 +22,21 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         [HideInInspector]
         public EconomyAgent currentHighestBidder;
 
-        private float _auctionTime = 40.0f;
+        private float _auctionTime = 5.0f;
 
         [HideInInspector]
         public float currentAuctionTime;
 
+        public float Progress => currentAuctionTime / _auctionTime;
+
         public bool sold;
 
-        public bool AuctionOn = false;
+        public bool auctionOn;
 
         public void SetAuctionItem()
         {
-            AuctionOn = _inventoryItems.Count > 0;
-            if (AuctionOn)
+            auctionOn = _inventoryItems.Count > 0;
+            if (auctionOn)
             {
                 System.Random rnd = new System.Random();
 
@@ -43,7 +45,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                 auctionedItem = _inventoryItems[index];
 
                 currentAuctionTime = 0.0f;
-                SetAuctionItem();
                 sold = false;
             }
         }
@@ -63,8 +64,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         // Returns if the auction is over
         private void Update()
         {
-            if (ItemCount > 0)
+            if (ItemCount > 0 && CurrentPlayers.Length > 0)
             {
+                if (!auctionOn)
+                {
+                    SetAuctionItem();
+                }
                 currentAuctionTime += Time.deltaTime;
                 if (currentAuctionTime >= _auctionTime)
                 {

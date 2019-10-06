@@ -2,6 +2,7 @@
 using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy
 {
@@ -14,6 +15,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         private float _spawnTime = 3.0f;
 
         public float currentTime;
+
+        UnityEvent soldEvent = new UnityEvent();
+
+        public float Progress => currentTime / _spawnTime;
 
         private void Start()
         {
@@ -55,9 +60,9 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             int index = rand.Next(items.Count);
             generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
 
-            generatedItem.Init(items[index]);
+            generatedItem?.Init(items[index]);
 
-            GameAuction auction = GetComponent<GameAuction>();
+            GameAuction auction = FindObjectOfType<GameAuction>();
             auction.AddAuctionItem(generatedItem);
         }
     }
