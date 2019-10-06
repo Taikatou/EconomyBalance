@@ -39,29 +39,29 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public void RunQuests(EconomyAgent agent)
         {
-            foreach (var var in CurrentPlayers)
+            bool questSuccess = Random.value < QuestSuccessProb;
+            if(questSuccess)
             {
-                bool questSuccess = Random.value < QuestSuccessProb;
-                if (questSuccess)
-                {
-                    QuestSuccess(0);
-                }
+                float money = GenerateItem(0);
+                agent.EarnMoney(money);
             }
         }
 
-        private void QuestSuccess(int damage)
+        private float GenerateItem(int damage)
         {
-            InventoryItem generatedItem = null;
             System.Random rand = new System.Random();
 
             // Generate a random index less than the size of the array.  
             int index = rand.Next(items.Count);
-            generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
+
+            InventoryItem generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
 
             generatedItem?.Init(items[index]);
 
             GameAuction auction = FindObjectOfType<GameAuction>();
             auction.AddAuctionItem(generatedItem);
+
+            return generatedItem.baseBidPrice;
         }
     }
 }

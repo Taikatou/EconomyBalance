@@ -11,6 +11,8 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public Text damageText;
 
+        public Text moneyText;
+
         public EconomyAgent economyAgent;
 
         // Update is called once per frame
@@ -24,6 +26,8 @@ namespace Assets.EconomyProject.Scripts.UI
             if(economyAgent)
             {
                 damageText.text = "Agent DMG: " + economyAgent.Damage;
+
+                moneyText.text = "Money: " + economyAgent.money;
             }
         }
     }

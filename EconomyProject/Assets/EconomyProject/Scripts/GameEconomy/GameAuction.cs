@@ -85,9 +85,13 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public void Bid(EconomyAgent player)
         {
-            currentHighestBidder = player;
-            currentItemPrice += bidIncrement;
-            sold = true;
+            float newPrice = currentItemPrice + bidIncrement;
+            if (player.money >= newPrice)
+            {
+                currentHighestBidder = player;
+                currentItemPrice = newPrice;
+                sold = true;
+            }
         }
     }
 }

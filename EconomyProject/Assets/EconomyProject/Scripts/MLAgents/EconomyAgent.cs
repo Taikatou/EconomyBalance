@@ -2,6 +2,7 @@
 using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.UI;
 using MLAgents;
+using System;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents
@@ -16,7 +17,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         public AgentScreen chosenChoice;
 
-        public float money;
+        public double money;
 
         public MainMenu mainMenu;
 
@@ -82,6 +83,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         public override void CollectObservations()
         {
             
+        }
+
+        public void EarnMoney(float amount)
+        {
+            if(amount > 0)
+            {
+                money = Math.Round(money + amount);
+            }
         }
     }
 }
