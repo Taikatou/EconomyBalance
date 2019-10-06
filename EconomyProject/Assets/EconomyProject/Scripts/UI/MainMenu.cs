@@ -26,6 +26,7 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public void SwitchMenu(AgentScreen whichMenu)
         {
+            Debug.Log("Choosen screen " + whichMenu.ToString());
             auctionMenu?.SetActive(whichMenu == AgentScreen.Auction);
             gameObject?.SetActive(whichMenu == AgentScreen.Main);
             questMenu?.SetActive(whichMenu == AgentScreen.Quest);

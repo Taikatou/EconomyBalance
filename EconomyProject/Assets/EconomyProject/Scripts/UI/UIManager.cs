@@ -8,17 +8,17 @@ namespace Assets.EconomyProject.Scripts.UI
         public EconomyAgent playerAgent;
         public void StartAution()
         {
-            playerAgent.SetAgentAction(AgentScreen.Auction);
+            playerAgent.SetAgentAction(AgentAct.Auction);
         }
 
         public void StartQuest()
         {
-            playerAgent.SetAgentAction(AgentScreen.Quest);
+            playerAgent.SetAgentAction(AgentAct.Quest);
         }
 
         public void MainMenu()
         {
-            playerAgent.SetAgentAction(AgentScreen.Main);
+            playerAgent.SetAgentAction(AgentAct.Main);
         }
 
         public void Bid()

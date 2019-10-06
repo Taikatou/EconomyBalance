@@ -9,13 +9,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         // Start is called before the first frame update
         protected AgentScreen actionChoice;
 
-
         public EconomyAgent[] CurrentPlayers
         {
             get
             {
                 EconomyAgent[] playerAgents = FindObjectsOfType<EconomyAgent>();
-                return Array.FindAll(playerAgents, element => element.chosenChoice == actionChoice);
+                return Array.FindAll(playerAgents, element => element.chosenScreen == actionChoice);
             }
         }
     }
