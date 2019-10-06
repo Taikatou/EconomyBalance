@@ -14,12 +14,12 @@ namespace Assets.EconomyProject.Scripts.UI
 
         private void Update()
         {
-            if (gameAuction.ItemCount > 0)
+            if (gameAuction.ItemCount > 0 && gameAuction.auctionedItem)
             {
                 slider.value = Progress;
                 itemText.text = "Name: " + gameAuction.auctionedItem.Name +
                                 " Dmg" + gameAuction.auctionedItem.dmg +
-                                " Bid price: " + gameAuction.auctionedItem.baseBidPrice;
+                                " Bid price: " + gameAuction.currentItemPrice;
             }
             else
             {

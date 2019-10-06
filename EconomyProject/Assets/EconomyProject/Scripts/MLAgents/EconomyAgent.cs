@@ -1,27 +1,30 @@
-﻿using Assets.EconomyProject.Scripts.Inventory;
+﻿using Assets.EconomyProject.Scripts.GameEconomy;
+using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.UI;
 using MLAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents
 {
-    public enum AgentActionChoice { Main, Quest, Auction }
+    public enum AgentScreen { Main, Quest, Auction }
 
-    public enum AgentAuctionChoice { Bid, Ignore }
+    public enum AgentChoice {  Back, Bid, Ignore }
 
     public class EconomyAgent : Agent
     {
         public bool useUi = true;
 
-        public AgentActionChoice chosenChoice;
-
-        public AgentAuctionChoice auctionChoice;
+        public AgentScreen chosenChoice;
 
         public float money;
 
         public MainMenu mainMenu;
 
         public AgentInventory Inventory => GetComponent<AgentInventory>();
+
+        public int Damage => Inventory.Damage;
+
+        private GameAuction gameAuction => FindObjectOfType<GameAuction>();
 
         public bool Bid(InventoryItem item, float price)
         {
@@ -33,25 +36,47 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             if(!useUi)
             {
                 var action = Mathf.FloorToInt(vectorAction[0]);
-                SetAction(action);
+
+                if(chosenChoice == AgentScreen.Main)
+                {
+                    SetAction(action);
+                }
+                else
+                {
+                    SetChoice(action);
+                }
             }
         }
 
         private void SetAction(int action)
         {
-            SetAgentAction((AgentActionChoice) action);
-            SetRunningAction((AgentAuctionChoice) action);
+            SetAgentAction((AgentScreen) action);
         }
 
-        public void SetAgentAction(AgentActionChoice choice)
+        public void SetAgentAction(AgentScreen choice)
         {
             chosenChoice = choice;
             mainMenu.SwitchMenu(choice);
         }
 
-        public void SetRunningAction(AgentAuctionChoice choice)
+        public void SetChoice(AgentChoice choice)
         {
-            auctionChoice = choice;
+            switch(choice)
+            {
+                case AgentChoice.Back:
+                    SetAgentAction(AgentScreen.Main);
+                    break;
+                case AgentChoice.Bid:
+                    gameAuction.Bid(this);
+                    break;
+                case AgentChoice.Ignore:
+                    break;
+            }
+        }
+
+        public void SetChoice(int choice)
+        {
+            SetChoice((AgentChoice)choice);
         }
 
         public override void CollectObservations()

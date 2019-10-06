@@ -7,9 +7,15 @@ namespace Assets.EconomyProject.Scripts.Inventory
     public class AgentInventory : MonoBehaviour
     {
         private List<InventoryItem> _items;
+
+        public List<InventoryItem> startInventory;
         void Start()
         {
             _items = new List<InventoryItem>();
+            foreach(var item in startInventory)
+            {
+                _items.Add(item);
+            }
         }
 
         public void AddItem(InventoryItem item)

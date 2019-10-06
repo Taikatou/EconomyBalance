@@ -11,24 +11,24 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public void SwitchToAuction()
         {
-            SwitchMenu(AgentActionChoice.Auction);
+            SwitchMenu(AgentScreen.Auction);
         }
 
         public void SwitchToMain()
         {
-            SwitchMenu(AgentActionChoice.Main);
+            SwitchMenu(AgentScreen.Main);
         }
 
         public void SwitchToQuest()
         {
-            SwitchMenu(AgentActionChoice.Quest);
+            SwitchMenu(AgentScreen.Quest);
         }
 
-        public void SwitchMenu(AgentActionChoice whichMenu)
+        public void SwitchMenu(AgentScreen whichMenu)
         {
-            auctionMenu?.SetActive(whichMenu == AgentActionChoice.Auction);
-            gameObject?.SetActive(whichMenu == AgentActionChoice.Main);
-            questMenu?.SetActive(whichMenu == AgentActionChoice.Quest);
+            auctionMenu?.SetActive(whichMenu == AgentScreen.Auction);
+            gameObject?.SetActive(whichMenu == AgentScreen.Main);
+            questMenu?.SetActive(whichMenu == AgentScreen.Quest);
         }
     }
 }

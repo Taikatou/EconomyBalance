@@ -7,7 +7,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
     public class EconomySystem : MonoBehaviour
     {
         // Start is called before the first frame update
-        protected AgentActionChoice actionChoice;
+        protected AgentScreen actionChoice;
 
 
         public EconomyAgent[] CurrentPlayers

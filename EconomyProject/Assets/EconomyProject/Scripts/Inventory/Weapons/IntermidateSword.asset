@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23bec5fbd5edd9b4ab62e476059b76fd, type: 3}
-  m_Name: BeginerSword
+  m_Name: IntermidateSword
   m_EditorClassIdentifier: 
-  baseBidPrice: 10
-  Name: Beginner Sword
-  dmg: 3
+  baseBidPrice: 12
+  Name: Intermediate Sword
+  dmg: 5

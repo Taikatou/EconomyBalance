@@ -16,13 +16,11 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public float currentTime;
 
-        UnityEvent soldEvent = new UnityEvent();
-
         public float Progress => currentTime / _spawnTime;
 
         private void Start()
         {
-            actionChoice = AgentActionChoice.Quest;
+            actionChoice = AgentScreen.Quest;
             currentTime = 0.0f;
         }
 
@@ -44,7 +42,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             foreach (var var in CurrentPlayers)
             {
                 bool questSuccess = Random.value < QuestSuccessProb;
-                if (true)
+                if (questSuccess)
                 {
                     QuestSuccess(0);
                 }

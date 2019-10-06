@@ -8,27 +8,22 @@ namespace Assets.EconomyProject.Scripts.UI
         public EconomyAgent playerAgent;
         public void StartAution()
         {
-            playerAgent.SetAgentAction(AgentActionChoice.Auction);
+            playerAgent.SetAgentAction(AgentScreen.Auction);
         }
 
         public void StartQuest()
         {
-            playerAgent.SetAgentAction(AgentActionChoice.Quest);
+            playerAgent.SetAgentAction(AgentScreen.Quest);
         }
 
         public void MainMenu()
         {
-            playerAgent.SetAgentAction(AgentActionChoice.Main);
+            playerAgent.SetAgentAction(AgentScreen.Main);
         }
 
         public void Bid()
         {
-            playerAgent.SetRunningAction(AgentAuctionChoice.Bid);
-        }
-
-        public void Ignore()
-        {
-            playerAgent.SetRunningAction(AgentAuctionChoice.Ignore);
+            playerAgent.SetChoice(AgentChoice.Bid);
         }
     }
 }

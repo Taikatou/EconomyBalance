@@ -45,6 +45,9 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                 auctionedItem = _inventoryItems[index];
 
                 currentAuctionTime = 0.0f;
+
+                currentItemPrice = auctionedItem.baseBidPrice;
+
                 sold = false;
             }
         }
@@ -58,7 +61,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         {
             _inventoryItems = new List<InventoryItem>();
 
-            actionChoice = AgentActionChoice.Auction;
+            actionChoice = AgentScreen.Auction;
         }
 
         // Returns if the auction is over
