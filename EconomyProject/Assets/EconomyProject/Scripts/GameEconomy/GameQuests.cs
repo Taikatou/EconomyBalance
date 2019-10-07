@@ -2,7 +2,6 @@
 using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy
 {
@@ -32,6 +31,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                 foreach (var agent in CurrentPlayers)
                 {
                     RunQuests(agent);
+                    agent.DecreaseDurability();
                 }
                 currentTime = 0.0f;
             }

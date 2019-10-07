@@ -15,3 +15,5 @@ MonoBehaviour:
   baseBidPrice: 15
   Name: Advanced Sword
   dmg: 8
+  BaseDurability: 8
+  Broken: 0

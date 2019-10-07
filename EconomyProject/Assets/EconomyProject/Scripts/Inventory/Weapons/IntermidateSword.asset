@@ -15,3 +15,5 @@ MonoBehaviour:
   baseBidPrice: 12
   Name: Intermediate Sword
   dmg: 5
+  BaseDurability: 5
+  Broken: 0

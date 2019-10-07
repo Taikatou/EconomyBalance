@@ -27,12 +27,26 @@ namespace Assets.EconomyProject.Scripts.Inventory
         {
             get
             {
-                var max = _items.Max(x => x.dmg);
-                var maxWeapon = _items.First(x => x.dmg == max);
-                return maxWeapon;
+                if (_items.Count > 0)
+                {
+                    var max = _items.Max(x => x.damage);
+                    var maxWeapon = _items.First(x => x.damage == max);
+                    return maxWeapon;
+                }
+                return null;
             }
         }
 
-        public int Damage => EquipedItem.dmg;
+        public void DecreaseDurability()
+        {
+            if(EquipedItem)
+            {
+                EquipedItem.DecreaseDurability();
+                if (EquipedItem.Broken)
+                {
+                    _items.Remove(EquipedItem);
+                }
+            }
+        }
     }
 }

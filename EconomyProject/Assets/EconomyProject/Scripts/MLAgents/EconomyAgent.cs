@@ -24,7 +24,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         public AgentInventory Inventory => GetComponent<AgentInventory>();
 
-        public int Damage => Inventory.Damage;
+        public InventoryItem Item => Inventory.EquipedItem;
 
         private GameAuction gameAuction => FindObjectOfType<GameAuction>();
 
@@ -35,9 +35,9 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             { AgentAct.Auction, AgentScreen.Auction }
         };
 
-        public bool Bid(InventoryItem item, float price)
+        public void DecreaseDurability()
         {
-            return price < money;
+            Inventory.DecreaseDurability();
         }
 
         public override void AgentAction(float[] vectorAction, string textAction)

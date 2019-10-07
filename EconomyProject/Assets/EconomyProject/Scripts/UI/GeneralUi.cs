@@ -13,6 +13,10 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public Text moneyText;
 
+        public Text durabilityText;
+
+        public Text currentItemText;
+
         public EconomyAgent economyAgent;
 
         // Update is called once per frame
@@ -25,9 +29,17 @@ namespace Assets.EconomyProject.Scripts.UI
             }
             if(economyAgent)
             {
-                damageText.text = "Agent DMG: " + economyAgent.Damage;
+                moneyText.text = "MONEY: " + economyAgent.money;
 
-                moneyText.text = "Money: " + economyAgent.money;
+                if(economyAgent.Item)
+                {
+
+                }
+                damageText.text = "AGENT DMG: " + economyAgent.Item.damage;
+
+                durabilityText.text = "DURABILITY: " + economyAgent.Item.Durability;
+
+                currentItemText.text = "CURRENT ITEM: " + economyAgent.Item.Name;
             }
         }
     }
