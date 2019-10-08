@@ -31,15 +31,14 @@ namespace Assets.EconomyProject.Scripts.UI
             {
                 moneyText.text = "MONEY: " + economyAgent.money;
 
+                damageText.text = "AGENT DMG: " + economyAgent.Damage;
+
                 if(economyAgent.Item)
                 {
+                    durabilityText.text = "DURABILITY: " + economyAgent.Item.Durability;
 
+                    currentItemText.text = "CURRENT ITEM: " + economyAgent.Item.Name;
                 }
-                damageText.text = "AGENT DMG: " + economyAgent.Item.damage;
-
-                durabilityText.text = "DURABILITY: " + economyAgent.Item.Durability;
-
-                currentItemText.text = "CURRENT ITEM: " + economyAgent.Item.Name;
             }
         }
     }

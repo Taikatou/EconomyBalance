@@ -941,6 +941,7 @@ MonoBehaviour:
   damageText: {fileID: 209877066}
   moneyText: {fileID: 349833729}
   durabilityText: {fileID: 667709497}
+  currentItemText: {fileID: 1827019599}
   economyAgent: {fileID: 6347880836300707091}
 --- !u!1 &448678405
 GameObject:
@@ -1638,7 +1639,8 @@ MonoBehaviour:
   currentItemPrice: 0
   currentHighestBidder: {fileID: 0}
   currentAuctionTime: 0
-  sold: 0
+  bidOn: 0
+  bidLast: 0
   auctionOn: 0
 --- !u!4 &970709943
 Transform:
@@ -2613,7 +2615,7 @@ GameObject:
   - component: {fileID: 1827019600}
   - component: {fileID: 1827019599}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ItemText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

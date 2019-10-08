@@ -29,7 +29,9 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public float Progress => currentAuctionTime / _auctionTime;
 
-        public bool sold;
+        public bool bidOn;
+
+        public bool bidLast;
 
         public bool auctionOn;
 
@@ -48,7 +50,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
                 currentItemPrice = auctionedItem.baseBidPrice;
 
-                sold = false;
+                bidOn = false;
+                bidLast = false;
             }
         }
 
@@ -76,21 +79,36 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                 currentAuctionTime += Time.deltaTime;
                 if (currentAuctionTime >= _auctionTime)
                 {
-                    _inventoryItems.Remove(auctionedItem);
-
-                    SetAuctionItem();
+                    currentAuctionTime = 0.0f;
+                    if (!bidOn)
+                    {
+                        _inventoryItems.Remove(auctionedItem);
+                        SetAuctionItem();
+                        if(bidLast)
+                        {
+                            currentHighestBidder.BoughtItem(auctionedItem, currentItemPrice);
+                        }
+                    }
+                    else
+                    {
+                        bidOn = false;
+                    }
                 }
             }
         }
 
         public void Bid(EconomyAgent player)
         {
-            float newPrice = currentItemPrice + bidIncrement;
-            if (player.money >= newPrice)
+            if(player != currentHighestBidder)
             {
-                currentHighestBidder = player;
-                currentItemPrice = newPrice;
-                sold = true;
+                float newPrice = currentItemPrice + bidIncrement;
+                if (player.money >= newPrice)
+                {
+                    currentHighestBidder = player;
+                    currentItemPrice = newPrice;
+                    bidOn = true;
+                    bidLast = true;
+                }
             }
         }
     }

@@ -28,6 +28,29 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         private GameAuction gameAuction => FindObjectOfType<GameAuction>();
 
+        public int BaseDamage = 2;
+
+        public void BoughtItem(InventoryItem item, float cost)
+        {
+            Inventory.AddItem(item);
+            if(cost > 0)
+            {
+                money -= cost;
+            }
+        }
+
+        public int Damage
+        {
+            get
+            {
+                if(Item)
+                {
+                    return Item.damage;
+                }
+                return BaseDamage;
+            }
+        }
+
         public Dictionary<AgentAct, AgentScreen> ActionMap = new Dictionary<AgentAct, AgentScreen>()
         {
             { AgentAct.Main, AgentScreen.Main },

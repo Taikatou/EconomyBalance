@@ -13,28 +13,15 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public int BaseDurability;
 
-        private int _currentDurability;
-
-        private bool _toSet;
+        [HideInInspector]
+        public int Durability;
 
         [HideInInspector]
         public bool Broken;
 
-        public int Durability
+        public void Awake()
         {
-            get
-            {
-                if(_toSet)
-                {
-                    _toSet = false;
-                    _currentDurability = BaseDurability;
-                }
-                return _currentDurability;
-            }
-            set
-            {
-                _currentDurability = value;
-            }
+            Durability = BaseDurability;
         }
 
         public void Init(float baseBidPrice, string name, int dmg, int durability)
@@ -42,7 +29,6 @@ namespace Assets.EconomyProject.Scripts.Inventory
             this.baseBidPrice = baseBidPrice;
             this.Name = name;
             this.damage = dmg;
-            this._currentDurability = durability;
             this.BaseDurability = durability;
         }
 
@@ -54,7 +40,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
         public void DecreaseDurability()
         {
             Durability--;
-            if(Durability <= 0)
+            if (Durability <= 0)
             {
                 Broken = true;
             }
