@@ -16,10 +16,11 @@ namespace Assets.EconomyProject.Scripts.Inventory
         [HideInInspector]
         public int Durability;
 
-        [HideInInspector]
-        public bool Broken;
+        public bool UnBreakable = false;
 
-        public void Awake()
+        public bool Broken => Durability == 0;
+
+        private void OnEnable()
         {
             Durability = BaseDurability;
         }
@@ -30,6 +31,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
             this.Name = name;
             this.damage = dmg;
             this.BaseDurability = durability;
+            this.Durability = durability;
         }
 
         public void Init(InventoryItem item)
@@ -39,10 +41,9 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public void DecreaseDurability()
         {
-            Durability--;
-            if (Durability <= 0)
+            if(UnBreakable)
             {
-                Broken = true;
+                Durability--;
             }
         }
     }
