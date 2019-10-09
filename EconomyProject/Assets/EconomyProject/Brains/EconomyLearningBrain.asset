@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EconomyLearningBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 0
+    vectorObservationSize: 8
     numStackedVectorObservations: 1
     vectorActionSize: 04000000
     cameraResolutions: []

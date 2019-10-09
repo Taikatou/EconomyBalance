@@ -2953,22 +2953,11 @@ PrefabInstance:
       propertyPath: mainMenu
       value: 
       objectReference: {fileID: 1277643501}
-    - target: {fileID: 6347880836300707090, guid: d23e778bfe4f7a445aad637bb2faae9e,
+    - target: {fileID: 6347880836300707091, guid: d23e778bfe4f7a445aad637bb2faae9e,
         type: 3}
-      propertyPath: startInventory.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6347880836300707090, guid: d23e778bfe4f7a445aad637bb2faae9e,
-        type: 3}
-      propertyPath: startInventory.Array.data[0]
+      propertyPath: brain
       value: 
-      objectReference: {fileID: 11400000, guid: 91bd7ff49920f4841b311f0aad3678e3,
-        type: 2}
-    - target: {fileID: 6347880836300707090, guid: d23e778bfe4f7a445aad637bb2faae9e,
-        type: 3}
-      propertyPath: startInventory.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 91bd7ff49920f4841b311f0aad3678e3,
+      objectReference: {fileID: 11400000, guid: ecf7406acb8466b42ab1e9168edd8170,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d23e778bfe4f7a445aad637bb2faae9e, type: 3}

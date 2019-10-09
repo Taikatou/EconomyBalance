@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf88a2c3c27c9b4b804eeb1c5a32011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startInventory:
+  - {fileID: 11400000, guid: 91bd7ff49920f4841b311f0aad3678e3, type: 2}
 --- !u!114 &6347880836300707091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,8 +66,7 @@ MonoBehaviour:
     resetOnDone: 1
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1
-  UseUI: 1
-  Ready: 0
-  ChoosenChoice: 0
-  AuctionChoice: 0
-  Money: 0
+  chosenScreen: 0
+  money: 0
+  mainMenu: {fileID: 0}
+  BaseDamage: 2

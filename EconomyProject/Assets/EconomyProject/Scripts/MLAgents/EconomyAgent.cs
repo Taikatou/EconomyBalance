@@ -148,10 +148,5 @@ namespace Assets.EconomyProject.Scripts.MLAgents
                 AddReward((float)money);
             }
         }
-
-        private void Update()
-        {
-            Debug.Log(Item.Name);   
-        }
     }
 }
