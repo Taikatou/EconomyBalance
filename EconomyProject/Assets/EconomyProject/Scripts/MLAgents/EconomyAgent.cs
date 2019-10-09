@@ -116,7 +116,28 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         public override void CollectObservations()
         {
+            AddVectorObs((int)chosenScreen);
+            AddVectorObs((float)money);
+            AddVectorObs(Damage);
+            AddVectorObs(Item.UnBreakable);
+            AddVectorObs(Item.Durability);
+            AddVectorObs(gameAuction.ItemCount);
+            bool writed = false;
+            if (chosenScreen == AgentScreen.Auction)
+            {
+                if(gameAuction.auctionedItem)
+                {
+                    writed = true;
+                    AddVectorObs(gameAuction.auctionedItem.damage);
+                    AddVectorObs(gameAuction.currentItemPrice);
+                }
+            }
             
+            if(!writed)
+            {
+                AddVectorObs(0);
+                AddVectorObs(0);
+            }
         }
 
         public void EarnMoney(float amount)
@@ -124,7 +145,13 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             if(amount > 0)
             {
                 money = Math.Round(money + amount);
+                AddReward((float)money);
             }
+        }
+
+        private void Update()
+        {
+            Debug.Log(Item.Name);   
         }
     }
 }

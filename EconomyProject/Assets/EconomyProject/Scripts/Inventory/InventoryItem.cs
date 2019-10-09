@@ -18,20 +18,20 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public bool UnBreakable = false;
 
-        public bool Broken => Durability == 0;
+        public bool Broken => !UnBreakable && Durability == 0;
 
         private void OnEnable()
         {
             Durability = BaseDurability;
         }
 
-        public void Init(float baseBidPrice, string name, int dmg, int durability)
+        public void Init(float basePrice, string name, int dmg, int durability)
         {
-            this.baseBidPrice = baseBidPrice;
-            this.Name = name;
-            this.damage = dmg;
-            this.BaseDurability = durability;
-            this.Durability = durability;
+            baseBidPrice = basePrice;
+            Name = name;
+            damage = dmg;
+            BaseDurability = durability;
+            Durability = durability;
         }
 
         public void Init(InventoryItem item)
