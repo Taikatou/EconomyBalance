@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseBidPrice: 10
   Name: Beginner Sword
-  damage: 12
+  damage: 10
   BaseDurability: 3
   Durability: 3
-  Breakable: 0
+  UnBreakable: 0

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseBidPrice: 12
   Name: Epic Sword
-  dmg: 20
+  damage: 20
   BaseDurability: 8
-  Broken: 0
+  Durability: 8
+  UnBreakable: 0

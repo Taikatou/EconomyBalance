@@ -7,8 +7,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 {
     public class GameAuction : EconomySystem
     {
-        private List<InventoryItem> _inventoryItems;
-
         public int ItemCount => _inventoryItems.Count;
 
         public float bidIncrement = 5.0f;
@@ -22,23 +20,27 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         [HideInInspector]
         public EconomyAgent currentHighestBidder;
 
-        private float _auctionTime = 5.0f;
-
         [HideInInspector]
         public float currentAuctionTime;
 
+        private float _auctionTime = 5.0f;
+
+        private bool _bidOn;
+
+        private bool _bidLast;
+
+        private bool _auctionOn;
+
+        private List<InventoryItem> _inventoryItems;
+
         public float Progress => currentAuctionTime / _auctionTime;
 
-        public bool bidOn;
-
-        public bool bidLast;
-
-        public bool auctionOn;
+        private DataLogger Logger => GetComponent<DataLogger>();
 
         public void SetAuctionItem()
         {
-            auctionOn = _inventoryItems.Count > 0;
-            if (auctionOn)
+            _auctionOn = _inventoryItems.Count > 0;
+            if (_auctionOn)
             {
                 System.Random rnd = new System.Random();
 
@@ -50,8 +52,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
                 currentItemPrice = auctionedItem.baseBidPrice;
 
-                bidOn = false;
-                bidLast = false;
+                currentHighestBidder = null;
+
+                _bidOn = false;
+                _bidLast = false;
             }
         }
 
@@ -72,7 +76,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         {
             if (ItemCount > 0 && CurrentPlayers.Length > 0)
             {
-                if (!auctionOn)
+                if (!_auctionOn)
                 {
                     SetAuctionItem();
                 }
@@ -80,18 +84,19 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                 if (currentAuctionTime >= _auctionTime)
                 {
                     currentAuctionTime = 0.0f;
-                    if (!bidOn)
+                    if (!_bidOn)
                     {
                         _inventoryItems.Remove(auctionedItem);
-                        SetAuctionItem();
-                        if(bidLast)
+                        if(_bidLast)
                         {
                             currentHighestBidder.BoughtItem(auctionedItem, currentItemPrice);
+                            Logger.AddAuctionItem(auctionedItem, currentItemPrice);
                         }
+                        SetAuctionItem();
                     }
                     else
                     {
-                        bidOn = false;
+                        _bidOn = false;
                     }
                 }
             }
@@ -106,8 +111,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                 {
                     currentHighestBidder = player;
                     currentItemPrice = newPrice;
-                    bidOn = true;
-                    bidLast = true;
+                    _bidOn = true;
+                    _bidLast = true;
                 }
             }
         }

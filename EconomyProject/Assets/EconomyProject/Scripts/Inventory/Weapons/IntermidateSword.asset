@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseBidPrice: 12
   Name: Intermediate Sword
-  dmg: 5
+  damage: 13
   BaseDurability: 5
-  Broken: 0
+  Durability: 5
+  UnBreakable: 0

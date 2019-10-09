@@ -16,5 +16,5 @@ MonoBehaviour:
   Name: Unarmed
   damage: 5
   BaseDurability: 0
-  Durability: 0
-  Breakable: 1
+  Durability: -2
+  UnBreakable: 1

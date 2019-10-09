@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseBidPrice: 15
   Name: Advanced Sword
-  dmg: 8
+  damage: 15
   BaseDurability: 8
-  Broken: 0
+  Durability: 8
+  UnBreakable: 0

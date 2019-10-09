@@ -41,7 +41,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public void DecreaseDurability()
         {
-            if(UnBreakable)
+            if(!UnBreakable)
             {
                 Durability--;
             }
