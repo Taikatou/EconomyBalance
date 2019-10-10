@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bec5fbd5edd9b4ab62e476059b76fd, type: 3}
   m_Name: Unarmed
   m_EditorClassIdentifier: 
-  baseBidPrice: 0
   Name: Unarmed
+  baseBidPrice: 0
   damage: 5
   BaseDurability: 0
-  Durability: -2
+  Durability: 0
   UnBreakable: 1
+  Efficiency: 10
+  RarityType: 0
+  MaxRarityType: 1

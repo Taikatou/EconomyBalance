@@ -17,6 +17,8 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public Text currentItemText;
 
+        public Text efficiencyText;
+
         public EconomyAgent economyAgent;
 
         // Update is called once per frame
@@ -38,6 +40,8 @@ namespace Assets.EconomyProject.Scripts.UI
                     durabilityText.text = "DURABILITY: " + (economyAgent.Item.UnBreakable? "∞" : economyAgent.Item.Durability.ToString());
 
                     currentItemText.text = "CURRENT ITEM: " + economyAgent.Item.Name;
+
+                    efficiencyText.text = "EFFICIENCY: " + economyAgent.Item.Efficiency;
                 }
             }
         }

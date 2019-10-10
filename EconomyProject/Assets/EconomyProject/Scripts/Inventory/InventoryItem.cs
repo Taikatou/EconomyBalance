@@ -2,12 +2,14 @@
 
 namespace Assets.EconomyProject.Scripts.Inventory
 {
+    public enum RarityTypes { Common, UnCommon, Rare, Epic }
+
     [CreateAssetMenu]
     public class InventoryItem : ScriptableObject
     {
-        public float baseBidPrice;
-
         public string Name;
+
+        public float baseBidPrice;
 
         public int damage;
 
@@ -19,6 +21,12 @@ namespace Assets.EconomyProject.Scripts.Inventory
         public bool UnBreakable = false;
 
         public bool Broken => !UnBreakable && Durability == 0;
+
+        public float Efficiency;
+
+        public RarityTypes RarityType;
+
+        public RarityTypes MaxRarityType;
 
         private void OnEnable()
         {
