@@ -107,7 +107,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             if(player != currentHighestBidder)
             {
                 float newPrice = currentItemPrice + bidIncrement;
-                if (player.money >= newPrice)
+                if (player.Money >= newPrice)
                 {
                     currentHighestBidder = player;
                     currentItemPrice = newPrice;

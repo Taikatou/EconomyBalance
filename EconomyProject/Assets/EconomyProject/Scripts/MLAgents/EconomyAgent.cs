@@ -18,7 +18,11 @@ namespace Assets.EconomyProject.Scripts.MLAgents
     {
         public AgentScreen chosenScreen = AgentScreen.Main;
 
-        public double money;
+        public double StartMoney;
+        
+        private double _money;
+
+        public double Money => _money;
 
         public MainMenu mainMenu;
 
@@ -28,14 +32,17 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         private GameAuction gameAuction => FindObjectOfType<GameAuction>();
 
-        public int BaseDamage = 2;
+        private void Start()
+        {
+            _money = StartMoney;
+        }
 
         public void BoughtItem(InventoryItem item, float cost)
         {
             Inventory.AddItem(item);
             if(cost > 0)
             {
-                money -= cost;
+                _money -= cost;
             }
         }
 
@@ -47,7 +54,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
                 {
                     return Item.damage;
                 }
-                return BaseDamage;
+                return 0;
             }
         }
 
@@ -117,7 +124,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         public override void CollectObservations()
         {
             AddVectorObs((int)chosenScreen);
-            AddVectorObs((float)money);
+            AddVectorObs((float)_money);
             AddVectorObs(Damage);
             AddVectorObs(Item.UnBreakable);
             AddVectorObs(Item.Durability);
@@ -144,8 +151,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         {
             if(amount > 0)
             {
-                money = Math.Round(money + amount);
-                AddReward((float)money);
+                _money = Math.Round(_money + amount);
+                AddReward((float)_money);
             }
         }
     }

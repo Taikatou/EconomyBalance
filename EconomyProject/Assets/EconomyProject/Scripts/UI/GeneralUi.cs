@@ -29,7 +29,7 @@ namespace Assets.EconomyProject.Scripts.UI
             }
             if(economyAgent)
             {
-                moneyText.text = "MONEY: " + economyAgent.money;
+                moneyText.text = "MONEY: " + economyAgent.Money;
 
                 damageText.text = "AGENT DMG: " + economyAgent.Damage;
 
