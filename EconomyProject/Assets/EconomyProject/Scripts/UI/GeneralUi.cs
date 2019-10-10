@@ -37,11 +37,11 @@ namespace Assets.EconomyProject.Scripts.UI
 
                 if(economyAgent.Item)
                 {
-                    durabilityText.text = "DURABILITY: " + (economyAgent.Item.UnBreakable? "∞" : economyAgent.Item.Durability.ToString());
+                    durabilityText.text = "DURABILITY: " + (economyAgent.Item.unBreakable? "∞" : economyAgent.Item.durability.ToString());
 
                     currentItemText.text = "CURRENT ITEM: " + economyAgent.Item.Name;
 
-                    efficiencyText.text = "EFFICIENCY: " + economyAgent.Item.Efficiency;
+                    efficiencyText.text = "EFFICIENCY: " + economyAgent.Item.efficiency;
                 }
             }
         }

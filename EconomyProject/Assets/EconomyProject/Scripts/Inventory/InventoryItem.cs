@@ -13,24 +13,24 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public int damage;
 
-        public int BaseDurability;
+        public int baseDurability;
 
         [HideInInspector]
-        public int Durability;
+        public int durability;
 
-        public bool UnBreakable = false;
+        public bool unBreakable = false;
 
-        public bool Broken => !UnBreakable && Durability == 0;
+        public bool Broken => !unBreakable && durability == 0;
 
-        public float Efficiency;
+        public float efficiency;
 
-        public RarityTypes RarityType;
+        public RarityTypes rarityType;
 
-        public RarityTypes MaxRarityType;
+        public RarityTypes maxRarityType;
 
         private void OnEnable()
         {
-            Durability = BaseDurability;
+            durability = baseDurability;
         }
 
         public void Init(float basePrice, string name, int dmg, int durability)
@@ -38,20 +38,20 @@ namespace Assets.EconomyProject.Scripts.Inventory
             baseBidPrice = basePrice;
             Name = name;
             damage = dmg;
-            BaseDurability = durability;
-            Durability = durability;
+            baseDurability = durability;
+            this.durability = durability;
         }
 
         public void Init(InventoryItem item)
         {
-            Init(item.baseBidPrice, item.Name, item.damage, item.BaseDurability);
+            Init(item.baseBidPrice, item.Name, item.damage, item.baseDurability);
         }
 
         public void DecreaseDurability()
         {
-            if(!UnBreakable)
+            if(!unBreakable)
             {
-                Durability--;
+                durability--;
             }
         }
     }

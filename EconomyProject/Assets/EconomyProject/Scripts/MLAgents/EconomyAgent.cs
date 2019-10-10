@@ -126,8 +126,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             AddVectorObs((int)chosenScreen);
             AddVectorObs((float)_money);
             AddVectorObs(Damage);
-            AddVectorObs(Item.UnBreakable);
-            AddVectorObs(Item.Durability);
+            AddVectorObs(Item.unBreakable);
+            AddVectorObs(Item.durability);
             AddVectorObs(gameAuction.ItemCount);
             bool writed = false;
             if (chosenScreen == AgentScreen.Auction)

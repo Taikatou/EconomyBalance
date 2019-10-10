@@ -2,20 +2,17 @@
 using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents;
 using UnityEngine;
+using System.Linq;
+using UnityEngine.Experimental.PlayerLoop;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy
 {
-    public struct QuestItems
-    {
-        InventoryItem item;
-        float Probability;
-    }
 
     public class GameQuests : EconomySystem
     {
         public List<InventoryItem> items = new List<InventoryItem>();
 
-        private float _spawnTime = 3.0f;
+        private readonly float _spawnTime = 3.0f;
 
         [HideInInspector]
         public float currentTime;
@@ -44,11 +41,11 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public void RunQuests(EconomyAgent agent)
         {
-            bool questSuccess = Random.value < (agent.Item.Efficiency / 100);
-            Debug.Log((agent.Item.Efficiency / 100));
+            bool questSuccess = Random.value < (agent.Item.efficiency / 100);
+            Debug.Log((agent.Item.efficiency / 100));
             if(questSuccess)
             {
-                float money = GenerateItem(0, agent.Item.MaxRarityType);
+                float money = GenerateItem(0, agent.Item.maxRarityType);
                 agent.EarnMoney(money);
             }
         }
@@ -70,8 +67,14 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                 GameAuction auction = FindObjectOfType<GameAuction>();
                 auction.AddAuctionItem(generatedItem);
             }
-            while (generatedItem && generatedItem.RarityType <= maxRarity);
-            return generatedItem.baseBidPrice;
+            while (generatedItem != null && generatedItem.rarityType <= maxRarity);
+
+            if (generatedItem != null)
+            {
+                return generatedItem.baseBidPrice;
+            }
+
+            return 0.0f;
         }
     }
 }
