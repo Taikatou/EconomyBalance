@@ -15,9 +15,7 @@ MonoBehaviour:
   Name: Advanced Sword
   baseBidPrice: 15
   damage: 15
-  BaseDurability: 8
-  Durability: 8
-  UnBreakable: 0
-  Efficiency: 40
-  RarityType: 2
-  MaxRarityType: 3
+  baseDurability: 15
+  durability: 15
+  unBreakable: 0
+  efficiency: 80

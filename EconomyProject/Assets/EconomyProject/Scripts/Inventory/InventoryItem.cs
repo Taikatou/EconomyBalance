@@ -24,27 +24,24 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public float efficiency;
 
-        public RarityTypes rarityType;
-
-        public RarityTypes maxRarityType;
-
         private void OnEnable()
         {
             durability = baseDurability;
         }
 
-        public void Init(float basePrice, string name, int dmg, int durability)
+        public void Init(float basePrice, string name, int dmg, int durability, float efficiency)
         {
             baseBidPrice = basePrice;
             Name = name;
             damage = dmg;
             baseDurability = durability;
             this.durability = durability;
+            this.efficiency = efficiency;
         }
 
         public void Init(InventoryItem item)
         {
-            Init(item.baseBidPrice, item.Name, item.damage, item.baseDurability);
+            Init(item.baseBidPrice, item.Name, item.damage, item.baseDurability, item.efficiency);
         }
 
         public void DecreaseDurability()

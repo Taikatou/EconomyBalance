@@ -15,9 +15,7 @@ MonoBehaviour:
   Name: Epic Sword
   baseBidPrice: 17
   damage: 20
-  BaseDurability: 8
-  Durability: 8
-  UnBreakable: 0
-  Efficiency: 50
-  RarityType: 3
-  MaxRarityType: 3
+  baseDurability: 19
+  durability: 19
+  unBreakable: 0
+  efficiency: 90

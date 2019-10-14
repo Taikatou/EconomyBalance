@@ -1,17 +1,11 @@
-﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.Inventory;
+﻿using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents;
 using UnityEngine;
-using System.Linq;
-using UnityEngine.Experimental.PlayerLoop;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy
 {
-
     public class GameQuests : EconomySystem
     {
-        public List<InventoryItem> items = new List<InventoryItem>();
-
         private readonly float _spawnTime = 3.0f;
 
         [HideInInspector]
@@ -19,8 +13,16 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public float Progress => currentTime / _spawnTime;
 
+        public GenericLootDropTableGameObject lootDropTable;
+
+        // How many items treasure will spawn
+        public int numItemsToDrop = 0;
+
+        public bool finiteMonsters = true;
+
         private void Start()
         {
+            lootDropTable.ValidateTable();
             actionChoice = AgentScreen.Quest;
             currentTime = 0.0f;
         }
@@ -30,11 +32,22 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             currentTime += Time.deltaTime;
             if(currentTime > _spawnTime)
             {
-                foreach (var agent in CurrentPlayers)
+                if(finiteMonsters)
                 {
-                    RunQuests(agent);
-                    agent.DecreaseDurability();
+                    foreach (var agent in CurrentPlayers)
+                    {
+                        RunQuests(agent);
+                    }
                 }
+                else
+                {
+                    System.Random random = new System.Random();
+                    int start2 = random.Next(0, CurrentPlayers.Length);
+                    var agent = CurrentPlayers[start2];
+
+                    RunQuests(agent);
+                }
+                
                 currentTime = 0.0f;
             }
         }
@@ -42,32 +55,29 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         public void RunQuests(EconomyAgent agent)
         {
             bool questSuccess = Random.value < (agent.Item.efficiency / 100);
-            Debug.Log((agent.Item.efficiency / 100));
             if(questSuccess)
             {
-                float money = GenerateItem(0, agent.Item.maxRarityType);
+                float money = GenerateItem(0);
                 agent.EarnMoney(money);
             }
+            agent.DecreaseDurability();
         }
 
-        private float GenerateItem(int damage, RarityTypes maxRarity)
+        private float GenerateItem(int damage)
         {
-            InventoryItem generatedItem;
-            do
+            InventoryItem generatedItem = null;
+
+            for (int i = 0; i < numItemsToDrop; i++)
             {
-                System.Random rand = new System.Random();
-
-                // Generate a random index less than the size of the array.  
-                int index = rand.Next(items.Count);
-
+                GeneratedLootItemScriptableObject selectedItem = lootDropTable.PickLootDropItem();
                 generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
 
-                generatedItem?.Init(items[index]);
-
+                generatedItem?.Init(selectedItem.item);
                 GameAuction auction = FindObjectOfType<GameAuction>();
                 auction.AddAuctionItem(generatedItem);
+
+                Debug.Log(selectedItem.item.Name);
             }
-            while (generatedItem != null && generatedItem.rarityType <= maxRarity);
 
             if (generatedItem != null)
             {

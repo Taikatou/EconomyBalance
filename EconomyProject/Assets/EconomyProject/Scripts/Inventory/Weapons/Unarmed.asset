@@ -15,9 +15,7 @@ MonoBehaviour:
   Name: Unarmed
   baseBidPrice: 0
   damage: 5
-  BaseDurability: 0
-  Durability: 0
-  UnBreakable: 1
-  Efficiency: 10
-  RarityType: 0
-  MaxRarityType: 1
+  baseDurability: 0
+  durability: 0
+  unBreakable: 1
+  efficiency: 40

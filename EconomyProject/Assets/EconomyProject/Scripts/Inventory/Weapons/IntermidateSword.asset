@@ -15,9 +15,7 @@ MonoBehaviour:
   Name: Intermediate Sword
   baseBidPrice: 12
   damage: 13
-  BaseDurability: 5
-  Durability: 5
-  UnBreakable: 0
-  Efficiency: 30
-  RarityType: 1
-  MaxRarityType: 2
+  baseDurability: 13
+  durability: 13
+  unBreakable: 0
+  efficiency: 70
