@@ -32,6 +32,21 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         private GameAuction gameAuction => FindObjectOfType<GameAuction>();
 
+        public float Progress
+        {
+            get
+            {
+                switch (chosenScreen)
+                {
+                    case AgentScreen.Auction:
+                        return gameAuction.Progress;
+                    case AgentScreen.Quest:
+                        return FindObjectOfType<GameQuests>().Progress;
+                }
+                return 0.0f;
+            }
+        }
+
         public static int AgentCounter = 0;
 
         public int AgentId;
@@ -49,18 +64,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             if(cost > 0)
             {
                 _money -= cost;
-            }
-        }
-
-        public int Damage
-        {
-            get
-            {
-                if(Item)
-                {
-                    return Item.damage;
-                }
-                return 0;
             }
         }
 
@@ -131,19 +134,21 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         {
             AddVectorObs((int)chosenScreen);
             AddVectorObs((float)_money);
-            AddVectorObs(Damage);
             AddVectorObs(Item.unBreakable);
             AddVectorObs(Item.durability);
+            AddVectorObs(Item.efficiency);
             AddVectorObs(gameAuction.ItemCount);
             AddVectorObs(Inventory.ItemCount);
+            AddVectorObs(Progress);
+
             bool writed = false;
             if (chosenScreen == AgentScreen.Auction)
             {
                 if(gameAuction.auctionedItem)
                 {
                     writed = true;
-                    AddVectorObs(gameAuction.auctionedItem.damage);
                     AddVectorObs(gameAuction.currentItemPrice);
+                    AddVectorObs(gameAuction.auctionedItem.efficiency);
                 }
             }
             

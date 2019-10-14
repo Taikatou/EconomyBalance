@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy
 {
-    public class EconomySystem : MonoBehaviour
+    public abstract class EconomySystem : MonoBehaviour
     {
         // Start is called before the first frame update
         protected AgentScreen actionChoice;
@@ -17,5 +17,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                 return Array.FindAll(playerAgents, element => element.chosenScreen == actionChoice);
             }
         }
+
+        public abstract float Progress { get; }
     }
 }

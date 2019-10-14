@@ -9,8 +9,6 @@ namespace Assets.EconomyProject.Scripts.UI
     {
         public Text auctionText;
 
-        public Text damageText;
-
         public Text moneyText;
 
         public Text durabilityText;
@@ -32,8 +30,6 @@ namespace Assets.EconomyProject.Scripts.UI
             if(economyAgent)
             {
                 moneyText.text = "MONEY: " + economyAgent.Money;
-
-                damageText.text = "AGENT DMG: " + economyAgent.Damage;
 
                 if(economyAgent.Item)
                 {

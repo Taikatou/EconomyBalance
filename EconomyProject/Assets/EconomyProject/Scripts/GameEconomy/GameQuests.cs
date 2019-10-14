@@ -11,7 +11,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         [HideInInspector]
         public float currentTime;
 
-        public float Progress => currentTime / _spawnTime;
+        public override float Progress => currentTime / _spawnTime;
 
         public GenericLootDropTableGameObject lootDropTable;
 
@@ -29,26 +29,29 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         private void Update()
         {
-            currentTime += Time.deltaTime;
-            if(currentTime > _spawnTime)
+            if(CurrentPlayers.Length > 1)
             {
-                if(finiteMonsters)
+                currentTime += Time.deltaTime;
+                if (currentTime > _spawnTime)
                 {
-                    foreach (var agent in CurrentPlayers)
+                    if (finiteMonsters)
                     {
+                        foreach (var agent in CurrentPlayers)
+                        {
+                            RunQuests(agent);
+                        }
+                    }
+                    else
+                    {
+                        System.Random random = new System.Random();
+                        int start2 = random.Next(0, CurrentPlayers.Length - 1);
+                        var agent = CurrentPlayers[start2];
+
                         RunQuests(agent);
                     }
-                }
-                else
-                {
-                    System.Random random = new System.Random();
-                    int start2 = random.Next(0, CurrentPlayers.Length);
-                    var agent = CurrentPlayers[start2];
 
-                    RunQuests(agent);
+                    currentTime = 0.0f;
                 }
-                
-                currentTime = 0.0f;
             }
         }
 

@@ -2,16 +2,12 @@
 
 namespace Assets.EconomyProject.Scripts.Inventory
 {
-    public enum RarityTypes { Common, UnCommon, Rare, Epic }
-
     [CreateAssetMenu]
     public class InventoryItem : ScriptableObject
     {
         public string Name;
 
         public float baseBidPrice;
-
-        public int damage;
 
         public int baseDurability;
 
@@ -29,11 +25,10 @@ namespace Assets.EconomyProject.Scripts.Inventory
             durability = baseDurability;
         }
 
-        public void Init(float basePrice, string name, int dmg, int durability, float efficiency)
+        public void Init(float basePrice, string name, int durability, float efficiency)
         {
             baseBidPrice = basePrice;
             Name = name;
-            damage = dmg;
             baseDurability = durability;
             this.durability = durability;
             this.efficiency = efficiency;
@@ -41,7 +36,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public void Init(InventoryItem item)
         {
-            Init(item.baseBidPrice, item.Name, item.damage, item.baseDurability, item.efficiency);
+            Init(item.baseBidPrice, item.Name, item.baseDurability, item.efficiency);
         }
 
         public void DecreaseDurability()

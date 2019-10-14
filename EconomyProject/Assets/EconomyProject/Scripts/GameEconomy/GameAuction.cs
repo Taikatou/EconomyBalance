@@ -33,7 +33,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         private List<InventoryItem> _inventoryItems;
 
-        public float Progress => currentAuctionTime / _auctionTime;
+        public override float Progress => currentAuctionTime / _auctionTime;
 
         private DataLogger Logger => GetComponent<DataLogger>();
 

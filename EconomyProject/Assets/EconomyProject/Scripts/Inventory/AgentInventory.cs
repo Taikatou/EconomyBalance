@@ -31,8 +31,8 @@ namespace Assets.EconomyProject.Scripts.Inventory
             {
                 if (_items.Count > 0)
                 {
-                    var max = _items.Max(x => x.damage);
-                    var maxWeapon = _items.First(x => x.damage == max);
+                    var max = _items.Max(x => x.efficiency);
+                    var maxWeapon = _items.First(x => x.efficiency == max);
                     return maxWeapon;
                 }
                 return null;
