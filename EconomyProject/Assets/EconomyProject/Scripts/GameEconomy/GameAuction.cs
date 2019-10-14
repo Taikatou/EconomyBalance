@@ -90,7 +90,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                         if(_bidLast)
                         {
                             currentHighestBidder.BoughtItem(auctionedItem, currentItemPrice);
-                            Logger.AddAuctionItem(auctionedItem, currentItemPrice);
+                            Logger.AddAuctionItem(auctionedItem, currentItemPrice, currentHighestBidder);
                         }
                         SetAuctionItem();
                     }

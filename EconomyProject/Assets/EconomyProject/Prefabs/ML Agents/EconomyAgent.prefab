@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e382e919727daf446bb2e1e0636e1726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brain: {fileID: 11400000, guid: 68170fbe4fa33744eb64b254db70629e, type: 2}
+  brain: {fileID: 11400000, guid: ecf7406acb8466b42ab1e9168edd8170, type: 2}
   agentParameters:
     agentCameras: []
     agentRenderTextures: []
@@ -67,6 +67,5 @@ MonoBehaviour:
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1
   chosenScreen: 0
-  money: 0
+  StartMoney: 0
   mainMenu: {fileID: 0}
-  BaseDamage: 2

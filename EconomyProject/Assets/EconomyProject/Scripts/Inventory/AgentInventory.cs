@@ -8,6 +8,8 @@ namespace Assets.EconomyProject.Scripts.Inventory
     {
         private List<InventoryItem> _items;
 
+        public int ItemCount => _items.Count;
+
         public List<InventoryItem> startInventory;
         void Start()
         {

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bec5fbd5edd9b4ab62e476059b76fd, type: 3}
   m_Name: MasterSword
   m_EditorClassIdentifier: 
-  Name: 
-  baseBidPrice: 0
-  damage: 0
-  baseDurability: 0
-  durability: 0
+  Name: Master Sword
+  baseBidPrice: 20
+  damage: 24
+  baseDurability: 20
+  durability: 20
   unBreakable: 0
-  efficiency: 0
+  efficiency: 95

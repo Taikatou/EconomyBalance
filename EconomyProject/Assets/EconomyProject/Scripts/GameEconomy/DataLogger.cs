@@ -1,4 +1,5 @@
 ﻿using Assets.EconomyProject.Scripts.Inventory;
+using Assets.EconomyProject.Scripts.MLAgents;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -11,13 +12,15 @@ struct AuctionItem
 {
     public InventoryItem item;
     public float price;
+    public int agentId;
 
     public string Name => item.Name;
 
-    public AuctionItem(InventoryItem item, float price) : this()
+    public AuctionItem(InventoryItem item, float price, int agentId) : this()
     {
         this.item = item;
         this.price = price;
+        this.agentId = agentId;
     }
 }
 
@@ -32,9 +35,9 @@ public class DataLogger : MonoBehaviour
         _auctionItems = new List<AuctionItem>();
     }
 
-    public void AddAuctionItem(InventoryItem item, float price)
+    public void AddAuctionItem(InventoryItem item, float price, EconomyAgent agent)
     {
-        AuctionItem newItem = new AuctionItem(item, price);
+        AuctionItem newItem = new AuctionItem(item, price, agent.AgentId);
         _auctionItems.Add(newItem);
     }
 

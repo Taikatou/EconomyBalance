@@ -32,9 +32,15 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         private GameAuction gameAuction => FindObjectOfType<GameAuction>();
 
+        public static int AgentCounter = 0;
+
+        public int AgentId;
+
         private void Start()
         {
             _money = StartMoney;
+            AgentId = AgentCounter;
+            AgentCounter++;
         }
 
         public void BoughtItem(InventoryItem item, float cost)
@@ -129,6 +135,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             AddVectorObs(Item.unBreakable);
             AddVectorObs(Item.durability);
             AddVectorObs(gameAuction.ItemCount);
+            AddVectorObs(Inventory.ItemCount);
             bool writed = false;
             if (chosenScreen == AgentScreen.Auction)
             {
