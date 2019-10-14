@@ -67,8 +67,6 @@ public abstract class GenericLootDropTable<T, U> where T : GenericLootDropItem<U
         // Find an item whose range contains pickedNumber
         foreach (T lootDropItem in lootDropItems)
         {
-            Debug.Log("pickedNumber " + pickedNumber.ToString() + " probabilityRangeFrom: " + lootDropItem.probabilityRangeFrom.ToString()
-                        + " probabilityRangeTo " + lootDropItem.probabilityRangeTo.ToString());
             // If the picked number matches the item's range, return item
             if (pickedNumber > lootDropItem.probabilityRangeFrom && pickedNumber < lootDropItem.probabilityRangeTo)
             {

@@ -32,6 +32,10 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         private GameAuction gameAuction => FindObjectOfType<GameAuction>();
 
+        private GameQuests gameQuests => FindObjectOfType<GameQuests>();
+
+        public bool PrintObservations = false;
+
         public float Progress
         {
             get
@@ -41,7 +45,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
                     case AgentScreen.Auction:
                         return gameAuction.Progress;
                     case AgentScreen.Quest:
-                        return FindObjectOfType<GameQuests>().Progress;
+                        return gameQuests.Progress;
                 }
                 return 0.0f;
             }
@@ -102,12 +106,25 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         {
             if(ActionMap.ContainsKey(choice))
             {
-                chosenScreen = ActionMap[choice];
-                if (choice != AgentAct.Stay)
+                bool canChange = CanMove();
+                if (canChange && choice != AgentAct.Stay)
                 {
+                    chosenScreen = ActionMap[choice];
                     mainMenu.SwitchMenu(chosenScreen);
                 }
             }
+        }
+
+        public bool CanMove()
+        {
+            switch(chosenScreen)
+            {
+                case AgentScreen.Auction:
+                    return gameAuction.CanMove(this);
+                case AgentScreen.Quest:
+                    return gameQuests.CanMove(this);
+            }
+            return true;
         }
 
         public void SetChoice(AgentChoice choice)
@@ -140,6 +157,11 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             AddVectorObs(gameAuction.ItemCount);
             AddVectorObs(Inventory.ItemCount);
             AddVectorObs(Progress);
+
+            if (PrintObservations)
+            {
+                Debug.Log(chosenScreen.ToString());
+            }
 
             bool writed = false;
             if (chosenScreen == AgentScreen.Auction)

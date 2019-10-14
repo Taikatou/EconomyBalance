@@ -8,10 +8,9 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
     {
         private readonly float _spawnTime = 3.0f;
 
-        [HideInInspector]
-        public float currentTime;
+        private float _currentTime;
 
-        public override float Progress => currentTime / _spawnTime;
+        public override float Progress => _currentTime / _spawnTime;
 
         public GenericLootDropTableGameObject lootDropTable;
 
@@ -20,19 +19,31 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public bool finiteMonsters = true;
 
+        public bool AutoReturn = true;
+
+        private bool _shouldReturn = false;
+
+
+        public bool CanMove(EconomyAgent agent)
+        {
+            return !_shouldReturn;
+        }
+
         private void Start()
         {
             lootDropTable.ValidateTable();
             actionChoice = AgentScreen.Quest;
-            currentTime = 0.0f;
+            _currentTime = 0.0f;
+
+            _shouldReturn = AutoReturn;
         }
 
         private void Update()
         {
-            if(CurrentPlayers.Length > 1)
+            if(CurrentPlayers.Length >= 1)
             {
-                currentTime += Time.deltaTime;
-                if (currentTime > _spawnTime)
+                _currentTime += Time.deltaTime;
+                if (_currentTime > _spawnTime)
                 {
                     if (finiteMonsters)
                     {
@@ -50,7 +61,14 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                         RunQuests(agent);
                     }
 
-                    currentTime = 0.0f;
+                    _shouldReturn = false;
+                    foreach (var agent in CurrentPlayers)
+                    {
+                        agent.SetAgentAction(AgentAct.Main);
+                    }
+                    _shouldReturn = AutoReturn;
+
+                    _currentTime = 0.0f;
                 }
             }
         }

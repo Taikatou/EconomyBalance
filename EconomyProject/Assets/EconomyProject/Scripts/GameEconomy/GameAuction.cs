@@ -102,6 +102,11 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             }
         }
 
+        public bool CanMove(EconomyAgent agent)
+        {
+            return !(currentHighestBidder == agent && currentHighestBidder && agent);
+        }
+
         public void Bid(EconomyAgent player)
         {
             if(player != currentHighestBidder)
