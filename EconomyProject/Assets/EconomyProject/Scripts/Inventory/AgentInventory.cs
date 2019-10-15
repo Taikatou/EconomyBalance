@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
                 if (_items.Count > 0)
                 {
                     var max = _items.Max(x => x.efficiency);
-                    var maxWeapon = _items.First(x => x.efficiency == max);
+                    var maxWeapon = _items.First(x => Math.Abs(x.efficiency - max) < 0.01);
                     return maxWeapon;
                 }
                 return null;

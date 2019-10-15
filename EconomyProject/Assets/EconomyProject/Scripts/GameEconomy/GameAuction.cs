@@ -17,13 +17,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         [HideInInspector]
         public float currentItemPrice;
 
-        [HideInInspector]
-        public EconomyAgent currentHighestBidder;
+        private EconomyAgent _currentHighestBidder;
 
         [HideInInspector]
         public float currentAuctionTime;
 
-        private float _auctionTime = 5.0f;
+        public float auctionTime = 5.0f;
 
         private bool _bidOn;
 
@@ -33,7 +32,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         private List<InventoryItem> _inventoryItems;
 
-        public override float Progress => currentAuctionTime / _auctionTime;
+        public override float Progress => currentAuctionTime / auctionTime;
 
         private DataLogger Logger => GetComponent<DataLogger>();
 
@@ -51,12 +50,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                 currentAuctionTime = 0.0f;
 
                 currentItemPrice = auctionedItem.baseBidPrice;
-
-                currentHighestBidder = null;
-
-                _bidOn = false;
-                _bidLast = false;
             }
+
+            _currentHighestBidder = null;
+
+            _bidOn = false;
+            _bidLast = false;
         }
 
         public void AddAuctionItem(InventoryItem item)
@@ -81,7 +80,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                     SetAuctionItem();
                 }
                 currentAuctionTime += Time.deltaTime;
-                if (currentAuctionTime >= _auctionTime)
+                if (currentAuctionTime >= auctionTime)
                 {
                     currentAuctionTime = 0.0f;
                     if (!_bidOn)
@@ -89,8 +88,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                         _inventoryItems.Remove(auctionedItem);
                         if(_bidLast)
                         {
-                            currentHighestBidder.BoughtItem(auctionedItem, currentItemPrice);
-                            Logger.AddAuctionItem(auctionedItem, currentItemPrice, currentHighestBidder);
+                            _currentHighestBidder.BoughtItem(auctionedItem, currentItemPrice);
+                            Logger.AddAuctionItem(auctionedItem, currentItemPrice, _currentHighestBidder);
                         }
                         SetAuctionItem();
                     }
@@ -104,17 +103,22 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public bool CanMove(EconomyAgent agent)
         {
-            return !(currentHighestBidder == agent && currentHighestBidder && agent);
+            return !(_currentHighestBidder == agent && _currentHighestBidder && agent);
+        }
+
+        public bool IsHighestBidder(EconomyAgent agent)
+        {
+            return _currentHighestBidder == agent;
         }
 
         public void Bid(EconomyAgent player)
         {
-            if(player != currentHighestBidder)
+            if(player != _currentHighestBidder)
             {
                 float newPrice = currentItemPrice + bidIncrement;
                 if (player.Money >= newPrice)
                 {
-                    currentHighestBidder = player;
+                    _currentHighestBidder = player;
                     currentItemPrice = newPrice;
                     _bidOn = true;
                     _bidLast = true;

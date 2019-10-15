@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 
-public abstract class GenericLootDropItem<T>
+namespace Assets.EconomyProject.Scripts.Inventory.LootBoxes
 {
-    // Item it represents - usually GameObject, integer etc...
-    public T item;
+    public abstract class GenericLootDropItem<T>
+    {
+        // Item it represents - usually GameObject, integer etc...
+        public T item;
 
-    // How many units the item takes - more units, higher chance of being picked
-    public float probabilityWeight;
+        // How many units the item takes - more units, higher chance of being picked
+        public float probabilityWeight;
 
-    // Displayed only as an information for the designer/programmer. Should not be set manually via inspector!    
-    public float probabilityPercent;
+        // Displayed only as an information for the designer/programmer. Should not be set manually via inspector!    
+        public float probabilityPercent;
 
-    // These values are assigned via LootDropTable script. They represent from which number to which number if selected, the item will be picked.
-    [HideInInspector]
-    public float probabilityRangeFrom;
-    [HideInInspector]
-    public float probabilityRangeTo;
+        // These values are assigned via LootDropTable script. They represent from which number to which number if selected, the item will be picked.
+        [HideInInspector]
+        public float probabilityRangeFrom;
+        [HideInInspector]
+        public float probabilityRangeTo;
+    }
 }

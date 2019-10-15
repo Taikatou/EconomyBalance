@@ -1,8 +1,10 @@
-﻿using Assets.EconomyProject.Scripts.Inventory;
-using System.Linq;
+﻿using System.Linq;
 
-[System.Serializable]
-public class GenericLootDropTableGameObject : GenericLootDropTable<GeneratedLootItemScriptableObject, InventoryItem>
+namespace Assets.EconomyProject.Scripts.Inventory.LootBoxes.Generated
 {
-    public float MaxMoney => lootDropItems.Max(x => x.item.baseBidPrice);
+    [System.Serializable]
+    public class GenericLootDropTableGameObject : GenericLootDropTable<GeneratedLootItemScriptableObject, InventoryItem>
+    {
+        public float MaxMoney => lootDropItems.Max(x => x.item.baseBidPrice);
+    }
 }

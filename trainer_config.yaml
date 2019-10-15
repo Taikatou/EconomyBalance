@@ -286,3 +286,7 @@ BasicLearning:
         extrinsic:
             strength: 1.0
             gamma: 0.9
+
+EconomyLearningBrain:
+    normalize: true
+    buffer_size: 256

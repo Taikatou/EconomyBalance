@@ -1,4 +1,5 @@
 ﻿using Assets.EconomyProject.Scripts.Inventory;
+using Assets.EconomyProject.Scripts.Inventory.LootBoxes.Generated;
 using Assets.EconomyProject.Scripts.MLAgents;
 using UnityEngine;
 
@@ -6,11 +7,11 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 {
     public class GameQuests : EconomySystem
     {
-        private readonly float _spawnTime = 3.0f;
+        public float spawnTime = 3.0f;
 
         private float _currentTime;
 
-        public override float Progress => _currentTime / _spawnTime;
+        public override float Progress => _currentTime / spawnTime;
 
         public GenericLootDropTableGameObject lootDropTable;
 
@@ -19,9 +20,11 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public bool finiteMonsters = true;
 
-        public bool AutoReturn = true;
+        public bool autoReturn = true;
 
         private bool _shouldReturn = false;
+
+        public float MaxMoney => lootDropTable.MaxMoney;
 
 
         public bool CanMove(EconomyAgent agent)
@@ -35,7 +38,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             actionChoice = AgentScreen.Quest;
             _currentTime = 0.0f;
 
-            _shouldReturn = AutoReturn;
+            _shouldReturn = autoReturn;
         }
 
         private void Update()
@@ -43,7 +46,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             if(CurrentPlayers.Length >= 1)
             {
                 _currentTime += Time.deltaTime;
-                if (_currentTime > _spawnTime)
+                if (_currentTime > spawnTime)
                 {
                     if (finiteMonsters)
                     {
@@ -66,7 +69,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                     {
                         agent.SetAgentAction(AgentAct.Main);
                     }
-                    _shouldReturn = AutoReturn;
+                    _shouldReturn = autoReturn;
 
                     _currentTime = 0.0f;
                 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Assets.EconomyProject.Scripts.GameEconomy;
+﻿using Assets.EconomyProject.Scripts.GameEconomy;
 using UnityEngine;
 using UnityEngine.UI;
 

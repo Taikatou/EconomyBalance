@@ -10,15 +10,15 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 {
     public enum AgentScreen { Main, Quest, Auction }
 
-    public enum AgentAct { Stay, Main, Quest, Auction }
+    public enum AgentAct { Quest, Auction }
 
-    public enum AgentChoice { Ignore, Back, Bid }
+    public enum AgentChoice { Ignore, Bid }
 
     public class EconomyAgent : Agent
     {
         public AgentScreen chosenScreen = AgentScreen.Main;
 
-        public double StartMoney;
+        public double startMoney;
         
         private double _money;
 
@@ -34,7 +34,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         private GameQuests gameQuests => FindObjectOfType<GameQuests>();
 
-        public bool PrintObservations = false;
+        public bool printObservations = false;
 
         public float Progress
         {
@@ -51,15 +51,15 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             }
         }
 
-        public static int AgentCounter = 0;
+        public static int agentCounter = 0;
 
-        public int AgentId;
+        public int agentId;
 
         private void Start()
         {
-            _money = StartMoney;
-            AgentId = AgentCounter;
-            AgentCounter++;
+            _money = startMoney;
+            agentId = agentCounter;
+            agentCounter++;
         }
 
         public void BoughtItem(InventoryItem item, float cost)
@@ -71,9 +71,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             }
         }
 
-        public Dictionary<AgentAct, AgentScreen> ActionMap = new Dictionary<AgentAct, AgentScreen>()
+        public Dictionary<AgentAct, AgentScreen> actionMap = new Dictionary<AgentAct, AgentScreen>()
         {
-            { AgentAct.Main, AgentScreen.Main },
             { AgentAct.Quest, AgentScreen.Quest },
             { AgentAct.Auction, AgentScreen.Auction }
         };
@@ -87,13 +86,16 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         {
             var action = Mathf.FloorToInt(vectorAction[0]);
 
-            if(chosenScreen == AgentScreen.Main)
+            switch (chosenScreen)
             {
-                SetAction(action);
-            }
-            else
-            {
-                SetChoice(action);
+                case AgentScreen.Main:
+                        SetAction(action);
+                    break;
+                case AgentScreen.Quest:
+                    break;
+                case AgentScreen.Auction:
+                        SetChoice(action);
+                    break;
             }
         }
 
@@ -104,12 +106,12 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         public void SetAgentAction(AgentAct choice)
         {
-            if(ActionMap.ContainsKey(choice))
+            if(actionMap.ContainsKey(choice))
             {
                 bool canChange = CanMove();
-                if (canChange && choice != AgentAct.Stay)
+                if (canChange)
                 {
-                    chosenScreen = ActionMap[choice];
+                    chosenScreen = actionMap[choice];
                     mainMenu.SwitchMenu(chosenScreen);
                 }
             }
@@ -131,13 +133,11 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         {
             switch(choice)
             {
-                case AgentChoice.Back:
-                    SetAgentAction(AgentAct.Main);
+                case AgentChoice.Ignore:
                     break;
+
                 case AgentChoice.Bid:
                     gameAuction.Bid(this);
-                    break;
-                case AgentChoice.Ignore:
                     break;
             }
         }
@@ -158,7 +158,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             AddVectorObs(Inventory.ItemCount);
             AddVectorObs(Progress);
 
-            if (PrintObservations)
+            if (printObservations)
             {
                 Debug.Log(chosenScreen.ToString());
             }
@@ -171,11 +171,13 @@ namespace Assets.EconomyProject.Scripts.MLAgents
                     writed = true;
                     AddVectorObs(gameAuction.currentItemPrice);
                     AddVectorObs(gameAuction.auctionedItem.efficiency);
+                    AddVectorObs(gameAuction.IsHighestBidder(this));
                 }
             }
             
             if(!writed)
             {
+                AddVectorObs(0);
                 AddVectorObs(0);
                 AddVectorObs(0);
             }
@@ -186,7 +188,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             if(amount > 0)
             {
                 _money = Math.Round(_money + amount);
-                AddReward((float)_money);
+                var reward = _money / gameQuests.MaxMoney;
+                AddReward((float)reward);
             }
         }
     }
