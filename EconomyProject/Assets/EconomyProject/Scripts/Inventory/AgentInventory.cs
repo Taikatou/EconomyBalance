@@ -9,16 +9,13 @@ namespace Assets.EconomyProject.Scripts.Inventory
     {
         private List<InventoryItem> _items;
 
+        public List<InventoryItem> startInventory;
+
         public int ItemCount => _items.Count;
 
-        public List<InventoryItem> startInventory;
-        void Start()
+        private void Start()
         {
             _items = new List<InventoryItem>();
-            foreach(var item in startInventory)
-            {
-                _items.Add(item);
-            }
         }
 
         public void AddItem(InventoryItem item)
@@ -49,6 +46,19 @@ namespace Assets.EconomyProject.Scripts.Inventory
                 {
                     _items.Remove(EquipedItem);
                 }
+            }
+        }
+
+        public void ResetInventory()
+        {
+            _items.Clear();
+            foreach (var item in startInventory)
+            {
+                InventoryItem generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
+
+                generatedItem?.Init(item);
+
+                _items.Add(item);
             }
         }
     }

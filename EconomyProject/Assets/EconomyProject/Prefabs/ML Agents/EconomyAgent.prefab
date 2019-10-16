@@ -70,4 +70,5 @@ MonoBehaviour:
   startMoney: 0
   mainMenu: {fileID: 0}
   printObservations: 0
+  UIControl: 1
   agentId: 0

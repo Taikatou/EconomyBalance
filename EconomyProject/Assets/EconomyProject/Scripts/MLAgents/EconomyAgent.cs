@@ -10,13 +10,13 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 {
     public enum AgentScreen { Main, Quest, Auction }
 
-    public enum AgentAct { Quest, Auction }
+    public enum AgentAct { Quest, Auction, Main }
 
     public enum AgentChoice { Ignore, Bid }
 
     public class EconomyAgent : Agent
     {
-        public AgentScreen chosenScreen = AgentScreen.Main;
+        public AgentScreen chosenScreen;
 
         public double startMoney;
         
@@ -26,6 +26,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         public MainMenu mainMenu;
 
+        public bool printObservations = false;
+
+        public bool UIControl = true;
+
+        public static int agentCounter = 0;
+
+        public int agentId;
+
         public AgentInventory Inventory => GetComponent<AgentInventory>();
 
         public InventoryItem Item => Inventory.EquipedItem;
@@ -33,8 +41,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         private GameAuction gameAuction => FindObjectOfType<GameAuction>();
 
         private GameQuests gameQuests => FindObjectOfType<GameQuests>();
-
-        public bool printObservations = false;
 
         public float Progress
         {
@@ -51,11 +57,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             }
         }
 
-        public static int agentCounter = 0;
+        public override void AgentReset()
+        {
+            _money = 0;
+            Inventory.ResetInventory();
+            chosenScreen = AgentScreen.Main;
+        }
 
-        public int agentId;
-
-        private void Start()
+        public override void InitializeAgent()
         {
             _money = startMoney;
             agentId = agentCounter;
@@ -74,7 +83,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         public Dictionary<AgentAct, AgentScreen> actionMap = new Dictionary<AgentAct, AgentScreen>()
         {
             { AgentAct.Quest, AgentScreen.Quest },
-            { AgentAct.Auction, AgentScreen.Auction }
+            { AgentAct.Auction, AgentScreen.Auction },
+            { AgentAct.Main, AgentScreen.Main }
         };
 
         public void DecreaseDurability()
@@ -84,18 +94,21 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         public override void AgentAction(float[] vectorAction, string textAction)
         {
-            var action = Mathf.FloorToInt(vectorAction[0]);
-
-            switch (chosenScreen)
+            if(!UIControl)
             {
-                case AgentScreen.Main:
+                var action = Mathf.FloorToInt(vectorAction[0]);
+
+                switch (chosenScreen)
+                {
+                    case AgentScreen.Main:
                         SetAction(action);
-                    break;
-                case AgentScreen.Quest:
-                    break;
-                case AgentScreen.Auction:
+                        break;
+                    case AgentScreen.Quest:
+                        break;
+                    case AgentScreen.Auction:
                         SetChoice(action);
-                    break;
+                        break;
+                }
             }
         }
 

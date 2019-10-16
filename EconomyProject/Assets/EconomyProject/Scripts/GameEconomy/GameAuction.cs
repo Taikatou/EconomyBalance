@@ -36,6 +36,17 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         private DataLogger Logger => GetComponent<DataLogger>();
 
+        public void Reset()
+        {
+            _inventoryItems?.Clear();
+        }
+
+        private void Start()
+        {
+            _inventoryItems = new List<InventoryItem>();
+            actionChoice = AgentScreen.Auction;
+        }
+
         public void SetAuctionItem()
         {
             _auctionOn = _inventoryItems.Count > 0;
@@ -61,13 +72,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         public void AddAuctionItem(InventoryItem item)
         {
             _inventoryItems.Add(item);
-        }
-
-        private void Start()
-        {
-            _inventoryItems = new List<InventoryItem>();
-
-            actionChoice = AgentScreen.Auction;
         }
 
         // Returns if the auction is over
@@ -97,6 +101,13 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                     {
                         _bidOn = false;
                     }
+                }
+            }
+            else
+            {
+                foreach (var agent in CurrentPlayers)
+                {
+                    agent.SetAgentAction(AgentAct.Main);
                 }
             }
         }

@@ -6,6 +6,8 @@ namespace Assets.EconomyProject.Scripts.UI
     public class UiManager : MonoBehaviour
     {
         public EconomyAgent playerAgent;
+        public EconomyAcademy economyAcademy;
+
         public void StartAution()
         {
             playerAgent.SetAgentAction(AgentAct.Auction);
@@ -24,6 +26,11 @@ namespace Assets.EconomyProject.Scripts.UI
         public void Bid()
         {
             playerAgent.SetChoice(AgentChoice.Bid);
+        }
+
+        public void Reset()
+        {
+            economyAcademy.AcademyReset();
         }
     }
 }
