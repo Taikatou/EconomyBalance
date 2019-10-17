@@ -24,11 +24,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         public double Money => _money;
 
-        public MainMenu mainMenu;
-
         public bool printObservations = false;
-
-        public bool UIControl = true;
 
         public static int agentCounter = 0;
 
@@ -94,21 +90,18 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         public override void AgentAction(float[] vectorAction, string textAction)
         {
-            if(!UIControl)
-            {
-                var action = Mathf.FloorToInt(vectorAction[0]);
+            var action = Mathf.FloorToInt(vectorAction[0]);
 
-                switch (chosenScreen)
-                {
-                    case AgentScreen.Main:
-                        SetAction(action);
-                        break;
-                    case AgentScreen.Quest:
-                        break;
-                    case AgentScreen.Auction:
-                        SetChoice(action);
-                        break;
-                }
+            switch (chosenScreen)
+            {
+                case AgentScreen.Main:
+                    SetAction(action);
+                    break;
+                case AgentScreen.Quest:
+                    break;
+                case AgentScreen.Auction:
+                    SetChoice(action);
+                    break;
             }
         }
 
@@ -125,10 +118,12 @@ namespace Assets.EconomyProject.Scripts.MLAgents
                 if (canChange)
                 {
                     chosenScreen = actionMap[choice];
-                    mainMenu.SwitchMenu(chosenScreen);
+                    OnSwitch();
                 }
             }
         }
+
+        protected virtual void OnSwitch() { }
 
         public bool CanMove()
         {
@@ -176,19 +171,19 @@ namespace Assets.EconomyProject.Scripts.MLAgents
                 Debug.Log(chosenScreen.ToString());
             }
 
-            bool writed = false;
+            bool wrote = false;
             if (chosenScreen == AgentScreen.Auction)
             {
                 if(gameAuction.auctionedItem)
                 {
-                    writed = true;
+                    wrote = true;
                     AddVectorObs(gameAuction.currentItemPrice);
                     AddVectorObs(gameAuction.auctionedItem.efficiency);
                     AddVectorObs(gameAuction.IsHighestBidder(this));
                 }
             }
             
-            if(!writed)
+            if(!wrote)
             {
                 AddVectorObs(0);
                 AddVectorObs(0);

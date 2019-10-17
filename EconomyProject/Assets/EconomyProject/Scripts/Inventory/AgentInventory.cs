@@ -16,6 +16,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
         private void Start()
         {
             _items = new List<InventoryItem>();
+            ResetInventory();
         }
 
         public void AddItem(InventoryItem item)
@@ -51,7 +52,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public void ResetInventory()
         {
-            _items.Clear();
+            _items?.Clear();
             foreach (var item in startInventory)
             {
                 InventoryItem generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
