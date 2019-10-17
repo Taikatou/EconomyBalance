@@ -155,40 +155,33 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             SetChoice((AgentChoice)choice);
         }
 
+        private void AddAuctionObs(InventoryItem item)
+        {
+            bool inAuction = (chosenScreen == AgentScreen.Auction) && item;
+
+            AddVectorObs(inAuction && gameAuction.IsHighestBidder(this));
+            
+            AddVectorObs(inAuction ? gameAuction.currentItemPrice : 0.0f);
+            AddVectorObs(item, inAuction);
+        }
+
+        private void AddVectorObs(InventoryItem item, bool condition=true, float defaultObs=0.0f, bool defaultBool=false)
+        {
+            AddVectorObs(condition ? item.durability : defaultObs);
+            AddVectorObs(condition ? item.efficiency : defaultObs);
+            AddVectorObs(condition ? item.unBreakable : defaultBool);
+        }
+
         public override void CollectObservations()
         {
             AddVectorObs((int)chosenScreen);
             AddVectorObs((float)_money);
-            AddVectorObs(Item.unBreakable);
-            AddVectorObs(Item.durability);
-            AddVectorObs(Item.efficiency);
+            AddVectorObs(Item);
             AddVectorObs(gameAuction.ItemCount);
             AddVectorObs(Inventory.ItemCount);
             AddVectorObs(Progress);
 
-            if (printObservations)
-            {
-                Debug.Log(chosenScreen.ToString());
-            }
-
-            bool wrote = false;
-            if (chosenScreen == AgentScreen.Auction)
-            {
-                if(gameAuction.auctionedItem)
-                {
-                    wrote = true;
-                    AddVectorObs(gameAuction.currentItemPrice);
-                    AddVectorObs(gameAuction.auctionedItem.efficiency);
-                    AddVectorObs(gameAuction.IsHighestBidder(this));
-                }
-            }
-            
-            if(!wrote)
-            {
-                AddVectorObs(0);
-                AddVectorObs(0);
-                AddVectorObs(0);
-            }
+            AddAuctionObs(gameAuction.auctionedItem);
         }
 
         public void EarnMoney(float amount)

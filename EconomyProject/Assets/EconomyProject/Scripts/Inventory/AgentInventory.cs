@@ -56,10 +56,12 @@ namespace Assets.EconomyProject.Scripts.Inventory
             foreach (var item in startInventory)
             {
                 InventoryItem generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
+                if (generatedItem != null)
+                {
+                    generatedItem.Init(item);
 
-                generatedItem?.Init(item);
-
-                _items.Add(item);
+                    _items?.Add(generatedItem);
+                }
             }
         }
     }
