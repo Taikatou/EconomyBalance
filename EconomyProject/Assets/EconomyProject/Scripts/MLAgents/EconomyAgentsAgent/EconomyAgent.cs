@@ -29,6 +29,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
         public EconomyWallet Wallet => GetComponent<EconomyWallet>();
 
+        public bool printInput = false;
+
         public override void AgentReset()
         {
             Inventory.ResetInventory();
@@ -43,7 +45,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
         public void BoughtItem(InventoryItem item, float cost)
         {
             Inventory.AddItem(item);
-            Wallet.SpendMoney(cost);
+            Wallet?.SpendMoney(cost);
         }
 
         public void DecreaseDurability()
@@ -54,7 +56,20 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
         public override void AgentAction(float[] vectorAction, string textAction)
         {
             var action = Mathf.FloorToInt(vectorAction[0]);
-            PlayerInput.SetAgentAction(this, action);
+            AgentAction(action);
+        }
+
+        public virtual void AgentAction(int action)
+        {
+            if (printInput)
+            {
+                Debug.Log(action);
+            }
+
+            if (action >= 0)
+            {
+                PlayerInput.SetAgentAction(this, action);
+            }
         }
 
         private void AddAuctionObs(InventoryItem item)

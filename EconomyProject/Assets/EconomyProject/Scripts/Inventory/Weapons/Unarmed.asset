@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: UnArmed
   baseBidPrice: 0
-  baseDurability: 0
-  durability: 0
+  baseDurability: 10
+  durability: 10
   unBreakable: 1
   efficiency: 40

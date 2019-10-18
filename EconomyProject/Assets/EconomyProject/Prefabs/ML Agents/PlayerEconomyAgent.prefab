@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1988394494484697629}
   - component: {fileID: 1171070700305087438}
-  - component: {fileID: -5968454695625978282}
   - component: {fileID: 1813628144}
+  - component: {fileID: 1448652206014252578}
   m_Layer: 0
   m_Name: PlayerEconomyAgent
   m_TagString: Untagged
@@ -47,7 +47,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startInventory:
   - {fileID: 11400000, guid: 91bd7ff49920f4841b311f0aad3678e3, type: 2}
---- !u!114 &-5968454695625978282
+--- !u!114 &1813628144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864355610370000414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce000fa4147eec844b7cdd831ec766ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startMoney: 0
+--- !u!114 &1448652206014252578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,21 +78,8 @@ MonoBehaviour:
     agentRenderTextures: []
     maxStep: 0
     resetOnDone: 1
-    onDemandDecision: 1
+    onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1
   agentId: 0
+  printInput: 0
   uiControl: 1
-  mainMenu: {fileID: 0}
---- !u!114 &1813628144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8864355610370000414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce000fa4147eec844b7cdd831ec766ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startMoney: 0

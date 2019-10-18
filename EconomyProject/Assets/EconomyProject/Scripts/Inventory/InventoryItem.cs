@@ -32,6 +32,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
             baseDurability = item.baseDurability;
             efficiency = item.efficiency;
             unBreakable = item.unBreakable;
+            durability = item.durability;
         }
 
         public void DecreaseDurability()

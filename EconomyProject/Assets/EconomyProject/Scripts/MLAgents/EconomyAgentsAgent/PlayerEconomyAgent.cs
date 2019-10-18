@@ -4,12 +4,9 @@
     {
         public bool uiControl = true;
 
-        public override void AgentAction(float[] vectorAction, string textAction)
+        public override void AgentAction(int action)
         {
-            if (!uiControl)
-            {
-                base.AgentAction(vectorAction, textAction);
-            }
+            base.AgentAction(action - 1);
         }
     }
 }

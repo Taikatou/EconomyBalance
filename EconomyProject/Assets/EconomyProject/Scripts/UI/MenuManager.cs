@@ -15,6 +15,8 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public EconomyAgent economyAgent;
 
+        public static EconomyAgent economyAgentInstance;
+
         private AgentScreen _cacheAgentScreen = AgentScreen.Main;
 
         private EconomyAcademy EconomyAcademy => FindObjectOfType<EconomyAcademy>();
@@ -30,11 +32,27 @@ namespace Assets.EconomyProject.Scripts.UI
 
         private void Update()
         {
-            AgentScreen screen = FindObjectOfType<PlayerInput>().GetScreen(economyAgent);
-            if (screen != _cacheAgentScreen)
+            PlayerInput playerInput = FindObjectOfType<PlayerInput>();
+            if (economyAgent != null && playerInput != null)
             {
-                _cacheAgentScreen = screen;
-                SwitchMenu(screen);
+                AgentScreen screen = playerInput.GetScreen(economyAgent);
+                if (screen != _cacheAgentScreen)
+                {
+                    _cacheAgentScreen = screen;
+                    SwitchMenu(screen);
+                }
+            }
+        }
+
+        private void Start()
+        {
+            if (economyAgent == null)
+            {
+                economyAgentInstance = FindObjectOfType<EconomyAgent>();
+            }
+            else
+            {
+                economyAgentInstance = economyAgent;
             }
         }
 

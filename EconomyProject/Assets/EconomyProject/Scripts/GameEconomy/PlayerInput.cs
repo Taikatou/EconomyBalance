@@ -21,11 +21,16 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public AgentScreen GetScreen(EconomyAgent agent)
         {
-            if (!_economyScreens.ContainsKey(agent))
+            if (agent)
             {
-                _economyScreens.Add(agent, AgentScreen.Main);
+                if (!_economyScreens.ContainsKey(agent))
+                {
+                    _economyScreens.Add(agent, AgentScreen.Main);
+                }
+                return _economyScreens[agent];
             }
-            return _economyScreens[agent];
+
+            return (AgentScreen)(-1);
         }
 
         public float GetProgress(EconomyAgent agent)
