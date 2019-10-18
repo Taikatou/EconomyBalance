@@ -25,18 +25,12 @@ namespace Assets.EconomyProject.Scripts.Inventory
             durability = baseDurability;
         }
 
-        public void Init(float basePrice, string name, int durability, float efficiency)
-        {
-            baseBidPrice = basePrice;
-            Name = name;
-            baseDurability = durability;
-            this.durability = durability;
-            this.efficiency = efficiency;
-        }
-
         public void Init(InventoryItem item)
         {
-            Init(item.baseBidPrice, item.Name, item.baseDurability, item.efficiency);
+            baseBidPrice = item.baseBidPrice;
+            Name = item.Name;
+            baseDurability = item.baseDurability;
+            efficiency = item.efficiency;
         }
 
         public void DecreaseDurability()
