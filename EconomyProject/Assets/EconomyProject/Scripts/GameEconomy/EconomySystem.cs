@@ -6,8 +6,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 {
     public abstract class EconomySystem : MonoBehaviour
     {
-        // Start is called before the first frame update
-        protected AgentScreen actionChoice;
+        public abstract float Progress { get; }
+        protected abstract AgentScreen actionChoice { get; }
 
         public EconomyAgent[] CurrentPlayers
         {
@@ -18,6 +18,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             }
         }
 
-        public abstract float Progress { get; }
+        protected void RequestDecision()
+        {
+            foreach(var agent in CurrentPlayers)
+            {
+                agent.RequestDecision();
+            }
+        }
     }
 }

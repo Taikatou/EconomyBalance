@@ -26,6 +26,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public float MaxMoney => lootDropTable.MaxMoney;
 
+        protected override AgentScreen actionChoice => AgentScreen.Quest;
 
         public bool CanMove(EconomyAgent agent)
         {
@@ -35,7 +36,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         private void Start()
         {
             lootDropTable.ValidateTable();
-            actionChoice = AgentScreen.Quest;
             _currentTime = 0.0f;
 
             _shouldReturn = autoReturn;

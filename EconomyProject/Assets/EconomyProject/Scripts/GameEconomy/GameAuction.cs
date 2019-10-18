@@ -36,6 +36,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         private DataLogger Logger => GetComponent<DataLogger>();
 
+        protected override AgentScreen actionChoice => AgentScreen.Auction;
+
         public void Reset()
         {
             _inventoryItems?.Clear();
@@ -44,7 +46,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         private void Start()
         {
             _inventoryItems = new List<InventoryItem>();
-            actionChoice = AgentScreen.Auction;
         }
 
         public void SetAuctionItem()

@@ -5,9 +5,9 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 {
     public class EconomyAcademy : Academy
     {
-        private GameAuction gameAuction => FindObjectOfType<GameAuction>();
+        private static GameAuction GameAuction => FindObjectOfType<GameAuction>();
 
-        private GameQuests gameQuests => FindObjectOfType<GameQuests>();
+        private static GameQuests GameQuests => FindObjectOfType<GameQuests>();
 
         public override void InitializeAcademy()
         {
@@ -16,7 +16,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         public override void AcademyReset()
         {
-            gameAuction.Reset();
+            GameAuction.Reset();
         }
     }
 }
