@@ -1,6 +1,6 @@
 ﻿using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.Inventory.LootBoxes.Generated;
-using Assets.EconomyProject.Scripts.MLAgents;
+using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
@@ -86,7 +86,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             if(questSuccess)
             {
                 float money = GenerateItem(0);
-                agent.EarnMoney(money);
+                agent.Wallet.EarnMoney(money);
             }
             agent.DecreaseDurability();
         }

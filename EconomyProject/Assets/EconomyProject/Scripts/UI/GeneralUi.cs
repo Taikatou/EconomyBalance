@@ -1,5 +1,5 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using Assets.EconomyProject.Scripts.MLAgents;
+using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +29,7 @@ namespace Assets.EconomyProject.Scripts.UI
             }
             if(economyAgent)
             {
-                moneyText.text = "MONEY: " + economyAgent.Money;
+                moneyText.text = "MONEY: " + economyAgent.Wallet.Money;
 
                 if(economyAgent.Item)
                 {

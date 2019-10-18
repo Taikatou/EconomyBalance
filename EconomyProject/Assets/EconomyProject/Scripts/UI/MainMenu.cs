@@ -1,4 +1,4 @@
-﻿using Assets.EconomyProject.Scripts.MLAgents;
+﻿using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI

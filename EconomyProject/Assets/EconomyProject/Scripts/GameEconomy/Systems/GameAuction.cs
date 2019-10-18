@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents;
+using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
@@ -127,7 +127,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         {
             var newPrice = currentItemPrice + bidIncrement;
             
-            if (!IsHighestBidder(player) && player.Money >= newPrice)
+            if (!IsHighestBidder(player) && player.Wallet.Money >= newPrice)
             {
                 _currentHighestBidder = player;
                 currentItemPrice = newPrice;

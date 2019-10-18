@@ -1,11 +1,10 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy;
+using Assets.EconomyProject.Scripts.GameEconomy.Systems;
 using Assets.EconomyProject.Scripts.Inventory;
 using MLAgents;
-using System;
-using Assets.EconomyProject.Scripts.GameEconomy.Systems;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents
+namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 {
     public enum AgentScreen { Main, Quest, Auction }
 
@@ -13,11 +12,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
     public class EconomyAgent : Agent
     {
-        public double startMoney;
-        
-        private double _money;
-
-        public double Money => _money;
 
         public static int agentCounter = 0;
 
@@ -29,21 +23,19 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         private GameAuction gameAuction => FindObjectOfType<GameAuction>();
 
-        private GameQuests gameQuests => FindObjectOfType<GameQuests>();
-
         public PlayerInput PlayerInput => FindObjectOfType<PlayerInput>();
 
         public AgentScreen ChosenScreen => PlayerInput.GetScreen(this);
 
+        public EconomyWallet Wallet => GetComponent<EconomyWallet>();
+
         public override void AgentReset()
         {
-            _money = 0;
             Inventory.ResetInventory();
         }
 
         public override void InitializeAgent()
         {
-            _money = startMoney;
             agentId = agentCounter;
             agentCounter++;
         }
@@ -51,10 +43,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         public void BoughtItem(InventoryItem item, float cost)
         {
             Inventory.AddItem(item);
-            if(cost > 0)
-            {
-                _money -= cost;
-            }
+            Wallet.SpendMoney(cost);
         }
 
         public void DecreaseDurability()
@@ -90,23 +79,13 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         public override void CollectObservations()
         {
             AddVectorObs((int)ChosenScreen);
-            AddVectorObs((float)_money);
+            AddVectorObs((float)Wallet.Money);
             AddVectorObs(Item);
             AddVectorObs(gameAuction.ItemCount);
             AddVectorObs(Inventory.ItemCount);
             AddVectorObs(PlayerInput.GetProgress(this));
 
             AddAuctionObs(gameAuction.auctionedItem);
-        }
-
-        public void EarnMoney(float amount)
-        {
-            if(amount > 0)
-            {
-                _money = Math.Round(_money + amount);
-                var reward = _money / gameQuests.MaxMoney;
-                AddReward((float)reward);
-            }
         }
     }
 }

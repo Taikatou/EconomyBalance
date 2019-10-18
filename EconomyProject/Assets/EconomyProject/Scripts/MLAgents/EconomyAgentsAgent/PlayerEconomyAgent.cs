@@ -1,7 +1,6 @@
 ﻿using Assets.EconomyProject.Scripts.UI;
-using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents
+namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 {
     public class PlayerEconomyAgent : EconomyAgent
     {

@@ -1,7 +1,6 @@
-﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using Assets.EconomyProject.Scripts.MLAgents;
+﻿using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
 
-namespace Assets.EconomyProject.Scripts.GameEconomy
+namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 {
     public class MainMenuSystem : EconomySystem
     {

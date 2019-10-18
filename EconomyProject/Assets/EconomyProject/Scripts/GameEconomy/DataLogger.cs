@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents;
+using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy
