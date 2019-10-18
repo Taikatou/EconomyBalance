@@ -22,19 +22,22 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         public bool autoReturn = false;
 
+        private bool _shouldReturn;
+
         public float MaxMoney => lootDropTable.MaxMoney;
 
         protected override AgentScreen ActionChoice => AgentScreen.Quest;
 
         public override bool CanMove(EconomyAgent agent)
         {
-            return !autoReturn;
+            return !_shouldReturn;
         }
 
         private void Start()
         {
             lootDropTable.ValidateTable();
             _currentTime = 0.0f;
+            _shouldReturn = autoReturn;
         }
 
         private void Update()
@@ -62,10 +65,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
                     if (autoReturn)
                     {
+                        _shouldReturn = false;
                         foreach (var agent in CurrentPlayers)
                         {
                             PlayerInput.SetMainAction(agent, AgentScreen.Main);
                         }
+                        _shouldReturn = true;
                     }
 
                     _currentTime = 0.0f;
@@ -99,7 +104,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 GameAuction auction = FindObjectOfType<GameAuction>();
                 auction.AddAuctionItem(generatedItem);
 
-                Debug.Log(selectedItem.item.Name);
+                Debug.Log(selectedItem.item.itemName);
             }
 
             if (generatedItem != null)

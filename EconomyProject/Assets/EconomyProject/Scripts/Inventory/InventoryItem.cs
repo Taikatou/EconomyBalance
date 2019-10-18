@@ -5,7 +5,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
     [CreateAssetMenu]
     public class InventoryItem : ScriptableObject
     {
-        public string Name;
+        public string itemName;
 
         public float baseBidPrice;
 
@@ -14,7 +14,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
         [HideInInspector]
         public int durability;
 
-        public bool unBreakable = false;
+        public bool unBreakable;
 
         public bool Broken => !unBreakable && durability == 0;
 
@@ -28,9 +28,10 @@ namespace Assets.EconomyProject.Scripts.Inventory
         public void Init(InventoryItem item)
         {
             baseBidPrice = item.baseBidPrice;
-            Name = item.Name;
+            itemName = item.itemName;
             baseDurability = item.baseDurability;
             efficiency = item.efficiency;
+            unBreakable = item.unBreakable;
         }
 
         public void DecreaseDurability()

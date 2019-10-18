@@ -35,7 +35,7 @@ namespace Assets.EconomyProject.Scripts.UI
                 {
                     durabilityText.text = "DURABILITY: " + (economyAgent.Item.unBreakable? "∞" : economyAgent.Item.durability.ToString());
 
-                    currentItemText.text = "CURRENT ITEM: " + economyAgent.Item.Name;
+                    currentItemText.text = "CURRENT ITEM: " + economyAgent.Item.itemName;
 
                     efficiencyText.text = "EFFICIENCY: " + economyAgent.Item.efficiency;
                 }

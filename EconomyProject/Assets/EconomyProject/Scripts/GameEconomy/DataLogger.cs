@@ -16,7 +16,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         public float price;
         public int agentId;
 
-        public string Name => item.Name;
+        public string Name => item.itemName;
 
         public AuctionItem(InventoryItem item, float price, int agentId) : this()
         {

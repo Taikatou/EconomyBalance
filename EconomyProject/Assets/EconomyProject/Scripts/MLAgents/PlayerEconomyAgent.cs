@@ -1,4 +1,5 @@
 ﻿using Assets.EconomyProject.Scripts.UI;
+using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents
 {
