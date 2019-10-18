@@ -3,7 +3,7 @@ using Assets.EconomyProject.Scripts.Inventory.LootBoxes.Generated;
 using Assets.EconomyProject.Scripts.MLAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.GameEconomy
+namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 {
     public class GameQuests : EconomySystem
     {
@@ -20,25 +20,21 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public bool finiteMonsters = true;
 
-        public bool autoReturn = true;
-
-        private bool _shouldReturn = false;
+        public bool autoReturn = false;
 
         public float MaxMoney => lootDropTable.MaxMoney;
 
-        protected override AgentScreen actionChoice => AgentScreen.Quest;
+        protected override AgentScreen ActionChoice => AgentScreen.Quest;
 
-        public bool CanMove(EconomyAgent agent)
+        public override bool CanMove(EconomyAgent agent)
         {
-            return !_shouldReturn;
+            return !autoReturn;
         }
 
         private void Start()
         {
             lootDropTable.ValidateTable();
             _currentTime = 0.0f;
-
-            _shouldReturn = autoReturn;
         }
 
         private void Update()
@@ -64,14 +60,17 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                         RunQuests(agent);
                     }
 
-                    _shouldReturn = false;
-                    foreach (var agent in CurrentPlayers)
+                    if (autoReturn)
                     {
-                        agent.SetAgentAction(AgentAct.Main);
+                        foreach (var agent in CurrentPlayers)
+                        {
+                            PlayerInput.SetMainAction(agent, AgentScreen.Main);
+                        }
                     }
-                    _shouldReturn = autoReturn;
 
                     _currentTime = 0.0f;
+
+                    RequestDecisions();
                 }
             }
         }

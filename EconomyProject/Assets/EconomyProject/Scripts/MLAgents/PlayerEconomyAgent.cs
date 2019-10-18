@@ -1,5 +1,4 @@
 ﻿using Assets.EconomyProject.Scripts.UI;
-using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents
 {
@@ -17,9 +16,9 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             }
         }
 
-        protected override void OnSwitch()
+        public override void OnSwitch()
         {
-            mainMenu.SwitchMenu(chosenScreen);
+            mainMenu.SwitchMenu(ChosenScreen);
         }
     }
 }

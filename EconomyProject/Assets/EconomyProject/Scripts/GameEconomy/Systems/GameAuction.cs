@@ -3,7 +3,7 @@ using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.GameEconomy
+namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 {
     public class GameAuction : EconomySystem
     {
@@ -36,7 +36,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         private DataLogger Logger => GetComponent<DataLogger>();
 
-        protected override AgentScreen actionChoice => AgentScreen.Auction;
+        protected override AgentScreen ActionChoice => AgentScreen.Auction;
 
         public void Reset()
         {
@@ -108,12 +108,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             {
                 foreach (var agent in CurrentPlayers)
                 {
-                    agent.SetAgentAction(AgentAct.Main);
+                    PlayerInput.SetMainAction(agent, AgentScreen.Main);
                 }
             }
         }
 
-        public bool CanMove(EconomyAgent agent)
+        public override bool CanMove(EconomyAgent agent)
         {
             return !(_currentHighestBidder == agent && _currentHighestBidder && agent);
         }
@@ -125,16 +125,14 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public void Bid(EconomyAgent player)
         {
-            if(player != _currentHighestBidder)
+            var newPrice = currentItemPrice + bidIncrement;
+            
+            if (!IsHighestBidder(player) && player.Money >= newPrice)
             {
-                float newPrice = currentItemPrice + bidIncrement;
-                if (player.Money >= newPrice)
-                {
-                    _currentHighestBidder = player;
-                    currentItemPrice = newPrice;
-                    _bidOn = true;
-                    _bidLast = true;
-                }
+                _currentHighestBidder = player;
+                currentItemPrice = newPrice;
+                _bidOn = true;
+                _bidLast = true;
             }
         }
     }

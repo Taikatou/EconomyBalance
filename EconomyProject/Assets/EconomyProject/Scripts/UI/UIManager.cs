@@ -1,4 +1,5 @@
-﻿using Assets.EconomyProject.Scripts.MLAgents;
+﻿using Assets.EconomyProject.Scripts.GameEconomy;
+using Assets.EconomyProject.Scripts.MLAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI
@@ -8,24 +9,26 @@ namespace Assets.EconomyProject.Scripts.UI
         public EconomyAgent playerAgent;
         public EconomyAcademy economyAcademy;
 
+        public PlayerInput PlayerInput => FindObjectOfType<PlayerInput>();
+
         public void StartAution()
         {
-            playerAgent.SetAgentAction(AgentAct.Auction);
+            PlayerInput.SetMainAction(playerAgent, AgentScreen.Auction);
         }
 
         public void StartQuest()
         {
-            playerAgent.SetAgentAction(AgentAct.Quest);
+            PlayerInput.SetMainAction(playerAgent, AgentScreen.Quest);
         }
 
         public void MainMenu()
         {
-            playerAgent.SetAgentAction(AgentAct.Main);
+            PlayerInput.SetMainAction(playerAgent, AgentScreen.Main);
         }
 
         public void Bid()
         {
-            playerAgent.SetChoice(AgentChoice.Bid);
+            PlayerInput.SetAuctionChoice(playerAgent, AuctionChoice.Bid);
         }
 
         public void Reset()

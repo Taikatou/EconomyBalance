@@ -1,4 +1,5 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy;
+using Assets.EconomyProject.Scripts.GameEconomy.Systems;
 using MLAgents;
 
 namespace Assets.EconomyProject.Scripts.MLAgents
@@ -7,7 +8,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
     {
         private static GameAuction GameAuction => FindObjectOfType<GameAuction>();
 
-        private static GameQuests GameQuests => FindObjectOfType<GameQuests>();
+        private static PlayerInput PlayerInput => FindObjectOfType<PlayerInput>();
 
         public override void InitializeAcademy()
         {
@@ -17,6 +18,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         public override void AcademyReset()
         {
             GameAuction.Reset();
+            PlayerInput.Reset();
         }
     }
 }
