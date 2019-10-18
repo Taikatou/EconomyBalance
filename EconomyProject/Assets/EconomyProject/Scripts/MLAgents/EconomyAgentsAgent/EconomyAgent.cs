@@ -15,7 +15,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
         public static int agentCounter = 0;
 
-        public int agentId;
+        [HideInInspector] public int agentId;
 
         public AgentInventory Inventory => GetComponent<AgentInventory>();
 
@@ -77,7 +77,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
         public override void CollectObservations()
         {
             AddVectorObs((int)ChosenScreen);
-            AddVectorObs((float)Wallet.Money);
+            AddVectorObs(Wallet? (float)Wallet.Money : 0.0f);
             AddVectorObs(Item);
             AddVectorObs(gameAuction.ItemCount);
             AddVectorObs(Inventory.ItemCount);
