@@ -6,21 +6,11 @@ namespace Assets.EconomyProject.Scripts.UI
 {
     public class QuestMenu : MonoBehaviour
     {
-        public Scrollbar scrollBar;
-
         public Slider slider;
 
         private void Update()
         {
             slider.value = Progress;
-        }
-
-        public void UpdateText()
-        {
-            DefaultControls.Resources tempResource = new DefaultControls.Resources();
-            GameObject newText = DefaultControls.CreateText(tempResource);
-
-            newText.transform.SetParent(FindContent(scrollBar));
         }
 
         public RectTransform FindContent(Scrollbar scrollViewObject)

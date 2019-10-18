@@ -8,11 +8,11 @@ namespace Assets.EconomyProject.Scripts.UI
     public class UiManager : MonoBehaviour
     {
         public EconomyAgent playerAgent;
-        public EconomyAcademy economyAcademy;
+        private EconomyAcademy EconomyAcademy => FindObjectOfType<EconomyAcademy>();
 
         public PlayerInput PlayerInput => FindObjectOfType<PlayerInput>();
 
-        public void StartAution()
+        public void StartAuction()
         {
             PlayerInput.SetMainAction(playerAgent, AgentScreen.Auction);
         }
@@ -34,7 +34,7 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public void Reset()
         {
-            economyAcademy.AcademyReset();
+            EconomyAcademy.AcademyReset();
         }
     }
 }

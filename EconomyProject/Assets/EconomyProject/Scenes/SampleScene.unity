@@ -282,7 +282,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1178690337}
-        m_MethodName: StartAution
+        m_MethodName: StartAuction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1971,7 +1971,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 601823049}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813628143}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d35e0a37d7e1314da36558b050203a7, type: 3}
@@ -2724,25 +2724,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1712567092}
   m_CullTransparentMesh: 0
---- !u!1 &1813628143 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8864355610370000414, guid: e11b1bf4b766cdc4d90af8b62d5f321c,
-    type: 3}
-  m_PrefabInstance: {fileID: 601823049}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1813628144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813628143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce000fa4147eec844b7cdd831ec766ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startMoney: 0
 --- !u!1 &1827019597
 GameObject:
   m_ObjectHideFlags: 0
