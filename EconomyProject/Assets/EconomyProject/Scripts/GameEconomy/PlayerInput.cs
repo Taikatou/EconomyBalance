@@ -39,8 +39,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                     return gameQuests.Progress;
                 case AgentScreen.Main:
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
             return 0.0f;
         }
@@ -84,8 +82,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                     case AuctionChoice.Bid:
                         gameAuction.Bid(agent);
                         break;
-                    default:
-                        break;
                 }
             }
         }
@@ -96,7 +92,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             if (canChange)
             {
                 _economyScreens[agent] = choice;
-                agent.OnSwitch();
             }
         }
 

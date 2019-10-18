@@ -57,8 +57,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
             PlayerInput.SetAgentAction(this, action);
         }
 
-        public virtual void OnSwitch() { }
-
         private void AddAuctionObs(InventoryItem item)
         {
             bool inAuction = (ChosenScreen == AgentScreen.Auction) && item;

@@ -28,7 +28,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         private bool _bidLast;
 
-        private bool _auctionOn;
+        private bool _auctionOn = false;
 
         private List<InventoryItem> _inventoryItems;
 
@@ -75,7 +75,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             _inventoryItems.Add(item);
         }
 
-        // Returns if the auction is over
         private void Update()
         {
             if (ItemCount > 0 && CurrentPlayers.Length > 0)

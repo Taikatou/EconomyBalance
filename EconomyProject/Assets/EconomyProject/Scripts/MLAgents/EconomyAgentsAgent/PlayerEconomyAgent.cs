@@ -1,12 +1,8 @@
-﻿using Assets.EconomyProject.Scripts.UI;
-
-namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
+﻿namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 {
     public class PlayerEconomyAgent : EconomyAgent
     {
         public bool uiControl = true;
-
-        public MainMenu mainMenu;
 
         public override void AgentAction(float[] vectorAction, string textAction)
         {
@@ -14,11 +10,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
             {
                 base.AgentAction(vectorAction, textAction);
             }
-        }
-
-        public override void OnSwitch()
-        {
-            mainMenu.SwitchMenu(ChosenScreen);
         }
     }
 }
