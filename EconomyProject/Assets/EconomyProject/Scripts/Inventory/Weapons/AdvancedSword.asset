@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bec5fbd5edd9b4ab62e476059b76fd, type: 3}
   m_Name: AdvancedSword
   m_EditorClassIdentifier: 
-  Name: Advanced Sword
+  itemName: Advanced Sword
   baseBidPrice: 15
-  damage: 15
   baseDurability: 15
   durability: 15
   unBreakable: 0

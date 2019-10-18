@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bec5fbd5edd9b4ab62e476059b76fd, type: 3}
   m_Name: EpicSword
   m_EditorClassIdentifier: 
-  Name: Epic Sword
+  itemName: Epic Sword
   baseBidPrice: 17
-  damage: 20
   baseDurability: 19
   durability: 19
   unBreakable: 0
