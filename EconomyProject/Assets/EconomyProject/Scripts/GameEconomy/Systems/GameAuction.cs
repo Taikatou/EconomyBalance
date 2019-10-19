@@ -122,7 +122,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             {
                 foreach (var agent in CurrentPlayers)
                 {
-                    PlayerInput.SetMainAction(agent, AgentScreen.Main);
+                    playerInput.SetMainAction(agent, AgentScreen.Main);
                 }
             }
         }

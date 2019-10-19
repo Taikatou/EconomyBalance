@@ -10,16 +10,18 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public Text itemText;
 
-        private GameAuction gameAuction => FindObjectOfType<GameAuction>();
+        public UiAccessor accessor;
+        
+        private GameAuction GameAuction => accessor.GameAuction;
 
         private void Update()
         {
-            if (gameAuction.ItemCount > 0 && gameAuction.auctionedItem)
+            if (GameAuction.ItemCount > 0 && GameAuction.auctionedItem)
             {
                 slider.value = Progress;
-                itemText.text = "Name: " + gameAuction.auctionedItem.itemName +
-                                " efficiency" + gameAuction.auctionedItem.efficiency +
-                                " Bid price: " + gameAuction.currentItemPrice;
+                itemText.text = "Name: " + GameAuction.auctionedItem.itemName +
+                                " efficiency" + GameAuction.auctionedItem.efficiency +
+                                " Bid price: " + GameAuction.currentItemPrice;
             }
             else
             {
@@ -27,6 +29,6 @@ namespace Assets.EconomyProject.Scripts.UI
             }
         }
 
-        public float Progress => gameAuction.Progress;
+        public float Progress => GameAuction.Progress;
     }
 }

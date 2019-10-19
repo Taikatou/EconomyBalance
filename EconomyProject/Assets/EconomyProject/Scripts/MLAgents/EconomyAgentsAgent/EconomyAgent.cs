@@ -120,8 +120,9 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
         public void EarnMoney(float amount)
         {
             Wallet.EarnMoney(amount);
-            var reward = Wallet.Money / endItem.baseBidPrice;
-            GetComponent<EconomyAgent>()?.AddReward((float)reward);
+            var reward = amount / endItem.baseBidPrice;
+            Debug.Log("Reward: " + reward);
+            AddReward((float)reward);
         }
     }
 }

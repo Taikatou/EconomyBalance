@@ -11,13 +11,15 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         public abstract bool CanMove(EconomyAgent agent);
 
-        public PlayerInput PlayerInput;
+        public PlayerInput playerInput;
+
+        public GameObject agents;
 
         public EconomyAgent[] CurrentPlayers
         {
             get
             {
-                EconomyAgent[] playerAgents = FindObjectsOfType<EconomyAgent>();
+                EconomyAgent[] playerAgents = agents.GetComponentsInChildren<EconomyAgent>();
                 return Array.FindAll(playerAgents, element => element.ChosenScreen == ActionChoice);
             }
         }

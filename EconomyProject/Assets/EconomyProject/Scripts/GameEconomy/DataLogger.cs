@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -30,10 +31,25 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
     {
         private List<AuctionItem> _auctionItems;
 
-        public string saveFileName = "Saved_data.csv";
+        public static int LoggerID = 0;
+
+        private string learningEnvironmentId = "agent_id_";
+
+        public int loggerId;
+
+        public string GetFileName
+        {
+            get
+            {
+                string nowStr = DateTime.Now.ToString("_dd_MM_yyyy_HH_mm");
+                return learningEnvironmentId + loggerId + nowStr + ".csv";
+            }
+        }
 
         private void Start()
         {
+            LoggerID++;
+            loggerId = LoggerID;
             _auctionItems = new List<AuctionItem>();
         }
 
@@ -79,7 +95,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         private string GetPath()
         {
             #if UNITY_EDITOR
-                return Application.dataPath + "/CSV/" + saveFileName;
+                return Application.dataPath + "/CSV/" + GetFileName;
             #elif UNITY_ANDROID
                 return Application.persistentDataPath+"Saved_data.csv";
             #elif UNITY_IPHONE

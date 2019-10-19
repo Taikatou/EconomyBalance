@@ -17,12 +17,14 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public Text efficiencyText;
 
+        public UiAccessor accessor;
+
         // Update is called once per frame
         private void Update()
         {
-            EconomyAgent economyAgent = MenuManager.economyAgentInstance;
-            GameAuction gameAuction = FindObjectOfType<GameAuction>();
-            if(gameAuction)
+            EconomyAgent economyAgent = accessor.EconomyAgent;
+            GameAuction gameAuction = accessor.GameAuction;
+            if (gameAuction)
             {
                 auctionText.text = "Auction Items: " + gameAuction.ItemCount.ToString();
             }

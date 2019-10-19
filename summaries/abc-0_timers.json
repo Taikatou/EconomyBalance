@@ -3,75 +3,75 @@
   "gauges": [
     {
       "name": "EconomyLearningBrain.mean_reward",
-      "value": 4350.249996304512,
-      "min": 23.899999976158142,
-      "max": 4350.249996304512,
-      "count": 10
+      "value": 99.1583343744278,
+      "min": 3.012500047683716,
+      "max": 288.51666980981827,
+      "count": 46
     }
   ],
-  "total": 251.0101416,
+  "total": 584.4060962,
   "count": 1,
-  "self": 9.789075400000172,
+  "self": 62.87964470000986,
   "children": [
     {
       "name": "TrainerController.advance",
-      "total": 241.22106619999983,
-      "count": 11190,
-      "self": 10.679526300000106,
+      "total": 521.5264514999901,
+      "count": 50001,
+      "self": 71.11798119999702,
       "children": [
         {
           "name": "env_step",
-          "total": 228.53521829999974,
-          "count": 11190,
-          "self": 221.75640690000054,
+          "total": 412.96876739999396,
+          "count": 50001,
+          "self": 380.79603399998473,
           "children": [
             {
               "name": "SubprocessEnvManager._take_step",
-              "total": 6.662572899999227,
-              "count": 11190,
-              "self": 0.18286639999943421,
+              "total": 31.63337650000772,
+              "count": 50001,
+              "self": 0.8409459000169903,
               "children": [
                 {
                   "name": "PPOPolicy.evaluate",
-                  "total": 6.479706499999793,
-                  "count": 11190,
-                  "self": 6.479706499999793
+                  "total": 30.79243059999073,
+                  "count": 50001,
+                  "self": 30.79243059999073
                 }
               ]
             },
             {
               "name": "workers",
-              "total": 0.11623849999997571,
-              "count": 11189,
+              "total": 0.5393569000015166,
+              "count": 50001,
               "self": 0.0,
               "children": [
                 {
                   "name": "worker_root",
-                  "total": 247.6110386999997,
-                  "count": 11189,
+                  "total": 579.7138741999947,
+                  "count": 50001,
                   "is_parallel": true,
-                  "self": 33.47939989999898,
+                  "self": 234.25961779999705,
                   "children": [
                     {
                       "name": "UnityEnvironment.step",
-                      "total": 214.13163880000073,
-                      "count": 11189,
+                      "total": 345.4542563999977,
+                      "count": 50001,
                       "is_parallel": true,
-                      "self": 3.908941900001196,
+                      "self": 31.93738450000251,
                       "children": [
                         {
                           "name": "UnityEnvironment._generate_step_input",
-                          "total": 0.7387784000006383,
-                          "count": 11189,
+                          "total": 6.5137566999941825,
+                          "count": 50001,
                           "is_parallel": true,
-                          "self": 0.7387784000006383
+                          "self": 6.5137566999941825
                         },
                         {
                           "name": "communicator.exchange",
-                          "total": 209.4839184999989,
-                          "count": 11189,
+                          "total": 307.003115200001,
+                          "count": 50001,
                           "is_parallel": true,
-                          "self": 209.4839184999989
+                          "self": 307.003115200001
                         }
                       ]
                     }
@@ -83,9 +83,9 @@
         },
         {
           "name": "update_policy",
-          "total": 2.006321599999989,
-          "count": 123,
-          "self": 2.006321599999989
+          "total": 37.43970289999912,
+          "count": 2327,
+          "self": 37.43970289999912
         }
       ]
     }

@@ -15,13 +15,11 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public EconomyAgent economyAgent;
 
-        public static EconomyAgent economyAgentInstance;
-
         private AgentScreen _cacheAgentScreen = AgentScreen.Main;
 
-        private EconomyAcademy EconomyAcademy => FindObjectOfType<EconomyAcademy>();
+        public UiAccessor accessor;
 
-        public PlayerInput PlayerInput => FindObjectOfType<PlayerInput>();
+        public PlayerInput PlayerInput => accessor.PlayerInput;
 
         public void SwitchMenu(AgentScreen whichMenu)
         {
@@ -32,7 +30,7 @@ namespace Assets.EconomyProject.Scripts.UI
 
         private void Update()
         {
-            PlayerInput playerInput = FindObjectOfType<PlayerInput>();
+            PlayerInput playerInput = accessor.PlayerInput;
             if (economyAgent != null && playerInput != null)
             {
                 AgentScreen screen = playerInput.GetScreen(economyAgent);
@@ -41,18 +39,6 @@ namespace Assets.EconomyProject.Scripts.UI
                     _cacheAgentScreen = screen;
                     SwitchMenu(screen);
                 }
-            }
-        }
-
-        private void Start()
-        {
-            if (economyAgent == null)
-            {
-                economyAgentInstance = FindObjectOfType<EconomyAgent>();
-            }
-            else
-            {
-                economyAgentInstance = economyAgent;
             }
         }
 
@@ -74,11 +60,6 @@ namespace Assets.EconomyProject.Scripts.UI
         public void Bid()
         {
             PlayerInput.SetAuctionChoice(economyAgent, AuctionChoice.Bid);
-        }
-
-        public void Reset()
-        {
-            EconomyAcademy.AcademyReset();
         }
     }
 }

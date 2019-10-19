@@ -1,6 +1,4 @@
 ﻿using System;
-using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using Assets.EconomyProject.Scripts.Inventory;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent

@@ -8,8 +8,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         public int numLearningAgents = 0;
 
-        public EconomyAcademy academy;
-
         public bool spawnAi = true;
 
         private void Start()

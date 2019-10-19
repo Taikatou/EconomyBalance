@@ -1,5 +1,4 @@
-﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.EconomyProject.Scripts.UI
@@ -7,6 +6,8 @@ namespace Assets.EconomyProject.Scripts.UI
     public class QuestMenu : MonoBehaviour
     {
         public Slider slider;
+
+        public UiAccessor accessor;
 
         private void Update()
         {
@@ -27,6 +28,6 @@ namespace Assets.EconomyProject.Scripts.UI
             return retVal;
         }
 
-        public float Progress => FindObjectOfType<GameQuests>().Progress;
+        public float Progress => accessor.GameQuests.Progress;
     }
 }
