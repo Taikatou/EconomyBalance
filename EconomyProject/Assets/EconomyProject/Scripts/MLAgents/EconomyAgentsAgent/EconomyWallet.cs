@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems;
+using Assets.EconomyProject.Scripts.Inventory;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
@@ -10,8 +11,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
         private double _money;
 
-        private GameQuests GameQuests => FindObjectOfType<GameQuests>();
-
         public double Money => _money;
         // Start is called before the first frame update
         void Start()
@@ -19,12 +18,12 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
             _money = startMoney;
         }
 
-        public void EarnMoney(float amount)
+        public void EarnMoney(float amount, float maxMoney)
         {
             if (amount > 0)
             {
                 _money = Math.Round(_money + amount);
-                var reward = _money / GameQuests.MaxMoney;
+                var reward = _money / maxMoney;
                 GetComponent<EconomyAgent>()?.AddReward((float)reward);
             }
         }

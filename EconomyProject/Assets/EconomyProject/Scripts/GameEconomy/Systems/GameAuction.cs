@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.Inventory;
+using Assets.EconomyProject.Scripts.MLAgents;
 using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 {
     public class GameAuction : EconomySystem
     {
+        private HashSet<EconomyAgent> _agentBids;
         public int ItemCount => _inventoryItems.Count;
 
         public float bidIncrement = 5.0f;
@@ -45,6 +47,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         private void Start()
         {
+            _agentBids = new HashSet<EconomyAgent>();
             _inventoryItems = new List<InventoryItem>();
         }
 
@@ -62,6 +65,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 currentAuctionTime = 0.0f;
 
                 currentItemPrice = auctionedItem.baseBidPrice;
+
+                _agentBids.Clear();
             }
 
             _currentHighestBidder = null;
@@ -94,12 +99,22 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                         {
                             _currentHighestBidder.BoughtItem(auctionedItem, currentItemPrice);
                             Logger.AddAuctionItem(auctionedItem, currentItemPrice, _currentHighestBidder);
+
                         }
                         SetAuctionItem();
                     }
                     else
                     {
                         _bidOn = false;
+                    }
+                }
+
+                foreach (var agent in CurrentPlayers)
+                {
+                    bool alreadyBid = _agentBids.Contains(agent);
+                    if (!alreadyBid)
+                    {
+                        agent.RequestDecision();
                     }
                 }
             }
@@ -132,6 +147,14 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 currentItemPrice = newPrice;
                 _bidOn = true;
                 _bidLast = true;
+            }
+        }
+
+        public void MakeDecision(EconomyAgent agent)
+        {
+            if (!_agentBids.Contains(agent))
+            {
+                _agentBids.Add(agent);
             }
         }
     }

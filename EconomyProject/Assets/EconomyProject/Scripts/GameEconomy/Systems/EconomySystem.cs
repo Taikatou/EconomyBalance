@@ -11,7 +11,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         public abstract bool CanMove(EconomyAgent agent);
 
-        public PlayerInput PlayerInput => FindObjectOfType<PlayerInput>();
+        public PlayerInput PlayerInput;
 
         public EconomyAgent[] CurrentPlayers
         {

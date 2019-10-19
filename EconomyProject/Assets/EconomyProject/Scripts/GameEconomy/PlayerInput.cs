@@ -10,9 +10,9 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
     {
         private Dictionary<EconomyAgent, AgentScreen> _economyScreens;
 
-        private GameAuction gameAuction => FindObjectOfType<GameAuction>();
+        public GameAuction gameAuction;
 
-        private GameQuests gameQuests => FindObjectOfType<GameQuests>();
+        public GameQuests gameQuests;
 
         public void Start()
         {
@@ -80,6 +80,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         {
             if (GetScreen(agent) == AgentScreen.Auction)
             {
+                if (agent.printInput)
+                {
+                    Debug.Log(choice);
+                }
                 switch (choice)
                 {
                     case AuctionChoice.Ignore:
@@ -88,6 +92,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                         gameAuction.Bid(agent);
                         break;
                 }
+                gameAuction.MakeDecision(agent);
             }
         }
 

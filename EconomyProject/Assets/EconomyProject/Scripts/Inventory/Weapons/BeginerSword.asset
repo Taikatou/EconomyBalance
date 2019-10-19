@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Beginner Sword
   baseBidPrice: 10
-  baseDurability: 12
-  durability: 12
+  baseDurability: 10
+  durability: 10
   unBreakable: 0
-  efficiency: 55
+  efficiency: 50

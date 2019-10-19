@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Intermidate Sword
   baseBidPrice: 12
-  baseDurability: 13
-  durability: 13
+  baseDurability: 10
+  durability: 10
   unBreakable: 0
-  efficiency: 70
+  efficiency: 60

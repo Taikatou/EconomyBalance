@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Epic Sword
   baseBidPrice: 17
-  baseDurability: 19
-  durability: 19
+  baseDurability: 10
+  durability: 10
   unBreakable: 0
-  efficiency: 90
+  efficiency: 80

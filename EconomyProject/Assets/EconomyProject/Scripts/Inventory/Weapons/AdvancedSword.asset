@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Advanced Sword
   baseBidPrice: 15
-  baseDurability: 15
-  durability: 15
+  baseDurability: 10
+  durability: 10
   unBreakable: 0
-  efficiency: 80
+  efficiency: 70

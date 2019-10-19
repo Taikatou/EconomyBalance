@@ -24,9 +24,9 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         private bool _shouldReturn;
 
-        public float MaxMoney => lootDropTable.MaxMoney;
-
         protected override AgentScreen ActionChoice => AgentScreen.Quest;
+
+        public GameAuction auction;
 
         public override bool CanMove(EconomyAgent agent)
         {
@@ -72,10 +72,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                         }
                         _shouldReturn = true;
                     }
+                    else
+                    {
+                        RequestDecisions();
+                    }
 
                     _currentTime = 0.0f;
-
-                    RequestDecisions();
                 }
             }
         }
@@ -86,7 +88,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             if(questSuccess)
             {
                 float money = GenerateItem(0);
-                agent.Wallet.EarnMoney(money);
+                agent.EarnMoney(money);
             }
             agent.DecreaseDurability();
         }
@@ -101,7 +103,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
 
                 generatedItem?.Init(selectedItem.item);
-                GameAuction auction = FindObjectOfType<GameAuction>();
+                
                 auction.AddAuctionItem(generatedItem);
 
                 Debug.Log(selectedItem.item.itemName);

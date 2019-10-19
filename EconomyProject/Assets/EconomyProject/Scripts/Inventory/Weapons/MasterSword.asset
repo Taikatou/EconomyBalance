@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Master Sword
   baseBidPrice: 20
-  baseDurability: 20
-  durability: 20
+  baseDurability: 10
+  durability: 10
   unBreakable: 0
-  efficiency: 99
+  efficiency: 90

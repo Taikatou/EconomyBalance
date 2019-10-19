@@ -12,6 +12,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
     public class EconomyAgent : Agent
     {
+        public InventoryItem endItem;
 
         public static int agentCounter = 0;
 
@@ -21,11 +22,11 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
         public InventoryItem Item => Inventory.EquipedItem;
 
-        private GameAuction gameAuction => FindObjectOfType<GameAuction>();
+        public GameAuction gameAuction;
 
-        public PlayerInput PlayerInput => FindObjectOfType<PlayerInput>();
+        public PlayerInput playerInput;
 
-        public AgentScreen ChosenScreen => PlayerInput.GetScreen(this);
+        public AgentScreen ChosenScreen => playerInput.GetScreen(this);
 
         public EconomyWallet Wallet => GetComponent<EconomyWallet>();
 
@@ -47,6 +48,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
         {
             Inventory.AddItem(item);
             Wallet?.SpendMoney(cost);
+
+            if (item && endItem)
+            {
+                if (item.itemName == endItem.itemName)
+                {
+                    Done();
+                }
+            }
         }
 
         public void DecreaseDurability()
@@ -69,7 +78,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
             if (action >= 0)
             {
-                PlayerInput.SetAgentAction(this, action);
+                playerInput.SetAgentAction(this, action);
             }
         }
 
@@ -97,9 +106,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
             AddVectorObs(Item);
             AddVectorObs(gameAuction.ItemCount);
             AddVectorObs(Inventory.ItemCount);
-            AddVectorObs(PlayerInput.GetProgress(this));
+            AddVectorObs(playerInput.GetProgress(this));
 
             AddAuctionObs(gameAuction.auctionedItem);
+        }
+
+        public void EarnMoney(float amount)
+        {
+            Wallet.EarnMoney(amount, endItem.baseBidPrice);
         }
     }
 }
