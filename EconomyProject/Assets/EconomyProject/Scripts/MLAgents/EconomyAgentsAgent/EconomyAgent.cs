@@ -34,6 +34,12 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
         public override void AgentReset()
         {
+            var reset = GetComponentInParent<ResetScript>();
+            reset.Reset();
+        }
+
+        public void ResetEconomyAgent()
+        {
             Inventory.ResetInventory();
             Wallet.Reset();
         }
@@ -113,7 +119,9 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
         public void EarnMoney(float amount)
         {
-            Wallet.EarnMoney(amount, endItem.baseBidPrice);
+            Wallet.EarnMoney(amount);
+            var reward = Wallet.Money / endItem.baseBidPrice;
+            GetComponent<EconomyAgent>()?.AddReward((float)reward);
         }
     }
 }

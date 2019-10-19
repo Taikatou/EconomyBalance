@@ -105,13 +105,11 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 generatedItem?.Init(selectedItem.item);
                 
                 auction.AddAuctionItem(generatedItem);
-
-                Debug.Log(selectedItem.item.itemName);
             }
 
             if (generatedItem != null)
             {
-                return generatedItem.baseBidPrice;
+                return generatedItem.baseBidPrice / 2;
             }
 
             return 0.0f;

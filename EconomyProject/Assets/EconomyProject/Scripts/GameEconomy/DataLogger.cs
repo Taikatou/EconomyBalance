@@ -49,7 +49,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             List<string[]> rowData = new List<string[]> { row };
             foreach (var item in _auctionItems)
             {
-                row = new string[2] { item.Name, item.price.ToString(CultureInfo.InvariantCulture) };
+                row = new[] { item.Name, item.price.ToString(CultureInfo.InvariantCulture), item.agentId.ToString() };
                 rowData.Add(row);
             }
             string[][] output = new string[rowData.Count][];

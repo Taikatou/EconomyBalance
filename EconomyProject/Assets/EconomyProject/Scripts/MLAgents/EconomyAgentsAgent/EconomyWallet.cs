@@ -18,13 +18,11 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
             _money = startMoney;
         }
 
-        public void EarnMoney(float amount, float maxMoney)
+        public void EarnMoney(float amount)
         {
             if (amount > 0)
             {
                 _money = Math.Round(_money + amount);
-                var reward = _money / maxMoney;
-                GetComponent<EconomyAgent>()?.AddReward((float)reward);
             }
         }
 
