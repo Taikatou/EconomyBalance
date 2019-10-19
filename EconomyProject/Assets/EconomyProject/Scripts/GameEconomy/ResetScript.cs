@@ -16,7 +16,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             }
 
             var gameAuction = GetComponentInChildren<GameAuction>();
-            gameAuction.Reset();
+            gameAuction?.Reset();
+
+            DataLogger dLogger = GetComponentInChildren<DataLogger>();
+            dLogger?.Reset();
         }
     }
 }

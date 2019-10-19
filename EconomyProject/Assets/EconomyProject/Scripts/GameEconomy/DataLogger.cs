@@ -31,7 +31,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
     {
         private List<AuctionItem> _auctionItems;
 
-        public static int LoggerID = 0;
+        public static int staticLoggerId = 0;
 
         private string learningEnvironmentId = "agent_id_";
 
@@ -48,8 +48,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         private void Start()
         {
-            LoggerID++;
-            loggerId = LoggerID;
+            staticLoggerId++;
+            loggerId = staticLoggerId;
             _auctionItems = new List<AuctionItem>();
         }
 
@@ -108,6 +108,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         void OnApplicationQuit()
         {
             OutputCsv();
+        }
+
+        public void Reset()
+        {
+            OutputCsv();
+            _auctionItems.Clear();
         }
     }
 }

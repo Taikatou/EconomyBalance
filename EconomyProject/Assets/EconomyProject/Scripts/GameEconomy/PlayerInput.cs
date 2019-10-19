@@ -92,7 +92,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                         gameAuction.Bid(agent);
                         break;
                 }
-                gameAuction.MakeDecision(agent);
             }
         }
 

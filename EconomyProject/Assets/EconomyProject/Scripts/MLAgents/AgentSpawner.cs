@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.EconomyProject.Scripts.GameEconomy;
+using Assets.EconomyProject.Scripts.GameEconomy.Systems;
+using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents
 {
@@ -9,6 +11,10 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         public int numLearningAgents = 0;
 
         public bool spawnAi = true;
+
+        public GameAuction gameAuction;
+
+        public PlayerInput playerInput;
 
         private void Start()
         {

@@ -11,10 +11,17 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public PlayerInput PlayerInput => coreGameSystem.GetComponentInChildren<PlayerInput>();
 
-        public EconomyAgent EconomyAgent => coreGameSystem.GetComponentInChildren<EconomyAgent>();
+        [HideInInspector]
+        public EconomyAgent economyAgent;
 
         public GameQuests GameQuests => coreGameSystem.GetComponentInChildren<GameQuests>();
 
         public GameObject coreGameSystem;
+
+
+        private void Start()
+        {
+            economyAgent = coreGameSystem.GetComponentInChildren<EconomyAgent>();
+        }
     }
 }

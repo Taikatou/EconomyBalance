@@ -137,24 +137,23 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             return _currentHighestBidder == agent;
         }
 
-        public void Bid(EconomyAgent player)
+        public void Bid(EconomyAgent agent)
         {
             var newPrice = currentItemPrice + bidIncrement;
             
-            if (!IsHighestBidder(player) && player.Wallet.Money >= newPrice)
+            if (!IsHighestBidder(agent) && agent.Wallet.Money >= newPrice)
             {
-                _currentHighestBidder = player;
+                _currentHighestBidder = agent;
                 currentItemPrice = newPrice;
                 _bidOn = true;
                 _bidLast = true;
-            }
-        }
 
-        public void MakeDecision(EconomyAgent agent)
-        {
-            if (!_agentBids.Contains(agent))
-            {
-                _agentBids.Add(agent);
+                // Stop asking agent for decision
+                _agentBids.Clear();
+                if (!_agentBids.Contains(agent))
+                {
+                    _agentBids.Add(agent);
+                }
             }
         }
     }
