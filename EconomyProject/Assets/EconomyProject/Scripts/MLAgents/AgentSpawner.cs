@@ -10,12 +10,17 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 
         public EconomyAcademy academy;
 
+        public bool spawnAi = true;
+
         private void Start()
         {
-            for (int i = 0; i < numLearningAgents; i++)
+            if(spawnAi)
             {
-                GameObject agentPrefab = Instantiate(learningAgentPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-                agentPrefab.transform.parent = gameObject.transform;
+                for (int i = 0; i < numLearningAgents; i++)
+                {
+                    GameObject agentPrefab = Instantiate(learningAgentPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                    agentPrefab.transform.parent = gameObject.transform;
+                }
             }
         }
     }

@@ -34,6 +34,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
         public override void AgentReset()
         {
             Inventory.ResetInventory();
+            Wallet.Reset();
         }
 
         public override void InitializeAgent()
