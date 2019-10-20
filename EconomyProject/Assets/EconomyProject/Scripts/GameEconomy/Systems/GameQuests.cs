@@ -109,7 +109,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
             if (generatedItem != null)
             {
-                return generatedItem.baseBidPrice;
+                return generatedItem.rewardPrice;
             }
 
             return 0.0f;

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: MasterSword
   m_EditorClassIdentifier: 
   itemName: Master Sword
-  baseBidPrice: 20
+  baseBidPrice: 10
+  rewardPrice: 25
   baseDurability: 10
   durability: 10
   unBreakable: 0

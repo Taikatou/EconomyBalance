@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: UltimateSwordOfPower
   m_EditorClassIdentifier: 
   itemName: Ultimate Sword Of Power
-  baseBidPrice: 20
+  baseBidPrice: 12
+  rewardPrice: 40
   baseDurability: 10
-  durability: 0
+  durability: 10
   unBreakable: 0
   efficiency: 100

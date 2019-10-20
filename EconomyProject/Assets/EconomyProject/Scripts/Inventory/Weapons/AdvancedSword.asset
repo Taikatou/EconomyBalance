@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: AdvancedSword
   m_EditorClassIdentifier: 
   itemName: Advanced Sword
-  baseBidPrice: 15
+  baseBidPrice: 8
+  rewardPrice: 14
   baseDurability: 10
   durability: 10
   unBreakable: 0

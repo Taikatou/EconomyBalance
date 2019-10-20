@@ -1655,6 +1655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9517270006edc54faaa09f430623886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  economyAgent: {fileID: 0}
   coreGameSystem: {fileID: 1732869650}
 --- !u!1 &903603529
 GameObject:
@@ -2427,7 +2428,6 @@ MonoBehaviour:
   auctionMenu: {fileID: 903603529}
   questMenu: {fileID: 1368742084}
   mainMenu: {fileID: 1277643499}
-  economyAgent: {fileID: 0}
   accessor: {fileID: 883289777}
 --- !u!1001 &1454529896
 PrefabInstance:
@@ -3410,6 +3410,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5803332211948300132, guid: a20c16da6c0ea1640b3b57af20fd8de0,
+        type: 3}
+      propertyPath: auctionTime
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 492166452449805149, guid: a20c16da6c0ea1640b3b57af20fd8de0, type: 3}

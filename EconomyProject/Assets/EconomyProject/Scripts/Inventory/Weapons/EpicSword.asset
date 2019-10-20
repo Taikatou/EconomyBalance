@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EpicSword
   m_EditorClassIdentifier: 
   itemName: Epic Sword
-  baseBidPrice: 17
+  baseBidPrice: 7
+  rewardPrice: 17
   baseDurability: 10
   durability: 10
   unBreakable: 0

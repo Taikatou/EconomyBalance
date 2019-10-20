@@ -9,6 +9,8 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public float baseBidPrice;
 
+        public float rewardPrice;
+
         public int baseDurability;
 
         [HideInInspector]
@@ -33,6 +35,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
             efficiency = item.efficiency;
             unBreakable = item.unBreakable;
             durability = item.durability;
+            rewardPrice = item.rewardPrice;
         }
 
         public void DecreaseDurability()

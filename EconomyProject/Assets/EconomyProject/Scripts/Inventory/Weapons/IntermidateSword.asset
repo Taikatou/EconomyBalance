@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: IntermidateSword
   m_EditorClassIdentifier: 
   itemName: Intermidate Sword
-  baseBidPrice: 12
+  baseBidPrice: 6
+  rewardPrice: 10
   baseDurability: 10
   durability: 10
   unBreakable: 0
