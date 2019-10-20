@@ -37,6 +37,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public int loggerId;
 
+        private int _resetCount = 0;
+
         public string GetFileName
         {
             get
@@ -61,11 +63,16 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public void OutputCsv()
         {
-            string[] row = { "Item Name", "Item Price" };
+            string[] row = { "Item Name", "Item Price", "AgentID", "ResetCount" };
             List<string[]> rowData = new List<string[]> { row };
             foreach (var item in _auctionItems)
             {
-                row = new[] { item.Name, item.price.ToString(CultureInfo.InvariantCulture), item.agentId.ToString() };
+                row = new[] {
+                                item.Name,
+                                item.price.ToString(CultureInfo.InvariantCulture),
+                                item.agentId.ToString(),
+                                _resetCount.ToString()
+                            };
                 rowData.Add(row);
             }
             string[][] output = new string[rowData.Count][];
@@ -112,8 +119,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public void Reset()
         {
-            OutputCsv();
-            _auctionItems.Clear();
+            _resetCount++;
         }
     }
 }

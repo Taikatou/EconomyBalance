@@ -15,9 +15,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         public GenericLootDropTableGameObject lootDropTable;
 
-        // How many items treasure will spawn
-        public int numItemsToDrop = 0;
-
         public bool finiteMonsters = true;
 
         public bool autoReturn = false;
@@ -27,6 +24,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         protected override AgentScreen ActionChoice => AgentScreen.Quest;
 
         public GameAuction auction;
+
+        public bool multipleLootDrops = true;
 
         public override bool CanMove(EconomyAgent agent)
         {
@@ -87,32 +86,31 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             bool questSuccess = Random.value < (agent.Item.efficiency / 100);
             if(questSuccess)
             {
-                float money = GenerateItem(0);
+                float money = GenerateItem(agent.Item);
                 agent.EarnMoney(money);
             }
             agent.DecreaseDurability();
         }
 
-        private float GenerateItem(int damage)
+        private float GenerateItem(InventoryItem attackWeapon)
         {
-            InventoryItem generatedItem = null;
-
-            for (int i = 0; i < numItemsToDrop; i++)
+            float totalPrice = 0.0f;
+            for (int i = 0; i < attackWeapon.numLootSpawns && (multipleLootDrops || i==0); i++)
             {
                 GeneratedLootItemScriptableObject selectedItem = lootDropTable.PickLootDropItem();
-                generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
+                var generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
 
                 generatedItem?.Init(selectedItem.item);
                 
                 auction.AddAuctionItem(generatedItem);
+
+                if (generatedItem != null)
+                {
+                    totalPrice += generatedItem.rewardPrice;
+                }
             }
 
-            if (generatedItem != null)
-            {
-                return generatedItem.rewardPrice;
-            }
-
-            return 0.0f;
+            return totalPrice;
         }
     }
 }

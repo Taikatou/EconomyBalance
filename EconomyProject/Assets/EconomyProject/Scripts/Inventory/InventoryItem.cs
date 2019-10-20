@@ -22,6 +22,8 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public float efficiency;
 
+        public int numLootSpawns = 1;
+
         private void OnEnable()
         {
             durability = baseDurability;
@@ -36,6 +38,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
             unBreakable = item.unBreakable;
             durability = item.durability;
             rewardPrice = item.rewardPrice;
+            numLootSpawns = item.numLootSpawns;
         }
 
         public void DecreaseDurability()
