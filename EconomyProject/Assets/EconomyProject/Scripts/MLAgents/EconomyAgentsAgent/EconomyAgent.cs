@@ -32,6 +32,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
         public bool printInput = false;
 
+        public bool resetOnComplete = false;
+
         public override void AgentReset()
         {
             var reset = GetComponentInParent<ResetScript>();
@@ -55,7 +57,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
             Inventory.AddItem(item);
             Wallet?.SpendMoney(cost);
 
-            if (item && endItem)
+            if (resetOnComplete && item && endItem)
             {
                 if (item.itemName == endItem.itemName)
                 {
