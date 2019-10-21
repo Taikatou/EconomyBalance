@@ -69,9 +69,8 @@ MonoBehaviour:
     numberOfActionsBetweenDecisions: 1
   endItem: {fileID: 11400000, guid: f2ee4c3d87136284f911c5dc145ee12c, type: 2}
   agentId: 0
-  gameAuction: {fileID: 0}
-  playerInput: {fileID: 0}
   printInput: 0
+  resetOnComplete: 1
 --- !u!114 &-4706628768726033178
 MonoBehaviour:
   m_ObjectHideFlags: 0
