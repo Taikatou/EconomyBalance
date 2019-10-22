@@ -103,6 +103,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
         private void AddVectorObs(InventoryItem item, bool condition=true, float defaultObs=0.0f, bool defaultBool=false)
         {
             AddVectorObs(condition ? item.durability : defaultObs);
+            AddVectorObs(condition ? item.baseDurability : defaultObs);
+            AddVectorObs(condition ? item.numLootSpawns : defaultObs);
             AddVectorObs(condition ? item.efficiency : defaultObs);
             AddVectorObs(condition ? item.unBreakable : defaultBool);
         }
@@ -115,6 +117,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
             AddVectorObs(GameAuction.ItemCount);
             AddVectorObs(Inventory.ItemCount);
             AddVectorObs(PlayerInput.GetProgress(this));
+            AddVectorObs(GameAuction.currentItemPrice);
 
             AddAuctionObs(GameAuction.auctionedItem);
         }
