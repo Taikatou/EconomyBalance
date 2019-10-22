@@ -7,21 +7,25 @@ namespace Assets.EconomyProject.Scripts.UI
 {
     public class UiAccessor : MonoBehaviour
     {
-        public GameAuction GameAuction => coreGameSystem.GetComponentInChildren<GameAuction>();
-
-        public PlayerInput PlayerInput => coreGameSystem.GetComponentInChildren<PlayerInput>();
-
-        [HideInInspector]
-        public EconomyAgent economyAgent;
+        private EconomyAgent _economyAgent;
+        
+        public GameObject coreGameSystem;
 
         public GameQuests GameQuests => coreGameSystem.GetComponentInChildren<GameQuests>();
 
-        public GameObject coreGameSystem;
+        public PlayerInput PlayerInput => coreGameSystem.GetComponentInChildren<PlayerInput>();
 
-
-        private void Start()
+        public GameAuction GameAuction => coreGameSystem.GetComponentInChildren<GameAuction>();
+        public EconomyAgent EconomyAgent
         {
-            economyAgent = coreGameSystem.GetComponentInChildren<EconomyAgent>();
+            get
+            {
+                if (_economyAgent == null)
+                {
+                    _economyAgent = coreGameSystem.GetComponentInChildren<EconomyAgent>();
+                }
+                return _economyAgent;
+            }
         }
     }
 }

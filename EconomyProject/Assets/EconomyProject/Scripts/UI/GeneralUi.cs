@@ -22,7 +22,7 @@ namespace Assets.EconomyProject.Scripts.UI
         // Update is called once per frame
         private void Update()
         {
-            EconomyAgent economyAgent = accessor.economyAgent;
+            EconomyAgent economyAgent = accessor.EconomyAgent;
             GameAuction gameAuction = accessor.GameAuction;
             if (gameAuction)
             {
