@@ -43,13 +43,10 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public void DecreaseDurability()
         {
-            if(EquipedItem)
+            EquipedItem.DecreaseDurability();
+            if (EquipedItem.Broken)
             {
-                EquipedItem.DecreaseDurability();
-                if (EquipedItem.Broken)
-                {
-                    _items.Remove(EquipedItem);
-                }
+                _items.Remove(EquipedItem);
             }
         }
 

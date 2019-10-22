@@ -46,7 +46,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 _currentTime += Time.deltaTime;
                 if (_currentTime > spawnTime)
                 {
-                    if (finiteMonsters)
+                    if (!finiteMonsters)
                     {
                         foreach (var agent in CurrentPlayers)
                         {
@@ -83,6 +83,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         public void RunQuests(EconomyAgent agent)
         {
+            
             bool questSuccess = Random.value < (agent.Item.efficiency / 100);
             if(questSuccess)
             {

@@ -18,7 +18,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public bool unBreakable;
 
-        public bool Broken => !unBreakable && durability == 0;
+        public bool Broken => !unBreakable && durability <= 0;
 
         public float efficiency;
 
