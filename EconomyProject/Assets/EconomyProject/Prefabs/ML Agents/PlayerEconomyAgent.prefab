@@ -78,8 +78,10 @@ MonoBehaviour:
     agentRenderTextures: []
     maxStep: 0
     resetOnDone: 1
-    onDemandDecision: 0
+    onDemandDecision: 1
     numberOfActionsBetweenDecisions: 1
+  endItem: {fileID: 0}
   agentId: 0
   printInput: 0
+  resetOnComplete: 0
   uiControl: 1

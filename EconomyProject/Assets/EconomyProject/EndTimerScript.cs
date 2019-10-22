@@ -34,7 +34,6 @@ namespace Assets.EconomyProject
             _startTime = totalTime;
         }
 
-        // Update is called once per frame
         void Update()
         {
             _currentTime -= Time.deltaTime;

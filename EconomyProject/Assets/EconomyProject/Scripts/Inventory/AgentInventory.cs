@@ -15,7 +15,6 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         private void Start()
         {
-            _items = new List<InventoryItem>();
             ResetInventory();
         }
 
@@ -28,6 +27,10 @@ namespace Assets.EconomyProject.Scripts.Inventory
         {
             get
             {
+                if (_items == null)
+                {
+                    ResetInventory();
+                }
                 if (_items.Count > 0)
                 {
                     var max = _items.Max(x => x.efficiency);
@@ -52,7 +55,15 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public void ResetInventory()
         {
-            _items?.Clear();
+            if (_items == null)
+            {
+                _items = new List<InventoryItem>();
+            }
+            else
+            {
+                _items?.Clear();
+            }
+
             foreach (var item in startInventory)
             {
                 InventoryItem generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;

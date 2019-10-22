@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents;
 using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
@@ -30,6 +31,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         private bool _bidLast;
 
         private bool _auctionOn;
+
+        public double addChance = 0.6f;
 
         private List<InventoryItem> _inventoryItems;
 
@@ -71,41 +74,48 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
                 _bidOn = false;
                 _bidLast = false;
-
-                currentAuctionTime = 0.0f;
             }
         }
 
         public void AddAuctionItem(InventoryItem item)
         {
-            _inventoryItems.Add(item);
+            System.Random rand = new System.Random();
+            double randValue = rand.NextDouble();
+            if (randValue <= addChance)
+            {
+                _inventoryItems.Add(item);
+            }
         }
 
         private void Update()
         {
-            if (ItemCount > 0 && CurrentPlayers.Length > 0)
+            if (CurrentPlayers.Length > 0)
             {
-                SetAuctionItem();
-
-                currentAuctionTime += Time.deltaTime;
-                if (currentAuctionTime >= auctionTime)
+                if (ItemCount > 0)
                 {
-                    if (!_bidOn)
+                    SetAuctionItem();
+
+                    currentAuctionTime += Time.deltaTime;
+                    if (currentAuctionTime >= auctionTime)
                     {
-                        AuctionOver();
-                    }
-                    else
-                    {
-                        _bidOn = false;
+                        if (!_bidOn)
+                        {
+                            AuctionOver();
+                        }
+                        else
+                        {
+                            _bidOn = false;
+                        }
+                        currentAuctionTime = 0.0f;
                     }
                 }
-            }
-            else
-            {
-                ReturnToMain();
-            }
+                else
+                {
+                    ReturnToMain();
+                }
 
-            RequestDecisions();
+                RequestDecisions();
+            }
         }
 
         private void AuctionOver()
@@ -124,7 +134,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         {
             foreach (var agent in CurrentPlayers)
             {
-                if (IsHighestBidder(agent))
+                bool notHighest = !IsHighestBidder(agent);
+                if (notHighest)
                 {
                     agent.RequestDecision();
                 }
@@ -141,7 +152,14 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         public override bool CanMove(EconomyAgent agent)
         {
-            return !(_currentHighestBidder == agent && _currentHighestBidder && agent);
+            if (!_auctionOn)
+            {
+                return true;
+            }
+            else
+            {
+                return !(_currentHighestBidder == agent && _currentHighestBidder && agent);
+            }
         }
 
         public bool IsHighestBidder(EconomyAgent agent)

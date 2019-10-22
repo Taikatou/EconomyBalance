@@ -41,7 +41,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         private void Update()
         {
-            if(CurrentPlayers.Length >= 1)
+            if (CurrentPlayers.Length >= 1)
             {
                 _currentTime += Time.deltaTime;
                 if (_currentTime > spawnTime)
