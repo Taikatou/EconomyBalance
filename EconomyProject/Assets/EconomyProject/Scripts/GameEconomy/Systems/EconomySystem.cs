@@ -24,7 +24,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             }
         }
 
-        protected void RequestDecisions()
+        protected virtual void RequestDecisions()
         {
             foreach(var agent in CurrentPlayers)
             {

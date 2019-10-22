@@ -309,3 +309,7 @@ EconomyLearningBrain:
             strength: 0.02
             gamma: 0.99
             encoding_size: 256
+
+TradingLearningBrain:
+    normalize: true
+    max_steps: 2e5

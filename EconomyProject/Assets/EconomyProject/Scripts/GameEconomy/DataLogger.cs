@@ -33,19 +33,18 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public static int staticLoggerId = 0;
 
-        private string learningEnvironmentId = "agent_id_";
+        public string learningEnvironmentId = "agent_id_";
 
         public int loggerId;
 
         private int _resetCount = 0;
 
-        public string GetFileName
+        private Dictionary<InventoryItem, List<float>> _itemPrices;
+
+        public string GetFileName(string fileName)
         {
-            get
-            {
-                string nowStr = DateTime.Now.ToString("_dd_MM_yyyy_HH_mm");
-                return learningEnvironmentId + loggerId + nowStr + ".csv";
-            }
+            string nowStr = DateTime.Now.ToString("_dd_MM_yyyy_HH_mm");
+            return fileName + loggerId + nowStr + ".csv";
         }
 
         private void Start()
@@ -53,28 +52,23 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             staticLoggerId++;
             loggerId = staticLoggerId;
             _auctionItems = new List<AuctionItem>();
+            _itemPrices = new Dictionary<InventoryItem, List<float>>();
         }
 
         public void AddAuctionItem(InventoryItem item, float price, EconomyAgent agent)
         {
             AuctionItem newItem = new AuctionItem(item, price, agent.agentId);
             _auctionItems.Add(newItem);
+
+            if (!_itemPrices.ContainsKey(item))
+            {
+                _itemPrices.Add(item, new List<float>());
+            }
+            _itemPrices[item].Add(price);
         }
 
-        public void OutputCsv()
+        public void OutputCsv(List<string[]> rowData, string fileName)
         {
-            string[] row = { "Item Name", "Item Price", "AgentID", "ResetCount" };
-            List<string[]> rowData = new List<string[]> { row };
-            foreach (var item in _auctionItems)
-            {
-                row = new[] {
-                                item.Name,
-                                item.price.ToString(CultureInfo.InvariantCulture),
-                                item.agentId.ToString(),
-                                _resetCount.ToString()
-                            };
-                rowData.Add(row);
-            }
             string[][] output = new string[rowData.Count][];
 
             for (int i = 0; i < output.Length; i++)
@@ -91,7 +85,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
                 sb.AppendLine(string.Join(delimiter, output[index]));
 
 
-            string filePath = GetPath();
+            string filePath = GetPath(fileName);
 
             StreamWriter outStream = System.IO.File.CreateText(filePath);
             outStream.WriteLine(sb);
@@ -99,10 +93,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         }
 
         // Following method is used to retrive the relative path as device platform
-        private string GetPath()
+        private string GetPath(string name)
         {
             #if UNITY_EDITOR
-                return Application.dataPath + "/CSV/" + GetFileName;
+                return Application.dataPath + "/CSV/" + GetFileName(name);
             #elif UNITY_ANDROID
                 return Application.persistentDataPath+"Saved_data.csv";
             #elif UNITY_IPHONE
@@ -114,7 +108,33 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         void OnApplicationQuit()
         {
-            OutputCsv();
+            var rowData = new List<string[]> { new[]{ "Item Name", "Item Price", "AgentID", "ResetCount" } };
+            foreach (var item in _auctionItems)
+            {
+                var row = new[] {
+                    item.Name,
+                    item.price.ToString(CultureInfo.InvariantCulture),
+                    item.agentId.ToString(),
+                    _resetCount.ToString()
+                };
+                rowData.Add(row);
+            }
+            OutputCsv(rowData, learningEnvironmentId);
+
+            var rowData2 = new List<string[]> { new[] { "Item Name", "Item Price" } };
+            foreach (var item in _itemPrices.Keys)
+            {
+                foreach (var salePrice in _itemPrices[item])
+                {
+                    var row = new[]
+                    {
+                        item.itemName,
+                        salePrice.ToString(CultureInfo.InvariantCulture)
+                    };
+                    rowData2.Add(row);
+                }
+            }
+            OutputCsv(rowData2, learningEnvironmentId + " sales");
         }
 
         public void Reset()
