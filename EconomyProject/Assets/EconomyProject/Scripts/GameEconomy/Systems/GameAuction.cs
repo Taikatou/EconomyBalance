@@ -8,7 +8,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 {
     public class GameAuction : EconomySystem
     {
-        private HashSet<EconomyAgent> _agentBids;
         public int ItemCount => _inventoryItems.Count;
 
         public float bidIncrement = 5.0f;
@@ -30,7 +29,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         private bool _bidLast;
 
-        private bool _auctionOn = false;
+        private bool _auctionOn;
 
         private List<InventoryItem> _inventoryItems;
 
@@ -47,32 +46,34 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         private void Start()
         {
-            _agentBids = new HashSet<EconomyAgent>();
             _inventoryItems = new List<InventoryItem>();
         }
 
         public void SetAuctionItem()
         {
-            _auctionOn = _inventoryItems.Count > 0;
-            if (_auctionOn)
+            if (!_auctionOn)
             {
-                System.Random rnd = new System.Random();
+                _auctionOn = _inventoryItems.Count > 0;
+                if (_auctionOn)
+                {
+                    System.Random rnd = new System.Random();
 
-                int index = rnd.Next(_inventoryItems.Count);
+                    int index = rnd.Next(_inventoryItems.Count);
 
-                auctionedItem = _inventoryItems[index];
+                    auctionedItem = _inventoryItems[index];
+
+                    currentAuctionTime = 0.0f;
+
+                    currentItemPrice = auctionedItem.baseBidPrice;
+                }
+
+                _currentHighestBidder = null;
+
+                _bidOn = false;
+                _bidLast = false;
 
                 currentAuctionTime = 0.0f;
-
-                currentItemPrice = auctionedItem.baseBidPrice;
-
-                _agentBids.Clear();
             }
-
-            _currentHighestBidder = null;
-
-            _bidOn = false;
-            _bidLast = false;
         }
 
         public void AddAuctionItem(InventoryItem item)
@@ -84,46 +85,57 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         {
             if (ItemCount > 0 && CurrentPlayers.Length > 0)
             {
-                if (!_auctionOn)
-                {
-                    SetAuctionItem();
-                }
+                SetAuctionItem();
+
                 currentAuctionTime += Time.deltaTime;
                 if (currentAuctionTime >= auctionTime)
                 {
-                    currentAuctionTime = 0.0f;
                     if (!_bidOn)
                     {
-                        _inventoryItems.Remove(auctionedItem);
-                        if(_bidLast)
-                        {
-                            _currentHighestBidder.BoughtItem(auctionedItem, currentItemPrice);
-                            Logger.AddAuctionItem(auctionedItem, currentItemPrice, _currentHighestBidder);
-
-                        }
-                        SetAuctionItem();
+                        AuctionOver();
                     }
                     else
                     {
                         _bidOn = false;
                     }
                 }
-
-                foreach (var agent in CurrentPlayers)
-                {
-                    bool alreadyBid = _agentBids.Contains(agent);
-                    if (!alreadyBid)
-                    {
-                        agent.RequestDecision();
-                    }
-                }
             }
             else
             {
-                foreach (var agent in CurrentPlayers)
+                ReturnToMain();
+            }
+
+            RequestDecisions();
+        }
+
+        private void AuctionOver()
+        {
+            _auctionOn = false;
+            _inventoryItems.Remove(auctionedItem);
+            if (_bidLast)
+            {
+                _currentHighestBidder.BoughtItem(auctionedItem, currentItemPrice);
+                Logger.AddAuctionItem(auctionedItem, currentItemPrice, _currentHighestBidder);
+            }
+            ReturnToMain();
+        }
+
+        protected override void RequestDecisions()
+        {
+            foreach (var agent in CurrentPlayers)
+            {
+                if (IsHighestBidder(agent))
                 {
-                    playerInput.SetMainAction(agent, AgentScreen.Main);
+                    agent.RequestDecision();
                 }
+            }
+        }
+
+        public void ReturnToMain()
+        {
+            foreach (var agent in CurrentPlayers)
+            {
+                playerInput.SetMainAction(agent, AgentScreen.Main);
             }
         }
 
@@ -147,13 +159,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 currentItemPrice = newPrice;
                 _bidOn = true;
                 _bidLast = true;
-
-                // Stop asking agent for decision
-                _agentBids.Clear();
-                if (!_agentBids.Contains(agent))
-                {
-                    _agentBids.Add(agent);
-                }
             }
         }
     }

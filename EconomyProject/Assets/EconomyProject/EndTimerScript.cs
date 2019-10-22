@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.EconomyProject
 {
@@ -6,18 +7,31 @@ namespace Assets.EconomyProject
     {
         private float _currentTime;
 
+        private float _startTime;
+
         public int seconds;
 
         public int minutes;
 
         public int hours;
 
-        public float CurrentTime => _currentTime;
+        public string CurrentTime
+        {
+            get
+            {
+                TimeSpan t = TimeSpan.FromSeconds(_startTime - _currentTime);
+
+                string currentTimeLeft = $"{t.Hours:D2}h:{t.Minutes:D2}m:{t.Seconds:D2}s:{t.Milliseconds:D3}ms";
+                return currentTimeLeft;
+            }
+        }
+
 
         void Start()
         {
             int totalTime = seconds + (60 * minutes) + (60 * 60 * hours);
             _currentTime = totalTime;
+            _startTime = totalTime;
         }
 
         // Update is called once per frame

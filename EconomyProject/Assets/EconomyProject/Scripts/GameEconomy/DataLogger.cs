@@ -16,14 +16,16 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         public InventoryItem item;
         public float price;
         public int agentId;
+        public string currentTime;
 
         public string Name => item.itemName;
 
-        public AuctionItem(InventoryItem item, float price, int agentId) : this()
+        public AuctionItem(InventoryItem item, float price, int agentId, string currentTime) : this()
         {
             this.item = item;
             this.price = price;
             this.agentId = agentId;
+            this.currentTime = currentTime;
         }
     }
 
@@ -41,6 +43,14 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         private Dictionary<InventoryItem, List<float>> _itemPrices;
 
+        public string CurrentTime
+        {
+            get
+            {
+                EndTimerScript endTimer = FindObjectOfType<EndTimerScript>();
+                return endTimer ? endTimer.CurrentTime : "";
+            }
+        }
         public string GetFileName(string fileName)
         {
             string nowStr = DateTime.Now.ToString("_dd_MM_yyyy_HH_mm");
@@ -57,7 +67,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public void AddAuctionItem(InventoryItem item, float price, EconomyAgent agent)
         {
-            AuctionItem newItem = new AuctionItem(item, price, agent.agentId);
+            
+            AuctionItem newItem = new AuctionItem(item, price, agent.agentId, CurrentTime);
             _auctionItems.Add(newItem);
 
             if (!_itemPrices.ContainsKey(item))
@@ -93,10 +104,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         }
 
         // Following method is used to retrive the relative path as device platform
-        private string GetPath(string name)
+        private string GetPath(string fileName)
         {
             #if UNITY_EDITOR
-                return Application.dataPath + "/CSV/" + GetFileName(name);
+                return Application.dataPath + "/CSV/" + GetFileName(fileName);
             #elif UNITY_ANDROID
                 return Application.persistentDataPath+"Saved_data.csv";
             #elif UNITY_IPHONE
@@ -108,33 +119,18 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         void OnApplicationQuit()
         {
-            var rowData = new List<string[]> { new[]{ "Item Name", "Item Price", "AgentID", "ResetCount" } };
+            var rowData = new List<string[]> { new[]{ "Item Name", "Item Price", "AgentID", "Event Time" } };
             foreach (var item in _auctionItems)
             {
                 var row = new[] {
                     item.Name,
                     item.price.ToString(CultureInfo.InvariantCulture),
                     item.agentId.ToString(),
-                    _resetCount.ToString()
+                    item.currentTime
                 };
                 rowData.Add(row);
             }
             OutputCsv(rowData, learningEnvironmentId);
-
-            var rowData2 = new List<string[]> { new[] { "Item Name", "Item Price" } };
-            foreach (var item in _itemPrices.Keys)
-            {
-                foreach (var salePrice in _itemPrices[item])
-                {
-                    var row = new[]
-                    {
-                        item.itemName,
-                        salePrice.ToString(CultureInfo.InvariantCulture)
-                    };
-                    rowData2.Add(row);
-                }
-            }
-            OutputCsv(rowData2, learningEnvironmentId + " sales");
         }
 
         public void Reset()

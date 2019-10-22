@@ -73,5 +73,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: f56be2afa70de914e810a7abda185507,
         type: 2}
+    - target: {fileID: 5940935655762775432, guid: 7f83e2c93df89ce4fbe3760b4b9b045b,
+        type: 3}
+      propertyPath: agentParameters.resetOnDone
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5940935655762775432, guid: 7f83e2c93df89ce4fbe3760b4b9b045b,
+        type: 3}
+      propertyPath: resetOnComplete
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f83e2c93df89ce4fbe3760b4b9b045b, type: 3}

@@ -21,5 +21,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             DataLogger dLogger = GetComponentInChildren<DataLogger>();
             dLogger?.Reset();
         }
+
+        protected void Update()
+        {
+            Time.timeScale = 50.0f;
+        }
     }
 }

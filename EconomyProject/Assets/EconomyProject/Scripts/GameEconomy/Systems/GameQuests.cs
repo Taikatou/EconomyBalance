@@ -95,7 +95,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         private float GenerateItem(InventoryItem attackWeapon)
         {
             float totalPrice = 0.0f;
-            for (int i = 0; i < attackWeapon.numLootSpawns && (multipleLootDrops || i==0); i++)
+
+            System.Random r = new System.Random();
+            int numSpawns = r.Next(1, attackWeapon.numLootSpawns + 1);
+            for (int i = 0; i < numSpawns && (multipleLootDrops || i==0); i++)
             {
                 GeneratedLootItemScriptableObject selectedItem = lootDropTable.PickLootDropItem();
                 var generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
