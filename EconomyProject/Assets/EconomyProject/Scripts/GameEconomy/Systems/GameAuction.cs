@@ -32,7 +32,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         private bool _auctionOn;
 
-        public double addChance = 0.6f;
+        public double addChance = 0.1f;
 
         private List<InventoryItem> _inventoryItems;
 
