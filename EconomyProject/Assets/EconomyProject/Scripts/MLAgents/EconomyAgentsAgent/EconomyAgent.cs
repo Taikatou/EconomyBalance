@@ -61,6 +61,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
             {
                 if (item.itemName == endItem.itemName)
                 {
+                    AddReward(1.0f);
                     Done();
                 }
             }
