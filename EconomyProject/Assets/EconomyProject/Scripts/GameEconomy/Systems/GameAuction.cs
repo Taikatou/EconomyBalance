@@ -32,7 +32,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         private bool _auctionOn;
 
-        public double addChance = 0.1f;
+        public double addChance = 0.9f;
 
         private List<InventoryItem> _inventoryItems;
 
@@ -124,6 +124,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             _inventoryItems.Remove(auctionedItem);
             if (_bidLast)
             {
+                Debug.Log("Sold Weapon: " + auctionedItem.itemName + " for " + currentItemPrice);
                 _currentHighestBidder.BoughtItem(auctionedItem, currentItemPrice);
                 Logger.AddAuctionItem(auctionedItem, currentItemPrice, _currentHighestBidder);
             }
