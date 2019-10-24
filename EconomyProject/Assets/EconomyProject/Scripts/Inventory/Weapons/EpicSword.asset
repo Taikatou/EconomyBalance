@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Epic Sword
   baseBidPrice: 9
   rewardPrice: 17
-  baseDurability: 10
+  baseDurability: 20
   durability: 10
   unBreakable: 0
   efficiency: 80

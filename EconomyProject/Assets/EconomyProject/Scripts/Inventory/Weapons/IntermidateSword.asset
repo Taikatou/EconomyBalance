@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Intermidate Sword
   baseBidPrice: 6
   rewardPrice: 10
-  baseDurability: 10
+  baseDurability: 15
   durability: 10
   unBreakable: 0
   efficiency: 60

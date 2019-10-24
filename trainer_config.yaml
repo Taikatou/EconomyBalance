@@ -289,6 +289,9 @@ BasicLearning:
 
 EconomyLearningBrain:
     beta: 1.0e-2
+    use_recurrent: true
+    sequence_length: 64
+    memory_size: 256
     normalize: true
     summary_freq: 2000
     time_horizon: 3
