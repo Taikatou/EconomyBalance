@@ -24,6 +24,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
             }
         }
 
+        public void LoseMoney(float amount)
+        {
+            if (amount < 0)
+            {
+                _money = Math.Round(_money + amount);
+            }
+        }
+
         public void SpendMoney(float amount)
         {
             if (amount > 0)

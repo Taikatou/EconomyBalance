@@ -94,7 +94,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             }
             else if (punishFailure)
             {
-                agent.AddReward(-0.2f);
+                agent.LoseMoney(2);
             }
             agent.DecreaseDurability();
         }

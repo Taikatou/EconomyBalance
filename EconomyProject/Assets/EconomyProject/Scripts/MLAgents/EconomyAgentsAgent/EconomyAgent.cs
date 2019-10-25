@@ -127,7 +127,13 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
         {
             Wallet.EarnMoney(amount);
             var reward = (amount / endItem.rewardPrice) / 5;
-            AddReward((float)reward);
+            AddReward(reward);
+        }
+
+        public void LoseMoney(float amount, float punishment=0.1f)
+        {
+            Wallet.LoseMoney(amount);
+            AddReward(punishment);
         }
     }
 }
