@@ -22,6 +22,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
         public InventoryItem Item => Inventory.EquipedItem;
 
+        public bool printInput = false;
+
+        public bool resetOnComplete = false;
+
+        public bool rewardMoney = false;
+
+        public bool punishLoss = false;
+
         public GameAuction GameAuction => GetComponentInParent<AgentSpawner>().gameAuction;
 
         public PlayerInput PlayerInput => GetComponentInParent<AgentSpawner>().playerInput;
@@ -29,12 +37,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
         public AgentScreen ChosenScreen => PlayerInput.GetScreen(this);
 
         public EconomyWallet Wallet => GetComponent<EconomyWallet>();
-
-        public bool printInput = false;
-
-        public bool resetOnComplete = false;
-
-        public bool rewardMoney = false;
 
         public override void AgentReset()
         {
@@ -137,10 +139,13 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
         public void LoseMoney(float amount, float punishment=0.1f)
         {
-            Wallet.LoseMoney(amount);
-            if (rewardMoney)
+            if (punishLoss)
             {
-                AddReward(punishment);
+                Wallet.LoseMoney(amount);
+                if (rewardMoney)
+                {
+                    AddReward(punishment);
+                }
             }
         }
     }
