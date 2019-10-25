@@ -27,6 +27,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         public bool multipleLootDrops = true;
 
+        public bool punishFailure = true;
+
         public override bool CanMove(EconomyAgent agent)
         {
             return !_shouldReturn;
@@ -89,6 +91,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             {
                 float money = GenerateItem(agent.Item);
                 agent.EarnMoney(money);
+            }
+            else if (punishFailure)
+            {
+                agent.AddReward(-0.2f);
             }
             agent.DecreaseDurability();
         }
