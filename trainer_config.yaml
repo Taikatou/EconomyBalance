@@ -288,18 +288,15 @@ BasicLearning:
             gamma: 0.9
 
 EconomyLearningBrain:
-    beta: 1.0e-2
-    use_recurrent: true
-    sequence_length: 32
-    memory_size: 128
-    normalize: false
     summary_freq: 2000
-    time_horizon: 1024
+    time_horizon: 128
     batch_size: 128
-    buffer_size: 1024
+    buffer_size: 2048
+    hidden_units: 512
     num_layers: 2
-    hidden_units: 10
+    beta: 1.0e-2
     max_steps: 10.0e4
+    num_epoch: 3
     reward_signals:
         extrinsic:
             strength: 1.0

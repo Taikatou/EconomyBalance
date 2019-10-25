@@ -34,6 +34,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
         public bool resetOnComplete = false;
 
+        public bool rewardMoney = false;
+
         public override void AgentReset()
         {
             var reset = GetComponentInParent<ResetScript>();
@@ -127,13 +129,19 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
         {
             Wallet.EarnMoney(amount);
             var reward = (amount / endItem.rewardPrice) / 5;
-            AddReward(reward);
+            if (rewardMoney)
+            {
+                AddReward(reward);
+            }
         }
 
         public void LoseMoney(float amount, float punishment=0.1f)
         {
             Wallet.LoseMoney(amount);
-            AddReward(punishment);
+            if (rewardMoney)
+            {
+                AddReward(punishment);
+            }
         }
     }
 }
