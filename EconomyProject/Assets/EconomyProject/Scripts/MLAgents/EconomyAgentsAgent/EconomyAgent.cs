@@ -1,4 +1,5 @@
-﻿using Assets.EconomyProject.Scripts.GameEconomy;
+﻿using System.Collections.Generic;
+using Assets.EconomyProject.Scripts.GameEconomy;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems;
 using Assets.EconomyProject.Scripts.Inventory;
 using MLAgents;
