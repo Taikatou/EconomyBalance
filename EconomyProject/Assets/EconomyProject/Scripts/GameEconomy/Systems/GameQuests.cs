@@ -105,11 +105,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
             System.Random r = new System.Random();
             int numSpawns = r.Next(1, attackWeapon.numLootSpawns);
+            int dropped = 0;
             for (int i = 0; i < numSpawns && (multipleLootDrops || i==0); i++)
             {
                 GeneratedLootItemScriptableObject selectedItem = lootDropTable.PickLootDropItem();
                 var generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
-
+                dropped++;
                 generatedItem?.Init(selectedItem.item);
                 
                 auction.AddAuctionItem(generatedItem);
@@ -119,7 +120,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                     totalPrice += generatedItem.rewardPrice;
                 }
             }
-
+            Debug.Log("Spawned " + dropped + " items");
             return totalPrice;
         }
     }

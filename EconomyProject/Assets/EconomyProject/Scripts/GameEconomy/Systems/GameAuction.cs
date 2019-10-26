@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents;
 using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
 using UnityEngine;
 
@@ -83,7 +81,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         {
             System.Random rand = new System.Random();
             double randValue = rand.NextDouble();
-            float randChance = Mathf.Lerp(addChance, 0.02f, _inventoryItems.Count / maxInventory);
+            float randChance = Mathf.Lerp(addChance, 0.005f, _inventoryItems.Count / maxInventory);
             if (randValue <= randChance)
             {
                 _inventoryItems.Add(item);
