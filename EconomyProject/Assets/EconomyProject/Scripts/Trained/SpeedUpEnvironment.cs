@@ -6,7 +6,7 @@ namespace Assets.EconomyProject.Scripts.Trained
     {
         void Update()
         {
-            Time.timeScale = 100;
+            //Time.timeScale = 100;
         }
     }
 }

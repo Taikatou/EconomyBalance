@@ -1,4 +1,4 @@
-﻿using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
+﻿using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
@@ -8,7 +8,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         public override float Progress => throw new System.NotImplementedException();
 
         protected override AgentScreen ActionChoice => AgentScreen.Main;
-        public override bool CanMove(EconomyAgent agent)
+        public override bool CanMove(AdventurerAgent agent)
         {
             return true;
         }

@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy
@@ -65,7 +65,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             _itemPrices = new Dictionary<InventoryItem, List<float>>();
         }
 
-        public void AddAuctionItem(InventoryItem item, float price, EconomyAgent agent)
+        public void AddAuctionItem(InventoryItem item, float price, AdventurerAgent agent)
         {
             
             AuctionItem newItem = new AuctionItem(item, price, agent.agentId, CurrentTime);

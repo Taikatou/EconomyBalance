@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy
 {
     public class PlayerInput : MonoBehaviour
     {
-        private Dictionary<EconomyAgent, AgentScreen> _economyScreens;
+        private Dictionary<AdventurerAgent, AgentScreen> _economyScreens;
 
         public GameAuction gameAuction;
 
@@ -15,10 +15,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public void Start()
         {
-            _economyScreens = new Dictionary<EconomyAgent, AgentScreen>();
+            _economyScreens = new Dictionary<AdventurerAgent, AgentScreen>();
         }
 
-        public AgentScreen GetScreen(EconomyAgent agent)
+        public AgentScreen GetScreen(AdventurerAgent agent)
         {
             if (agent)
             {
@@ -32,7 +32,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             return (AgentScreen)(-1);
         }
 
-        public float GetProgress(EconomyAgent agent)
+        public float GetProgress(AdventurerAgent agent)
         {
             var chosenScreen = GetScreen(agent);
             switch (chosenScreen)
@@ -47,7 +47,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             return 0.0f;
         }
 
-        public bool CanMove(EconomyAgent agent)
+        public bool CanMove(AdventurerAgent agent)
         {
             var chosenScreen = GetScreen(agent);
             switch (chosenScreen)
@@ -60,7 +60,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             return true;
         }
 
-        public void SetAgentAction(EconomyAgent agent, int action)
+        public void SetAgentAction(AdventurerAgent agent, int action)
         {
             switch (GetScreen(agent))
             {
@@ -75,7 +75,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             }
         }
 
-        public void SetAuctionChoice(EconomyAgent agent, AuctionChoice choice)
+        public void SetAuctionChoice(AdventurerAgent agent, AuctionChoice choice)
         {
             if (GetScreen(agent) == AgentScreen.Auction)
             {
@@ -90,7 +90,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             }
         }
 
-        public void SetMainAction(EconomyAgent agent, AgentScreen choice)
+        public void SetMainAction(AdventurerAgent agent, AgentScreen choice)
         {
             var canChange = CanMove(agent);
             if (canChange)

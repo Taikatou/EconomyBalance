@@ -1,6 +1,6 @@
 ﻿using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.Inventory.LootBoxes.Generated;
-using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
@@ -29,7 +29,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         public bool punishFailure = true;
 
-        public override bool CanMove(EconomyAgent agent)
+        public override bool CanMove(AdventurerAgent agent)
         {
             return !_shouldReturn;
         }
@@ -83,7 +83,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             }
         }
 
-        public void RunQuests(EconomyAgent agent)
+        public void RunQuests(AdventurerAgent agent)
         {
             
             bool questSuccess = Random.value < (agent.Item.efficiency / 100);

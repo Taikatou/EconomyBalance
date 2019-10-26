@@ -1,5 +1,5 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy;
-using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI
@@ -28,9 +28,9 @@ namespace Assets.EconomyProject.Scripts.UI
         private void Update()
         {
             PlayerInput playerInput = accessor.PlayerInput;
-            if (accessor.EconomyAgent != null && playerInput != null)
+            if (accessor.AdventurerAgent != null && playerInput != null)
             {
-                AgentScreen screen = playerInput.GetScreen(accessor.EconomyAgent);
+                AgentScreen screen = playerInput.GetScreen(accessor.AdventurerAgent);
                 if (screen != _cacheAgentScreen)
                 {
                     _cacheAgentScreen = screen;
@@ -41,22 +41,22 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public void StartAuction()
         {
-            PlayerInput.SetMainAction(accessor.EconomyAgent, AgentScreen.Auction);
+            PlayerInput.SetMainAction(accessor.AdventurerAgent, AgentScreen.Auction);
         }
 
         public void StartQuest()
         {
-            PlayerInput.SetMainAction(accessor.EconomyAgent, AgentScreen.Quest);
+            PlayerInput.SetMainAction(accessor.AdventurerAgent, AgentScreen.Quest);
         }
 
         public void MainMenu()
         {
-            PlayerInput.SetMainAction(accessor.EconomyAgent, AgentScreen.Main);
+            PlayerInput.SetMainAction(accessor.AdventurerAgent, AgentScreen.Main);
         }
 
         public void Bid()
         {
-            PlayerInput.SetAuctionChoice(accessor.EconomyAgent, AuctionChoice.Bid);
+            PlayerInput.SetAuctionChoice(accessor.AdventurerAgent, AuctionChoice.Bid);
         }
     }
 }

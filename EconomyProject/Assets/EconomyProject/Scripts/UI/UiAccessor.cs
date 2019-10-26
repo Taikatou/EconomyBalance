@@ -1,13 +1,13 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI
 {
     public class UiAccessor : MonoBehaviour
     {
-        private EconomyAgent _economyAgent;
+        private AdventurerAgent _adventurerAgent;
         
         public GameObject coreGameSystem;
 
@@ -16,16 +16,16 @@ namespace Assets.EconomyProject.Scripts.UI
         public PlayerInput PlayerInput => coreGameSystem.GetComponentInChildren<PlayerInput>();
 
         public GameAuction GameAuction => coreGameSystem.GetComponentInChildren<GameAuction>();
-        public EconomyAgent EconomyAgent
+        public AdventurerAgent AdventurerAgent
         {
             get
             {
-                if (_economyAgent == null)
+                if (_adventurerAgent == null)
                 {
-                    _economyAgent = coreGameSystem.GetComponentInChildren<EconomyAgent>();
-                    //_economyAgent.printObservations = true;
+                    _adventurerAgent = coreGameSystem.GetComponentInChildren<AdventurerAgent>();
+                    //_adventurerAgent.printObservations = true;
                 }
-                return _economyAgent;
+                return _adventurerAgent;
             }
         }
     }

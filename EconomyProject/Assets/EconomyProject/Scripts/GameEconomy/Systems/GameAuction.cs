@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
@@ -12,12 +12,9 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         public float bidIncrement = 5.0f;
 
         [HideInInspector]
-        public InventoryItem auctionedItem;
-
-        [HideInInspector]
         public float currentItemPrice;
 
-        private EconomyAgent _currentHighestBidder;
+        private AdventurerAgent _currentHighestBidder;
 
         [HideInInspector]
         public float currentAuctionTime;
@@ -42,6 +39,17 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         protected override AgentScreen ActionChoice => AgentScreen.Auction;
 
+        public InventoryItem AuctionedItem => GetAuctionItem(0);
+
+        public InventoryItem GetAuctionItem(int index)
+        {
+            if (_inventoryItems.Count > index)
+            {
+                return _inventoryItems[index];
+            }
+            return null;
+        }
+
         public void Reset()
         {
             _inventoryItems?.Clear();
@@ -61,13 +69,9 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 {
                     System.Random rnd = new System.Random();
 
-                    int index = rnd.Next(_inventoryItems.Count);
-
-                    auctionedItem = _inventoryItems[index];
-
                     currentAuctionTime = 0.0f;
 
-                    currentItemPrice = auctionedItem.baseBidPrice;
+                    currentItemPrice = AuctionedItem.baseBidPrice;
                 }
 
                 _currentHighestBidder = null;
@@ -122,6 +126,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         private void AuctionOver()
         {
             _auctionOn = false;
+            InventoryItem auctionedItem = AuctionedItem;
             _inventoryItems.Remove(auctionedItem);
             if (_bidLast)
             {
@@ -132,18 +137,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             ReturnToMain();
         }
 
-        protected override void RequestDecisions()
-        {
-            foreach (var agent in CurrentPlayers)
-            {
-                bool notHighest = !IsHighestBidder(agent);
-                if (notHighest)
-                {
-                    agent.RequestDecision();
-                }
-            }
-        }
-
         public void ReturnToMain()
         {
             foreach (var agent in CurrentPlayers)
@@ -152,7 +145,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             }
         }
 
-        public override bool CanMove(EconomyAgent agent)
+        public override bool CanMove(AdventurerAgent agent)
         {
             if (!_auctionOn)
             {
@@ -164,12 +157,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             }
         }
 
-        public bool IsHighestBidder(EconomyAgent agent)
+        public bool IsHighestBidder(AdventurerAgent agent)
         {
             return _currentHighestBidder == agent;
         }
 
-        public void Bid(EconomyAgent agent)
+        public void Bid(AdventurerAgent agent)
         {
             var newPrice = currentItemPrice + bidIncrement;
             
