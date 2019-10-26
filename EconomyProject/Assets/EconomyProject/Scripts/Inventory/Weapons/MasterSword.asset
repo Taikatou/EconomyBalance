@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Master Sword
   baseBidPrice: 10
   rewardPrice: 25
-  baseDurability: 25
+  baseDurability: 10
   durability: 25
   unBreakable: 0
   efficiency: 75

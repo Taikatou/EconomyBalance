@@ -178,7 +178,7 @@ PrefabInstance:
     - target: {fileID: 1236909210103590167, guid: 7e630bf950c0a0c42ac0b17bb36fce30,
         type: 3}
       propertyPath: spawnTime
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1236909210103590167, guid: 7e630bf950c0a0c42ac0b17bb36fce30,
         type: 3}
@@ -251,6 +251,11 @@ PrefabInstance:
     - target: {fileID: 1236909210103590167, guid: 7e630bf950c0a0c42ac0b17bb36fce30,
         type: 3}
       propertyPath: finiteMonsters
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1236909210103590167, guid: 7e630bf950c0a0c42ac0b17bb36fce30,
+        type: 3}
+      propertyPath: multipleLootDrops
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
