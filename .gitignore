@@ -9,7 +9,7 @@
 /**/[Bb]uilds/
 /**/[Ll]ogs/
 /**/[Mm]emoryCaptures/
-/**/[Bb]uild_env/
+/[Bb]uild_env/
 
 # Never ignore Asset meta data
 !/**/[Aa]ssets/**/*.meta
