@@ -23,7 +23,7 @@ namespace Assets.EconomyProject.Scripts.UI
                 if (_adventurerAgent == null)
                 {
                     _adventurerAgent = coreGameSystem.GetComponentInChildren<AdventurerAgent>();
-                    //_adventurerAgent.printObservations = true;
+                    _adventurerAgent.printObservations = true;
                 }
                 return _adventurerAgent;
             }

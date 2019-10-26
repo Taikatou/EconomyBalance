@@ -118,9 +118,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 {
                     ReturnToMain();
                 }
-
-                RequestDecisions();
             }
+            RequestDecisions();
         }
 
         private void AuctionOver()

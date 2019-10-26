@@ -1,6 +1,7 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems;
 using Assets.EconomyProject.Scripts.Inventory;
+using Boo.Lang;
 using MLAgents;
 using UnityEngine;
 
@@ -29,6 +30,24 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         public bool punishLoss = false;
 
         public bool printObservations = false;
+
+        private List<string> _weaponNames;
+
+        private int GetWeaponName(string weaponName)
+        {
+            if (_weaponNames == null)
+            {
+                _weaponNames = new List<string>();
+            }
+
+            if (!_weaponNames.Contains(weaponName))
+            {
+                _weaponNames.Add(weaponName);
+            }
+
+            return _weaponNames.IndexOf(weaponName);
+        }
+
 
         public GameAuction GameAuction => GetComponentInParent<AgentSpawner>().gameAuction;
 
@@ -131,6 +150,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         private string AddVectorObs(InventoryItem item, bool condition = true, float defaultObs = 0.0f)
         {
             var output = " Current Item";
+            output += AddVectorObs(condition ? GetWeaponName(item.itemName) : defaultObs, "Weapon Name Index");
             output += AddVectorObs(condition ? item.durability : defaultObs, "Durability");
             output += AddVectorObs(condition ? item.baseDurability : defaultObs, "Base Durability");
             output += AddVectorObs(condition ? item.numLootSpawns : defaultObs, "Num Loot Spawn");

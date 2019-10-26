@@ -8,7 +8,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         public double startMoney;
 
         public double Money { get; private set; }
-        // Start is called before the first frame update
+
         void Start()
         {
             Money = startMoney;
