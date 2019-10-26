@@ -9,10 +9,5 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
         {
             AddVectorObs(0);
         }
-
-        private void Update()
-        {
-            Time.timeScale = 100;
-        }
     }
 }

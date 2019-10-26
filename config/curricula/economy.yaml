@@ -1,0 +1,14 @@
+{
+    "measure" : "progress",
+    "thresholds" : [0.1, 0.3, 0.5],
+    "min_lesson_length" : 100,
+    "signal_smoothing" : true,
+    "parameters" :
+    {
+        "beginner_sword_prob"     :     [35.0,  40.0, 45.0],
+        "intermidate_sword_prob"  :     [20.0,  25.0, 25.0],
+        "advanced_sword_prob"     :     [17.5,  15.0, 10.0],
+        "epic_sword_prob"         :     [7.5,   10.0, 4.0],
+        "ultimate_sword_prob"     :     [5.0,   5.0,  1.0],
+    }
+}

@@ -16,7 +16,7 @@ MonoBehaviour:
   baseBidPrice: 12
   rewardPrice: 40
   baseDurability: 30
-  durability: 10
+  durability: 30
   unBreakable: 0
-  efficiency: 100
+  efficiency: 90
   numLootSpawns: 5

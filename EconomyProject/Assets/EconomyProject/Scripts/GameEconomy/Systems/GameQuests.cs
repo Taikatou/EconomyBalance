@@ -89,7 +89,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             bool questSuccess = Random.value < (agent.Item.efficiency / 100);
             if(questSuccess)
             {
-                float money = GenerateItem(agent.Item);
+                float money = GenerateItem(agent.Item) / 2;
                 agent.EarnMoney(money);
             }
             else if (punishFailure)
@@ -104,7 +104,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             float totalPrice = 0.0f;
 
             System.Random r = new System.Random();
-            int numSpawns = r.Next(1, attackWeapon.numLootSpawns + 1);
+            int numSpawns = r.Next(1, attackWeapon.numLootSpawns);
             for (int i = 0; i < numSpawns && (multipleLootDrops || i==0); i++)
             {
                 GeneratedLootItemScriptableObject selectedItem = lootDropTable.PickLootDropItem();

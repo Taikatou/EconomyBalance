@@ -22,13 +22,13 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
         public InventoryItem Item => Inventory.EquipedItem;
 
-        public bool printInput = false;
-
         public bool resetOnComplete = false;
 
         public bool rewardMoney = false;
 
         public bool punishLoss = false;
+
+        public bool printObservations = false;
 
         public GameAuction GameAuction => GetComponentInParent<AgentSpawner>().gameAuction;
 
@@ -65,9 +65,10 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
             {
                 if (item.itemName == endItem.itemName)
                 {
-                    AddReward(1.0f);
                     Done();
                 }
+
+                AddReward(item.efficiency / endItem.efficiency);
             }
         }
 
@@ -84,47 +85,77 @@ namespace Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent
 
         public virtual void AgentAction(int action)
         {
-            if (printInput)
-            {
-                Debug.Log(action);
-            }
-
             if (action >= 0)
             {
                 PlayerInput.SetAgentAction(this, action);
             }
         }
 
-        private void AddAuctionObs(InventoryItem item)
+        private string AddAuctionObs(InventoryItem item)
         {
             bool inAuction = (ChosenScreen == AgentScreen.Auction) && item;
 
-            AddVectorObs(inAuction && GameAuction.IsHighestBidder(this));
-            
-            AddVectorObs(inAuction ? GameAuction.currentItemPrice : 0.0f);
-            AddVectorObs(item, inAuction);
+            var output = AddVectorObs(item, inAuction);
+            output += AddVectorObs(inAuction, GameAuction.IsHighestBidder(this), "Is Highest Bidder");
+
+            output += AddVectorObs(inAuction ? GameAuction.currentItemPrice : 0.0f, "Current Price");
+            return output;
         }
 
-        private void AddVectorObs(InventoryItem item, bool condition=true, float defaultObs=0.0f, bool defaultBool=false)
+        protected string AddVectorObs(float observation, string obsName)
         {
-            AddVectorObs(condition ? item.durability : defaultObs);
-            AddVectorObs(condition ? item.baseDurability : defaultObs);
-            AddVectorObs(condition ? item.numLootSpawns : defaultObs);
-            AddVectorObs(condition ? item.efficiency : defaultObs);
-            AddVectorObs(condition ? item.unBreakable : defaultBool);
+            AddVectorObs(observation);
+            return " " +  obsName + ": " + observation;
+        }
+
+        protected string AddVectorObs(bool valid, bool observation, string obsName)
+        {
+            if (valid)
+            {
+                AddVectorObs(observation? 1: 2);
+            }
+            else
+            {
+                AddVectorObs(0);
+            }
+            
+            return " " + obsName + ": " + observation;
+        }
+
+        private string AddVectorObs(InventoryItem item, bool condition = true, float defaultObs = 0.0f)
+        {
+            var output = " Current Item";
+            output += AddVectorObs(condition ? item.durability : defaultObs, "Durability");
+            output += AddVectorObs(condition ? item.baseDurability : defaultObs, "Base Durability");
+            output += AddVectorObs(condition ? item.numLootSpawns : defaultObs, "Num Loot Spawn");
+            output += AddVectorObs(condition ? item.efficiency : defaultObs, "Efficiency");
+            output += AddVectorObs(condition && item, item && item.unBreakable, "Unbreakable");
+
+            return output;
+        }
+
+        protected string AddVectorObs(AgentScreen observation, string obsName)
+        {
+            AddVectorObs((int)observation);
+            return obsName + ": " + observation;
         }
 
         public override void CollectObservations()
         {
-            AddVectorObs((int)ChosenScreen);
-            AddVectorObs(Wallet? (float)Wallet.Money : 0.0f);
-            AddVectorObs(Item);
-            AddVectorObs(GameAuction.ItemCount);
-            AddVectorObs(Inventory.ItemCount);
-            AddVectorObs(PlayerInput.GetProgress(this));
-            AddVectorObs(GameAuction.currentItemPrice);
+            var output = AddVectorObs(ChosenScreen, "Chosen Screen");
+            output += AddVectorObs(Wallet? (float)Wallet.Money : 0.0f, "Money");
+            output += AddVectorObs(Item);
+            output += AddVectorObs(GameAuction.ItemCount, "Auction Item Count");
+            output += AddVectorObs(Inventory.ItemCount, "Inventory Item Count");
+            output += AddVectorObs(PlayerInput.GetProgress(this), "Progress");
+            output += AddVectorObs(GameAuction.currentItemPrice, "Current Item Price");
 
-            AddAuctionObs(GameAuction.auctionedItem);
+            output += AddAuctionObs(GameAuction.auctionedItem);
+
+            if (printObservations)
+            {
+                Debug.Log(output);
+            }
         }
 
         public void EarnMoney(float amount)

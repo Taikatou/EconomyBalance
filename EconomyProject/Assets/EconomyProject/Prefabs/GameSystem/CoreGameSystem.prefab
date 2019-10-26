@@ -43,10 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a078cb379edffdd41bf6d99d79c46ead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  learningAgentPrefab: {fileID: 7707616417561859250, guid: 7f83e2c93df89ce4fbe3760b4b9b045b,
-    type: 3}
-  numLearningAgents: 50
-  spawnAi: 1
   gameAuction: {fileID: 5803332211948300132}
   playerInput: {fileID: 1644154546455500952}
 --- !u!1 &5803332212511212224
@@ -104,6 +100,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5803332212511212225}
     m_Modifications:
+    - target: {fileID: 1236909210103590164, guid: 7e630bf950c0a0c42ac0b17bb36fce30,
+        type: 3}
+      propertyPath: m_Name
+      value: GameQuest
+      objectReference: {fileID: 0}
     - target: {fileID: 1236909210103590166, guid: 7e630bf950c0a0c42ac0b17bb36fce30,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -158,11 +159,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1236909210103590164, guid: 7e630bf950c0a0c42ac0b17bb36fce30,
-        type: 3}
-      propertyPath: m_Name
-      value: GameQuest
       objectReference: {fileID: 0}
     - target: {fileID: 1236909210103590167, guid: 7e630bf950c0a0c42ac0b17bb36fce30,
         type: 3}
@@ -255,7 +251,7 @@ PrefabInstance:
     - target: {fileID: 1236909210103590167, guid: 7e630bf950c0a0c42ac0b17bb36fce30,
         type: 3}
       propertyPath: finiteMonsters
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e630bf950c0a0c42ac0b17bb36fce30, type: 3}
@@ -284,16 +280,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5803332212511212225}
     m_Modifications:
-    - target: {fileID: 5068984172073472844, guid: 83c0dd6f0e813fd4f95364afb6d8f4ef,
+    - target: {fileID: 4065588338389896107, guid: 83c0dd6f0e813fd4f95364afb6d8f4ef,
         type: 3}
-      propertyPath: gameAuction
-      value: 
-      objectReference: {fileID: 5803332211948300132}
-    - target: {fileID: 5068984172073472844, guid: 83c0dd6f0e813fd4f95364afb6d8f4ef,
-        type: 3}
-      propertyPath: gameQuests
-      value: 
-      objectReference: {fileID: 5803332211210325912}
+      propertyPath: m_Name
+      value: PlayerInput
+      objectReference: {fileID: 0}
     - target: {fileID: 8093230244765206160, guid: 83c0dd6f0e813fd4f95364afb6d8f4ef,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -349,11 +340,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4065588338389896107, guid: 83c0dd6f0e813fd4f95364afb6d8f4ef,
+    - target: {fileID: 5068984172073472844, guid: 83c0dd6f0e813fd4f95364afb6d8f4ef,
         type: 3}
-      propertyPath: m_Name
-      value: PlayerInput
-      objectReference: {fileID: 0}
+      propertyPath: gameAuction
+      value: 
+      objectReference: {fileID: 5803332211948300132}
+    - target: {fileID: 5068984172073472844, guid: 83c0dd6f0e813fd4f95364afb6d8f4ef,
+        type: 3}
+      propertyPath: gameQuests
+      value: 
+      objectReference: {fileID: 5803332211210325912}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83c0dd6f0e813fd4f95364afb6d8f4ef, type: 3}
 --- !u!4 &2367061484572970308 stripped
@@ -381,6 +377,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5803332212511212225}
     m_Modifications:
+    - target: {fileID: 3598907528760838742, guid: 388a52fab21e3034ba80f473eb8f33c1,
+        type: 3}
+      propertyPath: m_Name
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 3598907528760838740, guid: 388a52fab21e3034ba80f473eb8f33c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -436,11 +437,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3598907528760838742, guid: 388a52fab21e3034ba80f473eb8f33c1,
-        type: 3}
-      propertyPath: m_Name
-      value: MainMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 3598907528760838743, guid: 388a52fab21e3034ba80f473eb8f33c1,
         type: 3}
       propertyPath: playerInput
@@ -466,25 +462,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5803332212511212225}
     m_Modifications:
-    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
+    - target: {fileID: 2736416197373676488, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
         type: 3}
-      propertyPath: playerInput
-      value: 
-      objectReference: {fileID: 1644154546455500952}
-    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
-        type: 3}
-      propertyPath: agents
-      value: 
-      objectReference: {fileID: 5803332211051719864}
-    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
-        type: 3}
-      propertyPath: bidIncrement
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
-        type: 3}
-      propertyPath: auctionTime
-      value: 2
+      propertyPath: m_Name
+      value: GameAuction
       objectReference: {fileID: 0}
     - target: {fileID: 2736416197373676490, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
         type: 3}
@@ -541,10 +522,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2736416197373676488, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
+    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
         type: 3}
-      propertyPath: m_Name
-      value: GameAuction
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 1644154546455500952}
+    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
+        type: 3}
+      propertyPath: agents
+      value: 
+      objectReference: {fileID: 5803332211051719864}
+    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
+        type: 3}
+      propertyPath: bidIncrement
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
+        type: 3}
+      propertyPath: auctionTime
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a25284d75dcf3544ebf8c5cd1ee5d80d, type: 3}

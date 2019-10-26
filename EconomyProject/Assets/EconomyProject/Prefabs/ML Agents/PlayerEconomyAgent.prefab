@@ -82,6 +82,7 @@ MonoBehaviour:
     numberOfActionsBetweenDecisions: 1
   endItem: {fileID: 0}
   agentId: 0
-  printInput: 0
   resetOnComplete: 0
-  uiControl: 1
+  rewardMoney: 1
+  punishLoss: 0
+  printObservations: 0

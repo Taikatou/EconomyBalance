@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.EconomyProject.Scripts.MLAgents;
+using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts
 {
@@ -9,6 +10,11 @@ namespace Assets.EconomyProject.Scripts
         public int numCoreSpawn;
 
         public bool spawnCoreSystems;
+
+        public GameObject learningAgentPrefab;
+
+        public int numLearningAgents;
+
         private void Start()
         {
             if (spawnCoreSystems)
@@ -17,6 +23,9 @@ namespace Assets.EconomyProject.Scripts
                 {
                     GameObject agentPrefab = Instantiate(coreSystemPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                     agentPrefab.transform.parent = gameObject.transform;
+
+                    var spawner = GetComponentInChildren<AgentSpawner>();
+                    spawner?.SpawnAgents(learningAgentPrefab, numLearningAgents);
                 }
             }
         }

@@ -18,5 +18,5 @@ MonoBehaviour:
   baseDurability: 10
   durability: 10
   unBreakable: 0
-  efficiency: 50
+  efficiency: 20
   numLootSpawns: 2

@@ -32,7 +32,9 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         private bool _auctionOn;
 
-        public double addChance = 0.9f;
+        public float addChance = 0.05f;
+
+        public float maxInventory = 50;
 
         private List<InventoryItem> _inventoryItems;
 
@@ -81,7 +83,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         {
             System.Random rand = new System.Random();
             double randValue = rand.NextDouble();
-            if (randValue <= addChance)
+            float randChance = Mathf.Lerp(addChance, 0.02f, _inventoryItems.Count / maxInventory);
+            if (randValue <= randChance)
             {
                 _inventoryItems.Add(item);
             }

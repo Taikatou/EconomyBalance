@@ -8,7 +8,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
     {
         public void Reset()
         {
-            Debug.Log("Reset Environment");
             EconomyAgent [] agents = GetComponentsInChildren<EconomyAgent>();
             foreach (var agent in agents)
             {

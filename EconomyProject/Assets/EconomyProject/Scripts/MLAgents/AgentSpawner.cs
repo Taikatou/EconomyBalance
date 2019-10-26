@@ -6,25 +6,15 @@ namespace Assets.EconomyProject.Scripts.MLAgents
 {
     public class AgentSpawner : MonoBehaviour
     {
-        public GameObject learningAgentPrefab;
-
-        public int numLearningAgents = 0;
-
-        public bool spawnAi = true;
-
         public GameAuction gameAuction;
 
         public PlayerInput playerInput;
-
-        private void Start()
+        public void SpawnAgents(GameObject learningAgentPrefab, int numLearningAgents)
         {
-            if(spawnAi)
+            for (int i = 0; i < numLearningAgents; i++)
             {
-                for (int i = 0; i < numLearningAgents; i++)
-                {
-                    GameObject agentPrefab = Instantiate(learningAgentPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-                    agentPrefab.transform.parent = gameObject.transform;
-                }
+                GameObject agentPrefab = Instantiate(learningAgentPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                agentPrefab.transform.parent = gameObject.transform;
             }
         }
     }

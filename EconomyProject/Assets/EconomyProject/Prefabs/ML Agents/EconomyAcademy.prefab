@@ -62,4 +62,14 @@ MonoBehaviour:
     timeScale: 1
     targetFrameRate: 60
   resetParameters:
-    m_ResetParameters: []
+    m_ResetParameters:
+    - key: beginner_sword_prob
+      value: 0
+    - key: intermidate_sword_prob-1
+      value: 0
+    - key: advanced_sword_prob
+      value: 0
+    - key: epic_sword_prob
+      value: 0
+    - key: ultimate_sword_prob
+      value: 0

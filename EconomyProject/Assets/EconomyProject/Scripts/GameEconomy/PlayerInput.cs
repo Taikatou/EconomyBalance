@@ -79,10 +79,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         {
             if (GetScreen(agent) == AgentScreen.Auction)
             {
-                if (agent.printInput)
-                {
-                    Debug.Log(choice);
-                }
                 switch (choice)
                 {
                     case AuctionChoice.Ignore:
