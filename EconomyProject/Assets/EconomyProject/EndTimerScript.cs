@@ -21,7 +21,7 @@ namespace Assets.EconomyProject
             {
                 TimeSpan t = TimeSpan.FromSeconds(_startTime - _currentTime);
 
-                string currentTimeLeft = $"{t.Hours:D2}h:{t.Minutes:D2}m:{t.Seconds:D2}s:{t.Milliseconds:D3}ms";
+                string currentTimeLeft = $"{t.Hours:D2}:{t.Minutes:D2}:{t.Seconds:D2}:{t.Milliseconds:D3}";
                 return currentTimeLeft;
             }
         }
