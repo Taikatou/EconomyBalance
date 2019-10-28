@@ -1,5 +1,5 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,23 +22,23 @@ namespace Assets.EconomyProject.Scripts.UI
         // Update is called once per frame
         private void Update()
         {
-            EconomyAgent economyAgent = accessor.EconomyAgent;
+            AdventurerAgent adventurerAgent = accessor.AdventurerAgent;
             GameAuction gameAuction = accessor.GameAuction;
             if (gameAuction)
             {
                 auctionText.text = "Auction Items: " + gameAuction.ItemCount.ToString();
             }
-            if(economyAgent)
+            if(adventurerAgent)
             {
-                moneyText.text = "MONEY: " + economyAgent.Wallet.Money;
+                moneyText.text = "MONEY: " + adventurerAgent.Wallet.Money;
 
-                if(economyAgent.Item)
+                if(adventurerAgent.Item)
                 {
-                    durabilityText.text = "DURABILITY: " + (economyAgent.Item.unBreakable? "∞" : economyAgent.Item.durability.ToString());
+                    durabilityText.text = "DURABILITY: " + (adventurerAgent.Item.unBreakable? "∞" : adventurerAgent.Item.durability.ToString());
 
-                    currentItemText.text = "CURRENT ITEM: " + economyAgent.Item.itemName;
+                    currentItemText.text = "CURRENT ITEM: " + adventurerAgent.Item.itemName;
 
-                    efficiencyText.text = "EFFICIENCY: " + economyAgent.Item.efficiency;
+                    efficiencyText.text = "EFFICIENCY: " + adventurerAgent.Item.efficiency;
                 }
             }
         }

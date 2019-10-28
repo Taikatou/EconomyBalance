@@ -1,5 +1,5 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy
@@ -8,7 +8,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
     {
         public void Reset()
         {
-            EconomyAgent [] agents = GetComponentsInChildren<EconomyAgent>();
+            AdventurerAgent [] agents = GetComponentsInChildren<AdventurerAgent>();
             foreach (var agent in agents)
             {
                 agent.ResetEconomyAgent();

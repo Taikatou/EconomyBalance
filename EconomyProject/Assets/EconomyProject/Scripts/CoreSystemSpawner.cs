@@ -13,19 +13,24 @@ namespace Assets.EconomyProject.Scripts
 
         public GameObject learningAgentPrefab;
 
+        public GameObject playerAgentPrefab;
+
         public int numLearningAgents;
+
+        public bool spawnPlayer;
 
         private void Start()
         {
             if (spawnCoreSystems)
             {
-                for (int i = 0; i < numCoreSpawn; i++)
+                for (var i = 0; i < numCoreSpawn; i++)
                 {
-                    GameObject agentPrefab = Instantiate(coreSystemPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                    var agentPrefab = Instantiate(coreSystemPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                     agentPrefab.transform.parent = gameObject.transform;
 
                     var spawner = GetComponentInChildren<AgentSpawner>();
-                    spawner?.SpawnAgents(learningAgentPrefab, numLearningAgents);
+                    var adventurerPrefab = spawnPlayer ? playerAgentPrefab : learningAgentPrefab;
+                    spawner?.SpawnAgents(adventurerPrefab, numLearningAgents);
                 }
             }
         }

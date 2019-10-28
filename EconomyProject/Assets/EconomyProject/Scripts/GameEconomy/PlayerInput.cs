@@ -1,24 +1,40 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy
 {
     public class PlayerInput : MonoBehaviour
     {
-        private Dictionary<EconomyAgent, AgentScreen> _economyScreens;
+        private Dictionary<AdventurerAgent, AgentScreen> _economyScreens;
 
         public GameAuction gameAuction;
 
         public GameQuests gameQuests;
 
+        public MainMenuSystem mainMenuSystem;
+
         public void Start()
         {
-            _economyScreens = new Dictionary<EconomyAgent, AgentScreen>();
+            _economyScreens = new Dictionary<AdventurerAgent, AgentScreen>();
         }
 
-        public AgentScreen GetScreen(EconomyAgent agent)
+        public EconomySystem GetEconomySystem(AdventurerAgent agent)
+        {
+            switch (GetScreen(agent))
+            {
+                case AgentScreen.Main:
+                    return mainMenuSystem;
+                case AgentScreen.Quest:
+                    return gameQuests;
+                case AgentScreen.Auction:
+                    return gameAuction;
+            }
+            return null;
+        }
+
+        public AgentScreen GetScreen(AdventurerAgent agent)
         {
             if (agent)
             {
@@ -32,65 +48,64 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             return (AgentScreen)(-1);
         }
 
-        public float GetProgress(EconomyAgent agent)
+        public float GetProgress(AdventurerAgent agent)
         {
-            var chosenScreen = GetScreen(agent);
-            switch (chosenScreen)
-            {
-                case AgentScreen.Auction:
-                    return gameAuction.Progress;
-                case AgentScreen.Quest:
-                    return gameQuests.Progress;
-                case AgentScreen.Main:
-                    break;
-            }
-            return 0.0f;
+            var system = GetEconomySystem(agent);
+            return system.Progress;
         }
 
-        public bool CanMove(EconomyAgent agent)
+        public bool CanMove(AdventurerAgent agent)
         {
-            var chosenScreen = GetScreen(agent);
-            switch (chosenScreen)
-            {
-                case AgentScreen.Auction:
-                    return gameAuction.CanMove(agent);
-                case AgentScreen.Quest:
-                    return gameQuests.CanMove(agent);
-            }
-            return true;
+            var system = GetEconomySystem(agent);
+            return system.CanMove(agent);
         }
 
-        public void SetAgentAction(EconomyAgent agent, int action)
+        public void SetAgentAction(AdventurerAgent agent, int mainAction, int auctionAction)
         {
             switch (GetScreen(agent))
             {
                 case AgentScreen.Auction:
-                    SetAuctionChoice(agent, (AuctionChoice)action);
-                    break;
+                    SetAuctionChoice(agent, auctionAction);
+                        break;
                 case AgentScreen.Main:
-                    SetMainAction(agent, (AgentScreen)action);
+                    SetMainAction(agent, mainAction);
                     break;
                 case AgentScreen.Quest:
                     break;
             }
         }
 
-        public void SetAuctionChoice(EconomyAgent agent, AuctionChoice choice)
+        public void SetAuctionChoice(AdventurerAgent agent, int choice)
         {
-            if (GetScreen(agent) == AgentScreen.Auction)
+            if (choice >= 0)
             {
-                switch (choice)
-                {
-                    case AuctionChoice.Ignore:
-                        break;
-                    case AuctionChoice.Bid:
-                        gameAuction.Bid(agent);
-                        break;
-                }
+                var action = (AuctionChoice) choice;
+                SetAuctionChoice(agent, action);
             }
         }
 
-        public void SetMainAction(EconomyAgent agent, AgentScreen choice)
+        public void SetAuctionChoice(AdventurerAgent agent, AuctionChoice choice)
+        {
+            switch (choice)
+            {
+                case AuctionChoice.Ignore:
+                    break;
+                case AuctionChoice.Bid:
+                    gameAuction.Bid(agent);
+                    break;
+            }
+        }
+
+        public void SetMainAction(AdventurerAgent agent, int choice)
+        {
+            if (choice >= 0)
+            {
+                AgentScreen action = (AgentScreen)choice;
+                SetMainAction(agent, action);
+            }
+        }
+
+        public void SetMainAction(AdventurerAgent agent, AgentScreen choice)
         {
             var canChange = CanMove(agent);
             if (canChange)

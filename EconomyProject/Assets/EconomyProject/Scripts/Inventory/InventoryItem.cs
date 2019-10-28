@@ -48,5 +48,12 @@ namespace Assets.EconomyProject.Scripts.Inventory
                 durability--;
             }
         }
+
+        public static InventoryItem GenerateItem(InventoryItem selectedItem)
+        {
+            var generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
+            generatedItem?.Init(selectedItem);
+            return generatedItem;
+        }
     }
 }

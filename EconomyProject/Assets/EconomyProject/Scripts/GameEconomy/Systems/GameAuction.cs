@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
@@ -17,7 +18,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         [HideInInspector]
         public float currentItemPrice;
 
-        private EconomyAgent _currentHighestBidder;
+        private AdventurerAgent _currentHighestBidder;
 
         [HideInInspector]
         public float currentAuctionTime;
@@ -152,33 +153,33 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             }
         }
 
-        public override bool CanMove(EconomyAgent agent)
+        public override bool CanMove(AdventurerAgent agent)
         {
             if (!_auctionOn)
             {
                 return true;
             }
-            else
-            {
-                return !(_currentHighestBidder == agent && _currentHighestBidder && agent);
-            }
+            return !(_currentHighestBidder == agent && _currentHighestBidder && agent);
         }
 
-        public bool IsHighestBidder(EconomyAgent agent)
+        public bool IsHighestBidder(AdventurerAgent agent)
         {
             return _currentHighestBidder == agent;
         }
 
-        public void Bid(EconomyAgent agent)
+        public void Bid(AdventurerAgent agent)
         {
-            var newPrice = currentItemPrice + bidIncrement;
-            
-            if (!IsHighestBidder(agent) && agent.Wallet.Money >= newPrice)
+            if (CurrentPlayers.Contains(agent))
             {
-                _currentHighestBidder = agent;
-                currentItemPrice = newPrice;
-                _bidOn = true;
-                _bidLast = true;
+                var newPrice = currentItemPrice + bidIncrement;
+
+                if (!IsHighestBidder(agent) && agent.Wallet.Money >= newPrice)
+                {
+                    _currentHighestBidder = agent;
+                    currentItemPrice = newPrice;
+                    _bidOn = true;
+                    _bidLast = true;
+                }
             }
         }
     }

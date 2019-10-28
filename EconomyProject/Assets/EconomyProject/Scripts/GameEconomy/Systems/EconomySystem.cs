@@ -1,5 +1,5 @@
 ﻿using System;
-using Assets.EconomyProject.Scripts.MLAgents.EconomyAgentsAgent;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
@@ -9,17 +9,17 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         public abstract float Progress { get; }
         protected abstract AgentScreen ActionChoice { get; }
 
-        public abstract bool CanMove(EconomyAgent agent);
+        public abstract bool CanMove(AdventurerAgent agent);
 
         public PlayerInput playerInput;
 
         public GameObject agents;
 
-        public EconomyAgent[] CurrentPlayers
+        public AdventurerAgent[] CurrentPlayers
         {
             get
             {
-                EconomyAgent[] playerAgents = agents.GetComponentsInChildren<EconomyAgent>();
+                AdventurerAgent[] playerAgents = agents.GetComponentsInChildren<AdventurerAgent>();
                 return Array.FindAll(playerAgents, element => element.ChosenScreen == ActionChoice);
             }
         }
@@ -31,5 +31,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 agent.RequestDecision();
             }
         }
+
+        // public abstract void SetChoice(AdventurerAgent agent, int input1, int input2);
     }
 }
