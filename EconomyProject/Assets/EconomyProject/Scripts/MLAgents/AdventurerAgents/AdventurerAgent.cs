@@ -96,12 +96,10 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         private string AddAuctionObs(InventoryItem item)
         {
-            bool inAuction = (ChosenScreen == AgentScreen.Auction) && item;
+            var output = AddVectorObs(item);
+            output += AddVectorObs(true, GameAuction.IsHighestBidder(this), "Is Highest Bidder");
 
-            var output = AddVectorObs(item, inAuction);
-            output += AddVectorObs(inAuction, GameAuction.IsHighestBidder(this), "Is Highest Bidder");
-
-            output += AddVectorObs(inAuction ? GameAuction.currentItemPrice : 0.0f, "Current Price");
+            output += AddVectorObs(GameAuction.currentItemPrice, "Current Price");
             return output;
         }
 
@@ -127,12 +125,13 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         private string AddVectorObs(InventoryItem item, bool condition = true, float defaultObs = 0.0f)
         {
+            condition = condition && item;
             var output = " Current Item";
             output += AddVectorObs(condition ? item.durability : defaultObs, "Durability");
             output += AddVectorObs(condition ? item.baseDurability : defaultObs, "Base Durability");
             output += AddVectorObs(condition ? item.numLootSpawns : defaultObs, "Num Loot Spawn");
             output += AddVectorObs(condition ? item.efficiency : defaultObs, "Efficiency");
-            output += AddVectorObs(condition && item, item && item.unBreakable, "Unbreakable");
+            output += AddVectorObs(condition, item && item.unBreakable, "Unbreakable");
 
             return output;
         }

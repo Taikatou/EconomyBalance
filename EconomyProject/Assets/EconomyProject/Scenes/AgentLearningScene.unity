@@ -557,6 +557,31 @@ PrefabInstance:
       propertyPath: coreGameSystem
       value: 
       objectReference: {fileID: 938610672}
+    - target: {fileID: 1097284254193952158, guid: f2aa003806f546a4e934199940c7cc66,
+        type: 3}
+      propertyPath: systemSpawner
+      value: 
+      objectReference: {fileID: 938610672}
+    - target: {fileID: 1097284253472533468, guid: f2aa003806f546a4e934199940c7cc66,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097284253472533468, guid: f2aa003806f546a4e934199940c7cc66,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1091.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097284253472533468, guid: f2aa003806f546a4e934199940c7cc66,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 427.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097284253472533468, guid: f2aa003806f546a4e934199940c7cc66,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 12.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2aa003806f546a4e934199940c7cc66, type: 3}
 --- !u!1001 &8347381409787847310

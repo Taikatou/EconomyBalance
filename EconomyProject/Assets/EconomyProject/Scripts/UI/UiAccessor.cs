@@ -7,25 +7,27 @@ namespace Assets.EconomyProject.Scripts.UI
 {
     public class UiAccessor : MonoBehaviour
     {
-        private AdventurerAgent _adventurerAgent;
-        
+        public int Index { get; set; }
+
         public GameObject coreGameSystem;
+
+        public AdventurerAgent[] GetAgents => coreGameSystem.GetComponentsInChildren<AdventurerAgent>();
 
         public GameQuests GameQuests => coreGameSystem.GetComponentInChildren<GameQuests>();
 
         public PlayerInput PlayerInput => coreGameSystem.GetComponentInChildren<PlayerInput>();
 
         public GameAuction GameAuction => coreGameSystem.GetComponentInChildren<GameAuction>();
+
         public AdventurerAgent AdventurerAgent
         {
             get
             {
-                if (_adventurerAgent == null)
+                if (GetAgents.Length > Index)
                 {
-                    _adventurerAgent = coreGameSystem.GetComponentInChildren<AdventurerAgent>();
-                    //_adventurerAgent.printObservations = true;
+                    return GetAgents[Index];
                 }
-                return _adventurerAgent;
+                return null;
             }
         }
     }

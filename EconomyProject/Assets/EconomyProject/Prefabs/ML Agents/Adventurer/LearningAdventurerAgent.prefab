@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5940935655762775432}
   - component: {fileID: -4706628768726033178}
   m_Layer: 0
-  m_Name: LearningEconomyAgent
+  m_Name: LearningAdventurerAgent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
   endItem: {fileID: 11400000, guid: f2ee4c3d87136284f911c5dc145ee12c, type: 2}
   agentId: 0
   resetOnComplete: 1
-  rewardMoney: 1
+  rewardMoney: 0
   punishLoss: 0
   printObservations: 0
 --- !u!114 &-4706628768726033178
