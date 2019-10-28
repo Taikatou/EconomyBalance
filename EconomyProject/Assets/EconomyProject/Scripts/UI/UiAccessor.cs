@@ -11,6 +11,8 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public GameObject coreGameSystem;
 
+        public bool printObservation = true;
+
         public AdventurerAgent[] GetAgents => coreGameSystem.GetComponentsInChildren<AdventurerAgent>();
 
         public GameQuests GameQuests => coreGameSystem.GetComponentInChildren<GameQuests>();
@@ -28,6 +30,17 @@ namespace Assets.EconomyProject.Scripts.UI
                     return GetAgents[Index];
                 }
                 return null;
+            }
+        }
+
+        private void Update()
+        {
+            if (printObservation)
+            {
+                foreach (var agent in GetAgents)
+                {
+                    agent.printObservations = agent == AdventurerAgent;
+                }
             }
         }
     }

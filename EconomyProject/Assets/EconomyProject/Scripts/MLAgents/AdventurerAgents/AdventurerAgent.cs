@@ -106,6 +106,11 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         {
             var mainAction = Mathf.FloorToInt(vectorAction[0]);
             var auctionAction = Mathf.FloorToInt(vectorAction[1]);
+
+            if (printObservations)
+            {
+                Debug.Log("MainAction: " + mainAction + " AuctionAction: " + auctionAction);
+            }
             AgentAction(mainAction, auctionAction);
         }
 

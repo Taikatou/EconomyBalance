@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1813628144}
   - component: {fileID: 1448652206014252578}
   m_Layer: 0
-  m_Name: PlayerEconomyAgent
+  m_Name: PlayerAdventurerAgent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,4 +85,5 @@ MonoBehaviour:
   resetOnComplete: 0
   rewardMoney: 1
   punishLoss: 0
-  printObservations: 0
+  printObservations: 1
+  punishTime: 0

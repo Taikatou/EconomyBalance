@@ -7,20 +7,18 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
     {
         public double startMoney;
 
-        private double _money;
-
-        public double Money => _money;
+        public double Money { get; private set; }
         // Start is called before the first frame update
         void Start()
         {
-            _money = startMoney;
+            Money = startMoney;
         }
 
         public void EarnMoney(float amount)
         {
             if (amount > 0)
             {
-                _money = Math.Round(_money + amount);
+                Money = Math.Round(Money + amount);
             }
         }
 
@@ -28,7 +26,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         {
             if (amount < 0)
             {
-                _money = Math.Round(_money + amount);
+                Money = Math.Round(Money + amount);
             }
         }
 
@@ -36,13 +34,13 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         {
             if (amount > 0)
             {
-                _money -= amount;
+                Money -= amount;
             }
         }
 
         public void Reset()
         {
-            _money = startMoney;
+            Money = startMoney;
         }
     }
 }
