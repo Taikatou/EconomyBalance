@@ -1,4 +1,6 @@
-﻿namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
+﻿using UnityEngine;
+
+namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 {
     public class PlayerAdventurerAgent : AdventurerAgent
     {

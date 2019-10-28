@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1219752778071651189}
   - component: {fileID: 1219752778071651190}
   m_Layer: 0
-  m_Name: EconomyAcademy
+  m_Name: AdventurerAcademy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
     width: 80
     height: 80
     qualityLevel: 1
-    timeScale: 100
+    timeScale: 1
     targetFrameRate: -1
   m_InferenceConfiguration:
     width: 1280
