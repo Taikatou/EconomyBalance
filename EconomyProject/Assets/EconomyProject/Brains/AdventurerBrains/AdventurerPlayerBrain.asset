@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AdventurerPlayerBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 18
+    vectorObservationSize: 20
     numStackedVectorObservations: 1
     vectorActionSize: 0300000002000000
     cameraResolutions: []

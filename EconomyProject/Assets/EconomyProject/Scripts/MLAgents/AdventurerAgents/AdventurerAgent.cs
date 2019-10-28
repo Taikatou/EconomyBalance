@@ -1,4 +1,5 @@
-﻿using Assets.EconomyProject.Scripts.GameEconomy;
+﻿using System.Collections.Generic;
+using Assets.EconomyProject.Scripts.GameEconomy;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems;
 using Assets.EconomyProject.Scripts.Inventory;
 using MLAgents;
@@ -30,6 +31,11 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public bool printObservations = false;
 
+        public bool punishTime;
+
+        private List<string> _weaponList;
+
+
         public GameAuction GameAuction => GetComponentInParent<AgentSpawner>().gameAuction;
 
         public PlayerInput PlayerInput => GetComponentInParent<AgentSpawner>().playerInput;
@@ -37,6 +43,16 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         public AgentScreen ChosenScreen => PlayerInput.GetScreen(this);
 
         public EconomyWallet Wallet => GetComponent<EconomyWallet>();
+
+        public int GetWeaponId(string itemName)
+        {
+            bool contains = _weaponList.Contains(itemName);
+            if (!contains)
+            {
+                _weaponList.Add(itemName);
+            }
+            return _weaponList.IndexOf(itemName);
+        }
 
         public override void AgentReset()
         {
@@ -54,6 +70,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         {
             agentId = agentCounter;
             agentCounter++;
+            _weaponList = new List<string>();
         }
 
         public void BoughtItem(InventoryItem item, float cost)
@@ -79,7 +96,10 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         private void Update()
         {
-            AddReward(-0.005f);
+            if (punishTime)
+            {
+                AddReward(-0.005f);
+            }
         }
 
         public override void AgentAction(float[] vectorAction, string textAction)
@@ -127,6 +147,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         {
             condition = condition && item;
             var output = " Current Item";
+            output += AddVectorObs(condition ? GetWeaponId(item.itemName) : -1, "ItemName");
             output += AddVectorObs(condition ? item.durability : defaultObs, "Durability");
             output += AddVectorObs(condition ? item.baseDurability : defaultObs, "Base Durability");
             output += AddVectorObs(condition ? item.numLootSpawns : defaultObs, "Num Loot Spawn");
