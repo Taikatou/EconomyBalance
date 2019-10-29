@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 {
-    public enum AgentScreen { Main, Quest, Auction }
+    public enum AgentScreen { Main, Quest, Auction, Shop }
 
     public enum AuctionChoice { Ignore, Bid }
 
