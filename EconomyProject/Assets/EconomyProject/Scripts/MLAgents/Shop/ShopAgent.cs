@@ -1,4 +1,5 @@
-﻿using MLAgents;
+﻿using System.Collections.Generic;
+using MLAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
@@ -6,6 +7,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
     public class ShopAgent : Agent
     {
         public int moveAmount = 1;
+        public Dictionary<>
         public override void CollectObservations()
         {
         }
