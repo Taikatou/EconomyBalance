@@ -25,13 +25,9 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public bool resetOnComplete = false;
 
-        public bool rewardMoney = false;
-
         public bool punishLoss = false;
 
         public bool printObservations = false;
-
-        public bool punishTime;
 
         private List<string> _weaponList;
 
@@ -84,22 +80,12 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
                 {
                     Done();
                 }
-
-                AddReward(item.efficiency / endItem.efficiency);
             }
         }
 
         public void DecreaseDurability()
         {
             Inventory.DecreaseDurability();
-        }
-
-        private void Update()
-        {
-            if (punishTime)
-            {
-                AddReward(-0.005f);
-            }
         }
 
         public override void AgentAction(float[] vectorAction, string textAction)
@@ -190,10 +176,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         {
             Wallet.EarnMoney(amount);
             var reward = (amount / endItem.rewardPrice) / 5;
-            if (rewardMoney)
-            {
-                AddReward(reward);
-            }
+            AddReward(reward);
         }
 
         public void LoseMoney(float amount, float punishment=0.1f)
@@ -201,10 +184,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
             if (punishLoss)
             {
                 Wallet.LoseMoney(amount);
-                if (rewardMoney)
-                {
-                    AddReward(punishment);
-                }
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using UnityEngine;
@@ -6,11 +7,17 @@ using Resources = UnityEngine.Resources;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 {
+    [System.Serializable]
+    public struct CraftingMap
+    {
+        public CraftingChoice choice;
+        public CraftingRequirements resource;
+    }
+
     public enum CraftingChoice { Abstain, BeginnerSword, IntermediateSword, AdvancedSword, EpicSword, UltimateSwordOfPower}
 
     public class CraftingAbility : MonoBehaviour
     {
-        private Dictionary<Resources, int> _numResources;
 
         public bool Crafting { get; private set; }
 
@@ -18,29 +25,17 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 
         public float TimeToCreation { get; private set; }
 
-        public CraftingRequirements craftingRequirement;
+        public List<CraftingMap> craftingRequirement;
 
-        private void Start()
-        {
-            _numResources = new Dictionary<Resources, int>();
-        }
-
-        public void AddResource(Resources resource, int count)
-        {
-            var hasResource = _numResources.ContainsKey(resource);
-            if (!hasResource)
-            {
-                _numResources[resource] = 0;
-            }
-
-            _numResources[resource] += count;
-        }
+        private CraftingRequirements _chosenRequirements;
 
         public void SetCraftingItem(CraftingChoice choice)
         {
-            if (!Crafting && choice != CraftingChoice.Abstain)
+            var foundChoice = craftingRequirement.Single(c => c.choice == choice).resource;
+            if (!Crafting && foundChoice)
             {
                 Crafting = true;
+                _chosenRequirements = foundChoice;
             }
         }
 
@@ -51,7 +46,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 
         public void FinishCrafting()
         {
-            var generatedItem = InventoryItem.GenerateItem(craftingRequirement.resultingItem);
+            var generatedItem = InventoryItem.GenerateItem(_chosenRequirements.resultingItem);
             Crafting = false;
         }
 

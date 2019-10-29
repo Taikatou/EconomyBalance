@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements
 {
-    public enum Resources { Wood, Metal, Gem, DragonScale }
+    public enum CraftingResources { Wood, Metal, Gem, DragonScale }
 
     [System.Serializable]
     public struct ResourceRequirement
