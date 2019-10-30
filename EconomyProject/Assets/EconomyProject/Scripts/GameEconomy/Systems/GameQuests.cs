@@ -41,7 +41,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             _shouldReturn = autoReturn;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (CurrentPlayers.Length >= 1)
             {
@@ -75,13 +75,13 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                     }
                     else
                     {
-                        RequestDecisions();
+                        //RequestDecisions();
                     }
 
                     _currentTime = 0.0f;
                 }
             }
-            RequestDecisions();
+            //RequestDecisions();
         }
 
         public void RunQuests(AdventurerAgent agent)

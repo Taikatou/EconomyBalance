@@ -1,4 +1,6 @@
 ﻿using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using UnityEngine;
+
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 {
     public class MainMenuSystem : EconomySystem
@@ -11,7 +13,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             return true;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             RequestDecisions();
         }

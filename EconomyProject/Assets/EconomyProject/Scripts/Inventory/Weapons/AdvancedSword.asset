@@ -15,8 +15,8 @@ MonoBehaviour:
   itemName: Advanced Sword
   baseBidPrice: 8
   rewardPrice: 14
-  baseDurability: 10
-  durability: 20
+  baseDurability: 20
+  durability: 10
   unBreakable: 0
   efficiency: 45
   numLootSpawns: 3

@@ -27,14 +27,14 @@ namespace Assets.EconomyProject
         }
 
 
-        void Start()
+        private void Start()
         {
             int totalTime = seconds + (60 * minutes) + (60 * 60 * hours);
             _currentTime = totalTime;
             _startTime = totalTime;
         }
 
-        void Update()
+        private void FixedUpdate()
         {
             _currentTime -= Time.deltaTime;
             if (_currentTime <= 0)

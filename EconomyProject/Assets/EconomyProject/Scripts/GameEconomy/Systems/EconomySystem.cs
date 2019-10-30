@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using MLAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
@@ -28,7 +29,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         {
             foreach(var agent in CurrentPlayers)
             {
-                agent.RequestDecision();
+                if (agent.agentParameters.onDemandDecision)
+                {
+                    agent.RequestDecision();
+                }
             }
         }
 

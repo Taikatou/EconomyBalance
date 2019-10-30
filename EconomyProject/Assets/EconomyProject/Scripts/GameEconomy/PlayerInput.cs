@@ -40,7 +40,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public AgentScreen GetScreen(AdventurerAgent agent)
         {
-            if (agent)
+            if (agent && _economyScreens != null)
             {
                 if (!_economyScreens.ContainsKey(agent))
                 {

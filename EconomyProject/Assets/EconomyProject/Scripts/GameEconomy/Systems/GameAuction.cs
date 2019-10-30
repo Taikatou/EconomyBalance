@@ -31,7 +31,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         private bool _auctionOn;
 
-        public float addChance = 0.05f;
+        public float addChance = 0.3f;
 
         public float maxInventory = 50;
 
@@ -89,14 +89,13 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             }
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (CurrentPlayers.Length > 0)
             {
                 if (ItemCount > 0)
                 {
                     SetAuctionItem();
-
                     currentAuctionTime += Time.deltaTime;
                     if (currentAuctionTime >= auctionTime)
                     {

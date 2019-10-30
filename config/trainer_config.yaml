@@ -296,8 +296,8 @@ AdventurerLearningBrain:
     hidden_units: 256
     num_layers: 3
     beta: 1.0e-2
-    max_steps: 10.0e4
-    num_epoch: 1
+    max_steps: 10.0e5
+    num_epoch: 3
     reward_signals:
         extrinsic:
             strength: 1.0
