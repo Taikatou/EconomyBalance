@@ -15,6 +15,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
         public MainMenuSystem mainMenuSystem;
 
+        public int NumberInAuction => gameAuction.CurrentPlayers.Length;
+
+        public int NumberInQuest => gameQuests.CurrentPlayers.Length;
+
         public void Start()
         {
             _economyScreens = new Dictionary<AdventurerAgent, AgentScreen>();

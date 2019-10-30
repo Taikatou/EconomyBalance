@@ -49,4 +49,7 @@ MonoBehaviour:
   spawnCoreSystems: 1
   learningAgentPrefab: {fileID: 7707616417561859250, guid: 7f83e2c93df89ce4fbe3760b4b9b045b,
     type: 3}
+  playerAgentPrefab: {fileID: 8864355610370000414, guid: e11b1bf4b766cdc4d90af8b62d5f321c,
+    type: 3}
   numLearningAgents: 50
+  spawnPlayer: 0

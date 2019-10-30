@@ -287,17 +287,17 @@ BasicLearning:
             strength: 1.0
             gamma: 0.9
 
-EconomyLearningBrain:
+AdventurerLearningBrain:
     normalize: false
     summary_freq: 2000
     time_horizon: 128
     batch_size: 128
     buffer_size: 2048
-    hidden_units: 512
-    num_layers: 2
+    hidden_units: 256
+    num_layers: 3
     beta: 1.0e-2
     max_steps: 10.0e4
-    num_epoch: 3
+    num_epoch: 1
     reward_signals:
         extrinsic:
             strength: 1.0

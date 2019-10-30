@@ -31,6 +31,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         private List<string> _weaponList;
 
+        public bool canSeeDistribution = true;
 
         public GameAuction GameAuction => GetComponentInParent<AgentSpawner>().gameAuction;
 
@@ -81,6 +82,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
                     Done();
                 }
             }
+            AddReward(item.efficiency / endItem.efficiency);
         }
 
         public void DecreaseDurability()
@@ -163,6 +165,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
             output += AddVectorObs(Inventory.ItemCount, "Inventory Item Count");
             output += AddVectorObs(PlayerInput.GetProgress(this), "Progress");
             output += AddVectorObs(GameAuction.currentItemPrice, "Current Item Price");
+            output += AddVectorObs(canSeeDistribution ? PlayerInput.NumberInAuction : 0, "Number in auction");
+            output += AddVectorObs(canSeeDistribution ? PlayerInput.NumberInQuest : 0, "Number in quest");
 
             output += AddAuctionObs(GameAuction.auctionedItem);
 
@@ -176,7 +180,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         {
             Wallet.EarnMoney(amount);
             var reward = (amount / endItem.rewardPrice) / 5;
-            AddReward(reward);
         }
 
         public void LoseMoney(float amount, float punishment=0.1f)
