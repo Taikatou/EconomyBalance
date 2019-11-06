@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.EconomyProject
+namespace Assets.EconomyProject.Scripts
 {
     public class EndTimerScript : MonoBehaviour
     {
