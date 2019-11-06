@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.Inventory;
+using Barracuda;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
@@ -9,21 +10,32 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
     {
         public InventoryItem item;
 
-        public int itemPrice;
+        public int price;
+
+        public int number;
+
+        public ShopItem(InventoryItem item, int price, int number)
+        {
+            this.item = item;
+            this.price = price;
+            this.number = number;
+        }
     }
 
     public class ShopAbility : MonoBehaviour
     {
         public List<ShopItem> shopItems;
 
-        private Dictionary<InventoryItem, int> _itemPrices;
+        private Dictionary<InventoryItem, ShopItem> _itemPrices;
+
+        public int startNumber = 10;
 
         void Start()
         {
-            _itemPrices = new Dictionary<InventoryItem, int>();
+            _itemPrices = new Dictionary<InventoryItem, ShopItem>();
             foreach (var shopItem in shopItems)
             {
-                _itemPrices.Add(shopItem.item, shopItem.itemPrice);
+                _itemPrices.Add(shopItem.item, shopItem);
             }
         }
 
@@ -32,25 +44,18 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             var hasItem = _itemPrices.ContainsKey(item);
             if (hasItem)
             {
-                _itemPrices[item] = price;
+                var shopInv = _itemPrices[item];
+                shopInv.price = price;
             }
         }
 
-        public void AddItem(InventoryItem item, int price)
+        public void AddItem(InventoryItem item, ShopItem shopInv)
         {
             var hasItem = _itemPrices.ContainsKey(item);
             if (!hasItem)
             {
-                _itemPrices.Add(item, price);
-                //shopItems.Add();
-            }
-        }
-
-        public void UpdatePrice(InventoryItem item, int priceChange)
-        {
-            if (_itemPrices.ContainsKey(item))
-            {
-                _itemPrices[item] += priceChange;
+                _itemPrices.Add(item, shopInv);
+                shopItems.Add(shopInv);
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using MLAgents;
+﻿using MLAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
@@ -19,9 +18,10 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             for (var i = 0; i < ShopAbility.shopItems.Count; i++)
             {
                 float action = vectorAction[i];
-                var moveAction = Mathf.FloorToInt(action);
-                var priceChange = moveAction * moveAmount;
-                //ShopAbility.UpdatePrice(priceChange);
+                var priceChange = action * moveAmount;
+
+                var item = ShopAbility.shopItems[i].item;
+                ShopAbility.ChangePrice(item, (int)priceChange);
             }
         }
     }
