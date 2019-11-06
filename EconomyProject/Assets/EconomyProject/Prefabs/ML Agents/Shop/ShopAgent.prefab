@@ -44,14 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061c8941b752e46498e3d796c3fc60f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brain: {fileID: 0}
+  brain: {fileID: 11400000, guid: 19df73a4cd1952147b75a97b59e79fed, type: 2}
   agentParameters:
     agentCameras: []
     agentRenderTextures: []
     maxStep: 0
     resetOnDone: 1
     onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 1
+    numberOfActionsBetweenDecisions: 100
   moveAmount: 3
 --- !u!114 &2058060824390224692
 MonoBehaviour:
@@ -67,14 +67,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopItems:
   - item: {fileID: 11400000, guid: ff61c0520e17b43429b1c5e7c3cd505d, type: 2}
-    itemPrice: 10
+    price: 5
+    number: 10
   - item: {fileID: 11400000, guid: ba1044b1ad3be3440a274303fe22f8cb, type: 2}
-    itemPrice: 10
+    price: 5
+    number: 10
   - item: {fileID: 11400000, guid: 220a652df168f054b8b6564ab9e67f7f, type: 2}
-    itemPrice: 10
+    price: 5
+    number: 10
   - item: {fileID: 11400000, guid: ecd492c3b2f26eb428a3a267c2e78659, type: 2}
-    itemPrice: 10
+    price: 5
+    number: 10
   - item: {fileID: 11400000, guid: 995af46e8ce3ad84a9491f7e65b0c666, type: 2}
-    itemPrice: 10
+    price: 5
+    number: 10
   - item: {fileID: 11400000, guid: f2ee4c3d87136284f911c5dc145ee12c, type: 2}
-    itemPrice: 10
+    price: 5
+    number: 10
+  startNumber: 10

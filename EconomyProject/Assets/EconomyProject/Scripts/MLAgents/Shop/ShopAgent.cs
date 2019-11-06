@@ -20,7 +20,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
                 float action = vectorAction[i];
                 var priceChange = action * moveAmount;
 
-                var item = ShopAbility.shopItems[i].item;
+                var item = ShopAbility.shopItems[i];
                 ShopAbility.ChangePrice(item, (int)priceChange);
             }
         }
