@@ -15,10 +15,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
     {
         public InventoryItem endItem;
 
-        public static int agentCounter = 0;
-
-        [HideInInspector] public int agentId;
-
         public AgentInventory Inventory => GetComponent<AgentInventory>();
 
         public InventoryItem Item => Inventory.EquipedItem;
@@ -33,9 +29,9 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public bool canSeeDistribution = true;
 
-        public GameAuction GameAuction => GetComponentInParent<AgentSpawner>().gameAuction;
+        public GameAuction GameAuction => GetComponentInParent<AdventurerSpawner>().gameAuction;
 
-        public PlayerInput PlayerInput => GetComponentInParent<AgentSpawner>().playerInput;
+        public PlayerInput PlayerInput => GetComponentInParent<AdventurerSpawner>().playerInput;
 
         public AgentScreen ChosenScreen => PlayerInput.GetScreen(this);
 
@@ -65,8 +61,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public override void InitializeAgent()
         {
-            agentId = agentCounter;
-            agentCounter++;
             _weaponList = new List<string>();
         }
 

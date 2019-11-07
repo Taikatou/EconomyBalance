@@ -28,7 +28,6 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
             iconImage.sprite = _item.icon;
             priceText.text = _item.price.ToString(CultureInfo.InvariantCulture);
             _scrollList = currentScrollList;
-
         }
 
         public void HandleClick()

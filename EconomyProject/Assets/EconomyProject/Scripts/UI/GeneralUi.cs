@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using Assets.EconomyProject.Scripts.MLAgents;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,7 +53,7 @@ namespace Assets.EconomyProject.Scripts.UI
 
             foreach (var agent in accessor.GetAgents)
             {
-                string agentId = agent.agentId.ToString();
+                string agentId = agent.GetComponent<AgentID>().agentId.ToString();
                 if (!_agentIds.Contains(agentId))
                 {
                     _agentIds.Add(agentId);
