@@ -12,14 +12,9 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public GameObject agentList;
 
-        private HashSet<string> _agentIds;
+        private HashSet<string> _agentIds  = new HashSet<string>();
 
         public ShopAgent[] AgentList => agentList.GetComponentsInChildren<ShopAgent>();
-
-        private void Start()
-        {
-            _agentIds = new HashSet<string>();
-        }
 
         // Update is called once per frame
         private void Update()

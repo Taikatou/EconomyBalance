@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,18 +11,24 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
     {
         public string itemName;
         public Sprite icon;
-        public float price = 1;
+        public double price;
+        public readonly int itemId;
+        private static int _itemId;
+
+        public Item(string itemName, double price)
+        {
+            this.itemName = itemName;
+            this.price = price;
+            itemId = _itemId;
+            _itemId++;
+        }
     }
 
-    public abstract class ShopScrollList : MonoBehaviour
+    public abstract class ShopScrollList :  MonoBehaviour
     {
-        public abstract List<Item> ItemList { get; set; }
+        public abstract List<Item> ItemList { get; }
         public Transform contentPanel;
-        public ShopScrollList otherShop;
-        public Text myGoldDisplay;
         public SimpleObjectPool buttonObjectPool;
-
-        public abstract double Gold { get; set; }
 
 
         // Use this for initialization
@@ -30,14 +37,13 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
             RefreshDisplay();
         }
 
-        public void RefreshDisplay()
+        public virtual void RefreshDisplay()
         {
-            myGoldDisplay.text = "Gold: " + Gold.ToString(CultureInfo.InvariantCulture);
             RemoveButtons();
             AddButtons();
         }
 
-        private void RemoveButtons()
+        public void RemoveButtons()
         {
             while (contentPanel.childCount > 0)
             {
@@ -48,42 +54,27 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
 
         protected void AddButtons()
         {
-            for (int i = 0; i < ItemList.Count; i++)
+            if (ItemList != null)
             {
-                Item item = ItemList[i];
-                GameObject newButton = buttonObjectPool.GetObject();
-                newButton.transform.SetParent(contentPanel);
+                foreach (var item in ItemList)
+                {
+                    GameObject newButton = buttonObjectPool.GetObject();
+                    newButton.transform.SetParent(contentPanel);
 
-                SampleButton sampleButton = newButton.GetComponent<SampleButton>();
-                sampleButton.Setup(item, this);
+                    SampleButton sampleButton = newButton.GetComponent<SampleButton>();
+                    sampleButton.Setup(item, this);
+                }
             }
         }
 
-        public void TryTransferItemToOtherShop(Item item)
-        {
-            if (otherShop.Gold >= item.price)
-            {
-                Gold += item.price;
-                otherShop.Gold -= item.price;
+        public abstract void TryTransferItemToOtherShop(Item item);
 
-                AddItem(item, otherShop);
-                RemoveItem(item, this);
-
-                RefreshDisplay();
-                otherShop.RefreshDisplay();
-                Debug.Log("enough gold");
-
-            }
-
-            Debug.Log("attempted");
-        }
-
-        void AddItem(Item itemToAdd, ShopScrollList shopList)
+        protected void AddItem(Item itemToAdd, ShopScrollList shopList)
         {
             shopList.ItemList.Add(itemToAdd);
         }
 
-        private void RemoveItem(Item itemToRemove, ShopScrollList shopList)
+        protected void RemoveItem(Item itemToRemove, ShopScrollList shopList)
         {
             for (int i = shopList.ItemList.Count - 1; i >= 0; i--)
             {

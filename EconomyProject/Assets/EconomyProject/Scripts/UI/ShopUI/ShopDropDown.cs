@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using Assets.EconomyProject.Scripts.MLAgents;
+using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
 
 namespace Assets.EconomyProject.Scripts.UI.ShopUI
 {
     public class ShopDropDown : AgentDropDown
     {
-        public ShopScrollList shopScroll;
+        public AgentShopScrollList agentScrollList;
 
         private void Start()
         {
@@ -15,7 +17,14 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
 
         public void HandleChange()
         {
-            shopScroll.RefreshDisplay();
+            var id = dropDown.options[dropDown.value].text;
+            foreach (var agent in AgentList)
+            {
+                if (agent.GetComponent<AgentID>().agentId == Int32.Parse(id))
+                {
+                    agentScrollList.UpdateAgent(agent);
+                }
+            }
         }
     }
 }

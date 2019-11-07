@@ -16,7 +16,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
         private ShopScrollList _scrollList;
 
         // Use this for initialization
-        void Start()
+        private void Start()
         {
             buttonComponent.onClick.AddListener(HandleClick);
         }
@@ -33,6 +33,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
         public void HandleClick()
         {
             _scrollList.TryTransferItemToOtherShop(_item);
+            Debug.Log(_item.itemId);
         }
     }
 }

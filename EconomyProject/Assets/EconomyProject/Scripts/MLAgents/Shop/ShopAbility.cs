@@ -65,5 +65,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
                 _itemPrices.Add(item, shopInv);
             }
         }
+
+        public ShopItem? GetItemPrice(InventoryItem item)
+        {
+            if (_itemPrices != null && _itemPrices.ContainsKey(item))
+            {
+                return _itemPrices[item];
+            }
+            return null;
+        }
     }
 }
