@@ -677,7 +677,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00012857583}
+  m_AnchoredPosition: {x: 0, y: -0.000034141223}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &746841363
@@ -695,6 +695,7 @@ MonoBehaviour:
   contentPanel: {fileID: 746841362}
   buttonObjectPool: {fileID: 908572788}
   otherShop: {fileID: 1027519404186901326}
+  gameObjects: {fileID: 1012460917}
 --- !u!114 &746841364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1516,8 +1517,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 908572787}
   - {fileID: 1027519404586036890}
+  - {fileID: 908572787}
   - {fileID: 1083393646}
   - {fileID: 2040770252}
   m_Father: {fileID: 0}
@@ -2012,7 +2013,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1801776799}
   m_HandleRect: {fileID: 1801776798}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2874,7 +2875,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00000245073}
+  m_AnchoredPosition: {x: 0, y: -0.000011444092}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1027519404186901325
@@ -2909,8 +2910,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contentPanel: {fileID: 1027519404186901324}
   buttonObjectPool: {fileID: 908572788}
-  otherShop: {fileID: 746841363}
   myGoldDisplay: {fileID: 1027519403271183034}
+  otherShop: {fileID: 746841363}
 --- !u!114 &1027519404186901327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2950,7 +2951,7 @@ RectTransform:
   - {fileID: 1027519403526883762}
   - {fileID: 1027519405198257141}
   m_Father: {fileID: 1336632293}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -3244,7 +3245,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1027519403939002200}
   m_HandleRect: {fileID: 1027519403939002201}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
