@@ -4,7 +4,7 @@ using Assets.EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.ShopUI
+namespace Assets.EconomyProject.Scripts.UI
 {
     public class AgentDropDown : MonoBehaviour
     {

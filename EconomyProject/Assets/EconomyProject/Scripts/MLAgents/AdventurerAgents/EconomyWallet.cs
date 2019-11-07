@@ -14,7 +14,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
             Money = startMoney;
         }
 
-        public void EarnMoney(float amount)
+        public void EarnMoney(double amount)
         {
             if (amount > 0)
             {
@@ -22,7 +22,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
             }
         }
 
-        public void LoseMoney(float amount)
+        public void LoseMoney(double amount)
         {
             if (amount < 0)
             {
@@ -30,12 +30,17 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
             }
         }
 
-        public void SpendMoney(float amount)
+        public void SpendMoney(double amount)
         {
             if (amount > 0)
             {
                 Money -= amount;
             }
+        }
+
+        public void SetMoney(double amount)
+        {
+            Money = amount;
         }
 
         public void Reset()

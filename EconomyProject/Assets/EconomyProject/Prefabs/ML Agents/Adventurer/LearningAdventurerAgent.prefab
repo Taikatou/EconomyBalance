@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 122171844582926690}
   - component: {fileID: 5940935655762775432}
   - component: {fileID: -4706628768726033178}
+  - component: {fileID: 5620581771315865838}
   m_Layer: 0
   m_Name: LearningAdventurerAgent
   m_TagString: Untagged
@@ -68,7 +69,6 @@ MonoBehaviour:
     onDemandDecision: 1
     numberOfActionsBetweenDecisions: 5
   endItem: {fileID: 11400000, guid: f2ee4c3d87136284f911c5dc145ee12c, type: 2}
-  agentId: 0
   resetOnComplete: 0
   punishLoss: 0
   printObservations: 0
@@ -86,3 +86,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMoney: 0
+--- !u!114 &5620581771315865838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7707616417561859250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f617471791d546b4298d88923d578558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentId: 0

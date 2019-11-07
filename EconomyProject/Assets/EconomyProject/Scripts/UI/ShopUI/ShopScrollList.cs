@@ -13,16 +13,15 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
         public float price = 1;
     }
 
-    public class ShopScrollList : MonoBehaviour
+    public abstract class ShopScrollList : MonoBehaviour
     {
-
-        public List<Item> itemList;
+        public abstract List<Item> ItemList { get; set; }
         public Transform contentPanel;
         public ShopScrollList otherShop;
         public Text myGoldDisplay;
         public SimpleObjectPool buttonObjectPool;
 
-        public float gold = 20f;
+        public abstract double Gold { get; set; }
 
 
         // Use this for initialization
@@ -31,9 +30,9 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
             RefreshDisplay();
         }
 
-        void RefreshDisplay()
+        public void RefreshDisplay()
         {
-            myGoldDisplay.text = "Gold: " + gold.ToString(CultureInfo.InvariantCulture);
+            myGoldDisplay.text = "Gold: " + Gold.ToString(CultureInfo.InvariantCulture);
             RemoveButtons();
             AddButtons();
         }
@@ -47,11 +46,11 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
             }
         }
 
-        private void AddButtons()
+        protected void AddButtons()
         {
-            for (int i = 0; i < itemList.Count; i++)
+            for (int i = 0; i < ItemList.Count; i++)
             {
-                Item item = itemList[i];
+                Item item = ItemList[i];
                 GameObject newButton = buttonObjectPool.GetObject();
                 newButton.transform.SetParent(contentPanel);
 
@@ -62,10 +61,10 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
 
         public void TryTransferItemToOtherShop(Item item)
         {
-            if (otherShop.gold >= item.price)
+            if (otherShop.Gold >= item.price)
             {
-                gold += item.price;
-                otherShop.gold -= item.price;
+                Gold += item.price;
+                otherShop.Gold -= item.price;
 
                 AddItem(item, otherShop);
                 RemoveItem(item, this);
@@ -81,16 +80,16 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
 
         void AddItem(Item itemToAdd, ShopScrollList shopList)
         {
-            shopList.itemList.Add(itemToAdd);
+            shopList.ItemList.Add(itemToAdd);
         }
 
         private void RemoveItem(Item itemToRemove, ShopScrollList shopList)
         {
-            for (int i = shopList.itemList.Count - 1; i >= 0; i--)
+            for (int i = shopList.ItemList.Count - 1; i >= 0; i--)
             {
-                if (shopList.itemList[i] == itemToRemove)
+                if (shopList.ItemList[i] == itemToRemove)
                 {
-                    shopList.itemList.RemoveAt(i);
+                    shopList.ItemList.RemoveAt(i);
                 }
             }
         }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1171070700305087438}
   - component: {fileID: 1813628144}
   - component: {fileID: 1448652206014252578}
+  - component: {fileID: -6630053473780852842}
   m_Layer: 0
   m_Name: PlayerAdventurerAgent
   m_TagString: Untagged
@@ -81,9 +82,20 @@ MonoBehaviour:
     onDemandDecision: 1
     numberOfActionsBetweenDecisions: 1
   endItem: {fileID: 0}
-  agentId: 0
   resetOnComplete: 0
-  rewardMoney: 1
   punishLoss: 0
   printObservations: 1
-  punishTime: 0
+  canSeeDistribution: 1
+--- !u!114 &-6630053473780852842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864355610370000414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f617471791d546b4298d88923d578558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentId: 0
