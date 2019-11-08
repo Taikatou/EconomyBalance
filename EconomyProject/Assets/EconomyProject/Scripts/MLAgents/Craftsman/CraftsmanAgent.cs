@@ -1,5 +1,5 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
-using Assets.EconomyProject.Scripts.Inventory;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using MLAgents;
 using UnityEngine;
@@ -9,7 +9,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
     public class CraftsmanAgent : Agent
     {
         private CraftingAbility CraftingAbility => GetComponent<CraftingAbility>();
-        public override void AgentAction(float[] vectorAction, string textAction)
+        public void AgentActionCrafting(float[] vectorAction, string textAction)
         {
             var craftAction = Mathf.FloorToInt(vectorAction[0]);
             CraftingAbility.SetCraftingItem(craftAction);
@@ -24,10 +24,12 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
             }
         }
 
-        public override void CollectObservations()
+        public void CollectObservationsCrafting()
         {
             AddVectorObs(CraftingAbility.Crafting);
             AddVectorObs(CraftingAbility.TimeToCreation);
+            var weaponId = WeaponId.GetWeaponId(CraftingAbility.RequirementName);
+            AddVectorObs(weaponId);
         }
     }
 }

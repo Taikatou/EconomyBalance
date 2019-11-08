@@ -34,15 +34,36 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
     {
         private List<ResourceRequest> _resourceRequests;
 
+        private Dictionary<CraftingInventory, List<ResourceRequest>> _craftingNumber;
+
+        public int GetRequestNumber(CraftingInventory inventory)
+        {
+            return _craftingNumber[inventory].Count;
+        }
+
         private void Start()
         {
             _resourceRequests = new List<ResourceRequest>();
+            _craftingNumber = new Dictionary<CraftingInventory, List<ResourceRequest>>();
         }
 
-        public void MakeRequest(CraftingResources resources, CraftingInventory inventory)
+        public bool MakeRequest(CraftingResources resources, CraftingInventory inventory)
         {
-            var request = new ResourceRequest(resources, inventory);
-            _resourceRequests.Add(request);
+            if (!_craftingNumber.ContainsKey(inventory))
+            {
+                _craftingNumber.Add(inventory, new List<ResourceRequest>());
+            }
+
+            bool canRequest = GetRequestNumber(inventory) < 5;
+            if (canRequest)
+            {
+                var request = new ResourceRequest(resources, inventory);
+                _resourceRequests.Add(request);
+
+                _craftingNumber[inventory].Add(request);
+            }
+
+            return canRequest;
         }
 
         public bool TakeRequest(int index, RequestTaker requestTaker)

@@ -3,7 +3,6 @@ using System.Linq;
 using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using UnityEngine;
-using Resources = UnityEngine.Resources;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 {
@@ -18,7 +17,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 
     public class CraftingAbility : MonoBehaviour
     {
-
         public bool Crafting { get; private set; }
 
         private float _updateTime;
@@ -28,6 +26,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
         public List<CraftingMap> craftingRequirement;
 
         private CraftingRequirements _chosenRequirements;
+
+        public string RequirementName => _chosenRequirements.resultingItem.itemName;
 
         public void SetCraftingItem(CraftingChoice choice)
         {

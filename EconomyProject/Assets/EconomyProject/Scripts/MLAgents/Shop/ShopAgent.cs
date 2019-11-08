@@ -1,22 +1,33 @@
 ﻿using System.Collections.Generic;
+using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
 using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
+using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using Assets.EconomyProject.Scripts.UI.ShopUI;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
 using MLAgents;
+using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 {
-    public class ShopAgent : Agent, IAdventurerScroll
+    public class ShopAgent : CraftsmanAgent, IAdventurerScroll
     {
         public float moveAmount = 100;
 
         public ShopAbility ShopAbility => GetComponent<ShopAbility>();
 
-        public override void CollectObservations()
+        public override void AgentAction(float[] vectorAction, string textAction)
         {
+            AgentActionCrafting(vectorAction, textAction);
+            AgentActionShopping(vectorAction, textAction);
         }
 
-        public override void AgentAction(float[] vectorAction, string textAction)
+        public override void CollectObservations()
+        {
+            CollectObservationsCrafting();
+        }
+
+        public void AgentActionShopping(float[] vectorAction, string textAction)
         {
             for (var i = 0; i < ShopAbility.shopItems.Count; i++)
             {
