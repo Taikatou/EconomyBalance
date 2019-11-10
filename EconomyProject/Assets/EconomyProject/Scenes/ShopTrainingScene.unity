@@ -350,7 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   learningAgentPrefab: {fileID: 6220377510714029038, guid: 81e2628fb8ab468499d6e20bb46f139c,
     type: 3}
-  numSpawn: 2
+  numSpawn: 1
 --- !u!4 &1012460919
 Transform:
   m_ObjectHideFlags: 0

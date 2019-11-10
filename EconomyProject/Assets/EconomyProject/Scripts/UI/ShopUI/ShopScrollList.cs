@@ -12,7 +12,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
 
         public abstract void TryTransferItemToOtherShop(ShopItem item);
 
-        protected abstract void RemoveItem(ShopItem itemToRemove, int number);
+        public abstract void RemoveItem(ShopItem itemToRemove, int number);
 
         // Use this for initialization
         void Start()
@@ -50,9 +50,9 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
             }
         }
 
-        protected void AddItem(ShopItem itemToAdd, ShopScrollList shopList)
+        public void AddItem(ShopItem itemToAdd)
         {
-            shopList.ItemList.Add(itemToAdd);
+            ItemList.Add(itemToAdd);
         }
 
         public void TryTransferItemToOtherShop(ShopItem item, int number)

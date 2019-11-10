@@ -46,7 +46,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
             myGoldDisplay.text = "Gold: " + Gold.ToString(CultureInfo.InvariantCulture);
         }
 
-        protected override void RemoveItem(ShopItem itemToRemove, int number)
+        public override void RemoveItem(ShopItem itemToRemove, int number)
         {
             var toRemove = itemToRemove.DeductStock(number);
             if (toRemove)
@@ -58,7 +58,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
         public override void TryTransferItemToOtherShop(ShopItem item)
         {
             var newItem = new ShopItem(item, 1);
-            otherShop.AddItem(newItem, adventurerAgent);
+            otherShop.marketPlace.AddItem(newItem, adventurerAgent);
             RemoveItem(item, 1);
             otherShop.RefreshDisplay();
             RefreshDisplay();

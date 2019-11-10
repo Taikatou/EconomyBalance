@@ -19,7 +19,7 @@ namespace Assets.EconomyProject.Scripts
         {
             get
             {
-                TimeSpan t = TimeSpan.FromSeconds(_startTime - _currentTime);
+                var t = TimeSpan.FromSeconds(_startTime - _currentTime);
 
                 string currentTimeLeft = $"{t.Hours:D2}:{t.Minutes:D2}:{t.Seconds:D2}:{t.Milliseconds:D3}";
                 return currentTimeLeft;

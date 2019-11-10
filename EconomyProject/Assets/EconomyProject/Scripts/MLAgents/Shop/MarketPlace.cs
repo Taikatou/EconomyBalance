@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Assets.EconomyProject.Scripts.UI.ShopUI;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             {
                 return _sellers[item];
             }
+
             return null;
         }
 
@@ -40,19 +42,54 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             _sellers = new Dictionary<ShopItem, IAdventurerScroll>();
         }
 
-        public void AddItem(ShopItem item, IAdventurerScroll seller)
+        public void RemoveItem(ShopItem item)
         {
+            _sellers.Remove(item);
+        }
+
+        public void TryTransferItemToOtherShop(ShopItem item, AgentShopScrollList otherShop, ShopScrollList thisShop)
+        {
+            var seller = GetSeller(item);
+
+            var canBuy = otherShop.Gold >= item.price;
+            var sellerValid = seller != null;
+
+            if (canBuy && sellerValid)
+            {
+                seller.Wallet.EarnMoney(item.price);
+                otherShop.Gold -= item.price;
+
+                otherShop.AddItem(item);
+                thisShop.RemoveItem(item, 1);
+
+                thisShop.RefreshDisplay();
+                otherShop.RefreshDisplay();
+                Debug.Log("enough gold");
+            }
+            Debug.Log("attempted");
+        }
+
+        public void AddItem(ShopItem item, IAdventurerScroll shopAgent)
+        {
+            foreach (var i in ItemList)
+            {
+                var isSeller = SellerHasItem(item, shopAgent);
+
+                var isItem = i.inventoryItem == item.inventoryItem;
+                var isPrice = item.price == i.price;
+                Debug.Log(isSeller + "\t" + isItem + "\t" + isPrice);
+                if (isSeller && isItem && isPrice)
+                {
+                    i.IncreaseStock(item.stock);
+                    return;
+                }
+            }
             ItemList.Add(item);
             var containsItem = _sellers.ContainsKey(item);
             if (!containsItem)
             {
-                _sellers.Add(item, seller);
+                _sellers.Add(item, shopAgent);
             }
-        }
-
-        public void RemoveItem(ShopItem item)
-        {
-            _sellers.Remove(item);
         }
     }
 }

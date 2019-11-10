@@ -11,7 +11,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
     public enum AuctionChoice { Ignore, Bid }
 
-    public class AdventurerAgent : Agent
+    public class AdventurerAgent : Agent, IObsAgent
     {
         public InventoryItem endItem;
 
@@ -87,45 +87,11 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         private string AddAuctionObs(InventoryItem item)
         {
-            var output = AddVectorObs(item);
-            output += AddVectorObs(true, GameAuction.IsHighestBidder(this), "Is Highest Bidder");
-            output += AddVectorObs(GameAuction.currentItemPrice, "Current Price");
+            var output = Observations.AddVectorObs(this, item);
+            output += Observations.AddVectorObs(this, true, GameAuction.IsHighestBidder(this), "Is Highest Bidder");
+            output += Observations.AddVectorObs(this, GameAuction.currentItemPrice, "Current Price");
             AddVectorObs(GameAuction.BidLast);
             AddVectorObs(GameAuction.BidOn);
-
-            return output;
-        }
-
-        protected string AddVectorObs(float observation, string obsName)
-        {
-            AddVectorObs(observation);
-            return " " +  obsName + ": " + observation;
-        }
-
-        protected string AddVectorObs(bool valid, bool observation, string obsName)
-        {
-            if (valid)
-            {
-                AddVectorObs(observation? 1: 2);
-            }
-            else
-            {
-                AddVectorObs(0);
-            }
-            
-            return " " + obsName + ": " + observation;
-        }
-
-        private string AddVectorObs(InventoryItem item, bool condition = true, float defaultObs = 0.0f)
-        {
-            condition = condition && item;
-            var output = " Current Item";
-            output += AddVectorObs(condition ? WeaponId.GetWeaponId(item.itemName) : -1, "ItemName");
-            output += AddVectorObs(condition ? item.durability : defaultObs, "Durability");
-            output += AddVectorObs(condition ? item.baseDurability : defaultObs, "Base Durability");
-            output += AddVectorObs(condition ? item.numLootSpawns : defaultObs, "Num Loot Spawn");
-            output += AddVectorObs(condition ? item.efficiency : defaultObs, "Efficiency");
-            output += AddVectorObs(condition, item && item.unBreakable, "Unbreakable");
 
             return output;
         }
@@ -139,14 +105,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         public override void CollectObservations()
         {
             var output = AddVectorObs(ChosenScreen, "Chosen Screen");
-            output += AddVectorObs(Wallet? (float)Wallet.Money : 0.0f, "Money");
-            output += AddVectorObs(Item);
-            output += AddVectorObs(GameAuction.ItemCount, "Auction Item Count");
-            output += AddVectorObs(Inventory.ItemCount, "Inventory Item Count");
-            output += AddVectorObs(PlayerInput.GetProgress(this), "Progress");
-            output += AddVectorObs(GameAuction.currentItemPrice, "Current Item Price");
-            output += AddVectorObs(canSeeDistribution ? PlayerInput.NumberInAuction : 0, "Number in auction");
-            output += AddVectorObs(canSeeDistribution ? PlayerInput.NumberInQuest : 0, "Number in quest");
+            output += Observations.AddVectorObs(this, Wallet ? (float)Wallet.Money : 0.0f, "Money");
+            output += Observations.AddVectorObs(this, Item);
+            output += Observations.AddVectorObs(this, GameAuction.ItemCount, "Auction Item Count");
+            output += Observations.AddVectorObs(this, Inventory.ItemCount, "Inventory Item Count");
+            output += Observations.AddVectorObs(this, PlayerInput.GetProgress(this), "Progress");
+            output += Observations.AddVectorObs(this, GameAuction.currentItemPrice, "Current Item Price");
+            output += Observations.AddVectorObs(this, canSeeDistribution ? PlayerInput.NumberInAuction : 0, "Number in auction");
+            output += Observations.AddVectorObs(this, canSeeDistribution ? PlayerInput.NumberInQuest : 0, "Number in quest");
 
             output += AddAuctionObs(GameAuction.auctionedItem);
 
@@ -168,6 +134,21 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
             {
                 Wallet.LoseMoney(amount);
             }
+        }
+
+        public new void AddVectorObs(float observation)
+        {
+            base.AddVectorObs(observation);
+        }
+
+        public new void AddVectorObs(int observation)
+        {
+            base.AddVectorObs(observation);
+        }
+
+        public new void AddVectorObs(bool observation)
+        {
+            base.AddVectorObs(observation);
         }
     }
 }
