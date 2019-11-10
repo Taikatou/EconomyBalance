@@ -19,7 +19,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
 
         public Text myGoldDisplay;
 
-        public PooledShopScrollList otherShop;
+        public MarketPlace marketPlace;
 
         public double Gold
         {
@@ -58,9 +58,8 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
         public override void TryTransferItemToOtherShop(ShopItem item)
         {
             var newItem = new ShopItem(item, 1);
-            otherShop.marketPlace.AddItem(newItem, adventurerAgent);
+            marketPlace.AddItem(newItem, adventurerAgent);
             RemoveItem(item, 1);
-            otherShop.RefreshDisplay();
             RefreshDisplay();
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assets.EconomyProject.Scripts.UI.ShopUI;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
@@ -11,6 +12,13 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
         private Dictionary<ShopItem, IAdventurerScroll> _sellers;
 
         public List<ShopItem> ItemList => _sellers.Keys.ToList();
+
+        public DateTime LastUpdated { get; set; }
+
+        private void Start()
+        {
+            _sellers = new Dictionary<ShopItem, IAdventurerScroll>();
+        }
 
         public IAdventurerScroll GetSeller(ShopItem item)
         {
@@ -37,14 +45,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             return false;
         }
 
-        private void Start()
+        public void RemoveItem(ShopItem item, int number=1)
         {
-            _sellers = new Dictionary<ShopItem, IAdventurerScroll>();
-        }
-
-        public void RemoveItem(ShopItem item)
-        {
-            _sellers.Remove(item);
+            var toRemove = item.DeductStock(number);
+            if (toRemove)
+            {
+                _sellers.Remove(item);
+            }
+            LastUpdated = DateTime.Now;
         }
 
         public void TryTransferItemToOtherShop(ShopItem item, AgentShopScrollList otherShop, ShopScrollList thisShop)
@@ -71,13 +79,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 
         public void AddItem(ShopItem item, IAdventurerScroll shopAgent)
         {
+            LastUpdated = DateTime.Now;
             foreach (var i in ItemList)
             {
                 var isSeller = SellerHasItem(item, shopAgent);
 
                 var isItem = i.inventoryItem == item.inventoryItem;
                 var isPrice = item.price == i.price;
-                Debug.Log(isSeller + "\t" + isItem + "\t" + isPrice);
+                //Debug.Log(isSeller + "\t" + isItem + "\t" + isPrice);
                 if (isSeller && isItem && isPrice)
                 {
                     i.IncreaseStock(item.stock);

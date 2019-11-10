@@ -859,6 +859,11 @@ PrefabInstance:
       propertyPath: otherShop
       value: 
       objectReference: {fileID: 746841363}
+    - target: {fileID: 6260699844471439698, guid: 4ddde22cce580764182697e94fc30bf1,
+        type: 3}
+      propertyPath: marketPlace
+      value: 
+      objectReference: {fileID: 581078238}
     - target: {fileID: 6260699846221116550, guid: 4ddde22cce580764182697e94fc30bf1,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.MLAgents.Shop;
-using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
 {
@@ -13,6 +13,8 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
 
         public MarketPlace marketPlace;
 
+        private DateTime _lastUpdated;
+
         public override void TryTransferItemToOtherShop(ShopItem item)
         {
             marketPlace.TryTransferItemToOtherShop(item, otherShop, this);
@@ -20,10 +22,15 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
 
         public override void RemoveItem(ShopItem itemToRemove, int number)
         {
-            var toRemove = itemToRemove.DeductStock(number);
-            if (toRemove)
+            marketPlace.RemoveItem(itemToRemove);
+        }
+
+        private void Update()
+        {
+            if (_lastUpdated != marketPlace.LastUpdated)
             {
-                marketPlace.RemoveItem(itemToRemove);
+                _lastUpdated = marketPlace.LastUpdated;
+                RefreshDisplay();
             }
         }
     }
