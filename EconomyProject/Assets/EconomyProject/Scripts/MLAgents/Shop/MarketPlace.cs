@@ -21,6 +21,20 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             return null;
         }
 
+        public bool SellerHasItem(ShopItem toCompare, IAdventurerScroll seller)
+        {
+            foreach (var item in ItemList)
+            {
+                if (item.inventoryItem.itemName == toCompare.inventoryItem.itemName &&
+                    item.price == toCompare.price && _sellers[item] == seller)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void Start()
         {
             _sellers = new Dictionary<ShopItem, IAdventurerScroll>();

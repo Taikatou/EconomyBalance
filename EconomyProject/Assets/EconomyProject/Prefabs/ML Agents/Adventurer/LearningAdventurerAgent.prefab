@@ -60,13 +60,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e382e919727daf446bb2e1e0636e1726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brain: {fileID: 11400000, guid: f56be2afa70de914e810a7abda185507, type: 2}
+  brain: {fileID: 11400000, guid: ecf7406acb8466b42ab1e9168edd8170, type: 2}
   agentParameters:
     agentCameras: []
     agentRenderTextures: []
     maxStep: 10000
     resetOnDone: 0
-    onDemandDecision: 1
+    onDemandDecision: 0
     numberOfActionsBetweenDecisions: 5
   endItem: {fileID: 11400000, guid: f2ee4c3d87136284f911c5dc145ee12c, type: 2}
   resetOnComplete: 0

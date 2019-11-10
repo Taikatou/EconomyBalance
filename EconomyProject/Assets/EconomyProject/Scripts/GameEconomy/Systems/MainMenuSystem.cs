@@ -12,10 +12,5 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         {
             return true;
         }
-
-        private void FixedUpdate()
-        {
-            RequestDecisions();
-        }
     }
 }

@@ -18,16 +18,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         [HideInInspector]
         public float currentItemPrice;
 
-        private AdventurerAgent _currentHighestBidder;
-
         [HideInInspector]
         public float currentAuctionTime;
 
         public float auctionTime = 5.0f;
 
-        private bool _bidOn;
-
-        private bool _bidLast;
+        private AdventurerAgent _currentHighestBidder;
 
         private bool _auctionOn;
 
@@ -42,6 +38,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         private DataLogger Logger => GetComponent<DataLogger>();
 
         protected override AgentScreen ActionChoice => AgentScreen.Auction;
+
+        public bool BidOn { get; private set; }
+
+        public bool BidLast { get; private set; }
 
         public void Reset()
         {
@@ -73,8 +73,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
                 _currentHighestBidder = null;
 
-                _bidOn = false;
-                _bidLast = false;
+                BidOn = false;
+                BidLast = false;
             }
         }
 
@@ -99,13 +99,13 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                     currentAuctionTime += Time.deltaTime;
                     if (currentAuctionTime >= auctionTime)
                     {
-                        if (!_bidOn)
+                        if (!BidOn)
                         {
                             AuctionOver();
                         }
                         else
                         {
-                            _bidOn = false;
+                            BidOn = false;
                         }
                         currentAuctionTime = 0.0f;
                     }
@@ -114,8 +114,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 {
                     ReturnToMain();
                 }
-
-                RequestDecisions();
             }
         }
 
@@ -123,7 +121,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         {
             _auctionOn = false;
             _inventoryItems.Remove(auctionedItem);
-            if (_bidLast)
+            if (BidLast)
             {
                 Debug.Log("Sold Weapon: " + auctionedItem.itemName + " for " + currentItemPrice);
                 _currentHighestBidder.BoughtItem(auctionedItem, currentItemPrice);
@@ -176,8 +174,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 {
                     _currentHighestBidder = agent;
                     currentItemPrice = newPrice;
-                    _bidOn = true;
-                    _bidLast = true;
+                    BidOn = true;
+                    BidLast = true;
                 }
             }
         }

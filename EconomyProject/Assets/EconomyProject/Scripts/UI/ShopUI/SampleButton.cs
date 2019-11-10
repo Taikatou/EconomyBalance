@@ -11,6 +11,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
         public Text nameLabel;
         public Image iconImage;
         public Text priceText;
+        public Text stockText;
 
         private ShopItem _itemDetails;
         private ShopScrollList _scrollList;
@@ -28,6 +29,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
             //iconImage.sprite = _item.icon;
             priceText.text = itemDetails.price.ToString(CultureInfo.InvariantCulture);
             _scrollList = currentScrollList;
+            stockText.text = "x" + itemDetails.stock;
         }
 
         public void HandleClick()

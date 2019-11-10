@@ -17,7 +17,8 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
         {
             foreach (var i in ItemList)
             {
-                var isSeller = marketPlace.GetSeller(item) == shopAgent;
+                var isSeller = marketPlace.SellerHasItem(item, shopAgent);
+
                 var isItem = i.inventoryItem == item.inventoryItem;
                 var isPrice = item.price == i.price;
                 Debug.Log(isSeller + "\t" + isItem + "\t" + isPrice);

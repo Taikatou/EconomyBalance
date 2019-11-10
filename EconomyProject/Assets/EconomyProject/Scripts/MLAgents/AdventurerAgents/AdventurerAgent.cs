@@ -15,10 +15,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
     {
         public InventoryItem endItem;
 
-        public AgentInventory Inventory => GetComponent<AgentInventory>();
-
-        public InventoryItem Item => Inventory.EquipedItem;
-
         public bool resetOnComplete = false;
 
         public bool punishLoss = false;
@@ -26,6 +22,10 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         public bool printObservations = false;
 
         public bool canSeeDistribution = true;
+
+        public AgentInventory Inventory => GetComponent<AgentInventory>();
+
+        public InventoryItem Item => Inventory.EquipedItem;
 
         public GameAuction GameAuction => GetComponentInParent<AdventurerSpawner>().gameAuction;
 
@@ -89,8 +89,10 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         {
             var output = AddVectorObs(item);
             output += AddVectorObs(true, GameAuction.IsHighestBidder(this), "Is Highest Bidder");
-
             output += AddVectorObs(GameAuction.currentItemPrice, "Current Price");
+            AddVectorObs(GameAuction.BidLast);
+            AddVectorObs(GameAuction.BidOn);
+
             return output;
         }
 
