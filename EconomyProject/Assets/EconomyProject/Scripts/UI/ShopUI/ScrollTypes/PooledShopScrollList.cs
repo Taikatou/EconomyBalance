@@ -13,12 +13,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
 
         public override void TryTransferItemToOtherShop(ShopItem item)
         {
-            marketPlace.TryTransferItemToOtherShop(item, otherShop, this);
-        }
-
-        public override void RemoveItem(ShopItem itemToRemove, int number)
-        {
-            marketPlace.RemoveItem(itemToRemove);
+            marketPlace.TryTransferItemToOtherShop(item, otherShop);
         }
     }
 }

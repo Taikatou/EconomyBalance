@@ -18,8 +18,6 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
 
         public abstract void TryTransferItemToOtherShop(ShopItem item);
 
-        public abstract void RemoveItem(ShopItem itemToRemove, int number);
-
         // Use this for initialization
         void Start()
         {
@@ -56,17 +54,9 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
             }
         }
 
-        public void AddItem(ShopItem itemToAdd)
-        {
-            ItemList.Add(itemToAdd);
-        }
-
         public void TryTransferItemToOtherShop(ShopItem item, int number)
         {
-            for (var i = 0; i < number; i++)
-            {
-                TryTransferItemToOtherShop(item);
-            }
+            TryTransferItemToOtherShop(item);
         }
 
         private void Update()

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.Inventory;
+using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
@@ -12,11 +13,15 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 
         public int stock;
 
-        public ShopItem(ShopItem item, int stock)
+        [HideInInspector]
+        public readonly IAdventurerScroll seller;
+
+        public ShopItem(ShopItem item, int stock, IAdventurerScroll seller)
         {
             this.inventoryItem = item.inventoryItem;
             this.price = item.price;
             this.stock = stock;
+            this.seller = seller;
         }
 
         public string ItemName => inventoryItem ? inventoryItem.itemName : "";
@@ -34,6 +39,12 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             {
                 stock += number;
             }
+        }
+
+        public static bool Compare(ShopItem itemA, ShopItem itemB)
+        {
+            return itemA.inventoryItem.itemName == itemB.inventoryItem.itemName &&
+                   itemA.price == itemB.price;
         }
     }
 

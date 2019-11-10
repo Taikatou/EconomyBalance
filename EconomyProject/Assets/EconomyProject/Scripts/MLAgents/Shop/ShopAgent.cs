@@ -14,14 +14,48 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
         public EconomyWallet Wallet => GetComponent<EconomyWallet>();
         public List<ShopItem> ItemList => ShopAbility.shopItems;
 
-        public void RemoveItem(ShopItem itemToRemove, int number)
+        public void RemoveItem(ShopItem itemToRemove)
         {
-            var toRemove = itemToRemove.DeductStock(number);
+            var sellersItem = FindItem(itemToRemove);
+            Debug.Log(sellersItem.stock);
+            var toRemove = sellersItem.DeductStock(itemToRemove.stock);
             if (toRemove)
             {
-                ItemList.Remove(itemToRemove);
+                ItemList.Remove(sellersItem);
             }
         }
+
+        public void AddItem(ShopItem addItem)
+        {
+            var foundItem = FindItem(addItem);
+            if (foundItem != null)
+            {
+                foundItem.IncreaseStock(addItem.stock);
+            }
+            else
+            {
+                ItemList.Add(addItem);
+            }
+        }
+
+        public bool HasItem(ShopItem toCompare)
+        {
+            return FindItem(toCompare) != null;
+        }
+
+        public ShopItem FindItem(ShopItem toCompare)
+        {
+            foreach (var item in ItemList)
+            {
+                if (ShopItem.Compare(item, toCompare))
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+
 
         public override void AgentAction(float[] vectorAction, string textAction)
         {
