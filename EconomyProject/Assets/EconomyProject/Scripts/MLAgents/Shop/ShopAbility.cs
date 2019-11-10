@@ -12,7 +12,29 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 
         public int stock;
 
+        public ShopItem(ShopItem item, int stock)
+        {
+            this.inventoryItem = item.inventoryItem;
+            this.price = item.price;
+            this.stock = stock;
+        }
+
         public string ItemName => inventoryItem ? inventoryItem.itemName : "";
+
+        public bool DeductStock(int number)
+        {
+            var newValue = this.stock - number;
+            stock = newValue < 0 ? 0 : newValue;
+            return newValue == 0;
+        }
+
+        public void IncreaseStock(int number)
+        {
+            if (number > 0)
+            {
+                stock += number;
+            }
+        }
     }
 
     public class ShopAbility : MonoBehaviour

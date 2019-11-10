@@ -15,6 +15,18 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
 
         public void AddItem(ShopItem item, IAdventurerScroll shopAgent)
         {
+            foreach (var i in ItemList)
+            {
+                var isSeller = marketPlace.GetSeller(item) == shopAgent;
+                var isItem = i.inventoryItem == item.inventoryItem;
+                var isPrice = item.price == i.price;
+                Debug.Log(isSeller + "\t" + isItem + "\t" + isPrice);
+                if (isSeller && isItem && isPrice)
+                {
+                    i.IncreaseStock(item.stock);
+                    return;
+                }
+            }
             marketPlace.AddItem(item, shopAgent);
         }
 
@@ -31,7 +43,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
                 otherShop.Gold -= item.price;
 
                 AddItem(item, otherShop);
-                RemoveItem(item);
+                RemoveItem(item, 1);
 
                 RefreshDisplay();
                 otherShop.RefreshDisplay();
@@ -40,9 +52,13 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
             Debug.Log("attempted");
         }
 
-        protected override void RemoveItem(ShopItem itemToRemove)
+        protected override void RemoveItem(ShopItem itemToRemove, int number)
         {
-            marketPlace.RemoveItem(itemToRemove);
+            var toRemove = itemToRemove.DeductStock(number);
+            if (toRemove)
+            {
+                marketPlace.RemoveItem(itemToRemove);
+            }
         }
     }
 }

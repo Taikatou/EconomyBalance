@@ -48,13 +48,13 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         {
             get
             {
-                EndTimerScript endTimer = FindObjectOfType<EndTimerScript>();
+                var endTimer = FindObjectOfType<EndTimerScript>();
                 return endTimer ? endTimer.CurrentTime : "";
             }
         }
         public string GetFileName(string fileName)
         {
-            string nowStr = DateTime.Now.ToString("_dd_MM_yyyy_HH_mm");
+            var nowStr = DateTime.Now.ToString("_dd_MM_yyyy_HH_mm");
             return fileName + loggerId + nowStr + ".csv";
         }
 

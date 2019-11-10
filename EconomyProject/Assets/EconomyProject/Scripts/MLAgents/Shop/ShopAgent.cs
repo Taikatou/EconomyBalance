@@ -2,7 +2,6 @@
 using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
-using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 {

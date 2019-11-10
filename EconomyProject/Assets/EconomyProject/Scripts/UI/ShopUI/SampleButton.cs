@@ -32,7 +32,8 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
 
         public void HandleClick()
         {
-            _scrollList.TryTransferItemToOtherShop(_itemDetails);
+            var number = 1;
+            _scrollList.TryTransferItemToOtherShop(_itemDetails, number);
         }
     }
 }

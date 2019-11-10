@@ -46,15 +46,20 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
             myGoldDisplay.text = "Gold: " + Gold.ToString(CultureInfo.InvariantCulture);
         }
 
-        protected override void RemoveItem(ShopItem itemToRemove)
+        protected override void RemoveItem(ShopItem itemToRemove, int number)
         {
-            ItemList.Remove(itemToRemove);
+            var toRemove = itemToRemove.DeductStock(number);
+            if (toRemove)
+            {
+                ItemList.Remove(itemToRemove);
+            }
         }
 
         public override void TryTransferItemToOtherShop(ShopItem item)
         {
-            otherShop.AddItem(item, adventurerAgent);
-            RemoveItem(item);
+            var newItem = new ShopItem(item, 1);
+            otherShop.AddItem(newItem, adventurerAgent);
+            RemoveItem(item, 1);
             otherShop.RefreshDisplay();
             RefreshDisplay();
         }

@@ -13,7 +13,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 
         public IAdventurerScroll GetSeller(ShopItem item)
         {
-            bool contains = _sellers.ContainsKey(item);
+            var contains = _sellers.ContainsKey(item);
             if (contains)
             {
                 return _sellers[item];
