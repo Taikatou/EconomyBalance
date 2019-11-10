@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Assets.EconomyProject.Scripts.UI.ShopUI
 {
-    public class UpdateItemUI : MonoBehaviour
+    public class UpdateItemUi : MonoBehaviour
     {
         public Button moveToMarketplaceButton;
         public Button backButton;
@@ -23,7 +23,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
         private void Start()
         {
             moveToMarketplaceButton.onClick.AddListener(MoveToMarketPlace);
-            backButton.onClick.AddListener(CloseUI);
+            backButton.onClick.AddListener(CloseUi);
             saveButton.onClick.AddListener(SaveButton);
         }
 
@@ -37,7 +37,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
             newPriceField.text = item.price.ToString();
         }
 
-        private void CloseUI()
+        private void CloseUi()
         {
             _marketPlace.Refresh();
             gameObject.SetActive(false);
@@ -45,8 +45,9 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
 
         private void MoveToMarketPlace()
         {
+            SaveButton();
             _marketPlace.TransferToShop(_shopItem, _seller);
-            CloseUI();
+            CloseUi();
         }
 
         private void SaveButton()

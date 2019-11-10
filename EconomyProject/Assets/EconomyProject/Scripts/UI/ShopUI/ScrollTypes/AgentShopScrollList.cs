@@ -19,7 +19,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
 
         public Text myGoldDisplay;
 
-        public UpdateItemUI updateItem;
+        public UpdateItemUi updateItem;
 
         public override List<ShopItem> ItemList => adventurerAgent?.ItemList;
 
