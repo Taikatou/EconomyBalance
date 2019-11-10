@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2058060824390224692}
   - component: {fileID: 4563505960450716024}
   - component: {fileID: 568787241}
+  - component: {fileID: 1698003909039440842}
+  - component: {fileID: 8868528098903630128}
   m_Layer: 0
   m_Name: ShopAgent
   m_TagString: Untagged
@@ -69,16 +71,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopItems:
-  - {fileID: 11400000, guid: ff61c0520e17b43429b1c5e7c3cd505d, type: 2}
-  - {fileID: 11400000, guid: ba1044b1ad3be3440a274303fe22f8cb, type: 2}
-  - {fileID: 11400000, guid: 220a652df168f054b8b6564ab9e67f7f, type: 2}
-  - {fileID: 11400000, guid: ecd492c3b2f26eb428a3a267c2e78659, type: 2}
-  - {fileID: 11400000, guid: 995af46e8ce3ad84a9491f7e65b0c666, type: 2}
-  - {fileID: 11400000, guid: f2ee4c3d87136284f911c5dc145ee12c, type: 2}
-  startItem:
-    price: 5
-    number: 5
-  startNumber: 10
+  - inventoryItem: {fileID: 11400000, guid: ff61c0520e17b43429b1c5e7c3cd505d, type: 2}
+    price: 10
+    stock: 3
+    itemId: 0
+  - inventoryItem: {fileID: 11400000, guid: ba1044b1ad3be3440a274303fe22f8cb, type: 2}
+    price: 10
+    stock: 3
+    itemId: 0
+  - inventoryItem: {fileID: 11400000, guid: 220a652df168f054b8b6564ab9e67f7f, type: 2}
+    price: 10
+    stock: 3
+    itemId: 0
+  - inventoryItem: {fileID: 11400000, guid: ecd492c3b2f26eb428a3a267c2e78659, type: 2}
+    price: 10
+    stock: 3
+    itemId: 0
+  - inventoryItem: {fileID: 11400000, guid: 995af46e8ce3ad84a9491f7e65b0c666, type: 2}
+    price: 10
+    stock: 3
+    itemId: 0
+  - inventoryItem: {fileID: 11400000, guid: f2ee4c3d87136284f911c5dc145ee12c, type: 2}
+    price: 10
+    stock: 3
+    itemId: 0
 --- !u!114 &4563505960450716024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,3 +121,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMoney: 100
+--- !u!114 &1698003909039440842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6220377510714029038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef49ebaf2c1d3e34d80a0c97fe600c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  craftingRequirement: []
+--- !u!114 &8868528098903630128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6220377510714029038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f002c2d191232e4d847ecc768fab97a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

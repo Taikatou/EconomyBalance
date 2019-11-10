@@ -26,5 +26,10 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
                 }
             }
         }
+
+        protected override void UpdateChange()
+        {
+            agentScrollList.UpdateAgent(AgentList[0]);
+        }
     }
 }

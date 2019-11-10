@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
 using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
-using Assets.EconomyProject.Scripts.UI.ShopUI;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
-using MLAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
@@ -15,6 +11,9 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
         public float moveAmount = 100;
 
         public ShopAbility ShopAbility => GetComponent<ShopAbility>();
+
+        public EconomyWallet Wallet => GetComponent<EconomyWallet>();
+        public List<ShopItem> ItemList => ShopAbility.shopItems;
 
         public override void AgentAction(float[] vectorAction, string textAction)
         {
@@ -38,37 +37,5 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
                 ShopAbility.ChangePrice(item, (int)priceChange);
             }
         }
-
-        public EconomyWallet Wallet => GetComponent<EconomyWallet>();
-
-        public List<Item> ItemList
-        {
-            get
-            {
-                var itemList = new List<Item>();
-                foreach (var item in ShopAbility.shopItems)
-                {
-                    var shopItem = ShopAbility.GetItemPrice(item);
-                    if (shopItem.HasValue)
-                    {
-                        ShopItem value = shopItem.Value;
-                        for (var i = 0; i < value.number; i++)
-                        {
-                            var uiItem = new Item(item.itemName, (double)value.price);
-                            itemList.Add(uiItem);
-                        }
-                    }
-                }
-
-                return itemList;
-            }
-        }
-
-        public override void InitializeAgent()
-        {
-            ItemInMarket = new List<Item>();
-        }
-
-        public List<Item> ItemInMarket { get; set; }
     }
 }

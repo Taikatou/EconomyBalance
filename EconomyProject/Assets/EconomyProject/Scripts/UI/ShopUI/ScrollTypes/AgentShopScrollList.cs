@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using Assets.EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine.UI;
 
 namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
@@ -8,12 +9,11 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
     public interface IAdventurerScroll
     {
         EconomyWallet Wallet { get; }
-        List<Item> ItemList { get; }
-        List<Item> ItemInMarket{ get; }
+        List<ShopItem> ItemList { get; }
     }
     public class AgentShopScrollList : ShopScrollList
     {
-        public override List<Item> ItemList => adventurerAgent?.ItemList;
+        public override List<ShopItem> ItemList => adventurerAgent?.ItemList;
 
         public IAdventurerScroll adventurerAgent;
 
@@ -21,7 +21,8 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
 
         public PooledShopScrollList otherShop;
 
-        public double Gold {
+        public double Gold
+        {
             get
             {
                 if (adventurerAgent != null && adventurerAgent.Wallet)
@@ -45,11 +46,15 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
             myGoldDisplay.text = "Gold: " + Gold.ToString(CultureInfo.InvariantCulture);
         }
 
-        public override void TryTransferItemToOtherShop(Item item)
+        protected override void RemoveItem(ShopItem itemToRemove)
         {
-            otherShop.AddItem(item);
-            RemoveItem(item, this);
-            adventurerAgent.ItemInMarket.Add(item);
+            ItemList.Remove(itemToRemove);
+        }
+
+        public override void TryTransferItemToOtherShop(ShopItem item)
+        {
+            otherShop.AddItem(item, adventurerAgent);
+            RemoveItem(item);
             otherShop.RefreshDisplay();
             RefreshDisplay();
         }

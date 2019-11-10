@@ -12,9 +12,11 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public GameObject agentList;
 
-        private HashSet<string> _agentIds  = new HashSet<string>();
+        private readonly HashSet<string> _agentIds  = new HashSet<string>();
 
         public ShopAgent[] AgentList => agentList.GetComponentsInChildren<ShopAgent>();
+
+        private bool _setOption;
 
         // Update is called once per frame
         private void Update()
@@ -32,6 +34,18 @@ namespace Assets.EconomyProject.Scripts.UI
                     }
                 }
             }
+
+            if (!_setOption && AgentList.Length > 0)
+            {
+                _setOption = true;
+                dropDown.value = 0;
+                UpdateChange();
+            }
+        }
+
+        protected virtual void UpdateChange()
+        {
+
         }
     }
 }

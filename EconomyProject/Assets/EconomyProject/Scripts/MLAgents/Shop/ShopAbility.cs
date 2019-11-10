@@ -5,72 +5,40 @@ using UnityEngine;
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 {
     [System.Serializable]
-    public struct ShopItem
+    public class ShopItem
     {
+        public InventoryItem inventoryItem;
         public int price;
 
-        public int number;
+        public int stock;
 
-        public ShopItem(int price, int number)
-        {
-            this.price = price;
-            this.number = number;
-        }
-
-        public ShopItem(ShopItem item)
-        {
-            this.price = item.price;
-            this.number = item.number;
-        }
-
-        public void ChangePrice(int newPrice)
-        {
-            price = newPrice;
-        }
+        public string ItemName => inventoryItem ? inventoryItem.itemName : "";
     }
 
     public class ShopAbility : MonoBehaviour
     {
-        public List<InventoryItem> shopItems;
+        public List<ShopItem> shopItems;
 
-        public ShopItem startItem;
-
-        private Dictionary<InventoryItem, ShopItem> _itemPrices;
-
-        public int startNumber = 10;
-
-        private void Start()
+        public void ChangePrice(ShopItem item, int price)
         {
-            _itemPrices = new Dictionary<InventoryItem, ShopItem>();
+            if (price > 0)
+            {
+                var shopItem = FindShopItem(item.inventoryItem);
+                if (shopItem != null)
+                {
+                    shopItem.price = price;
+                }
+            }
+        }
+
+        public ShopItem FindShopItem(InventoryItem item)
+        {
             foreach (var shopItem in shopItems)
             {
-                _itemPrices.Add(shopItem, startItem);
-            }
-        }
-
-        public void ChangePrice(InventoryItem item, int price)
-        {
-            var hasItem = _itemPrices.ContainsKey(item);
-            if (hasItem)
-            {
-                _itemPrices[item].ChangePrice(price);
-            }
-        }
-
-        public void AddItem(InventoryItem item, ShopItem shopInv)
-        {
-            var hasItem = _itemPrices.ContainsKey(item);
-            if (!hasItem)
-            {
-                _itemPrices.Add(item, shopInv);
-            }
-        }
-
-        public ShopItem? GetItemPrice(InventoryItem item)
-        {
-            if (_itemPrices != null && _itemPrices.ContainsKey(item))
-            {
-                return _itemPrices[item];
+                if (shopItem.ItemName == item.itemName)
+                {
+                    return shopItem;
+                }
             }
             return null;
         }

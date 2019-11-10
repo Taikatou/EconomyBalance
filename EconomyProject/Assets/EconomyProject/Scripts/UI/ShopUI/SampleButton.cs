@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Assets.EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
         public Image iconImage;
         public Text priceText;
 
-
-        private Item _item;
+        private ShopItem _itemDetails;
         private ShopScrollList _scrollList;
 
         // Use this for initialization
@@ -21,19 +21,18 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
             buttonComponent.onClick.AddListener(HandleClick);
         }
 
-        public void Setup(Item currentItem, ShopScrollList currentScrollList)
+        public void Setup(ShopItem itemDetails, ShopScrollList currentScrollList)
         {
-            _item = currentItem;
-            nameLabel.text = _item.itemName;
-            iconImage.sprite = _item.icon;
-            priceText.text = _item.price.ToString(CultureInfo.InvariantCulture);
+            _itemDetails = itemDetails;
+            nameLabel.text = _itemDetails.ItemName;
+            //iconImage.sprite = _item.icon;
+            priceText.text = itemDetails.price.ToString(CultureInfo.InvariantCulture);
             _scrollList = currentScrollList;
         }
 
         public void HandleClick()
         {
-            _scrollList.TryTransferItemToOtherShop(_item);
-            Debug.Log(_item.itemId);
+            _scrollList.TryTransferItemToOtherShop(_itemDetails);
         }
     }
 }

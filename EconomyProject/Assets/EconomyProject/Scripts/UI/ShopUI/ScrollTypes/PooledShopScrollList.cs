@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Assets.EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine;
 
@@ -8,53 +7,42 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
     public class PooledShopScrollList : ShopScrollList
     {
         // Start is called before the first frame update
-        public override List<Item> ItemList => _itemList;
-
-        private readonly List<Item> _itemList = new List<Item>();
+        public override List<ShopItem> ItemList => marketPlace.ItemList;
 
         public AgentShopScrollList otherShop;
 
-        public void AddItem(Item item)
+        public MarketPlace marketPlace;
+
+        public void AddItem(ShopItem item, IAdventurerScroll shopAgent)
         {
-            _itemList.Add(item);
+            marketPlace.AddItem(item, shopAgent);
         }
 
-        public GameObject gameObjects;
-
-        public IAdventurerScroll GetSeller(Item itemSale)
+        public override void TryTransferItemToOtherShop(ShopItem item)
         {
-            var sa = gameObjects.GetComponentsInChildren<ShopAgent>();
-            Debug.Log(sa.Length);
-            foreach (var s in sa)
-            {
-                foreach (var item in s.ItemInMarket)
-                {
-                    Debug.Log(item.itemId + "\t" +  itemSale.itemId);
-                    if (item.itemId == itemSale.itemId)
-                    {
-                        return s;
-                    }
-                }
-            }
-            return null;
-        }
+            var seller = marketPlace.GetSeller(item);
 
-        public override void TryTransferItemToOtherShop(Item item)
-        {
-            var seller = GetSeller(item);
-            if (otherShop.Gold >= item.price)
+            var canBuy = otherShop.Gold >= item.price;
+            var sellerValid = seller != null;
+
+            if (canBuy && sellerValid)
             {
                 seller.Wallet.EarnMoney(item.price);
                 otherShop.Gold -= item.price;
 
                 AddItem(item, otherShop);
-                RemoveItem(item, this);
+                RemoveItem(item);
 
                 RefreshDisplay();
                 otherShop.RefreshDisplay();
                 Debug.Log("enough gold");
             }
             Debug.Log("attempted");
+        }
+
+        protected override void RemoveItem(ShopItem itemToRemove)
+        {
+            marketPlace.RemoveItem(itemToRemove);
         }
     }
 }
