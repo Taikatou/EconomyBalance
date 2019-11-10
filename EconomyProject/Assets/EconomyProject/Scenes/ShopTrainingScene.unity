@@ -708,7 +708,6 @@ MonoBehaviour:
   buttonObjectPool: {fileID: 908572788}
   otherShop: {fileID: 1027519404186901326}
   marketPlace: {fileID: 581078238}
-  gameObjects: {fileID: 1012460917}
 --- !u!114 &746841364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,7 +1037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   learningAgentPrefab: {fileID: 6220377510714029038, guid: 81e2628fb8ab468499d6e20bb46f139c,
     type: 3}
-  numSpawn: 1
+  numSpawn: 2
 --- !u!4 &1012460919
 Transform:
   m_ObjectHideFlags: 0
