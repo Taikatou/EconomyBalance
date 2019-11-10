@@ -52,7 +52,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             {
                 _sellers.Remove(item);
             }
-            LastUpdated = DateTime.Now;
+
+            Refresh();
         }
 
         public void TryTransferItemToOtherShop(ShopItem item, AgentShopScrollList otherShop, ShopScrollList thisShop)
@@ -79,7 +80,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 
         public void AddItem(ShopItem item, IAdventurerScroll shopAgent)
         {
-            LastUpdated = DateTime.Now;
+            Refresh();
             foreach (var i in ItemList)
             {
                 var isSeller = SellerHasItem(item, shopAgent);
@@ -99,6 +100,19 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             {
                 _sellers.Add(item, shopAgent);
             }
+        }
+
+        public void Refresh()
+        {
+            LastUpdated = DateTime.Now;
+        }
+
+        public void TransferToShop(ShopItem item, IAdventurerScroll seller, int stockNumber = 1)
+        {
+            var newItem = new ShopItem(item, stockNumber);
+            AddItem(newItem, seller);
+            Refresh();
+            seller.RemoveItem(item, stockNumber);
         }
     }
 }

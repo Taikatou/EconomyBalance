@@ -10,6 +10,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
     {
         EconomyWallet Wallet { get; }
         List<ShopItem> ItemList { get; }
+        void RemoveItem(ShopItem itemToRemove, int number);
     }
     public class AgentShopScrollList : ShopScrollList
     {
@@ -18,8 +19,6 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
         public IAdventurerScroll adventurerAgent;
 
         public Text myGoldDisplay;
-
-        public MarketPlace marketPlace;
 
         public double Gold
         {
@@ -48,19 +47,12 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
 
         public override void RemoveItem(ShopItem itemToRemove, int number)
         {
-            var toRemove = itemToRemove.DeductStock(number);
-            if (toRemove)
-            {
-                ItemList.Remove(itemToRemove);
-            }
+            adventurerAgent.RemoveItem(itemToRemove, number);
         }
 
         public override void TryTransferItemToOtherShop(ShopItem item)
         {
-            var newItem = new ShopItem(item, 1);
-            marketPlace.AddItem(newItem, adventurerAgent);
-            RemoveItem(item, 1);
-            RefreshDisplay();
+            marketPlace.TransferToShop(item, adventurerAgent);
         }
     }
 }

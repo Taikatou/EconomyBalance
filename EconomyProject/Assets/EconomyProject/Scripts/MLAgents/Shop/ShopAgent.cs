@@ -14,6 +14,15 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
         public EconomyWallet Wallet => GetComponent<EconomyWallet>();
         public List<ShopItem> ItemList => ShopAbility.shopItems;
 
+        public void RemoveItem(ShopItem itemToRemove, int number)
+        {
+            var toRemove = itemToRemove.DeductStock(number);
+            if (toRemove)
+            {
+                ItemList.Remove(itemToRemove);
+            }
+        }
+
         public override void AgentAction(float[] vectorAction, string textAction)
         {
             AgentActionCrafting(vectorAction, textAction);

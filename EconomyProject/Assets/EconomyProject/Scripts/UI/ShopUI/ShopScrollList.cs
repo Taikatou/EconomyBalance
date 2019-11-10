@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine;
 
@@ -9,6 +10,11 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
         public abstract List<ShopItem> ItemList { get; }
         public Transform contentPanel;
         public SimpleObjectPool buttonObjectPool;
+
+        public MarketPlace marketPlace;
+
+
+        private DateTime _lastUpdated;
 
         public abstract void TryTransferItemToOtherShop(ShopItem item);
 
@@ -60,6 +66,15 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
             for (var i = 0; i < number; i++)
             {
                 TryTransferItemToOtherShop(item);
+            }
+        }
+
+        private void Update()
+        {
+            if (_lastUpdated != marketPlace.LastUpdated)
+            {
+                _lastUpdated = marketPlace.LastUpdated;
+                RefreshDisplay();
             }
         }
     }

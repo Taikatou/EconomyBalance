@@ -11,10 +11,6 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
 
         public AgentShopScrollList otherShop;
 
-        public MarketPlace marketPlace;
-
-        private DateTime _lastUpdated;
-
         public override void TryTransferItemToOtherShop(ShopItem item)
         {
             marketPlace.TryTransferItemToOtherShop(item, otherShop, this);
@@ -23,15 +19,6 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
         public override void RemoveItem(ShopItem itemToRemove, int number)
         {
             marketPlace.RemoveItem(itemToRemove);
-        }
-
-        private void Update()
-        {
-            if (_lastUpdated != marketPlace.LastUpdated)
-            {
-                _lastUpdated = marketPlace.LastUpdated;
-                RefreshDisplay();
-            }
         }
     }
 }
