@@ -21,5 +21,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements
         public float timeToCreation = 3;
 
         public List<ResourceRequirement> resourcesRequirements = new List<ResourceRequirement>();
+
+        public string ResultingItemName => resultingItem ? resultingItem.itemName : "";
     }
 }

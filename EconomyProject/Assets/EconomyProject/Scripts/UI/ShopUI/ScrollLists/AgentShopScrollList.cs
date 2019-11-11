@@ -4,7 +4,7 @@ using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using Assets.EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
+namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
 {
     public interface IAdventurerScroll
     {
@@ -42,15 +42,15 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes
             RefreshDisplay();
         }
 
+        public override void SelectItem(ShopItem item, int number = 1)
+        {
+            updateItem.SetVisible(item, marketPlace, adventurerAgent);
+        }
+
         public override void RefreshDisplay()
         {
             base.RefreshDisplay();
             myGoldDisplay.text = "Gold: " + Gold.ToString(CultureInfo.InvariantCulture);
-        }
-
-        public override void TryTransferItemToOtherShop(ShopItem item)
-        {
-            updateItem.SetVisible(item, marketPlace, adventurerAgent);
         }
     }
 }

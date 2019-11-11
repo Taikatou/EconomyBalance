@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
+using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
@@ -45,6 +45,22 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
         {
             return itemA.inventoryItem.itemName == itemB.inventoryItem.itemName &&
                    itemA.price == itemB.price;
+        }
+
+        public void IncreasePrice(int increase)
+        {
+            if (increase > 0)
+            {
+                price += increase; 
+            }
+        }
+
+        public void DecreasePrice(int increase)
+        {
+            if (increase > 0)
+            {
+                price -= increase;
+            }
         }
     }
 

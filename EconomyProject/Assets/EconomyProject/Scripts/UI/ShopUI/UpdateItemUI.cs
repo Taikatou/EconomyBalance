@@ -1,6 +1,5 @@
-﻿using System;
-using Assets.EconomyProject.Scripts.MLAgents.Shop;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
+﻿using Assets.EconomyProject.Scripts.MLAgents.Shop;
+using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 using UnityEngine.UI;
 

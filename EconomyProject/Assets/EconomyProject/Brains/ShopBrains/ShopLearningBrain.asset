@@ -13,17 +13,13 @@ MonoBehaviour:
   m_Name: ShopLearningBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 0
+    vectorObservationSize: 3
     numStackedVectorObservations: 1
-    vectorActionSize: 06000000
+    vectorActionSize: 0600000004000000
     cameraResolutions: []
     vectorActionDescriptions:
     - 
     - 
-    - 
-    - 
-    - 
-    - 
-    vectorActionSpaceType: 1
+    vectorActionSpaceType: 0
   model: {fileID: 0}
   inferenceDevice: 0

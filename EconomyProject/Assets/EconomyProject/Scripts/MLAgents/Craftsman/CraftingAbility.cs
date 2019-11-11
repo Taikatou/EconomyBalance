@@ -17,17 +17,27 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 
     public class CraftingAbility : MonoBehaviour
     {
-        public bool Crafting { get; private set; }
-
         private float _updateTime;
-
-        public float TimeToCreation { get; private set; }
 
         public List<CraftingMap> craftingRequirement;
 
         private CraftingRequirements _chosenRequirements;
 
-        public string RequirementName => _chosenRequirements.resultingItem.itemName;
+        public bool Crafting { get; private set; }
+
+        public float TimeToCreation { get; private set; }
+
+        public string RequirementName
+        {
+            get
+            {
+                if (_chosenRequirements)
+                {
+                    return _chosenRequirements.ResultingItemName;
+                }
+                return "";
+            }
+        }
 
         public void SetCraftingItem(CraftingChoice choice)
         {

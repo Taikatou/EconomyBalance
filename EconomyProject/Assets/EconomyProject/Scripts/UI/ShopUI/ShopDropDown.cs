@@ -1,6 +1,6 @@
 ﻿using System;
 using Assets.EconomyProject.Scripts.MLAgents;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
+using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 
 namespace Assets.EconomyProject.Scripts.UI.ShopUI
 {

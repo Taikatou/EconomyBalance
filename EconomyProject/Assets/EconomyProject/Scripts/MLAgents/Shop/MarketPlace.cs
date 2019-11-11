@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
+using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
@@ -10,13 +10,26 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
     {
         private Dictionary<ShopItem, IAdventurerScroll> _sellers;
 
-        public List<ShopItem> ItemList => (_sellers != null)? _sellers.Keys.ToList() : new List<ShopItem>();
+        public List<ShopItem> ItemList => _sellers != null? _sellers.Keys.ToList() : new List<ShopItem>();
 
         public DateTime LastUpdated { get; set; }
 
         private void Start()
         {
             _sellers = new Dictionary<ShopItem, IAdventurerScroll>();
+        }
+
+        public int SellersItems(IAdventurerScroll seller)
+        {
+            var count = 0;
+            foreach (var item in ItemList)
+            {
+                if (item.seller == seller)
+                {
+                    count++;
+                }
+            }
+            return count;
         }
 
         public IAdventurerScroll GetSeller(ShopItem item)
@@ -28,20 +41,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             }
 
             return null;
-        }
-
-        public bool SellerHasItem(ShopItem toCompare, IAdventurerScroll seller)
-        {
-            foreach (var item in ItemList)
-            {
-                if (item.inventoryItem.itemName == toCompare.inventoryItem.itemName &&
-                    item.price == toCompare.price && _sellers[item] == seller)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         public void RemoveItem(ShopItem item, int number=1)

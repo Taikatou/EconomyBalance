@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.MLAgents.Shop;
+using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.UI.ShopUI
+namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
 {
-    public abstract class ShopScrollList :  MonoBehaviour
+
+    public interface IScrollList <T>
     {
-        public abstract List<ShopItem> ItemList { get; }
+        void SelectItem(T item, int number = 1);
+    }
+    public abstract class AbstractScrollList<T, TQ> : MonoBehaviour, IScrollList<T>  where TQ : SampleButton<T>
+    {
+        public abstract List<T> ItemList { get; }
         public Transform contentPanel;
         public SimpleObjectPool buttonObjectPool;
 
@@ -16,7 +22,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
 
         private DateTime _lastUpdated;
 
-        public abstract void TryTransferItemToOtherShop(ShopItem item);
+        public abstract void SelectItem(T item, int number=1);
 
         // Use this for initialization
         void Start()
@@ -48,15 +54,10 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
                     var newButton = buttonObjectPool.GetObject();
                     newButton.transform.SetParent(contentPanel);
 
-                    SampleButton sampleButton = newButton.GetComponent<SampleButton>();
+                    var sampleButton = newButton.GetComponent<TQ>();
                     sampleButton.Setup(item, this);
                 }
             }
-        }
-
-        public void TryTransferItemToOtherShop(ShopItem item, int number)
-        {
-            TryTransferItemToOtherShop(item);
         }
 
         private void Update()

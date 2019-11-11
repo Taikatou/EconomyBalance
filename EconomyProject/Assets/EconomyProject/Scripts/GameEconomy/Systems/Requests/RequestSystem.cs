@@ -32,18 +32,28 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 
     public class RequestSystem : MonoBehaviour
     {
-        private List<ResourceRequest> _resourceRequests;
+        public List<ResourceRequest> ResourceRequests { get; private set; }
 
         private Dictionary<CraftingInventory, List<ResourceRequest>> _craftingNumber;
 
+        public List<ResourceRequest> GetCraftingRequests(CraftingInventory inventory)
+        {
+            return _craftingNumber[inventory];
+        }
+
         public int GetRequestNumber(CraftingInventory inventory)
         {
-            return _craftingNumber[inventory].Count;
+            if (_craftingNumber.ContainsKey(inventory))
+            {
+                return _craftingNumber[inventory].Count;
+            }
+
+            return 0;
         }
 
         private void Start()
         {
-            _resourceRequests = new List<ResourceRequest>();
+            ResourceRequests = new List<ResourceRequest>();
             _craftingNumber = new Dictionary<CraftingInventory, List<ResourceRequest>>();
         }
 
@@ -58,7 +68,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
             if (canRequest)
             {
                 var request = new ResourceRequest(resources, inventory);
-                _resourceRequests.Add(request);
+                ResourceRequests.Add(request);
 
                 _craftingNumber[inventory].Add(request);
             }
@@ -68,11 +78,11 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 
         public bool TakeRequest(int index, RequestTaker requestTaker)
         {
-            if (_resourceRequests.Count > index)
+            if (ResourceRequests.Count > index)
             {
-                var request = _resourceRequests[index];
+                var request = ResourceRequests[index];
                 RequestRecord.AddRequest(requestTaker, request);
-                _resourceRequests.RemoveAt(index);
+                ResourceRequests.RemoveAt(index);
             }
             return true;
         }
@@ -80,7 +90,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
         public void SubmitRequest(CraftingResources resource, CraftingInventory inventory)
         {
             ResourceRequest newRequest = new ResourceRequest(resource, inventory);
-            _resourceRequests.Add(newRequest);
+            ResourceRequests.Add(newRequest);
         }
 
     }

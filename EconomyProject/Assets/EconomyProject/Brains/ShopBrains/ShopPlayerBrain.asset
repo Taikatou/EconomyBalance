@@ -13,21 +13,11 @@ MonoBehaviour:
   m_Name: ShopPlayerBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 0
+    vectorObservationSize: 1
     numStackedVectorObservations: 1
-    vectorActionSize: 030000000300000003000000030000000300000003000000020000000200000002000000020000000200000002000000
+    vectorActionSize: 0600000004000000
     cameraResolutions: []
     vectorActionDescriptions:
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
     - 
     - 
     vectorActionSpaceType: 0

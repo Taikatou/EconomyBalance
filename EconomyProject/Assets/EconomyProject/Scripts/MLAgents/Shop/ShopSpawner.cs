@@ -6,6 +6,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
     {
         public GameObject learningAgentPrefab;
 
+        public MarketPlace marketPlace;
+
         public int numSpawn;
         private void Start()
         {

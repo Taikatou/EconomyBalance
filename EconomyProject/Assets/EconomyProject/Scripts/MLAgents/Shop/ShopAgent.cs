@@ -1,18 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollTypes;
+using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 {
-    public enum ShopDecision { Ignore, Submit }
+    public enum ShopDecision { Ignore, Submit , ChangePriceDown, ChangePriceUp}
     public class ShopAgent : CraftsmanAgent, IAdventurerScroll
     {
         public int moveAmount = 1;
         public ShopAbility ShopAbility => GetComponent<ShopAbility>();
         public EconomyWallet Wallet => GetComponent<EconomyWallet>();
         public List<ShopItem> ItemList => ShopAbility.shopItems;
+        public MarketPlace MarketPlace => GetComponentInParent<ShopSpawner>().marketPlace;
 
         public void RemoveItem(ShopItem itemToRemove)
         {
@@ -38,11 +40,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             }
         }
 
-        public bool HasItem(ShopItem toCompare)
-        {
-            return FindItem(toCompare) != null;
-        }
-
         public ShopItem FindItem(ShopItem toCompare)
         {
             foreach (var item in ItemList)
@@ -66,45 +63,44 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
         public override void CollectObservations()
         {
             CollectObservationsCrafting();
+            CollectObservationsShop();
         }
 
-        public int ChangeAmount(int action)
+        public void CollectObservationsShop()
         {
-            switch (action)
-            {
-                case 1:
-                    return moveAmount;
-                case 2:
-                    return -moveAmount;
-            }
+            AddVectorObs(MarketPlace.SellersItems(this));
 
-            return 0;
+            AddVectorObs((float)Wallet.earnedMoney);
+            AddVectorObs((float)Wallet.spentMoney);
+            AddVectorObs((float)Wallet.Money);
+            Wallet.ResetStep();
         }
 
         // continuous decisions 6 change price
-        // discrete submit to marketplace
+            // discrete submit to marketplace
         public void AgentActionShopping(float[] vectorAction, string textAction)
         {
-            for (var i = 0; i < ShopAbility.shopItems.Count; i++)
-            {
-                var action = Mathf.FloorToInt(vectorAction[i]);
-                var priceChange = ChangeAmount(action);
+            var selectedItem = Mathf.FloorToInt(vectorAction[0]);
 
-                var item = ShopAbility.shopItems[i];
-                ShopAbility.ChangePrice(item, priceChange);
-            }
+            var item = ShopAbility.shopItems[selectedItem];
 
-            for (var j = 5; j < 12; j++)
+            var shopDecision = Mathf.FloorToInt(vectorAction[1]);
+            var decision = (ShopDecision)shopDecision;
+            switch (decision)
             {
-                var action = Mathf.FloorToInt(vectorAction[j]);
-                var decision = (ShopDecision) action;
-                switch (decision)
-                {
-                    case ShopDecision.Ignore:
-                        break;
-                    case ShopDecision.Submit:
-                        break;
-                }
+                case ShopDecision.Ignore:
+                    break;
+                case ShopDecision.Submit:
+                    MarketPlace.TransferToShop(item, this);
+                    break;
+                case ShopDecision.ChangePriceDown:
+                    item.DecreasePrice(moveAmount);
+                    break;
+                case ShopDecision.ChangePriceUp:
+                    item.IncreasePrice(moveAmount);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }
