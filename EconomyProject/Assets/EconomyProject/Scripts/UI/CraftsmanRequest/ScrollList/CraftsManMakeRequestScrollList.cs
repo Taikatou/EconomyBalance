@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
-using Assets.EconomyProject.Scripts.UI.Craftsman.Buttons;
+using Assets.EconomyProject.Scripts.UI.CraftsmanRequest.Buttons;
 
-namespace Assets.EconomyProject.Scripts.UI.Craftsman.ScrollList
+namespace Assets.EconomyProject.Scripts.UI.CraftsmanRequest.ScrollList
 {
     public class CraftsManMakeRequestScrollList : CraftingScrollList<CraftingResources, CraftingMakeRequestButton>
     {

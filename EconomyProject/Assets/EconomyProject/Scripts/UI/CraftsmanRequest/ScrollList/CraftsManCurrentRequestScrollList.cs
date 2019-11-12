@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
-using Assets.EconomyProject.Scripts.UI.Craftsman.Buttons;
+using Assets.EconomyProject.Scripts.UI.CraftsmanRequest.Buttons;
 
-namespace Assets.EconomyProject.Scripts.UI.Craftsman.ScrollList
+namespace Assets.EconomyProject.Scripts.UI.CraftsmanRequest.ScrollList
 {
     public class CraftsManCurrentRequestScrollList : CraftingScrollList<ResourceRequest, CraftingCurrentRequestButton>
     {

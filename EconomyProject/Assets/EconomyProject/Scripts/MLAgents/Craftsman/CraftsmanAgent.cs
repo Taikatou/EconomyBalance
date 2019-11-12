@@ -12,7 +12,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
     {
         public RequestSystem requestSystem;
 
-        private CraftingAbility CraftingAbility => GetComponent<CraftingAbility>();
+        public CraftingAbility CraftingAbility => GetComponent<CraftingAbility>();
 
         public CraftingInventory CraftingInventory => GetComponent<CraftingInventory>();
 

@@ -1,7 +1,7 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
-using Assets.EconomyProject.Scripts.UI.Craftsman.ScrollList;
+using Assets.EconomyProject.Scripts.UI.CraftsmanRequest.ScrollList;
 
-namespace Assets.EconomyProject.Scripts.UI.Craftsman.DropDown
+namespace Assets.EconomyProject.Scripts.UI.CraftsmanRequest.DropDown
 {
     public class CraftsmanTakeRequestDropbox : CraftsmanDropDow<RequestTaker>
     {
