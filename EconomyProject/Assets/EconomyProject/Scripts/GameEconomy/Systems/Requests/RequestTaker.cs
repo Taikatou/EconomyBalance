@@ -1,8 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
-    public class RequestTaker : MonoBehaviour
+    public abstract class RequestTaker : MonoBehaviour
     {
+        public abstract List<ResourceRequest> ItemList { get; }
+
+        public abstract void TakeRequest(ResourceRequest request);
     }
 }

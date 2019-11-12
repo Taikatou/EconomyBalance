@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
-    public class RequestRecord
+    public class RequestRecord : MonoBehaviour
     {
-        private static RequestRecord _instance;
-
-        public static RequestRecord Instance => _instance ?? (_instance = new RequestRecord());
 
         private readonly Dictionary<RequestTaker, List<ResourceRequest>> _currentRequests;
 
@@ -15,7 +13,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
             _currentRequests = new Dictionary<RequestTaker, List<ResourceRequest>>();
         }
 
-        private void _AddRequest(RequestTaker requestTaker, ResourceRequest resourceRequest)
+        public void AddRequest(RequestTaker requestTaker, ResourceRequest resourceRequest)
         {
             bool contains = _currentRequests.ContainsKey(requestTaker);
             if (!contains)
@@ -25,12 +23,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
             _currentRequests[requestTaker].Add(resourceRequest); 
         }
 
-        public static void AddRequest(RequestTaker requestTaker, ResourceRequest resourceRequest)
-        {
-            Instance._AddRequest(requestTaker, resourceRequest);
-        }
-
-        private void _CompleteRequest(RequestTaker taker, ResourceRequest request)
+        private void CompleteRequest(RequestTaker taker, ResourceRequest request)
         {
             if (_currentRequests.ContainsKey(taker))
             {
@@ -41,11 +34,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
                     request.TransferResource();
                 }
             }
-        }
-
-        public static void CompleteRequest(RequestTaker taker, ResourceRequest request)
-        {
-            Instance._CompleteRequest(taker, request);
         }
     }
 }

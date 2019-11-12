@@ -1,14 +1,13 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
+using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.ShopUI.Buttons
+namespace Assets.EconomyProject.Scripts.UI.Craftsman.Buttons
 {
-    public class CraftingButton : SampleButton<ResourceRequest>
+    public class CraftingCurrentRequestButton : SampleButton<ResourceRequest>
     {
         public Text nameLabel;
         public Image iconImage;
-        public Text priceText;
         public Text stockText;
         public override void SetupButton()
         {

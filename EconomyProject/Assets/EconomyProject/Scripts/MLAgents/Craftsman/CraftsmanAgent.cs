@@ -25,9 +25,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 
             if (requestSystem)
             {
-                CraftingResources resource = (CraftingResources)requestAction;
-                requestSystem.MakeRequest(resource, CraftingInventory);
+                var resource = (CraftingResources)requestAction;
+                MakeRequest(resource);
             }
+        }
+
+        public void MakeRequest(CraftingResources resource)
+        {
+            requestSystem.MakeRequest(resource, CraftingInventory);
         }
 
         public void CollectObservationsCrafting()

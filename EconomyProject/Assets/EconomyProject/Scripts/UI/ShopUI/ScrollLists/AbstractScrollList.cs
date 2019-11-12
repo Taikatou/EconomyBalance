@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.MLAgents.Shop;
 using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
 using UnityEngine;
 
@@ -11,13 +10,19 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
     {
         void SelectItem(T item, int number = 1);
     }
+
+    public interface ILastUpdate
+    {
+        DateTime LastUpdated { get; }
+    }
+
     public abstract class AbstractScrollList<T, TQ> : MonoBehaviour, IScrollList<T>  where TQ : SampleButton<T>
     {
         public abstract List<T> ItemList { get; }
         public Transform contentPanel;
         public SimpleObjectPool buttonObjectPool;
 
-        public MarketPlace marketPlace;
+        public abstract ILastUpdate LastUpdated { get; }
 
 
         private DateTime _lastUpdated;
@@ -62,9 +67,14 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
 
         private void Update()
         {
-            if (_lastUpdated != marketPlace.LastUpdated)
+            UpdateUi();
+        }
+
+        protected virtual void UpdateUi()
+        {
+            if (_lastUpdated != LastUpdated.LastUpdated)
             {
-                _lastUpdated = marketPlace.LastUpdated;
+                _lastUpdated = LastUpdated.LastUpdated;
                 RefreshDisplay();
             }
         }

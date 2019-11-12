@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 {
-    public class MarketPlace : MonoBehaviour
+    public class MarketPlace : MonoBehaviour, ILastUpdate
     {
         private Dictionary<ShopItem, IAdventurerScroll> _sellers;
 

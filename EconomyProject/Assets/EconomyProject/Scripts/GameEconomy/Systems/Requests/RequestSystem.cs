@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
+using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
@@ -30,15 +32,25 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
         }
     }
 
-    public class RequestSystem : MonoBehaviour
+    public class RequestSystem : MonoBehaviour, ILastUpdate
     {
+        public DateTime LastUpdated { get; set; }
         public List<ResourceRequest> ResourceRequests { get; private set; }
 
         private Dictionary<CraftingInventory, List<ResourceRequest>> _craftingNumber;
 
+        public RequestRecord RequestRecord => GetComponent<RequestRecord>();
+
         public List<ResourceRequest> GetCraftingRequests(CraftingInventory inventory)
         {
-            return _craftingNumber[inventory];
+            if (_craftingNumber != null)
+            {
+                if (_craftingNumber.ContainsKey(inventory))
+                {
+                    return _craftingNumber[inventory];
+                }
+            }
+            return new List<ResourceRequest>();
         }
 
         public int GetRequestNumber(CraftingInventory inventory)
@@ -72,18 +84,26 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 
                 _craftingNumber[inventory].Add(request);
             }
-
+            Refresh();
             return canRequest;
         }
 
-        public bool TakeRequest(int index, RequestTaker requestTaker)
+        public void RemoveRequest(ResourceRequest takeRequest, CraftingInventory inventory)
         {
-            if (ResourceRequests.Count > index)
+            ResourceRequests.Remove(takeRequest);
+
+            _craftingNumber[inventory].Remove(takeRequest);
+            Refresh();
+        }
+
+        public bool TakeRequest(RequestTaker requestTaker, ResourceRequest takeRequest)
+        {
+            if (ResourceRequests.Contains(takeRequest))
             {
-                var request = ResourceRequests[index];
-                RequestRecord.AddRequest(requestTaker, request);
-                ResourceRequests.RemoveAt(index);
+                RequestRecord.AddRequest(requestTaker, takeRequest);
+                ResourceRequests.Remove(takeRequest);
             }
+            Refresh();
             return true;
         }
 
@@ -91,7 +111,12 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
         {
             ResourceRequest newRequest = new ResourceRequest(resource, inventory);
             ResourceRequests.Add(newRequest);
+            Refresh();
         }
 
+        public void Refresh()
+        {
+            LastUpdated = DateTime.Now;
+        }
     }
 }

@@ -5,5 +5,8 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
 {
     public abstract class ShopScrollList : AbstractScrollList<ShopItem, ShopButton>
     {
+        public MarketPlace marketPlace;
+
+        public override ILastUpdate LastUpdated => marketPlace;
     }
 }
