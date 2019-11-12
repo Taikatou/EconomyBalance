@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
 using Assets.EconomyProject.Scripts.UI.Craftsman.Buttons;
 
@@ -17,6 +16,11 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.ScrollList
         public override void SelectItem(ResourceRequest item, int number = 1)
         {
             requestTaker.TakeRequest(item);
+        }
+
+        public void UpdateAgent(RequestTaker newAgent)
+        {
+            requestTaker = newAgent;
         }
     }
 }

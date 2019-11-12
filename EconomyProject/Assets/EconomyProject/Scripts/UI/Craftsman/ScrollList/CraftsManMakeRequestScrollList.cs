@@ -17,5 +17,10 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.ScrollList
         {
             craftingAgent.MakeRequest(item);
         }
+
+        public void UpdateAgent(CraftsmanAgent newAgent)
+        {
+            craftingAgent = newAgent;
+        }
     }
 }

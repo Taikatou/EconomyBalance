@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.MLAgents;
-using Assets.EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.EconomyProject.Scripts.UI
 {
-    public class AgentDropDown : MonoBehaviour
+    public abstract class AgentDropDown<T> : MonoBehaviour where T : MonoBehaviour
     {
         public Dropdown dropDown;
 
@@ -14,7 +14,7 @@ namespace Assets.EconomyProject.Scripts.UI
 
         private readonly HashSet<string> _agentIds  = new HashSet<string>();
 
-        public ShopAgent[] AgentList => agentList.GetComponentsInChildren<ShopAgent>();
+        public T[] AgentList => agentList.GetComponentsInChildren<T>();
 
         private bool _setOption;
 
@@ -47,5 +47,26 @@ namespace Assets.EconomyProject.Scripts.UI
         {
 
         }
+
+        private void Start()
+        {
+            dropDown.onValueChanged.AddListener(delegate {
+                HandleChange();
+            });
+        }
+
+        protected virtual void HandleChange()
+        {
+            var id = dropDown.options[dropDown.value].text;
+            foreach (var agent in AgentList)
+            {
+                if (agent.GetComponent<AgentID>().agentId == Int32.Parse(id))
+                {
+                    UpdateAgent(agent);
+                }
+            }
+        }
+
+        protected abstract void UpdateAgent(T agent);
     }
 }
