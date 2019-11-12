@@ -11,9 +11,14 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
         void SelectItem(T item, int number = 1);
     }
 
-    public interface ILastUpdate
+    public abstract class LastUpdate : MonoBehaviour
     {
-        DateTime LastUpdated { get; }
+        public DateTime LastUpdated { get; set; }
+
+        public void Refresh()
+        {
+            LastUpdated = DateTime.Now;
+        }
     }
 
     public abstract class AbstractScrollList<T, TQ> : MonoBehaviour, IScrollList<T>  where TQ : SampleButton<T>
@@ -22,7 +27,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
         public Transform contentPanel;
         public SimpleObjectPool buttonObjectPool;
 
-        public abstract ILastUpdate LastUpdated { get; }
+        public abstract LastUpdate LastUpdated { get; }
 
 
         private DateTime _lastUpdated;

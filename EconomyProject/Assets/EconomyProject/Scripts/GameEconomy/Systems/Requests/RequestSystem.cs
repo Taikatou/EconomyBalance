@@ -32,9 +32,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
         }
     }
 
-    public class RequestSystem : MonoBehaviour, ILastUpdate
+    public class RequestSystem : LastUpdate
     {
-        public DateTime LastUpdated { get; set; }
         public List<ResourceRequest> ResourceRequests { get; private set; }
 
         private Dictionary<CraftingInventory, List<ResourceRequest>> _craftingNumber;
@@ -112,11 +111,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
             ResourceRequest newRequest = new ResourceRequest(resource, inventory);
             ResourceRequests.Add(newRequest);
             Refresh();
-        }
-
-        public void Refresh()
-        {
-            LastUpdated = DateTime.Now;
         }
     }
 }

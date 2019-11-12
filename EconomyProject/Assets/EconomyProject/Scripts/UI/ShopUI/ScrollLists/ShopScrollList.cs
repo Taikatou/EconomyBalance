@@ -7,6 +7,6 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
     {
         public MarketPlace marketPlace;
 
-        public override ILastUpdate LastUpdated => marketPlace;
+        public override LastUpdate LastUpdated => marketPlace;
     }
 }

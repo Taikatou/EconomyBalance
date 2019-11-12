@@ -6,13 +6,11 @@ using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 {
-    public class MarketPlace : MonoBehaviour, ILastUpdate
+    public class MarketPlace : LastUpdate
     {
         private Dictionary<ShopItem, IAdventurerScroll> _sellers;
 
         public List<ShopItem> ItemList => _sellers != null? _sellers.Keys.ToList() : new List<ShopItem>();
-
-        public DateTime LastUpdated { get; set; }
 
         private void Start()
         {
@@ -108,11 +106,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             }
 
             return null;
-        }
-
-        public void Refresh()
-        {
-            LastUpdated = DateTime.Now;
         }
 
         public void TransferToShop(ShopItem item, IAdventurerScroll seller, int stockNumber = 1)

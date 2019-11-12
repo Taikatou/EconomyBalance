@@ -1,11 +1,9 @@
-﻿using System;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
-using Assets.EconomyProject.Scripts.MLAgents.Shop;
+﻿using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
 using Assets.EconomyProject.Scripts.UI.Craftsman.ScrollList;
 
-namespace Assets.EconomyProject.Scripts.UI.Craftsman
+namespace Assets.EconomyProject.Scripts.UI.Craftsman.DropDown
 {
-    public class CraftsmanMakeRequestDropbox : AgentDropDown<CraftsmanAgent>
+    public class CraftsmanMakeRequestDropbox : CraftsmanDropDow<CraftsmanAgent>
     {
         public CraftsManMakeRequestScrollList agentScrollList;
 
@@ -16,6 +14,7 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman
 
         protected override void UpdateAgent(CraftsmanAgent agent)
         {
+            base.UpdateAgent(agent);
             agentScrollList.UpdateAgent(agent);
         }
     }
