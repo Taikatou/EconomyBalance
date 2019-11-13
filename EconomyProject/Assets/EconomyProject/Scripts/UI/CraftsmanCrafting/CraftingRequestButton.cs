@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
 using UnityEngine.UI;
 
