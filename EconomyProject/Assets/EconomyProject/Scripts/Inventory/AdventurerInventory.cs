@@ -10,14 +10,14 @@ namespace Assets.EconomyProject.Scripts.Inventory
         {
             get
             {
-                if (items == null)
+                if (Items == null)
                 {
                     ResetInventory();
                 }
-                if (items.Count > 0)
+                if (Items.Count > 0)
                 {
-                    var max = items.Max(x => x.efficiency);
-                    var maxWeapon = items.First(x => Math.Abs(x.efficiency - max) < 0.01);
+                    var max = Items.Max(x => x.efficiency);
+                    var maxWeapon = Items.First(x => Math.Abs(x.efficiency - max) < 0.01);
                     return maxWeapon;
                 }
                 return null;
@@ -29,7 +29,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
             EquipedItem.DecreaseDurability();
             if (EquipedItem.Broken)
             {
-                items.Remove(EquipedItem);
+                Items.Remove(EquipedItem);
             }
         }
     }

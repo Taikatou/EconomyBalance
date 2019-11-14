@@ -1,38 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.Inventory
 {
-    public class AgentInventory : MonoBehaviour
+    public class AgentInventory : LastUpdate
     {
-        protected List<InventoryItem> items;
+        public List<InventoryItem> Items { get; private set; }
 
         public List<InventoryItem> startInventory;
 
-        public int ItemCount => items.Count;
+        public int ItemCount => Items.Count;
 
         private void Start()
         {
             ResetInventory();
-            items = new List<InventoryItem>();
+            Items = new List<InventoryItem>();
         }
 
         public void AddItem(InventoryItem item)
         {
-            items.Add(item);
+            Items.Add(item);
+            Refresh();
         }
 
         public void ResetInventory()
         {
-            if (items == null)
+            if (Items == null)
             {
-                items = new List<InventoryItem>();
+                Items = new List<InventoryItem>();
             }
             else
             {
-                items?.Clear();
+                Items?.Clear();
             }
 
             foreach (var item in startInventory)
@@ -42,9 +44,11 @@ namespace Assets.EconomyProject.Scripts.Inventory
                 {
                     generatedItem.Init(item);
 
-                    items?.Add(generatedItem);
+                    Items?.Add(generatedItem);
                 }
             }
+
+            Refresh();
         }
     }
 }
