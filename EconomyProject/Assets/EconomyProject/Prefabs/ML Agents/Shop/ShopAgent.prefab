@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1698003909039440842}
   - component: {fileID: 8868528098903630128}
   - component: {fileID: 2053566769}
+  - component: {fileID: 1690807225}
   m_Layer: 0
   m_Name: ShopAgent
   m_TagString: Untagged
@@ -166,3 +167,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe44ab26e9b99c4388ec065bf6b9cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1690807225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6220377510714029038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cf88a2c3c27c9b4b804eeb1c5a32011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startInventory: []
