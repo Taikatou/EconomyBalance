@@ -51,7 +51,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public static InventoryItem GenerateItem(InventoryItem selectedItem)
         {
-            var generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
+            var generatedItem = CreateInstance("InventoryItem") as InventoryItem;
             generatedItem?.Init(selectedItem);
             return generatedItem;
         }

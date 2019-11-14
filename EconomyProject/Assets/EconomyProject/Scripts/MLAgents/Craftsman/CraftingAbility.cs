@@ -17,36 +17,51 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 
     public class CraftingAbility : MonoBehaviour
     {
-        private float _updateTime;
+        public float UpdateTime { get; private set; }
 
         public List<CraftingMap> craftingRequirement;
-
-        private CraftingRequirements _chosenRequirements;
 
         public bool Crafting { get; private set; }
 
         public float TimeToCreation { get; private set; }
 
-        public string RequirementName
+        public InventoryItem ChosenCrafting { get; set; }
+
+        public CraftingInventory CraftingInventory => GetComponent<CraftingInventory>();
+
+        public AgentInventory Inventory => GetComponent<AgentInventory>();
+
+        public float Progress
         {
             get
             {
-                if (_chosenRequirements)
+                if (Crafting)
                 {
-                    return _chosenRequirements.ResultingItemName;
+                    return UpdateTime / TimeToCreation;
                 }
-                return "";
+                return 0;
             }
         }
 
         public void SetCraftingItem(CraftingChoice choice)
         {
-            var foundChoice = craftingRequirement.Single(c => c.choice == choice).resource;
-            if (!Crafting && foundChoice)
+            var foundChoice = craftingRequirement.Single(c => c.choice == choice);
+            if (!Crafting && foundChoice.resource)
             {
-                Crafting = true;
-                _chosenRequirements = foundChoice;
+                var hasResources = CraftingInventory.HasResources(foundChoice.resource);
+                if (hasResources)
+                {
+                    StartCrafting(foundChoice);
+                }
             }
+        }
+
+        private void StartCrafting(CraftingMap foundChoice)
+        {
+            UpdateTime = 0;
+            Crafting = true;
+            ChosenCrafting = foundChoice.resource.resultingItem;
+            TimeToCreation = foundChoice.resource.timeToCreation;
         }
 
         public void SetCraftingItem(int choice)
@@ -56,7 +71,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 
         public void FinishCrafting()
         {
-            var generatedItem = InventoryItem.GenerateItem(_chosenRequirements.resultingItem);
+            var generatedItem = InventoryItem.GenerateItem(ChosenCrafting);
+            Inventory.AddItem(generatedItem);
             Crafting = false;
         }
 
@@ -64,8 +80,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
         {
             if (Crafting)
             {
-                _updateTime += Time.deltaTime;
-                if (_updateTime >= TimeToCreation)
+                UpdateTime += Time.deltaTime;
+                if (UpdateTime >= TimeToCreation)
                 {
                     FinishCrafting();
                 }

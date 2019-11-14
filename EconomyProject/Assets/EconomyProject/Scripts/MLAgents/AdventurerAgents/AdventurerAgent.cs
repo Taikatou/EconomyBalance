@@ -23,7 +23,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public bool canSeeDistribution = true;
 
-        public AgentInventory Inventory => GetComponent<AgentInventory>();
+        public AdventurerInventory Inventory => GetComponent<AdventurerInventory>();
 
         public InventoryItem Item => Inventory.EquipedItem;
 

@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 750485388832555185}
-  - component: {fileID: 122171844582926690}
   - component: {fileID: 5940935655762775432}
   - component: {fileID: -4706628768726033178}
   - component: {fileID: 5620581771315865838}
+  - component: {fileID: 4250931923004593224}
   m_Layer: 0
   m_Name: LearningAdventurerAgent
   m_TagString: Untagged
@@ -34,20 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &122171844582926690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7707616417561859250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cf88a2c3c27c9b4b804eeb1c5a32011, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startInventory:
-  - {fileID: 11400000, guid: 91bd7ff49920f4841b311f0aad3678e3, type: 2}
 --- !u!114 &5940935655762775432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +72,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMoney: 0
+  earnedMoney: 0
+  spentMoney: 0
 --- !u!114 &5620581771315865838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,3 +87,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentId: 0
+--- !u!114 &4250931923004593224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7707616417561859250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a01aab7e5f3c274a90a9307fb39ef3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startInventory:
+  - {fileID: 11400000, guid: 91bd7ff49920f4841b311f0aad3678e3, type: 2}

@@ -9,7 +9,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements
     [System.Serializable]
     public struct ResourceRequirement
     {
-        public Resources type;
+        public CraftingResources type;
         public int number;
     }
 

@@ -39,7 +39,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
         {
             AddVectorObs(CraftingAbility.Crafting);
             AddVectorObs(CraftingAbility.TimeToCreation);
-            var weaponId = WeaponId.GetWeaponId(CraftingAbility.RequirementName);
+            var weaponId = WeaponId.GetWeaponId(CraftingAbility.ChosenCrafting.itemName);
             AddVectorObs(weaponId);
         }
 

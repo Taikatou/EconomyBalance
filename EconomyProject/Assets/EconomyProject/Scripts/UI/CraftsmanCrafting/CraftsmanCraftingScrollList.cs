@@ -11,7 +11,7 @@ namespace Assets.EconomyProject.Scripts.UI.CraftsmanCrafting
         public override LastUpdate LastUpdated => GetComponent<CraftingLastUpdate>();
         public override void SelectItem(CraftingMap item, int number = 1)
         {
-            throw new System.NotImplementedException();
+            agent.CraftingAbility.SetCraftingItem(item.choice);
         }
     }
 }

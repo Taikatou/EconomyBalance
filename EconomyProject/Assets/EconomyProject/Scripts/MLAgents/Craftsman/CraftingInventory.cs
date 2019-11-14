@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using UnityEngine;
 
@@ -22,6 +23,34 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
             }
 
             _numResources[resource] += count;
+        }
+
+        public bool HasResources(CraftingRequirements resource)
+        {
+            var found = true;
+            foreach (var item in resource.resourcesRequirements)
+            {
+                if (_numResources.ContainsKey(item.type))
+                {
+                    if (_numResources[item.type] < item.number)
+                    {
+                        found = false;
+                    }
+                }
+                else
+                {
+                    found = false;
+                }
+            }
+
+            if (found)
+            {
+                foreach (var item in resource.resourcesRequirements)
+                {
+                    _numResources[item.type] -= item.number;
+                }
+            }
+            return found || true;
         }
     }
 }
