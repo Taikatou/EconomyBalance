@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 
 namespace Assets.EconomyProject.Scripts.UI.Inventory

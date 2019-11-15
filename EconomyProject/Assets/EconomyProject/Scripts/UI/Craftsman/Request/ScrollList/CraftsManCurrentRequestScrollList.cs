@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
-using Assets.EconomyProject.Scripts.UI.CraftsmanRequest.Buttons;
+using Assets.EconomyProject.Scripts.UI.Craftsman.Request.Buttons;
 
-namespace Assets.EconomyProject.Scripts.UI.CraftsmanRequest.ScrollList
+namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
 {
     public class CraftsManCurrentRequestScrollList : CraftingScrollList<ResourceRequest, CraftingCurrentRequestButton>
     {
@@ -10,8 +10,6 @@ namespace Assets.EconomyProject.Scripts.UI.CraftsmanRequest.ScrollList
 
         // Start is called before the first frame update
         public override List<ResourceRequest> ItemList => requestTaker.ItemList;
-
-        public RequestSystem recordSystem;
 
         public override void SelectItem(ResourceRequest item, int number = 1)
         {

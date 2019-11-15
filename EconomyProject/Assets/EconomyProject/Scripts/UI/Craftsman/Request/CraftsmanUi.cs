@@ -3,7 +3,7 @@ using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.CraftsmanRequest
+namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request
 {
     public class CraftsmanUi : MonoBehaviour
     {

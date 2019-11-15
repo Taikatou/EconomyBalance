@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using UnityEngine;
 
@@ -14,7 +13,19 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
             _numResources = new Dictionary<CraftingResources, int>();
         }
 
-        public void AddResource(CraftingResources resource, int count)
+        public int GetResourceNumber(CraftingResources key)
+        {
+            if (_numResources != null)
+            {
+                if (_numResources.ContainsKey(key))
+                {
+                    return _numResources[key];
+                }
+            }
+            return 0;
+        }
+
+            public void AddResource(CraftingResources resource, int count)
         {
             var hasResource = _numResources.ContainsKey(resource);
             if (!hasResource)
@@ -50,7 +61,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
                     _numResources[item.type] -= item.number;
                 }
             }
-            return found || true;
+            return found;
         }
     }
 }

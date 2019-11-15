@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f33be378f7bd344bfd962edad7510f, type: 3}
   m_Name: IntermediateCrafting
   m_EditorClassIdentifier: 
-  resultingItem: {fileID: 0}
+  resultingItem: {fileID: 11400000, guid: ba1044b1ad3be3440a274303fe22f8cb, type: 2}
   timeToCreation: 3
   resourcesRequirements:
   - type: 0

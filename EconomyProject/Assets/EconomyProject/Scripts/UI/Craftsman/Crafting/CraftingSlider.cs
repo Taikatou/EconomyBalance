@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.CraftsmanCrafting
+namespace Assets.EconomyProject.Scripts.UI.Craftsman.Crafting
 {
     public class CraftingSlider : MonoBehaviour
     {

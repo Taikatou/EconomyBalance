@@ -1,7 +1,7 @@
 ﻿using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
-using Assets.EconomyProject.Scripts.UI.CraftsmanRequest.ScrollList;
+using Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList;
 
-namespace Assets.EconomyProject.Scripts.UI.CraftsmanRequest.DropDown
+namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.DropDown
 {
     public class CraftsmanMakeRequestDropbox : CraftsmanDropDow<CraftsmanAgent>
     {

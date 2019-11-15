@@ -2,7 +2,7 @@
 using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 
-namespace Assets.EconomyProject.Scripts.UI.CraftsmanRequest.ScrollList
+namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
 {
     public abstract class CraftingScrollList<T, TQ> : AbstractScrollList<T, TQ> where TQ : SampleButton<T>
     {

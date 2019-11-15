@@ -8,5 +8,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
         public abstract List<ResourceRequest> ItemList { get; }
 
         public abstract void TakeRequest(ResourceRequest request);
+
+        public virtual void CompleteRequest()
+        {
+
+        }
     }
 }

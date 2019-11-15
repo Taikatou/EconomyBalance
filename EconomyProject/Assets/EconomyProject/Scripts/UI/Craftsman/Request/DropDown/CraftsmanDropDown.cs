@@ -2,7 +2,7 @@
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.UI.CraftsmanRequest.DropDown
+namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.DropDown
 {
     public class CraftsmanDropDow<T> : AgentDropDown<T> where T : MonoBehaviour
     {

@@ -23,15 +23,22 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
             _currentRequests[requestTaker].Add(resourceRequest); 
         }
 
-        private void CompleteRequest(RequestTaker taker, ResourceRequest request)
+        public void CompleteRequest(RequestTaker taker, ResourceRequest request)
         {
             if (_currentRequests.ContainsKey(taker))
             {
-                var requestList = _currentRequests[taker];
-                if (requestList.Contains(request))
+                if (_currentRequests[taker].Contains(request))
                 {
-                    _currentRequests[taker].Remove(request);
+                    taker.CompleteRequest();
                     request.TransferResource();
+
+                    _currentRequests[taker].Remove(request);
+
+                    var count = _currentRequests[taker].Count;
+                    if (count == 0)
+                    {
+                        _currentRequests.Remove(taker);
+                    }
                 }
             }
         }

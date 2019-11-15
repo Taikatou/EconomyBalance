@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
-using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
@@ -49,7 +47,22 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
                     return _craftingNumber[inventory];
                 }
             }
+
             return new List<ResourceRequest>();
+        }
+
+        public List<ResourceRequest> GetAllCraftingRequests()
+        {
+            var returnList = new List<ResourceRequest>();
+            foreach (KeyValuePair<CraftingInventory, List<ResourceRequest>> entry in _craftingNumber)
+            {
+                foreach (var item in entry.Value)
+                {
+                    returnList.Add(item);
+                }
+            }
+
+            return returnList;
         }
 
         public int GetRequestNumber(CraftingInventory inventory)
@@ -83,6 +96,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 
                 _craftingNumber[inventory].Add(request);
             }
+
             Refresh();
             return canRequest;
         }
@@ -102,15 +116,26 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
                 RequestRecord.AddRequest(requestTaker, takeRequest);
                 ResourceRequests.Remove(takeRequest);
             }
+
             Refresh();
             return true;
         }
 
-        public void SubmitRequest(CraftingResources resource, CraftingInventory inventory)
+        public void CompleteRequest(RequestTaker taker, ResourceRequest request)
         {
-            ResourceRequest newRequest = new ResourceRequest(resource, inventory);
-            ResourceRequests.Add(newRequest);
-            Refresh();
+            RequestRecord.CompleteRequest(taker, request);
+            if (_craftingNumber.ContainsKey(request.Inventory))
+            {
+                if (_craftingNumber[request.Inventory].Contains(request))
+                {
+                    _craftingNumber[request.Inventory].Remove(request);
+                    var count = _craftingNumber[request.Inventory].Count;
+                    if (count == 0)
+                    {
+                        _craftingNumber.Remove(request.Inventory);
+                    }
+                }
+            }
         }
     }
 }

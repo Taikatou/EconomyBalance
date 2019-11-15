@@ -27,10 +27,10 @@ namespace Assets.EconomyProject.Scripts.UI
 
         private void Update()
         {
-            PlayerInput playerInput = accessor.PlayerInput;
+            var playerInput = accessor.PlayerInput;
             if (accessor.AdventurerAgent != null && playerInput != null)
             {
-                AgentScreen screen = playerInput.GetScreen(accessor.AdventurerAgent);
+                var screen = playerInput.GetScreen(accessor.AdventurerAgent);
                 if (screen != _cacheAgentScreen)
                 {
                     _cacheAgentScreen = screen;

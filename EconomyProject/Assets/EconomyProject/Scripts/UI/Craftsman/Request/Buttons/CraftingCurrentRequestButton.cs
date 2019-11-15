@@ -2,7 +2,7 @@
 using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.CraftsmanRequest.Buttons
+namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.Buttons
 {
     public class CraftingCurrentRequestButton : SampleButton<ResourceRequest>
     {
