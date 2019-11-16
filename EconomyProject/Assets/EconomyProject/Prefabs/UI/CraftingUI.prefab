@@ -249,7 +249,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1622777458788856318}
-  craftingAbility: {fileID: 0}
 --- !u!1 &1622777459303630192
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +336,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contentPanel: {fileID: 1863524031770254873}
   buttonObjectPool: {fileID: 2234139989238524236}
-  agent: {fileID: 0}
 --- !u!114 &1622777459799576601
 MonoBehaviour:
   m_ObjectHideFlags: 0

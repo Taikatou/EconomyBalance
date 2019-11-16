@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
+using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using MLAgents;
@@ -16,6 +17,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
         public CraftsmanScreen CurrentScreen { get; private set; }
         public CraftingAbility CraftingAbility => GetComponent<CraftingAbility>();
         public CraftingInventory CraftingInventory => GetComponent<CraftingInventory>();
+        public AgentInventory AgentInventory => GetComponent<AgentInventory>();
 
         public void AgentActionCrafting(float[] vectorAction, string textAction)
         {

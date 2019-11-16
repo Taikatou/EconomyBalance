@@ -8,12 +8,12 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.Crafting
     {
         public Slider slider;
 
-        public CraftingAbility craftingAbility;
+        public CraftingAbility CraftingAbility => GetComponentInParent<CraftsmanMenu>().currentAgent.CraftingAbility;
 
         private void Update()
         {
             Time.timeScale = 1.0f;
-            slider.value = craftingAbility.Progress;
+            slider.value = CraftingAbility.Progress;
         }
     }
 }
