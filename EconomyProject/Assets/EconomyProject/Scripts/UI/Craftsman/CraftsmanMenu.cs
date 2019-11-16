@@ -1,10 +1,9 @@
-﻿using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+﻿using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
+using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI.Craftsman
 {
-    public enum CraftsmanScreen { Main, Request, Craft }
-
     public class CraftsmanMenu : MonoBehaviour
     {
         public GameObject requestMenu;
@@ -13,23 +12,37 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman
 
         public GameObject mainMenu;
 
+        public CraftsmanAgent currentAgent;
+
+        private CraftsmanScreen _cachedScreen;
+
+        private void Update()
+        {
+            var nextScreen = currentAgent.CurrentScreen;
+            if (nextScreen != _cachedScreen)
+            {
+                SwitchMenu(nextScreen);
+            }
+        }
+
         public void MoveToRequest()
         {
-            SwitchMenu(CraftsmanScreen.Request);
+            currentAgent.ChangeAgentScreen(CraftsmanScreen.Request);
         }
 
         public void MoveToCraft()
         {
-            SwitchMenu(CraftsmanScreen.Craft);
+            currentAgent.ChangeAgentScreen(CraftsmanScreen.Craft);
         }
 
         public void ReturnToMain()
         {
-            SwitchMenu(CraftsmanScreen.Main);
+            currentAgent.ChangeAgentScreen(CraftsmanScreen.Main);
         }
 
         public void SwitchMenu(CraftsmanScreen whichMenu)
         {
+            _cachedScreen = currentAgent.CurrentScreen;
             requestMenu?.SetActive(whichMenu == CraftsmanScreen.Request);
             craftMenu.GetComponentInChildren<LastUpdate>()?.Refresh();
             craftMenu?.SetActive(whichMenu == CraftsmanScreen.Craft);

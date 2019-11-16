@@ -8,12 +8,13 @@ using ResourceRequest = Assets.EconomyProject.Scripts.GameEconomy.Systems.Reques
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 {
+    public enum CraftsmanScreen { Main, Request, Craft }
+
     public class CraftsmanAgent : Agent
     {
         public RequestSystem requestSystem;
-
+        public CraftsmanScreen CurrentScreen { get; private set; }
         public CraftingAbility CraftingAbility => GetComponent<CraftingAbility>();
-
         public CraftingInventory CraftingInventory => GetComponent<CraftingInventory>();
 
         public void AgentActionCrafting(float[] vectorAction, string textAction)
@@ -39,8 +40,15 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
         {
             AddVectorObs(CraftingAbility.Crafting);
             AddVectorObs(CraftingAbility.TimeToCreation);
+            AddVectorObs((int)CurrentScreen);
+
             var weaponId = WeaponId.GetWeaponId(CraftingAbility.ChosenCrafting.itemName);
             AddVectorObs(weaponId);
+        }
+
+        public void ChangeAgentScreen(CraftsmanScreen nextScreen)
+        {
+            CurrentScreen = nextScreen;
         }
 
         public List<ResourceRequest> GetCraftingRequests()
