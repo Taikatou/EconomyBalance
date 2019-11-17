@@ -1,6 +1,5 @@
-﻿using System;
-using GameDevTV.Utils;
-using RPG.Stats;
+﻿using GameDevTV.Utils;
+using System;
 using UnityEngine;
 
 namespace Assets.RPG.Scripts.Stats
@@ -8,71 +7,79 @@ namespace Assets.RPG.Scripts.Stats
     public class BaseStats : MonoBehaviour
     {
         [Range(1, 99)]
-        [SerializeField] int startingLevel = 1;
-        [SerializeField] CharacterClass characterClass;
-        [SerializeField] Progression progression = null;
-        [SerializeField] GameObject levelUpParticleEffect = null;
-        [SerializeField] bool shouldUseModifiers = false;
+        [SerializeField]
+        private int startingLevel = 1;
+        [SerializeField]
+        private CharacterClass _characterClass;
+        [SerializeField]
+        private readonly Progression _progression = null;
+        [SerializeField]
+        private readonly GameObject _levelUpParticleEffect = null;
+        [SerializeField]
+        private bool shouldUseModifiers = false;
 
-        public event Action onLevelUp;
+        public event Action OnLevelUp;
 
-        LazyValue<int> currentLevel;
+        private LazyValue<int> _currentLevel;
 
-        Experience experience;
+        private Experience _experience;
 
-        private void Awake() {
-            experience = GetComponent<Experience>();
-            currentLevel = new LazyValue<int>(CalculateLevel);
-        }
-
-        private void Start() 
+        private void Awake()
         {
-            currentLevel.ForceInit();
+            _experience = GetComponent<Experience>();
+            _currentLevel = new LazyValue<int>(CalculateLevel);
         }
 
-        private void OnEnable() {
-            if (experience != null)
+        private void Start()
+        {
+            _currentLevel.ForceInit();
+        }
+
+        private void OnEnable()
+        {
+            if (_experience != null)
             {
-                experience.onExperienceGained += UpdateLevel;
+                _experience.OnExperienceGained += UpdateLevel;
             }
         }
 
-        private void OnDisable() {
-            if (experience != null)
+        private void OnDisable()
+        {
+            if (_experience != null)
             {
-                experience.onExperienceGained -= UpdateLevel;
+                _experience.OnExperienceGained -= UpdateLevel;
             }
         }
 
-        private void UpdateLevel() 
+        private void UpdateLevel()
         {
             int newLevel = CalculateLevel();
-            if (newLevel > currentLevel.value)
+            if (newLevel > _currentLevel.value)
             {
-                currentLevel.value = newLevel;
+                _currentLevel.value = newLevel;
                 LevelUpEffect();
-                onLevelUp();
+                OnLevelUp();
             }
         }
 
         private void LevelUpEffect()
         {
-            Instantiate(levelUpParticleEffect, transform);
+            Instantiate(_levelUpParticleEffect, transform);
         }
 
         public float GetStat(Stat stat)
         {
-            return (GetBaseStat(stat) + GetAdditiveModifier(stat)) * (1 + GetPercentageModifier(stat)/100);
+            return (GetBaseStat(stat) + GetAdditiveModifier(stat)) * (1 + GetPercentageModifier(stat) / 100);
         }
 
         private float GetBaseStat(Stat stat)
         {
-            return progression.GetStat(stat, characterClass, GetLevel());
+            return _progression.GetStat(stat, _characterClass, GetLevel());
         }
 
         public int GetLevel()
         {
-            return currentLevel.value;
+            return _currentLevel.value;
         }
 
         private float GetAdditiveModifier(Stat stat)
@@ -111,10 +118,10 @@ namespace Assets.RPG.Scripts.Stats
             if (experience == null) return startingLevel;
 
             float currentXP = experience.GetPoints();
-            int penultimateLevel = progression.GetLevels(Stat.ExperienceToLevelUp, characterClass);
+            int penultimateLevel = _progression.GetLevels(Stat.ExperienceToLevelUp, _characterClass);
             for (int level = 1; level <= penultimateLevel; level++)
             {
-                float XPToLevelUp = progression.GetStat(Stat.ExperienceToLevelUp, characterClass, level);
+                float XPToLevelUp = _progression.GetStat(Stat.ExperienceToLevelUp, _characterClass, level);
                 if (XPToLevelUp > currentXP)
                 {
                     return level;

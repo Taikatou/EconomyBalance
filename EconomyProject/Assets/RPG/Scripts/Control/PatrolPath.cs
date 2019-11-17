@@ -4,13 +4,14 @@ namespace Assets.RPG.Scripts.Control
 {
     public class PatrolPath : MonoBehaviour
     {
-        const float waypointGizmoRadius = 0.3f;
+        const float WaypointGizmoRadius = 0.3f;
 
-        private void OnDrawGizmos() {
+        private void OnDrawGizmos()
+        {
             for (int i = 0; i < transform.childCount; i++)
             {
                 int j = GetNextIndex(i);
-                Gizmos.DrawSphere(GetWaypoint(i), waypointGizmoRadius);
+                Gizmos.DrawSphere(GetWaypoint(i), WaypointGizmoRadius);
                 Gizmos.DrawLine(GetWaypoint(i), GetWaypoint(j));
             }
         }

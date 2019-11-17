@@ -7,9 +7,10 @@ namespace Assets.RPG.Scripts.Core
         [SerializeField]
         private GameObject _persistentObjectPrefab;
 
-        private static bool _hasSpawned = false;
+        private static bool _hasSpawned;
 
-        private void Awake() {
+        private void Awake()
+        {
             if (_hasSpawned) return;
 
             SpawnPersistentObjects();

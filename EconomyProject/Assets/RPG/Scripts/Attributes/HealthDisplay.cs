@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,16 +5,16 @@ namespace Assets.RPG.Scripts.Attributes
 {
     public class HealthDisplay : MonoBehaviour
     {
-        Health health;
+        private Health _health;
 
         private void Awake()
         {
-            health = GameObject.FindWithTag("Player").GetComponent<Health>();
+            _health = GameObject.FindWithTag("Player").GetComponent<Health>();
         }
 
         private void Update()
         {
-            GetComponent<Text>().text = String.Format("{0:0}/{1:0}", health.GetHealthPoints(), health.GetMaxHealthPoints());
+            GetComponent<Text>().text = $"{_health.GetHealthPoints():0}/{_health.GetMaxHealthPoints():0}";
         }
     }
 }
