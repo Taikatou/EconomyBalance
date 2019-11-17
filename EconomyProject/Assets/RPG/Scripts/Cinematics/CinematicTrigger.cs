@@ -2,16 +2,17 @@
 using UnityEngine.Playables;
 
 namespace Assets.RPG.Scripts.Cinematics
+
 {
     public class CinematicTrigger : MonoBehaviour
     {
-        private bool _alreadyTriggered;
-
-        private void OnTriggerEnter(Component other)
+        bool alreadyTriggered = false;
+        
+        private void OnTriggerEnter(Collider other) 
         {
-            if (!_alreadyTriggered && other.gameObject.tag == "Player")
+            if(!alreadyTriggered && other.gameObject.tag == "Player")
             {
-                _alreadyTriggered = true;
+                alreadyTriggered = true;
                 GetComponent<PlayableDirector>().Play();
             }
         }

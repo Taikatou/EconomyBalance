@@ -1,34 +1,34 @@
-using Assets.RPG.Scripts.Saving;
 using System;
+using Assets.RPG.Scripts.Saving;
 using UnityEngine;
 
 namespace Assets.RPG.Scripts.Stats
 {
     public class Experience : MonoBehaviour, ISaveable
     {
-        [SerializeField] float _experiencePoints = 0;
+        [SerializeField] float experiencePoints = 0;
 
-        public event Action OnExperienceGained;
+        public event Action onExperienceGained;
 
         public void GainExperience(float experience)
         {
-            _experiencePoints += experience;
-            OnExperienceGained?.Invoke();
+            experiencePoints += experience;
+            onExperienceGained();
         }
 
         public float GetPoints()
         {
-            return _experiencePoints;
+            return experiencePoints;
         }
 
         public object CaptureState()
         {
-            return _experiencePoints;
+            return experiencePoints;
         }
 
         public void RestoreState(object state)
         {
-            _experiencePoints = (float)state;
+            experiencePoints = (float)state;
         }
     }
 }

@@ -1,5 +1,5 @@
-using Assets.RPG.Scripts.Control;
 using System.Collections;
+using Assets.RPG.Scripts.Control;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -8,26 +8,19 @@ namespace Assets.RPG.Scripts.SceneManagement
 {
     public class Portal : MonoBehaviour
     {
-        private enum DestinationIdentifier
+        enum DestinationIdentifier
         {
             A, B, C, D, E
         }
 
-        [SerializeField]
-        private readonly int sceneToLoad = -1;
-        [SerializeField]
-        private Transform _spawnPoint;
-        [SerializeField]
-        private DestinationIdentifier _destination;
-        [SerializeField]
-        private readonly float fadeOutTime = 1f;
-        [SerializeField]
-        private readonly float fadeInTime = 2f;
-        [SerializeField]
-        private readonly float fadeWaitTime = 0.5f;
+        [SerializeField] int sceneToLoad = -1;
+        [SerializeField] Transform spawnPoint;
+        [SerializeField] DestinationIdentifier destination;
+        [SerializeField] float fadeOutTime = 1f;
+        [SerializeField] float fadeInTime = 2f;
+        [SerializeField] float fadeWaitTime = 0.5f;
 
-        private void OnTriggerEnter(Collider other)
-        {
+        private void OnTriggerEnter(Collider other) {
             if (other.tag == "Player")
             {
                 StartCoroutine(Transition());
@@ -48,7 +41,7 @@ namespace Assets.RPG.Scripts.SceneManagement
             SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
             PlayerController playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
             playerController.enabled = false;
-
+            
             yield return fader.FadeOut(fadeOutTime);
 
             savingWrapper.Save();
@@ -59,7 +52,7 @@ namespace Assets.RPG.Scripts.SceneManagement
 
 
             savingWrapper.Load();
-
+            
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
 
@@ -76,8 +69,8 @@ namespace Assets.RPG.Scripts.SceneManagement
         {
             GameObject player = GameObject.FindWithTag("Player");
             player.GetComponent<NavMeshAgent>().enabled = false;
-            player.transform.position = otherPortal._spawnPoint.position;
-            player.transform.rotation = otherPortal._spawnPoint.rotation;
+            player.transform.position = otherPortal.spawnPoint.position;
+            player.transform.rotation = otherPortal.spawnPoint.rotation;
             player.GetComponent<NavMeshAgent>().enabled = true;
         }
 
@@ -86,7 +79,7 @@ namespace Assets.RPG.Scripts.SceneManagement
             foreach (Portal portal in FindObjectsOfType<Portal>())
             {
                 if (portal == this) continue;
-                if (portal._destination != _destination) continue;
+                if (portal.destination != destination) continue;
 
                 return portal;
             }

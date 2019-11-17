@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using RPG.Saving;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,8 +12,8 @@ namespace Assets.RPG.Scripts.Saving
     {
         public IEnumerator LoadLastScene(string saveFile)
         {
-            var state = LoadFile(saveFile);
-            var buildIndex = SceneManager.GetActiveScene().buildIndex;
+            Dictionary<string, object> state = LoadFile(saveFile);
+            int buildIndex = SceneManager.GetActiveScene().buildIndex;
             if (state.ContainsKey("lastSceneBuildIndex"))
             {
                 buildIndex = (int)state["lastSceneBuildIndex"];

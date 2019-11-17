@@ -5,12 +5,11 @@ namespace Assets.RPG.Scripts.Combat
 {
     public class Weapon : MonoBehaviour
     {
-        [SerializeField]
-        private UnityEvent _onHit;
+        [SerializeField] UnityEvent onHit;
 
         public void OnHit()
         {
-            _onHit.Invoke();
+            onHit.Invoke();
         }
     }
 }

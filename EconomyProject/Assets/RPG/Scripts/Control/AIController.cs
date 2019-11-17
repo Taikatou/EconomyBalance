@@ -9,36 +9,34 @@ namespace Assets.RPG.Scripts.Control
 {
     public class AIController : MonoBehaviour
     {
-        [SerializeField]
-        private readonly float chaseDistance = 5f;
-        [SerializeField] readonly float suspicionTime = 3f;
-        [SerializeField] readonly float agroCooldownTime = 5f;
-        [SerializeField] PatrolPath _patrolPath;
-        [SerializeField] readonly float waypointTolerance = 1f;
-        [SerializeField] readonly float waypointDwellTime = 3f;
-        [Range(0, 1)]
+        [SerializeField] float chaseDistance = 5f;
+        [SerializeField] float suspicionTime = 3f;
+        [SerializeField] float agroCooldownTime = 5f;
+        [SerializeField] PatrolPath patrolPath;
+        [SerializeField] float waypointTolerance = 1f;
+        [SerializeField] float waypointDwellTime = 3f;
+        [Range(0,1)]
         [SerializeField] float patrolSpeedFraction = 0.2f;
         [SerializeField] float shoutDistance = 5f;
 
-        Fighter _fighter;
-        Health _health;
-        Mover _mover;
-        GameObject _player;
+        Fighter fighter;
+        Health health;
+        Mover mover;
+        GameObject player;
 
-        LazyValue<Vector3> _guardPosition;
-        float _timeSinceLastSawPlayer = Mathf.Infinity;
-        float _timeSinceArrivedAtWaypoint = Mathf.Infinity;
-        float _timeSinceAggrevated = Mathf.Infinity;
-        int _currentWaypointIndex;
+        LazyValue<Vector3> guardPosition;
+        float timeSinceLastSawPlayer = Mathf.Infinity;
+        float timeSinceArrivedAtWaypoint = Mathf.Infinity;
+        float timeSinceAggrevated = Mathf.Infinity;
+        int currentWaypointIndex = 0;
 
-        private void Awake()
-        {
-            _fighter = GetComponent<Fighter>();
-            _health = GetComponent<Health>();
-            _mover = GetComponent<Mover>();
-            _player = GameObject.FindWithTag("Player");
+        private void Awake() {
+            fighter = GetComponent<Fighter>();
+            health = GetComponent<Health>();
+            mover = GetComponent<Mover>();
+            player = GameObject.FindWithTag("Player");
 
-            _guardPosition = new LazyValue<Vector3>(GetGuardPosition);
+            guardPosition = new LazyValue<Vector3>(GetGuardPosition);
         }
 
         private Vector3 GetGuardPosition()
@@ -46,20 +44,19 @@ namespace Assets.RPG.Scripts.Control
             return transform.position;
         }
 
-        private void Start()
-        {
-            _guardPosition.ForceInit();
+        private void Start() {
+            guardPosition.ForceInit();
         }
 
         private void Update()
         {
-            if (_health.IsDead()) return;
+            if (health.IsDead()) return;
 
-            if (IsAggrevated() && _fighter.CanAttack(_player))
+            if (IsAggrevated() && fighter.CanAttack(player))
             {
                 AttackBehaviour();
             }
-            else if (_timeSinceLastSawPlayer < suspicionTime)
+            else if (timeSinceLastSawPlayer < suspicionTime)
             {
                 SuspicionBehaviour();
             }
@@ -73,33 +70,33 @@ namespace Assets.RPG.Scripts.Control
 
         public void Aggrevate()
         {
-            _timeSinceAggrevated = 0;
+            timeSinceAggrevated = 0;
         }
 
         private void UpdateTimers()
         {
-            _timeSinceLastSawPlayer += Time.deltaTime;
-            _timeSinceArrivedAtWaypoint += Time.deltaTime;
-            _timeSinceAggrevated += Time.deltaTime;
+            timeSinceLastSawPlayer += Time.deltaTime;
+            timeSinceArrivedAtWaypoint += Time.deltaTime;
+            timeSinceAggrevated += Time.deltaTime;
         }
 
         private void PatrolBehaviour()
         {
-            Vector3 nextPosition = _guardPosition.value;
+            Vector3 nextPosition = guardPosition.value;
 
-            if (_patrolPath != null)
+            if (patrolPath != null)
             {
                 if (AtWaypoint())
                 {
-                    _timeSinceArrivedAtWaypoint = 0;
+                    timeSinceArrivedAtWaypoint = 0;
                     CycleWaypoint();
                 }
                 nextPosition = GetCurrentWaypoint();
             }
 
-            if (_timeSinceArrivedAtWaypoint > waypointDwellTime)
+            if (timeSinceArrivedAtWaypoint > waypointDwellTime)
             {
-                _mover.StartMoveAction(nextPosition, patrolSpeedFraction);
+                mover.StartMoveAction(nextPosition, patrolSpeedFraction);
             }
         }
 
@@ -111,12 +108,12 @@ namespace Assets.RPG.Scripts.Control
 
         private void CycleWaypoint()
         {
-            _currentWaypointIndex = _patrolPath.GetNextIndex(_currentWaypointIndex);
+            currentWaypointIndex = patrolPath.GetNextIndex(currentWaypointIndex);
         }
 
         private Vector3 GetCurrentWaypoint()
         {
-            return _patrolPath.GetWaypoint(_currentWaypointIndex);
+            return patrolPath.GetWaypoint(currentWaypointIndex);
         }
 
         private void SuspicionBehaviour()
@@ -126,8 +123,8 @@ namespace Assets.RPG.Scripts.Control
 
         private void AttackBehaviour()
         {
-            _timeSinceLastSawPlayer = 0;
-            _fighter.Attack(_player);
+            timeSinceLastSawPlayer = 0;
+            fighter.Attack(player);
 
             AggrevateNearbyEnemies();
         }
@@ -146,13 +143,12 @@ namespace Assets.RPG.Scripts.Control
 
         private bool IsAggrevated()
         {
-            float distanceToPlayer = Vector3.Distance(_player.transform.position, transform.position);
-            return distanceToPlayer < chaseDistance || _timeSinceAggrevated < agroCooldownTime;
+            float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+            return distanceToPlayer < chaseDistance || timeSinceAggrevated < agroCooldownTime;
         }
 
         // Called by Unity
-        private void OnDrawGizmosSelected()
-        {
+        private void OnDrawGizmosSelected() {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, chaseDistance);
         }

@@ -1,12 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.RPG.Scripts.UI.DamageText
 {
     public class DamageText : MonoBehaviour
     {
-        [SerializeField]
-        private readonly Text _damageText = null;
+        [SerializeField] Text damageText = null;
 
         public void DestroyText()
         {
@@ -15,7 +15,7 @@ namespace Assets.RPG.Scripts.UI.DamageText
 
         public void SetValue(float amount)
         {
-            _damageText.text = $"{amount:0}";
+            damageText.text = String.Format("{0:0}", amount);
         }
     }
 }

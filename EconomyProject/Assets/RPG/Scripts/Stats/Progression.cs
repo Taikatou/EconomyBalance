@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RPG.Stats;
 using UnityEngine;
 
 namespace Assets.RPG.Scripts.Stats
