@@ -12,7 +12,18 @@ namespace Assets.RPG.Scripts.Dialogue
 
         public bool HandleRaycast(PlayerController callingController)
         {
-            throw new System.NotImplementedException();
+            var dialogueAction = callingController.GetComponent<DialogueAction>();
+            if (!dialogueAction.CanTalk(gameObject))
+            {
+                return false;
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                dialogueAction.StartTalk(gameObject);
+            }
+
+            return true;
         }
     }
 }

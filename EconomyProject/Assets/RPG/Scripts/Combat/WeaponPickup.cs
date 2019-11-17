@@ -23,7 +23,7 @@ namespace Assets.RPG.Scripts.Combat
         {
             if (weapon != null)
             {
-                subject.GetComponent<Fighter>().EquipWeapon(weapon);
+                subject.GetComponent<FighterAction>().EquipWeapon(weapon);
             }
             if (healthToRestore > 0)
             {

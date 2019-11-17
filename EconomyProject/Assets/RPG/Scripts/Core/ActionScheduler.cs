@@ -8,12 +8,11 @@ namespace Assets.RPG.Scripts.Core
 
         public void StartAction(IAction action)
         {
-            if (_currentAction == action) return;
-            if (_currentAction != null)
+            if (_currentAction != action)
             {
-                _currentAction.Cancel();
+                _currentAction?.Cancel();
+                _currentAction = action;
             }
-            _currentAction = action;
         }
 
         public void CancelCurrentAction()
