@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.Inventory
 {
