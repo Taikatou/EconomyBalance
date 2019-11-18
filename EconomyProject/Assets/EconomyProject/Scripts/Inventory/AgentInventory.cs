@@ -14,8 +14,8 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         private void Start()
         {
-            ResetInventory();
             Items = new List<InventoryItem>();
+            ResetInventory();
         }
 
         public void AddItem(InventoryItem item)
@@ -26,27 +26,32 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public void ResetInventory()
         {
-            if (Items == null)
-            {
-                Items = new List<InventoryItem>();
-            }
-            else
-            {
-                Items?.Clear();
-            }
+            Items.Clear();
 
             foreach (var item in startInventory)
             {
-                InventoryItem generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
+                var generatedItem = ScriptableObject.CreateInstance("InventoryItem") as InventoryItem;
                 if (generatedItem != null)
                 {
                     generatedItem.Init(item);
 
-                    Items?.Add(generatedItem);
+                    Items.Add(generatedItem);
                 }
             }
 
             Refresh();
+        }
+
+        public void DecreaseDurability(InventoryItem item)
+        {
+            if (Items.Contains(item))
+            {
+                item.DecreaseDurability();
+                if (item.Broken)
+                {
+                    Items.Remove(item);
+                }
+            }
         }
     }
 }

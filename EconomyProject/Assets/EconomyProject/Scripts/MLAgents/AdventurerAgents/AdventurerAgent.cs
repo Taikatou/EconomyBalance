@@ -23,9 +23,11 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public bool canSeeDistribution = true;
 
-        public AdventurerInventory Inventory => GetComponent<AdventurerInventory>();
+        public AgentInventory Inventory => GetComponent<AgentInventory>();
 
-        public InventoryItem Item => Inventory.EquipedItem;
+        public AdventurerInventory AdventurerInventory => GetComponent<AdventurerInventory>();
+
+        public InventoryItem Item => AdventurerInventory.EquipedItem;
 
         public GameAuction GameAuction => GetComponentInParent<AdventurerSpawner>().gameAuction;
 
@@ -65,7 +67,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public void DecreaseDurability()
         {
-            Inventory.DecreaseDurability();
+            AdventurerInventory.DecreaseDurability();
         }
 
         public override void AgentAction(float[] vectorAction, string textAction)

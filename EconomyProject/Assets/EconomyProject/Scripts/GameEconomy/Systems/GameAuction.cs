@@ -78,11 +78,13 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             }
         }
 
+        public virtual float AddChance => Mathf.Lerp(addChance, 0.005f, _inventoryItems.Count / maxInventory);
+
         public void AddAuctionItem(InventoryItem item)
         {
-            System.Random rand = new System.Random();
-            double randValue = rand.NextDouble();
-            float randChance = Mathf.Lerp(addChance, 0.005f, _inventoryItems.Count / maxInventory);
+            var rand = new System.Random();
+            var randValue = rand.NextDouble();
+            var randChance = 0.99;
             if (randValue <= randChance)
             {
                 _inventoryItems.Add(item);

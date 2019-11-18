@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.Inventory
 {
-    public class AdventurerInventory : AgentInventory
+    public class AdventurerInventory : MonoBehaviour
     {
+        public AgentInventory AgentInventory => GetComponent<AgentInventory>();
+        public List<InventoryItem> Items => AgentInventory.Items;
+
         public InventoryItem EquipedItem
         {
             get
             {
-                if (Items == null)
-                {
-                    ResetInventory();
-                }
                 if (Items.Count > 0)
                 {
                     var max = Items.Max(x => x.efficiency);
@@ -25,11 +26,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public void DecreaseDurability()
         {
-            EquipedItem.DecreaseDurability();
-            if (EquipedItem.Broken)
-            {
-                Items.Remove(EquipedItem);
-            }
+            AgentInventory.DecreaseDurability(EquipedItem);
         }
     }
 }
