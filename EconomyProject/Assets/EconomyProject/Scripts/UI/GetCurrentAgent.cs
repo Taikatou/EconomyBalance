@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI
 {
-    public abstract class GetCurrentAgent<T> : MonoBehaviour where T: Agent
+    public class GetCurrentAgent : MonoBehaviour
     {
-        public abstract GameObject AgentParent { get; }
+        public GameObject agentParent;
 
         public int Index { get; set; }
 
-        public T[] GetAgents => AgentParent.GetComponentsInChildren<T>();
+        public Agent[] GetAgents => agentParent.GetComponentsInChildren<Agent>();
 
-        public T CurrentAgent
+        public Agent CurrentAgent
         {
             get
             {
@@ -24,7 +24,7 @@ namespace Assets.EconomyProject.Scripts.UI
             }
         }
 
-        public void UpdateAgent(T agent)
+        public void UpdateAgent(Agent agent)
         {
             var index = Array.FindIndex(GetAgents, a => a == agent);
             if (index >= 0)

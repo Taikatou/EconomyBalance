@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.MLAgents;
+using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using Assets.EconomyProject.Scripts.UI.Adventurer;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,11 +21,13 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public UiAccessor accessor;
 
-        public AdventurerGetAgent adventurerGetAgent;
+        public GetCurrentAgent getAgent;
 
         public Dropdown dropDown;
 
         private HashSet<string> _agentIds;
+
+        public AdventurerAgent AdventurerAgent => getAgent.CurrentAgent.GetComponent<AdventurerAgent>();
 
         private void Start()
         {
@@ -34,27 +37,27 @@ namespace Assets.EconomyProject.Scripts.UI
         // Update is called once per frame
         private void Update()
         {
-            var adventurerAgent = adventurerGetAgent.CurrentAgent;
             var gameAuction = accessor.GameAuction;
             if (gameAuction)
             {
-                auctionText.text = "Auction Items: " + gameAuction.ItemCount.ToString();
+                auctionText.text = "Auction Items: " + gameAuction.ItemCount;
             }
-            if(adventurerAgent)
+            if(AdventurerAgent)
             {
-                moneyText.text = "MONEY: " + adventurerAgent.Wallet.Money;
+                moneyText.text = "MONEY: " + AdventurerAgent.Wallet.Money;
 
-                if(adventurerAgent.Item)
+                if(AdventurerAgent.Item)
                 {
-                    durabilityText.text = "DURABILITY: " + (adventurerAgent.Item.unBreakable? "∞" : adventurerAgent.Item.durability.ToString());
+                    durabilityText.text = "DURABILITY: " + (AdventurerAgent.Item.unBreakable? "∞" : AdventurerAgent.Item.durability.ToString());
 
-                    currentItemText.text = "CURRENT ITEM: " + adventurerAgent.Item.itemName;
+                    currentItemText.text = "CURRENT ITEM: " + AdventurerAgent.Item.itemName;
 
-                    efficiencyText.text = "EFFICIENCY: " + adventurerAgent.Item.efficiency;
+                    efficiencyText.text = "EFFICIENCY: " + AdventurerAgent.Item.efficiency;
                 }
             }
 
-            foreach (var agent in adventurerGetAgent.GetAgents)
+            // todo add this to dropdown text
+            /*foreach (var agent in AdventurerAgent.GetAgents)
             {
                 string agentId = agent.GetComponent<AgentID>().agentId.ToString();
                 if (!_agentIds.Contains(agentId))
@@ -63,7 +66,7 @@ namespace Assets.EconomyProject.Scripts.UI
                     dropDown.options.Add(new Dropdown.OptionData(agentId));
                 }
             }
-            adventurerGetAgent.Index = dropDown.value;
+            AdventurerAgent.Index = dropDown.value;*/
         }
     }
 }

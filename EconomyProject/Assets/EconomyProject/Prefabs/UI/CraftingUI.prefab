@@ -336,6 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contentPanel: {fileID: 1863524031770254873}
   buttonObjectPool: {fileID: 2234139989238524236}
+  getCurrentAgent: {fileID: 0}
 --- !u!114 &1622777459799576601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,6 +574,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InventoryScrollView
+      objectReference: {fileID: 0}
+    - target: {fileID: 7002954896124347666, guid: fc5a7a8115802c549b71060eac09e055,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7002954896124347667, guid: fc5a7a8115802c549b71060eac09e055,
         type: 3}

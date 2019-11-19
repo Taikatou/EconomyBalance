@@ -13,7 +13,9 @@ namespace Assets.EconomyProject.Scripts.UI.Adventurer
 
         public GameObject mainMenu;
 
-        public AdventurerGetAgent accessor;
+        public GetCurrentAgent accessor;
+
+        public AdventurerAgent AdventurerAgent => accessor.CurrentAgent.GetComponent<AdventurerAgent>();
 
         public PlayerInput PlayerInput => GetComponent<UiAccessor>().PlayerInput;
 
@@ -34,7 +36,7 @@ namespace Assets.EconomyProject.Scripts.UI.Adventurer
             var playerInput = PlayerInput;
             if (accessor.CurrentAgent != null && playerInput != null)
             {
-                var screen = playerInput.GetScreen(accessor.CurrentAgent);
+                var screen = playerInput.GetScreen(AdventurerAgent);
                 
                 SwitchMenu(screen);
             }
@@ -42,22 +44,22 @@ namespace Assets.EconomyProject.Scripts.UI.Adventurer
 
         public void StartAuction()
         {
-            PlayerInput.SetMainAction(accessor.CurrentAgent, AgentScreen.Auction);
+            PlayerInput.SetMainAction(AdventurerAgent, AgentScreen.Auction);
         }
 
         public void StartQuest()
         {
-            PlayerInput.SetMainAction(accessor.CurrentAgent, AgentScreen.Quest);
+            PlayerInput.SetMainAction(AdventurerAgent, AgentScreen.Quest);
         }
 
         public void MainMenu()
         {
-            PlayerInput.SetMainAction(accessor.CurrentAgent, AgentScreen.Main);
+            PlayerInput.SetMainAction(AdventurerAgent, AgentScreen.Main);
         }
 
         public void Bid()
         {
-            PlayerInput.SetAuctionChoice(accessor.CurrentAgent, AuctionChoice.Bid);
+            PlayerInput.SetAuctionChoice(AdventurerAgent, AuctionChoice.Bid);
         }
     }
 }

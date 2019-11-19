@@ -8,8 +8,8 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.Crafting
     {
         public Slider slider;
 
-        public CraftsmanGetAgent CraftsmanGetAgent => GetComponentInParent<CraftsmanGetAgent>();
-        public CraftingAbility CraftingAbility => CraftsmanGetAgent.CurrentAgent.CraftingAbility;
+        public CraftsmanUIControls CraftsmanUiControls => GetComponentInParent<CraftsmanUIControls>();
+        public CraftingAbility CraftingAbility => CraftsmanUiControls.CraftsmanAgent.CraftingAbility;
 
         private void Update()
         {

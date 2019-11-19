@@ -1,20 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
+using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
+using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+using MLAgents;
 using UnityEngine;
+using ResourceRequest = Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests.ResourceRequest;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 {
     public enum ShopDecision { Ignore, Submit , ChangePriceDown, ChangePriceUp}
-    public class ShopAgent : CraftsmanAgent, IAdventurerScroll
+    public class ShopAgent : Agent, IAdventurerScroll
     {
-        public int moveAmount = 1;
         public ShopAbility ShopAbility => GetComponent<ShopAbility>();
         public EconomyWallet Wallet => GetComponent<EconomyWallet>();
         public List<ShopItem> ItemList => ShopAbility.shopItems;
-        public MarketPlace MarketPlace => GetComponentInParent<ShopSpawner>().marketPlace;
+        public MarketPlace MarketPlace => GetComponentInParent<AgentSpawner>().marketPlace;
+
+        public RequestSystem requestSystem;
+        public CraftsmanScreen CurrentScreen { get; private set; }
+        public CraftingAbility CraftingAbility => GetComponent<CraftingAbility>();
+        public CraftingInventory CraftingInventory => GetComponent<CraftingInventory>();
+        public AgentInventory AgentInventory => GetComponent<AgentInventory>();
 
         public void RemoveItem(ShopItem itemToRemove)
         {
@@ -56,13 +66,11 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 
         public override void AgentAction(float[] vectorAction, string textAction)
         {
-            AgentActionCrafting(vectorAction, textAction);
             AgentActionShopping(vectorAction, textAction);
         }
 
         public override void CollectObservations()
         {
-            CollectObservationsCrafting();
             CollectObservationsShop();
         }
 
@@ -75,33 +83,34 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             AddVectorObs((float)Wallet.Money);
             Wallet.ResetStep();
         }
-
-        // continuous decisions 6 change price
-            // discrete submit to marketplace
         public void AgentActionShopping(float[] vectorAction, string textAction)
         {
-            var selectedItem = Mathf.FloorToInt(vectorAction[0]);
+            
+        }
 
-            var item = ShopAbility.shopItems[selectedItem];
+        public void MakeRequest(CraftingResources resource)
+        {
+            requestSystem.MakeRequest(resource, CraftingInventory);
+        }
 
-            var shopDecision = Mathf.FloorToInt(vectorAction[1]);
-            var decision = (ShopDecision)shopDecision;
-            switch (decision)
-            {
-                case ShopDecision.Ignore:
-                    break;
-                case ShopDecision.Submit:
-                    MarketPlace.TransferToShop(item, this);
-                    break;
-                case ShopDecision.ChangePriceDown:
-                    item.DecreasePrice(moveAmount);
-                    break;
-                case ShopDecision.ChangePriceUp:
-                    item.IncreasePrice(moveAmount);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+        public void ChangeAgentScreen(CraftsmanScreen nextScreen)
+        {
+            CurrentScreen = nextScreen;
+        }
+
+        public List<ResourceRequest> GetCraftingRequests()
+        {
+            return requestSystem.GetCraftingRequests(CraftingInventory);
+        }
+
+        public override float[] Heuristic()
+        {
+            return new float[]{};
+        }
+
+        public void SetRequestSystem(RequestSystem newRequestSystem)
+        {
+            requestSystem = newRequestSystem;
         }
     }
 }

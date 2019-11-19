@@ -13,13 +13,13 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman
 
         public GameObject mainMenu;
 
-        public CraftsmanGetAgent CraftsmanGetAgent => GetComponent<CraftsmanGetAgent>();
+        public CraftsmanUIControls CraftsmanUiControls => GetComponent<CraftsmanUIControls>();
 
         private void Update()
         {
-            if (CraftsmanGetAgent.CurrentAgent)
+            if (CraftsmanUiControls.CraftsmanAgent)
             {
-                var nextScreen = CraftsmanGetAgent.CurrentAgent.CurrentScreen;
+                var nextScreen = CraftsmanUiControls.CraftsmanAgent.CurrentScreen;
                 SwitchMenu(nextScreen);
             }
         }

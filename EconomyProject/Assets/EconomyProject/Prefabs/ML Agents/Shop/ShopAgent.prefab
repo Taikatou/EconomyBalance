@@ -16,9 +16,8 @@ GameObject:
   - component: {fileID: 8868528098903630128}
   - component: {fileID: 2053566769}
   - component: {fileID: 1690807225}
-  - component: {fileID: 1550709192}
   - component: {fileID: 7495793412378739832}
-  - component: {fileID: 2515984144819144826}
+  - component: {fileID: 2696612896792117499}
   m_Layer: 0
   m_Name: ShopAgent
   m_TagString: Untagged
@@ -159,18 +158,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startInventory: []
---- !u!114 &1550709192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6220377510714029038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfe44ab26e9b99c4388ec065bf6b9cc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7495793412378739832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,16 +171,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 1
+    vectorObservationSize: 4
     numStackedVectorObservations: 1
-    vectorActionSize: 01000000
+    vectorActionSize: 010000000100000001000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_UseHeuristic: 0
-  m_BehaviorName: My Behavior
---- !u!114 &2515984144819144826
+  m_BehaviorName: Shop Agent
+--- !u!114 &2696612896792117499
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,7 +195,6 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
     resetOnDone: 1
-    onDemandDecision: 1
+    onDemandDecision: 0
     numberOfActionsBetweenDecisions: 1
   requestSystem: {fileID: 0}
-  moveAmount: 1

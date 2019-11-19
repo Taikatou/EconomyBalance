@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
+using Assets.EconomyProject.Scripts.MLAgents.Shop;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
     public class CraftsmanRequestTaker : RequestTaker
     {
-        public CraftsmanAgent CraftsMan => GetComponent<CraftsmanAgent>();
+        public ShopAgent CraftsMan => GetComponent<ShopAgent>();
         public override List<ResourceRequest> ItemList => CraftsMan.GetCraftingRequests();
         public override void TakeRequest(ResourceRequest request)
         {

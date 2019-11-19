@@ -1,13 +1,13 @@
-﻿using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
+﻿using Assets.EconomyProject.Scripts.MLAgents.Shop;
 
 namespace Assets.EconomyProject.Scripts.UI.Craftsman
 {
-    public class CraftsmanDropdown : AgentDropDown<CraftsmanAgent>
+    public class CraftsmanDropdown : AgentDropDown<ShopAgent>
     {
-        public CraftsmanGetAgent craftsManMenu;
-        protected override void UpdateAgent(CraftsmanAgent agent)
+        public GetCurrentAgent craftsManAccessor;
+        protected override void UpdateAgent(ShopAgent agent)
         {
-            craftsManMenu.UpdateAgent(agent);
+            craftsManAccessor.UpdateAgent(agent);
         }
     }
 }

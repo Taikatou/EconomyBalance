@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
 using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
-using MLAgents;
 using UnityEngine;
 using ResourceRequest = Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests.ResourceRequest;
 
@@ -11,7 +9,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 {
     public enum CraftsmanScreen { Stay, Main, Request, Craft }
 
-    public class CraftsmanAgent : Agent
+    public class CraftsmanAgentG : MonoBehaviour
     {
         public RequestSystem requestSystem;
         public CraftsmanScreen CurrentScreen { get; private set; }
@@ -26,7 +24,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 
         public void AgentActionCrafting(float[] vectorAction, string textAction)
         {
-            var screenAction = Mathf.FloorToInt(vectorAction[0]);
+            /*var screenAction = Mathf.FloorToInt(vectorAction[0]);
             var nextScreen = (CraftsmanScreen) screenAction;
             if (nextScreen != CraftsmanScreen.Stay)
             {
@@ -42,22 +40,12 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
             {
                 var resource = (CraftingResources)requestAction;
                 MakeRequest(resource);
-            }
+            }*/
         }
 
         public void MakeRequest(CraftingResources resource)
         {
             requestSystem.MakeRequest(resource, CraftingInventory);
-        }
-
-        public void CollectObservationsCrafting()
-        {
-            AddVectorObs(CraftingAbility.Crafting);
-            AddVectorObs(CraftingAbility.TimeToCreation);
-            AddVectorObs((int)CurrentScreen);
-
-            var weaponId = WeaponId.GetWeaponId(CraftingAbility.ChosenCrafting.itemName);
-            AddVectorObs(weaponId);
         }
 
         public void ChangeAgentScreen(CraftsmanScreen nextScreen)

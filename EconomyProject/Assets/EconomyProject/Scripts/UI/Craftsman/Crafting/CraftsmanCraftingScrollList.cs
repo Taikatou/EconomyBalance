@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
+using Assets.EconomyProject.Scripts.MLAgents.Shop;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 
 namespace Assets.EconomyProject.Scripts.UI.Craftsman.Crafting
 {
     public class CraftsmanCraftingScrollList : AbstractScrollList<CraftingInfo, CraftingRequestButton>
     {
-        public CraftsmanGetAgent craftsmanMenu;
-        public CraftsmanAgent Agent => craftsmanMenu.CurrentAgent;
+        public GetCurrentAgent getCurrentAgent;
+        public override LastUpdate LastUpdated => GetComponent<CraftingLastUpdate>();
+        public ShopAgent Agent => getCurrentAgent.CurrentAgent.GetComponent<ShopAgent>();
 
         public override List<CraftingInfo> ItemList
         {
@@ -22,7 +23,6 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.Crafting
                 return itemList;
             }
         }
-        public override LastUpdate LastUpdated => GetComponent<CraftingLastUpdate>();
         public override void SelectItem(CraftingInfo item, int number = 1)
         {
             Agent.CraftingAbility.SetCraftingItem(item.craftingMap.choice);

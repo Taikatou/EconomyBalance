@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
+using Assets.EconomyProject.Scripts.UI.Craftsman.Request.Buttons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
-using Assets.EconomyProject.Scripts.UI.Craftsman.Request.Buttons;
+using Assets.EconomyProject.Scripts.MLAgents.Shop;
 
 namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
 {
@@ -20,29 +20,34 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
     }
     public class CraftsManMakeRequestScrollList : CraftingScrollList<CraftingResourceUi, CraftingMakeRequestButton>
     {
-        public CraftsmanGetAgent getCurrentAgent;
-        public CraftsmanAgent CraftingAgent => getCurrentAgent.CurrentAgent;
+        public GetCurrentAgent getCurrentAgent;
+
+        public ShopAgent CraftsmanAgent => getCurrentAgent.CurrentAgent.GetComponent<ShopAgent>();
 
         // Start is called before the first frame update
         public override List<CraftingResourceUi> ItemList
         {
             get
             {
-                var items = new List<CraftingResourceUi>();
-                var resources = Enum.GetValues(typeof(CraftingResources)).Cast<CraftingResources>().ToList();
-                foreach(var resource in resources)
+                if (CraftsmanAgent)
                 {
-                    var inventoryNumber = CraftingAgent.CraftingInventory.GetResourceNumber(resource);
-                    var resourceUi = new CraftingResourceUi(resource, inventoryNumber);
-                    items.Add(resourceUi);
+                    var items = new List<CraftingResourceUi>();
+                    var resources = Enum.GetValues(typeof(CraftingResources)).Cast<CraftingResources>().ToList();
+                    foreach (var resource in resources)
+                    {
+                        var inventoryNumber = CraftsmanAgent.CraftingInventory.GetResourceNumber(resource);
+                        var resourceUi = new CraftingResourceUi(resource, inventoryNumber);
+                        items.Add(resourceUi);
+                    }
+                    return items;
                 }
-                return items;
+                return null;
             }
         } 
 
         public override void SelectItem(CraftingResourceUi item, int number = 1)
         {
-            CraftingAgent.MakeRequest(item.resourceType);
+            CraftsmanAgent.MakeRequest(item.resourceType);
         }
     }
 }
