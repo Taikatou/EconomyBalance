@@ -28,7 +28,7 @@ namespace Assets.EconomyProject.Scripts
                     var agentPrefab = Instantiate(coreSystemPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                     agentPrefab.transform.parent = gameObject.transform;
 
-                    var spawner = GetComponentInChildren<AgentSpawner>();
+                    var spawner = GetComponentInChildren<BaseAgentSpawner>();
                     var adventurerPrefab = spawnPlayer ? playerAgentPrefab : learningAgentPrefab;
                     spawner?.SpawnAgents(adventurerPrefab, numLearningAgents);
                 }

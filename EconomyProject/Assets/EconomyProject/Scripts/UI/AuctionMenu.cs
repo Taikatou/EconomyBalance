@@ -1,4 +1,5 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems;
+using Assets.EconomyProject.Scripts.UI.Adventurer;
 using UnityEngine;
 using UnityEngine.UI;
 

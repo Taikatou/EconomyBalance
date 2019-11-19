@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.EconomyProject.Scripts.UI.Adventurer;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.EconomyProject.Scripts.UI

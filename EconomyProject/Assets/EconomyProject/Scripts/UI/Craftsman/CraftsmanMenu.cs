@@ -1,6 +1,5 @@
 ﻿using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
-using MLAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI.Craftsman
@@ -21,10 +20,13 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman
 
         private void Update()
         {
-            var nextScreen = CurrentAgent.CurrentScreen;
-            if (nextScreen != _cachedScreen)
+            if (CurrentAgent)
             {
-                SwitchMenu(nextScreen);
+                var nextScreen = CurrentAgent.CurrentScreen;
+                if (nextScreen != _cachedScreen)
+                {
+                    SwitchMenu(nextScreen);
+                }
             }
         }
 

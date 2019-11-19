@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8868528098903630128}
   - component: {fileID: 2053566769}
   - component: {fileID: 1690807225}
+  - component: {fileID: 1550709192}
   m_Layer: 0
   m_Name: ShopAgent
   m_TagString: Untagged
@@ -50,11 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061c8941b752e46498e3d796c3fc60f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brain: {fileID: 11400000, guid: 19df73a4cd1952147b75a97b59e79fed, type: 2}
   agentParameters:
-    agentCameras: []
-    agentRenderTextures:
-    - {fileID: 0}
     maxStep: 0
     resetOnDone: 1
     onDemandDecision: 0
@@ -180,3 +177,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startInventory: []
+--- !u!114 &1550709192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6220377510714029038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe44ab26e9b99c4388ec065bf6b9cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

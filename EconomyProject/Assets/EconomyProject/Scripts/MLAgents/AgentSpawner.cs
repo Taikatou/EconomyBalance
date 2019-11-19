@@ -2,15 +2,14 @@
 
 namespace Assets.EconomyProject.Scripts.MLAgents
 {
-    public class AgentSpawner : MonoBehaviour
+    public class AgentSpawner : BaseAgentSpawner
     {
-        public void SpawnAgents(GameObject learningAgentPrefab, int numLearningAgents)
+        public GameObject learningAgentPrefab;
+
+        public int numSpawn;
+        private void Start()
         {
-            for (int i = 0; i < numLearningAgents; i++)
-            {
-                GameObject agentPrefab = Instantiate(learningAgentPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-                agentPrefab.transform.parent = gameObject.transform;
-            }
+            SpawnAgents(learningAgentPrefab, numSpawn);
         }
     }
 }

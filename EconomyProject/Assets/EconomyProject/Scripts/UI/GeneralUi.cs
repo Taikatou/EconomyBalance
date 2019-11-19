@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.MLAgents;
+using Assets.EconomyProject.Scripts.UI.Adventurer;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,8 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public UiAccessor accessor;
 
+        public AdventurerGetAgent adventurerGetAgent;
+
         public Dropdown dropDown;
 
         private HashSet<string> _agentIds;
@@ -31,7 +34,7 @@ namespace Assets.EconomyProject.Scripts.UI
         // Update is called once per frame
         private void Update()
         {
-            var adventurerAgent = accessor.CurrentAgent;
+            var adventurerAgent = adventurerGetAgent.CurrentAgent;
             var gameAuction = accessor.GameAuction;
             if (gameAuction)
             {
@@ -51,7 +54,7 @@ namespace Assets.EconomyProject.Scripts.UI
                 }
             }
 
-            foreach (var agent in accessor.GetAgents)
+            foreach (var agent in adventurerGetAgent.GetAgents)
             {
                 string agentId = agent.GetComponent<AgentID>().agentId.ToString();
                 if (!_agentIds.Contains(agentId))
@@ -60,7 +63,7 @@ namespace Assets.EconomyProject.Scripts.UI
                     dropDown.options.Add(new Dropdown.OptionData(agentId));
                 }
             }
-            accessor.Index = dropDown.value;
+            adventurerGetAgent.Index = dropDown.value;
         }
     }
 }

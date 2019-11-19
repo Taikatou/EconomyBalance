@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 {
-    public class AdventurerSpawner : AgentSpawner
+    public class AdventurerSpawner : BaseAgentSpawner
     {
         public GameAuction gameAuction;
 

@@ -10,6 +10,8 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public int Index { get; set; }
 
+        public T[] GetAgents => AgentParent.GetComponentsInChildren<T>();
+
         public T CurrentAgent
         {
             get
@@ -30,7 +32,5 @@ namespace Assets.EconomyProject.Scripts.UI
                 Index = index;
             }
         }
-
-        public T[] GetAgents => AgentParent.GetComponentsInChildren<T>();
     }
 }
