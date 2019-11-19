@@ -6,14 +6,19 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
 {
     public class CraftsManCurrentRequestScrollList : CraftingScrollList<ResourceRequest, CraftingCurrentRequestButton>
     {
-        public RequestTaker RequestTaker => GetComponentInParent<CraftsmanMenu>().currentAgent.GetComponent<RequestTaker>();
+        public RequestTaker requestTaker;
 
         // Start is called before the first frame update
-        public override List<ResourceRequest> ItemList => RequestTaker.ItemList;
+        public override List<ResourceRequest> ItemList => requestTaker.ItemList;
 
         public override void SelectItem(ResourceRequest item, int number = 1)
         {
-            RequestTaker.TakeRequest(item);
+            requestTaker.TakeRequest(item);
+        }
+
+        public void UpdateAgent(RequestTaker newAgent)
+        {
+            requestTaker = newAgent;
         }
     }
 }

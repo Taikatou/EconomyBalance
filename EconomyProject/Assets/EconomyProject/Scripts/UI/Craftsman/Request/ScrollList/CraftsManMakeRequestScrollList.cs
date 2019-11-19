@@ -20,7 +20,7 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
     }
     public class CraftsManMakeRequestScrollList : CraftingScrollList<CraftingResourceUi, CraftingMakeRequestButton>
     {
-        public CraftsmanAgent CraftingAgent => GetComponentInParent<CraftsmanMenu>().currentAgent;
+        public CraftsmanAgent craftingAgent;
 
         // Start is called before the first frame update
         public override List<CraftingResourceUi> ItemList
@@ -31,7 +31,7 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
                 var resources = Enum.GetValues(typeof(CraftingResources)).Cast<CraftingResources>().ToList();
                 foreach(var resource in resources)
                 {
-                    var inventoryNumber = CraftingAgent.CraftingInventory.GetResourceNumber(resource);
+                    var inventoryNumber = craftingAgent.CraftingInventory.GetResourceNumber(resource);
                     var resourceUi = new CraftingResourceUi(resource, inventoryNumber);
                     items.Add(resourceUi);
                 }
@@ -41,7 +41,12 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
 
         public override void SelectItem(CraftingResourceUi item, int number = 1)
         {
-            CraftingAgent.MakeRequest(item.resourceType);
+            craftingAgent.MakeRequest(item.resourceType);
+        }
+
+        public void UpdateAgent(CraftsmanAgent newAgent)
+        {
+            craftingAgent = newAgent;
         }
     }
 }
