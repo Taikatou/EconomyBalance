@@ -9,7 +9,7 @@ using ResourceRequest = Assets.EconomyProject.Scripts.GameEconomy.Systems.Reques
 
 namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 {
-    public enum CraftsmanScreen { Stay, Main, Request, Craft }
+    public enum CraftsmanScreen { Main, Request, Craft }
 
     public class CraftsmanAgent : Agent
     {
@@ -21,17 +21,10 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
 
         public void AgentActionCrafting(float[] vectorAction, string textAction)
         {
-            var screenAction = Mathf.FloorToInt(vectorAction[0]);
-            var nextScreen = (CraftsmanScreen) screenAction;
-            if (nextScreen != CraftsmanScreen.Stay)
-            {
-                ChangeAgentScreen(nextScreen);
-            }
-
-            var craftAction = Mathf.FloorToInt(vectorAction[1]);
+            var craftAction = Mathf.FloorToInt(vectorAction[0]);
             CraftingAbility.SetCraftingItem(craftAction);
 
-            var requestAction = Mathf.FloorToInt(vectorAction[2]);
+            var requestAction = Mathf.FloorToInt(vectorAction[1]);
 
             if (requestSystem)
             {
