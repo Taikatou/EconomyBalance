@@ -1,3 +1,5 @@
+using System;
+using RPG.Stats;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,16 +7,16 @@ namespace Assets.RPG.Scripts.Stats
 {
     public class ExperienceDisplay : MonoBehaviour
     {
-        Experience _experience;
+        Experience experience;
 
         private void Awake()
         {
-            _experience = GameObject.FindWithTag("Player").GetComponent<Experience>();
+            experience = GameObject.FindWithTag("Player").GetComponent<Experience>();
         }
 
         private void Update()
         {
-            GetComponent<Text>().text = $"{_experience.GetPoints():0}";
+            GetComponent<Text>().text = String.Format("{0:0}", experience.GetPoints());
         }
     }
 }

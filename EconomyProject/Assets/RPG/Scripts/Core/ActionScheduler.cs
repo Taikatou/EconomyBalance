@@ -4,16 +4,16 @@ namespace Assets.RPG.Scripts.Core
 {
     public class ActionScheduler : MonoBehaviour
     {
-        IAction _currentAction;
+        IAction currentAction;
 
         public void StartAction(IAction action)
         {
-            if (_currentAction == action) return;
-            if (_currentAction != null)
+            if (currentAction == action) return;
+            if (currentAction != null)
             {
-                _currentAction.Cancel();
+                currentAction.Cancel();
             }
-            _currentAction = action;
+            currentAction = action;
         }
 
         public void CancelCurrentAction()

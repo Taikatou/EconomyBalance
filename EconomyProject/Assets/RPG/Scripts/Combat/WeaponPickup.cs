@@ -1,6 +1,6 @@
-﻿using Assets.RPG.Scripts.Attributes;
+﻿using System.Collections;
+using Assets.RPG.Scripts.Attributes;
 using Assets.RPG.Scripts.Control;
-using System.Collections;
 using UnityEngine;
 
 namespace Assets.RPG.Scripts.Combat
@@ -13,8 +13,8 @@ namespace Assets.RPG.Scripts.Combat
         private float healthToRestore = 0;
         [SerializeField]
         private readonly float _respawnTime = 5;
-
-        private void OnTriggerEnter(Collider other)
+    
+        private void OnTriggerEnter(Collider other) 
         {
             if (other.gameObject.tag == "Player")
             {

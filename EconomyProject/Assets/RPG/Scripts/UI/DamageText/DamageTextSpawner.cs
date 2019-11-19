@@ -4,11 +4,11 @@ namespace Assets.RPG.Scripts.UI.DamageText
 {
     public class DamageTextSpawner : MonoBehaviour
     {
-        [SerializeField] readonly DamageText _damageTextPrefab = null;
+        [SerializeField] Assets.RPG.Scripts.UI.DamageText.DamageText damageTextPrefab = null;
 
         public void Spawn(float damageAmount)
         {
-            var instance = Instantiate<DamageText>(_damageTextPrefab, transform);
+            Assets.RPG.Scripts.UI.DamageText.DamageText instance = Instantiate<Assets.RPG.Scripts.UI.DamageText.DamageText>(damageTextPrefab, transform);
             instance.SetValue(damageAmount);
         }
     }

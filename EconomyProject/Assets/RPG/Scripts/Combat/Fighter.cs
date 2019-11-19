@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using Assets.RPG.Scripts.Attributes;
 using Assets.RPG.Scripts.Core;
 using Assets.RPG.Scripts.Movement;
 using Assets.RPG.Scripts.Saving;
 using Assets.RPG.Scripts.Stats;
 using GameDevTV.Utils;
-using System.Collections.Generic;
+using RPG.Stats;
 using UnityEngine;
 
 namespace Assets.RPG.Scripts.Combat
@@ -25,8 +26,7 @@ namespace Assets.RPG.Scripts.Combat
         WeaponConfig _currentWeaponConfig;
         LazyValue<Weapon> _currentWeapon;
 
-        private void Awake()
-        {
+        private void Awake() {
             _currentWeaponConfig = _defaultWeapon;
             _currentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
         }
@@ -36,7 +36,7 @@ namespace Assets.RPG.Scripts.Combat
             return AttachWeapon(_defaultWeapon);
         }
 
-        private void Start()
+        private void Start() 
         {
             _currentWeapon.ForceInit();
         }
@@ -74,7 +74,7 @@ namespace Assets.RPG.Scripts.Combat
         public Health GetTarget()
         {
             return _target;
-        }
+        } 
 
         private void AttackBehaviour()
         {
@@ -96,7 +96,7 @@ namespace Assets.RPG.Scripts.Combat
         // Animation Event
         void Hit()
         {
-            if (_target == null) { return; }
+            if(_target == null) { return; }
 
             float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
 

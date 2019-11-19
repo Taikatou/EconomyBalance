@@ -4,11 +4,11 @@ namespace Assets.RPG.Scripts.Core
 {
     public class FollowCamera : MonoBehaviour
     {
-        [SerializeField] Transform _target;
+        [SerializeField] Transform target;
 
         void LateUpdate()
         {
-            transform.position = _target.position;
+            transform.position = target.position;
         }
     }
 }

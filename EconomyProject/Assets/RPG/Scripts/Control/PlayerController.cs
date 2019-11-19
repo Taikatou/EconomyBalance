@@ -1,6 +1,6 @@
+using System;
 using Assets.RPG.Scripts.Attributes;
 using Assets.RPG.Scripts.Movement;
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -9,7 +9,7 @@ namespace Assets.RPG.Scripts.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        Health _health;
+        Health health;
 
         [System.Serializable]
         struct CursorMapping
@@ -19,19 +19,18 @@ namespace Assets.RPG.Scripts.Control
             public Vector2 hotspot;
         }
 
-        [SerializeField] readonly CursorMapping[] _cursorMappings = null;
-        [SerializeField] readonly float _maxNavMeshProjectionDistance = 1f;
-        [SerializeField] readonly float _raycastRadius = 1f;
+        [SerializeField] CursorMapping[] cursorMappings = null;
+        [SerializeField] float maxNavMeshProjectionDistance = 1f;
+        [SerializeField] float raycastRadius = 1f;
 
-        private void Awake()
-        {
-            _health = GetComponent<Health>();
+        private void Awake() {
+            health = GetComponent<Health>();
         }
 
         private void Update()
         {
             if (InteractWithUI()) return;
-            if (_health.IsDead())
+            if (health.IsDead()) 
             {
                 SetCursor(CursorType.None);
                 return;
@@ -73,7 +72,7 @@ namespace Assets.RPG.Scripts.Control
 
         RaycastHit[] RaycastAllSorted()
         {
-            RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(), _raycastRadius);
+            RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(), raycastRadius);
             float[] distances = new float[hits.Length];
             for (int i = 0; i < hits.Length; i++)
             {
@@ -111,7 +110,7 @@ namespace Assets.RPG.Scripts.Control
 
             NavMeshHit navMeshHit;
             bool hasCastToNavMesh = NavMesh.SamplePosition(
-                hit.point, out navMeshHit, _maxNavMeshProjectionDistance, NavMesh.AllAreas);
+                hit.point, out navMeshHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
             if (!hasCastToNavMesh) return false;
 
             target = navMeshHit.position;
@@ -127,14 +126,14 @@ namespace Assets.RPG.Scripts.Control
 
         private CursorMapping GetCursorMapping(CursorType type)
         {
-            foreach (CursorMapping mapping in _cursorMappings)
+            foreach (CursorMapping mapping in cursorMappings)
             {
                 if (mapping.type == type)
                 {
                     return mapping;
                 }
             }
-            return _cursorMappings[0];
+            return cursorMappings[0];
         }
 
         private static Ray GetMouseRay()
