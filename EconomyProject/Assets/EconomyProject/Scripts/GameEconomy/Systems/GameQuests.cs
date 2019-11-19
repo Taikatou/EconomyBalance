@@ -57,8 +57,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                     }
                     else
                     {
-                        var random = new System.Random();
-                        var start2 = random.Next(0, CurrentPlayers.Length - 1);
+                        System.Random random = new System.Random();
+                        int start2 = random.Next(0, CurrentPlayers.Length - 1);
                         var agent = CurrentPlayers[start2];
 
                         RunQuests(agent);
@@ -103,9 +103,9 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         {
             var totalPrice = 0.0f;
 
-            var r = new System.Random();
+            System.Random r = new System.Random();
             var numSpawns = r.Next(1, attackWeapon.numLootSpawns);
-            for (var i = 0; i < numSpawns && (multipleLootDrops || i==0); i++)
+            for (int i = 0; i < numSpawns && (multipleLootDrops || i==0); i++)
             {
                 var selectedItem = lootDropTable.PickLootDropItem();
                 var generatedItem = InventoryItem.GenerateItem(selectedItem.item);
