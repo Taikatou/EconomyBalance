@@ -8,7 +8,7 @@ namespace PsychoticLab
     public enum Race { Human, Elf }
     public enum SkinColor { White, Brown, Black, Elf }
     public enum Elements {  Yes, No }
-    public enum HeadCovering { HeadCoveringsBaseHair, HeadCoveringsNoFacialHair, HeadCoveringsNoHair }
+    public enum HeadCovering { HeadCoverings_Base_Hair, HeadCoverings_No_FacialHair, HeadCoverings_No_Hair }
     public enum FacialHair { Yes, No }
 
     public class CharacterRandomizer : MonoBehaviour
@@ -189,7 +189,7 @@ namespace PsychoticLab
             Race race = Race.Human;
             SkinColor skinColor = SkinColor.White;
             Elements elements = Elements.Yes;
-            HeadCovering headCovering = HeadCovering.HeadCoveringsBaseHair;
+            HeadCovering headCovering = HeadCovering.HeadCoverings_Base_Hair;
             FacialHair facialHair = FacialHair.Yes;
 
             // disable any enabled objects before clear
@@ -220,13 +220,13 @@ namespace PsychoticLab
             int headCoveringRoll = Random.Range(0, 100);
             // HeadCoverings_Base_Hair
             if (headCoveringRoll <= 33)
-                headCovering = HeadCovering.HeadCoveringsBaseHair;
+                headCovering = HeadCovering.HeadCoverings_Base_Hair;
             // HeadCoverings_No_FacialHair
             if (headCoveringRoll > 33 && headCoveringRoll < 66)
-                headCovering = HeadCovering.HeadCoveringsNoFacialHair;
+                headCovering = HeadCovering.HeadCoverings_No_FacialHair;
             // HeadCoverings_No_Hair
             if (headCoveringRoll >= 66)
-                headCovering = HeadCovering.HeadCoveringsNoHair;
+                headCovering = HeadCovering.HeadCoverings_No_Hair;
 
             // select skin color if human, otherwise set skin color to elf
             switch (race)
@@ -289,27 +289,27 @@ namespace PsychoticLab
                         ActivateItem(cog.eyebrow[Random.Range(0, cog.eyebrow.Count)]);
 
                     //select facial hair (conditional)
-                    if (cog.facialHair.Count != 0 && facialHair == FacialHair.Yes && gender == Gender.Male && headCovering != HeadCovering.HeadCoveringsNoFacialHair)
+                    if (cog.facialHair.Count != 0 && facialHair == FacialHair.Yes && gender == Gender.Male && headCovering != HeadCovering.HeadCoverings_No_FacialHair)
                         ActivateItem(cog.facialHair[Random.Range(0, cog.facialHair.Count)]);
 
                     // select hair attachment
                     switch (headCovering)
                     {
-                        case HeadCovering.HeadCoveringsBaseHair:
+                        case HeadCovering.HeadCoverings_Base_Hair:
                             // set hair attachment to index 1
                             if (allGender.all_Hair.Count != 0)
                                 ActivateItem(allGender.all_Hair[1]);
                             if (allGender.headCoverings_Base_Hair.Count != 0)
                                 ActivateItem(allGender.headCoverings_Base_Hair[Random.Range(0, allGender.headCoverings_Base_Hair.Count)]);
                             break;
-                        case HeadCovering.HeadCoveringsNoFacialHair:
+                        case HeadCovering.HeadCoverings_No_FacialHair:
                             // no facial hair attachment
                             if (allGender.all_Hair.Count != 0)
                                 ActivateItem(allGender.all_Hair[Random.Range(0, allGender.all_Hair.Count)]);
                             if (allGender.headCoverings_No_FacialHair.Count != 0)
                                 ActivateItem(allGender.headCoverings_No_FacialHair[Random.Range(0, allGender.headCoverings_No_FacialHair.Count)]);
                             break;
-                        case HeadCovering.HeadCoveringsNoHair:
+                        case HeadCovering.HeadCoverings_No_Hair:
                             // select hair attachment
                             if (allGender.headCoverings_No_Hair.Count != 0)
                                 ActivateItem(allGender.all_Hair[Random.Range(0, allGender.all_Hair.Count)]);

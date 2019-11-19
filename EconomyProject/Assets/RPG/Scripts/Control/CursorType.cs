@@ -7,6 +7,5 @@ namespace Assets.RPG.Scripts.Control
         Combat,
         UI,
         Pickup,
-        Dialogue
     }
 }

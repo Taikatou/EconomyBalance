@@ -1,17 +1,20 @@
-﻿using System.Collections;
-using Assets.RPG.Scripts.Attributes;
+﻿using Assets.RPG.Scripts.Attributes;
 using Assets.RPG.Scripts.Control;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.RPG.Scripts.Combat
 {
     public class WeaponPickup : MonoBehaviour, IRaycastable
     {
-        [SerializeField] WeaponConfig weapon = null;
-        [SerializeField] float healthToRestore = 0;
-        [SerializeField] float respawnTime = 5;
-    
-        private void OnTriggerEnter(Collider other) 
+        [SerializeField]
+        private readonly WeaponConfig _weapon = null;
+        [SerializeField]
+        private float healthToRestore = 0;
+        [SerializeField]
+        private readonly float _respawnTime = 5;
+
+        private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.tag == "Player")
             {
@@ -21,15 +24,15 @@ namespace Assets.RPG.Scripts.Combat
 
         private void Pickup(GameObject subject)
         {
-            if (weapon != null)
+            if (_weapon != null)
             {
-                subject.GetComponent<Fighter>().EquipWeapon(weapon);
+                subject.GetComponent<Fighter>().EquipWeapon(_weapon);
             }
             if (healthToRestore > 0)
             {
                 subject.GetComponent<Health>().Heal(healthToRestore);
             }
-            StartCoroutine(HideForSeconds(respawnTime));
+            StartCoroutine(HideForSeconds(_respawnTime));
         }
 
         private IEnumerator HideForSeconds(float seconds)

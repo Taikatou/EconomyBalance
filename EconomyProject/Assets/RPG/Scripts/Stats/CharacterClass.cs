@@ -1,4 +1,4 @@
-namespace RPG.Stats
+namespace Assets.RPG.Scripts.Stats
 {
     public enum CharacterClass
     {

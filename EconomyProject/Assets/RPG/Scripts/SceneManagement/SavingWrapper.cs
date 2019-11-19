@@ -1,28 +1,31 @@
-using System.Collections;
 using Assets.RPG.Scripts.Saving;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.RPG.Scripts.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
-        const string defaultSaveFile = "save";
+        private const string DefaultSaveFile = "save";
 
-        [SerializeField] float fadeInTime = 0.2f;
-        
-        private void Awake() 
+        [SerializeField]
+        private float fadeInTime = 0.2f;
+
+        private void Awake()
         {
             StartCoroutine(LoadLastScene());
         }
 
-        private IEnumerator LoadLastScene() {
-            yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
+        private IEnumerator LoadLastScene()
+        {
+            yield return GetComponent<SavingSystem>().LoadLastScene(DefaultSaveFile);
             Fader fader = FindObjectOfType<Fader>();
             fader.FadeOutImmediate();
             yield return fader.FadeIn(fadeInTime);
         }
 
-        private void Update() {
+        private void Update()
+        {
             if (Input.GetKeyDown(KeyCode.S))
             {
                 Save();
@@ -39,17 +42,17 @@ namespace Assets.RPG.Scripts.SceneManagement
 
         public void Load()
         {
-            GetComponent<SavingSystem>().Load(defaultSaveFile);
+            GetComponent<SavingSystem>().Load(DefaultSaveFile);
         }
 
         public void Save()
         {
-            GetComponent<SavingSystem>().Save(defaultSaveFile);
+            GetComponent<SavingSystem>().Save(DefaultSaveFile);
         }
 
         public void Delete()
         {
-            GetComponent<SavingSystem>().Delete(defaultSaveFile);
+            GetComponent<SavingSystem>().Delete(DefaultSaveFile);
         }
     }
 }
