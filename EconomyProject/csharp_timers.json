@@ -1,1 +1,1 @@
-{"count":1,"self":0.1860423,"total":0.1870426,"children":null}
+{"count":1,"self":25.7476448,"total":25.7616761,"children":{"AgentResetIfDone":{"count":294,"self":0.0020012,"total":0.0020012,"children":null},"AgentSendState":{"count":294,"self":0.003,"total":0.003,"children":null},"DecideAction":{"count":294,"self":0.0070303,"total":0.0070303,"children":null},"AcademyStep":{"count":294,"self":0,"total":0,"children":null},"AgentAct":{"count":294,"self":0,"total":0,"children":null}}}

@@ -44,13 +44,8 @@ namespace Assets.EconomyProject.Scripts.UI
             if (!same)
             {
                 CacheAgentScreen = whichMenu;
-                var enumList = Enum.GetValues(typeof(T)).Cast<T>().ToList();
-
-                foreach (var enu in enumList)
-                {
-                    var openedMenu = OpenedMenus[enu];
-                    openedMenu.Activate();
-                }
+                var openedMenu = OpenedMenus[whichMenu];
+                openedMenu.Activate();
             }
         }
     }

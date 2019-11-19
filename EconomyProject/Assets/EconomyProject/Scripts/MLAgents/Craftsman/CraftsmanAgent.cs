@@ -19,6 +19,11 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
         public CraftingInventory CraftingInventory => GetComponent<CraftingInventory>();
         public AgentInventory AgentInventory => GetComponent<AgentInventory>();
 
+        public void SetRequestSystem(RequestSystem newRequestSystem)
+        {
+            requestSystem = newRequestSystem;
+        }
+
         public void AgentActionCrafting(float[] vectorAction, string textAction)
         {
             var screenAction = Mathf.FloorToInt(vectorAction[0]);

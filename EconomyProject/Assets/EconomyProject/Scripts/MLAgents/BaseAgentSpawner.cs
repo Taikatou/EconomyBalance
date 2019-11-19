@@ -8,9 +8,15 @@ namespace Assets.EconomyProject.Scripts.MLAgents
         {
             for (var i = 0; i < numLearningAgents; i++)
             {
-                var agentPrefab = Instantiate(learningAgentPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                var agentPrefab = Spawn(learningAgentPrefab);
                 agentPrefab.transform.parent = gameObject.transform;
             }
+        }
+
+        public virtual GameObject Spawn(GameObject toSpawnPrefab)
+        {
+            var agentPrefab = Instantiate(toSpawnPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            return agentPrefab;
         }
     }
 }

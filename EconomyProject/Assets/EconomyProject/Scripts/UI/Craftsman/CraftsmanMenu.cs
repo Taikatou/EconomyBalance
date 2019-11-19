@@ -26,7 +26,7 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman
 
         public override Dictionary<CraftsmanScreen, OpenedMenu> OpenedMenus => new Dictionary<CraftsmanScreen, OpenedMenu>
         {
-            { CraftsmanScreen.Main, new OpenedMenu(new List<GameObject>{mainMenu}, new List<GameObject>{ craftMenu, mainMenu}) },
+            { CraftsmanScreen.Main, new OpenedMenu(new List<GameObject>{mainMenu}, new List<GameObject>{ craftMenu, requestMenu}) },
             { CraftsmanScreen.Craft, new OpenedMenu(new List<GameObject>{craftMenu}, new List<GameObject>{ requestMenu, mainMenu}) },
             { CraftsmanScreen.Request, new OpenedMenu(new List<GameObject>{requestMenu}, new List<GameObject>{ mainMenu, craftMenu }) }
         };
