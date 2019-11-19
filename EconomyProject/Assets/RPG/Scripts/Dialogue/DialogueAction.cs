@@ -12,8 +12,6 @@ namespace Assets.RPG.Scripts.Dialogue
         private NPC _target;
         private bool _talking;
         private bool _startTalking;
-
-        public  DialogueRunner DialogueRunner => FindObjectOfType<DialogueRunner>();
         public void StartTalk(GameObject talkTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
@@ -28,7 +26,7 @@ namespace Assets.RPG.Scripts.Dialogue
             if (!_talking)
             {
                 _talking = true;
-                DialogueRunner.StartDialogue(_target.talkToNode);
+                FindObjectOfType<DialogueRunner>().StartDialogue(_target.talkToNode);
             }
         }
 
@@ -36,7 +34,6 @@ namespace Assets.RPG.Scripts.Dialogue
         {
             _talking = false;
             _startTalking = false;
-            DialogueRunner.Stop();
         }
 
         private void Update()
