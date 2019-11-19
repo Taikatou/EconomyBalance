@@ -6,7 +6,9 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
 {
     public class CraftsManCurrentRequestScrollList : CraftingScrollList<ResourceRequest, CraftingCurrentRequestButton>
     {
-        public RequestTaker RequestTaker => GetComponentInParent<CraftsmanMenu>().currentAgent.GetComponent<RequestTaker>();
+        public CraftsmanMenu getCurrentAgent;
+
+        public RequestTaker RequestTaker => getCurrentAgent.CurrentAgent.GetComponent<RequestTaker>();
 
         // Start is called before the first frame update
         public override List<ResourceRequest> ItemList => RequestTaker.ItemList;

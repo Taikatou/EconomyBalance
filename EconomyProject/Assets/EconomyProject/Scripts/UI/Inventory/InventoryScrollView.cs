@@ -11,7 +11,9 @@ namespace Assets.EconomyProject.Scripts.UI.Inventory
         public override List<InventoryItem> ItemList => AgentInventory.Items;
         public override LastUpdate LastUpdated => AgentInventory;
 
-        public AgentInventory AgentInventory => GetComponentInParent<CraftsmanMenu>().currentAgent.AgentInventory;
+        public CraftsmanMenu craftsmanMenu;
+
+        public AgentInventory AgentInventory => craftsmanMenu.CurrentAgent.AgentInventory;
 
         public override void SelectItem(InventoryItem item, int number = 1)
         {

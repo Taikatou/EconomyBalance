@@ -1,10 +1,11 @@
 ﻿using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+using MLAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI.Craftsman
 {
-    public class CraftsmanMenu : MonoBehaviour
+    public class CraftsmanMenu : GetCurrentAgent<CraftsmanAgent>
     {
         public GameObject requestMenu;
 
@@ -12,13 +13,15 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman
 
         public GameObject mainMenu;
 
-        public CraftsmanAgent currentAgent;
+        public GameObject agentParent;
 
         private CraftsmanScreen _cachedScreen;
 
+        public override GameObject AgentParent => agentParent;
+
         private void Update()
         {
-            var nextScreen = currentAgent.CurrentScreen;
+            var nextScreen = CurrentAgent.CurrentScreen;
             if (nextScreen != _cachedScreen)
             {
                 SwitchMenu(nextScreen);
@@ -27,22 +30,22 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman
 
         public void MoveToRequest()
         {
-            currentAgent.ChangeAgentScreen(CraftsmanScreen.Request);
+            CurrentAgent.ChangeAgentScreen(CraftsmanScreen.Request);
         }
 
         public void MoveToCraft()
         {
-            currentAgent.ChangeAgentScreen(CraftsmanScreen.Craft);
+            CurrentAgent.ChangeAgentScreen(CraftsmanScreen.Craft);
         }
 
         public void ReturnToMain()
         {
-            currentAgent.ChangeAgentScreen(CraftsmanScreen.Main);
+            CurrentAgent.ChangeAgentScreen(CraftsmanScreen.Main);
         }
 
         public void SwitchMenu(CraftsmanScreen whichMenu)
         {
-            _cachedScreen = currentAgent.CurrentScreen;
+            _cachedScreen = CurrentAgent.CurrentScreen;
             requestMenu?.SetActive(whichMenu == CraftsmanScreen.Request);
             craftMenu.GetComponentInChildren<LastUpdate>()?.Refresh();
             craftMenu?.SetActive(whichMenu == CraftsmanScreen.Craft);

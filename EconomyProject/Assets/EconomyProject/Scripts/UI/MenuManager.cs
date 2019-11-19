@@ -28,9 +28,9 @@ namespace Assets.EconomyProject.Scripts.UI
         private void Update()
         {
             var playerInput = accessor.PlayerInput;
-            if (accessor.AdventurerAgent != null && playerInput != null)
+            if (accessor.CurrentAgent != null && playerInput != null)
             {
-                var screen = playerInput.GetScreen(accessor.AdventurerAgent);
+                var screen = playerInput.GetScreen(accessor.CurrentAgent);
                 if (screen != _cacheAgentScreen)
                 {
                     _cacheAgentScreen = screen;
@@ -41,22 +41,22 @@ namespace Assets.EconomyProject.Scripts.UI
 
         public void StartAuction()
         {
-            PlayerInput.SetMainAction(accessor.AdventurerAgent, AgentScreen.Auction);
+            PlayerInput.SetMainAction(accessor.CurrentAgent, AgentScreen.Auction);
         }
 
         public void StartQuest()
         {
-            PlayerInput.SetMainAction(accessor.AdventurerAgent, AgentScreen.Quest);
+            PlayerInput.SetMainAction(accessor.CurrentAgent, AgentScreen.Quest);
         }
 
         public void MainMenu()
         {
-            PlayerInput.SetMainAction(accessor.AdventurerAgent, AgentScreen.Main);
+            PlayerInput.SetMainAction(accessor.CurrentAgent, AgentScreen.Main);
         }
 
         public void Bid()
         {
-            PlayerInput.SetAuctionChoice(accessor.AdventurerAgent, AuctionChoice.Bid);
+            PlayerInput.SetAuctionChoice(accessor.CurrentAgent, AuctionChoice.Bid);
         }
     }
 }

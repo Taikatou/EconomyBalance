@@ -6,7 +6,8 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.Crafting
 {
     public class CraftsmanCraftingScrollList : AbstractScrollList<CraftingInfo, CraftingRequestButton>
     {
-        public CraftsmanAgent Agent => GetComponentInParent<CraftsmanMenu>().currentAgent;
+        public CraftsmanMenu craftsmanMenu;
+        public CraftsmanAgent Agent => craftsmanMenu.CurrentAgent;
 
         public override List<CraftingInfo> ItemList
         {

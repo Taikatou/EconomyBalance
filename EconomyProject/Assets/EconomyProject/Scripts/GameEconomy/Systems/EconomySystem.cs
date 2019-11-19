@@ -36,6 +36,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             }
         }
 
-        // public abstract void SetChoice(AdventurerAgent agent, int input1, int input2);
+        // public abstract void SetChoice(CurrentAgent agent, int input1, int input2);
     }
 }

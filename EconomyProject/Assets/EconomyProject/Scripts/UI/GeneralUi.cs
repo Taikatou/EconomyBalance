@@ -31,7 +31,7 @@ namespace Assets.EconomyProject.Scripts.UI
         // Update is called once per frame
         private void Update()
         {
-            var adventurerAgent = accessor.AdventurerAgent;
+            var adventurerAgent = accessor.CurrentAgent;
             var gameAuction = accessor.GameAuction;
             if (gameAuction)
             {

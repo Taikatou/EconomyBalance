@@ -8,7 +8,7 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman
         public CraftsmanMenu craftsManMenu;
         protected override void UpdateAgent(CraftsmanAgent agent)
         {
-            craftsManMenu.currentAgent = agent;
+            craftsManMenu.UpdateAgent(agent);
         }
     }
 }
