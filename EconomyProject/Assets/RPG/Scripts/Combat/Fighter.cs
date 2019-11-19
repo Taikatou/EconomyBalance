@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Assets.RPG.Scripts.Combat
 {
-    public class FighterAction : MonoBehaviour, IAction, ISaveable, IModifierProvider
+    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
     {
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform rightHandTransform = null;

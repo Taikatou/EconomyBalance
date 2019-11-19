@@ -14,15 +14,14 @@ namespace Assets.RPG.Scripts.Combat
 
         public bool HandleRaycast(PlayerController callingController)
         {
-            FighterAction fighterAction = callingController.GetComponent<FighterAction>();
-            if (!fighterAction.CanAttack(gameObject))
+            if (!callingController.GetComponent<Fighter>().CanAttack(gameObject))
             {
                 return false;
             }
 
             if (Input.GetMouseButton(0))
             {
-                fighterAction.Attack(gameObject);
+                callingController.GetComponent<Fighter>().Attack(gameObject);
             }
 
             return true;

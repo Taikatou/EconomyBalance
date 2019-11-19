@@ -7,21 +7,21 @@ namespace Assets.RPG.Scripts.Combat
 {
     public class EnemyHealthDisplay : MonoBehaviour
     {
-        FighterAction _fighterAction;
+        Fighter fighter;
 
         private void Awake()
         {
-            _fighterAction = GameObject.FindWithTag("Player").GetComponent<FighterAction>();
+            fighter = GameObject.FindWithTag("Player").GetComponent<Fighter>();
         }
 
         private void Update()
         {
-            if (_fighterAction.GetTarget() == null)
+            if (fighter.GetTarget() == null)
             {
                 GetComponent<Text>().text = "N/A";
                 return;
             }
-            Health health = _fighterAction.GetTarget();
+            Health health = fighter.GetTarget();
             GetComponent<Text>().text = String.Format("{0:0}/{1:0}", health.GetHealthPoints(), health.GetMaxHealthPoints());
         }
     }

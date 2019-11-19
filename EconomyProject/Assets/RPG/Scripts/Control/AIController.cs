@@ -19,7 +19,7 @@ namespace Assets.RPG.Scripts.Control
         [SerializeField] float patrolSpeedFraction = 0.2f;
         [SerializeField] float shoutDistance = 5f;
 
-        FighterAction _fighterAction;
+        Fighter fighter;
         Health health;
         Mover mover;
         GameObject player;
@@ -31,7 +31,7 @@ namespace Assets.RPG.Scripts.Control
         int currentWaypointIndex = 0;
 
         private void Awake() {
-            _fighterAction = GetComponent<FighterAction>();
+            fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
             player = GameObject.FindWithTag("Player");
@@ -52,7 +52,7 @@ namespace Assets.RPG.Scripts.Control
         {
             if (health.IsDead()) return;
 
-            if (IsAggrevated() && _fighterAction.CanAttack(player))
+            if (IsAggrevated() && fighter.CanAttack(player))
             {
                 AttackBehaviour();
             }
@@ -124,7 +124,7 @@ namespace Assets.RPG.Scripts.Control
         private void AttackBehaviour()
         {
             timeSinceLastSawPlayer = 0;
-            _fighterAction.Attack(player);
+            fighter.Attack(player);
 
             AggrevateNearbyEnemies();
         }
