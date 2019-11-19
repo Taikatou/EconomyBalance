@@ -6,7 +6,7 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
 {
     public class CraftsManCurrentRequestScrollList : CraftingScrollList<ResourceRequest, CraftingCurrentRequestButton>
     {
-        public CraftsmanMenu getCurrentAgent;
+        public CraftsmanGetAgent getCurrentAgent;
 
         public RequestTaker RequestTaker => getCurrentAgent.CurrentAgent.GetComponent<RequestTaker>();
 

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3219537685212485374}
-  - component: {fileID: 9151567126028951903}
   - component: {fileID: 2058060824390224692}
   - component: {fileID: 4563505960450716024}
   - component: {fileID: 568787241}
@@ -18,6 +17,8 @@ GameObject:
   - component: {fileID: 2053566769}
   - component: {fileID: 1690807225}
   - component: {fileID: 1550709192}
+  - component: {fileID: 7495793412378739832}
+  - component: {fileID: 2515984144819144826}
   m_Layer: 0
   m_Name: ShopAgent
   m_TagString: Untagged
@@ -39,25 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9151567126028951903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6220377510714029038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 061c8941b752e46498e3d796c3fc60f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-    resetOnDone: 1
-    onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 100
-  requestSystem: {fileID: 0}
-  moveAmount: 1
 --- !u!114 &2058060824390224692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,3 +171,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe44ab26e9b99c4388ec065bf6b9cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7495793412378739832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6220377510714029038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    vectorObservationSize: 1
+    numStackedVectorObservations: 1
+    vectorActionSize: 01000000
+    vectorActionDescriptions: []
+    vectorActionSpaceType: 0
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_UseHeuristic: 0
+  m_BehaviorName: My Behavior
+--- !u!114 &2515984144819144826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6220377510714029038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 061c8941b752e46498e3d796c3fc60f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+    resetOnDone: 1
+    onDemandDecision: 1
+    numberOfActionsBetweenDecisions: 1
+  requestSystem: {fileID: 0}
+  moveAmount: 1

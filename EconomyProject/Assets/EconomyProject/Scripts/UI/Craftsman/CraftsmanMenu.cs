@@ -1,10 +1,11 @@
-﻿using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
+﻿using System.Collections.Generic;
+using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
 using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI.Craftsman
 {
-    public class CraftsmanMenu : GetCurrentAgent<CraftsmanAgent>
+    public class CraftsmanMenu : BaseMenuManager<CraftsmanScreen>
     {
         public GameObject requestMenu;
 
@@ -12,46 +13,33 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman
 
         public GameObject mainMenu;
 
-        public GameObject agentParent;
-
-        private CraftsmanScreen _cachedScreen;
-
-        public override GameObject AgentParent => agentParent;
+        public CraftsmanGetAgent CraftsmanGetAgent => GetComponent<CraftsmanGetAgent>();
 
         private void Update()
         {
-            if (CurrentAgent)
+            if (CraftsmanGetAgent.CurrentAgent)
             {
-                var nextScreen = CurrentAgent.CurrentScreen;
-                if (nextScreen != _cachedScreen)
-                {
-                    SwitchMenu(nextScreen);
-                }
+                var nextScreen = CraftsmanGetAgent.CurrentAgent.CurrentScreen;
+                SwitchMenu(nextScreen);
             }
         }
 
-        public void MoveToRequest()
+        public override Dictionary<CraftsmanScreen, OpenedMenu> OpenedMenus => new Dictionary<CraftsmanScreen, OpenedMenu>
         {
-            CurrentAgent.ChangeAgentScreen(CraftsmanScreen.Request);
+            { CraftsmanScreen.Main, new OpenedMenu(new List<GameObject>{mainMenu}, new List<GameObject>{ craftMenu, mainMenu}) },
+            { CraftsmanScreen.Craft, new OpenedMenu(new List<GameObject>{craftMenu}, new List<GameObject>{ requestMenu, mainMenu}) },
+            { CraftsmanScreen.Request, new OpenedMenu(new List<GameObject>{requestMenu}, new List<GameObject>{ mainMenu, craftMenu }) }
+        };
+
+        public override bool Compare(CraftsmanScreen a, CraftsmanScreen b)
+        {
+            return a == b;
         }
 
-        public void MoveToCraft()
+        public override void SwitchMenu(CraftsmanScreen whichMenu)
         {
-            CurrentAgent.ChangeAgentScreen(CraftsmanScreen.Craft);
-        }
-
-        public void ReturnToMain()
-        {
-            CurrentAgent.ChangeAgentScreen(CraftsmanScreen.Main);
-        }
-
-        public void SwitchMenu(CraftsmanScreen whichMenu)
-        {
-            _cachedScreen = CurrentAgent.CurrentScreen;
-            requestMenu?.SetActive(whichMenu == CraftsmanScreen.Request);
+            base.SwitchMenu(whichMenu);
             craftMenu.GetComponentInChildren<LastUpdate>()?.Refresh();
-            craftMenu?.SetActive(whichMenu == CraftsmanScreen.Craft);
-            mainMenu?.SetActive(whichMenu == CraftsmanScreen.Main);
         }
     }
 }

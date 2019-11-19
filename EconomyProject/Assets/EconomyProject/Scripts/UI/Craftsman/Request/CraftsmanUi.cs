@@ -10,7 +10,8 @@ namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request
         public Text requestText;
 
         public RequestSystem requestSystem;
-        public CraftsmanAgent CraftsmanAgent => GetComponentInParent<CraftsmanMenu>().CurrentAgent;
+        public CraftsmanGetAgent CraftsmanGetAgent => GetComponentInParent<CraftsmanGetAgent>();
+        public CraftsmanAgent CraftsmanAgent => CraftsmanGetAgent.CurrentAgent;
         void Update()
         {
             var number = requestSystem.GetRequestNumber(CraftsmanAgent.CraftingInventory);
