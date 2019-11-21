@@ -1,68 +1,68 @@
 {
   "name": "root",
-  "total": 184.85933690000002,
+  "total": 37.365818,
   "count": 1,
-  "self": 91.61470849999986,
+  "self": 13.937691100000045,
   "children": [
     {
       "name": "TrainerController.advance",
-      "total": 93.24462840000015,
-      "count": 1677,
-      "self": 6.603290900000033,
+      "total": 23.428126899999953,
+      "count": 2118,
+      "self": 2.243388799999842,
       "children": [
         {
           "name": "env_step",
-          "total": 75.37512910000015,
-          "count": 1677,
-          "self": 73.77965940000014,
+          "total": 19.10715210000011,
+          "count": 2118,
+          "self": 17.337282300000055,
           "children": [
             {
               "name": "SubprocessEnvManager._take_step",
-              "total": 1.5719386000001343,
-              "count": 1677,
-              "self": 0.034207300000306695,
+              "total": 1.7411761999999786,
+              "count": 2118,
+              "self": 0.0454023999999027,
               "children": [
                 {
                   "name": "PPOPolicy.evaluate",
-                  "total": 1.5377312999998276,
-                  "count": 1677,
-                  "self": 1.5377312999998276
+                  "total": 1.695773800000076,
+                  "count": 2118,
+                  "self": 1.695773800000076
                 }
               ]
             },
             {
               "name": "workers",
-              "total": 0.023531099999877014,
-              "count": 1676,
+              "total": 0.02869360000007859,
+              "count": 2117,
               "self": 0.0,
               "children": [
                 {
                   "name": "worker_root",
-                  "total": 180.14580910000026,
-                  "count": 1676,
+                  "total": 32.1613259999999,
+                  "count": 2117,
                   "is_parallel": true,
-                  "self": 108.4107009000005,
+                  "self": 16.51095139999986,
                   "children": [
                     {
                       "name": "UnityEnvironment.step",
-                      "total": 71.73510819999976,
-                      "count": 1676,
+                      "total": 15.65037460000004,
+                      "count": 2117,
                       "is_parallel": true,
-                      "self": 5.961248900000086,
+                      "self": 1.150927500000087,
                       "children": [
                         {
                           "name": "UnityEnvironment._generate_step_input",
-                          "total": 1.1480133999997952,
-                          "count": 1676,
+                          "total": 0.29347619999999885,
+                          "count": 2117,
                           "is_parallel": true,
-                          "self": 1.1480133999997952
+                          "self": 0.29347619999999885
                         },
                         {
                           "name": "communicator.exchange",
-                          "total": 64.62584589999987,
-                          "count": 1676,
+                          "total": 14.205970899999954,
+                          "count": 2117,
                           "is_parallel": true,
-                          "self": 64.62584589999987
+                          "self": 14.205970899999954
                         }
                       ]
                     }
@@ -74,15 +74,15 @@
         },
         {
           "name": "update_policy",
-          "total": 11.266208399999964,
-          "count": 7,
-          "self": 8.038471999999874,
+          "total": 2.077586,
+          "count": 1,
+          "self": 1.1745403000000003,
           "children": [
             {
               "name": "PPOPolicy.update",
-              "total": 3.22773640000009,
-              "count": 216,
-              "self": 3.22773640000009
+              "total": 0.9030456999999998,
+              "count": 30,
+              "self": 0.9030456999999998
             }
           ]
         }

@@ -875,11 +875,6 @@ PrefabInstance:
       propertyPath: requestSystem
       value: 
       objectReference: {fileID: 1558139375}
-    - target: {fileID: 5262257821049965991, guid: 2505c4c6ec1aded4ba7a3726763cef82,
-        type: 3}
-      propertyPath: agentList
-      value: 
-      objectReference: {fileID: 1121020426}
     - target: {fileID: 1018863607430260788, guid: 2505c4c6ec1aded4ba7a3726763cef82,
         type: 3}
       propertyPath: requestSystem

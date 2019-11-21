@@ -15,7 +15,7 @@ namespace Assets.RPG.Scripts.Attributes
 
         private void Update()
         {
-            GetComponent<Text>().text = String.Format("{0:0}/{1:0}", health.GetHealthPoints(), health.GetMaxHealthPoints());
+            GetComponent<Text>().text = $"{health.GetHealthPoints():0}/{health.GetMaxHealthPoints():0}";
         }
     }
 }

@@ -219,6 +219,7 @@ MonoBehaviour:
   currentItemText: {fileID: 1097284255397957728}
   efficiencyText: {fileID: 1097284253911657266}
   accessor: {fileID: 1097284254193952158}
+  getAgent: {fileID: 287734434}
   dropDown: {fileID: 1803083247232106862}
 --- !u!1 &1097284253487956266
 GameObject:
@@ -1243,8 +1244,9 @@ GameObject:
   - component: {fileID: 1097284254193952129}
   - component: {fileID: 1097284254193952130}
   - component: {fileID: 1097284254193952158}
+  - component: {fileID: 287734434}
   m_Layer: 5
-  m_Name: UICanvas
+  m_Name: AdventurerUICanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1347,7 +1349,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coreGameSystem: {fileID: 0}
-  printObservation: 1
+--- !u!114 &287734434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097284254193952131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16c0fd572a51684f956cdedf5359a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParent: {fileID: 0}
 --- !u!1 &1097284254206930534
 GameObject:
   m_ObjectHideFlags: 0
@@ -1802,7 +1816,8 @@ MonoBehaviour:
   auctionMenu: {fileID: 1097284254206930534}
   questMenu: {fileID: 1097284254681568235}
   mainMenu: {fileID: 1097284254856806852}
-  accessor: {fileID: 1097284254193952158}
+  getCurrentAgent: {fileID: 287734434}
+  uiAccessor: {fileID: 1097284254193952158}
 --- !u!1 &1097284254775711002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,6 +2609,7 @@ GameObject:
   - component: {fileID: 5786386447069057350}
   - component: {fileID: 4107094086208237271}
   - component: {fileID: 1803083247232106862}
+  - component: {fileID: 2482717749373642102}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -2711,6 +2727,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_AlphaFadeSpeed: 0.15
+--- !u!114 &2482717749373642102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718971123327363087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9724942ca2cab4f4c9fd4860bd4bdaff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropDown: {fileID: 1803083247232106862}
+  agentList: {fileID: 0}
+  getCurrentAgent: {fileID: 287734434}
 --- !u!1 &1822334218183296832
 GameObject:
   m_ObjectHideFlags: 0

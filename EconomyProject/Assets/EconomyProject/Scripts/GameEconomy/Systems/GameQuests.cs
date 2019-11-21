@@ -73,15 +73,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                         }
                         _shouldReturn = true;
                     }
-                    else
-                    {
-                        //RequestDecisions();
-                    }
 
                     _currentTime = 0.0f;
                 }
             }
-            //RequestDecisions();
         }
 
         public void RunQuests(AdventurerAgent agent)

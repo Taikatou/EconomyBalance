@@ -27,7 +27,14 @@ namespace Assets.EconomyProject.Scripts.UI
 
         private HashSet<string> _agentIds;
 
-        public AdventurerAgent AdventurerAgent => getAgent.CurrentAgent.GetComponent<AdventurerAgent>();
+        public AdventurerAgent AdventurerAgent
+        {
+            get
+            {
+                var adventurer = getAgent.CurrentAgent.GetComponent<AdventurerAgent>();
+                return adventurer;
+            }
+        }
 
         private void Start()
         {

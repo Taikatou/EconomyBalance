@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI.Adventurer
 {
+
     public class AdventurerMenuManager : BaseMenuManager<AgentScreen>
     {
         public GameObject auctionMenu;
@@ -13,11 +14,13 @@ namespace Assets.EconomyProject.Scripts.UI.Adventurer
 
         public GameObject mainMenu;
 
-        public GetCurrentAgent accessor;
+        public GetCurrentAgent getCurrentAgent;
 
-        public AdventurerAgent AdventurerAgent => accessor.CurrentAgent.GetComponent<AdventurerAgent>();
+        public UiAccessor uiAccessor;
 
-        public PlayerInput PlayerInput => GetComponent<UiAccessor>().PlayerInput;
+        public AdventurerAgent AdventurerAgent => getCurrentAgent.CurrentAgent.GetComponent<AdventurerAgent>();
+
+        public PlayerInput PlayerInput => uiAccessor.PlayerInput;
 
         public override Dictionary<AgentScreen, OpenedMenu> OpenedMenus => new Dictionary<AgentScreen, OpenedMenu>
         {
@@ -34,7 +37,7 @@ namespace Assets.EconomyProject.Scripts.UI.Adventurer
         private void Update()
         {
             var playerInput = PlayerInput;
-            if (accessor.CurrentAgent != null && playerInput != null)
+            if (getCurrentAgent.CurrentAgent != null && playerInput != null)
             {
                 var screen = playerInput.GetScreen(AdventurerAgent);
                 

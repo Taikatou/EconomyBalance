@@ -14,7 +14,6 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         private void Start()
         {
-            Items = new List<InventoryItem>();
             ResetInventory();
         }
 
@@ -26,7 +25,14 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public void ResetInventory()
         {
-            Items.Clear();
+            if (Items == null)
+            {
+                Items = new List<InventoryItem>();
+            }
+            else
+            {
+                Items.Clear();
+            }
 
             foreach (var item in startInventory)
             {

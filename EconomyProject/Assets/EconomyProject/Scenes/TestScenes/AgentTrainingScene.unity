@@ -860,33 +860,33 @@ PrefabInstance:
     - target: {fileID: 1097284254856806852, guid: f2aa003806f546a4e934199940c7cc66,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097284254950142914, guid: f2aa003806f546a4e934199940c7cc66,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097284254950142914, guid: f2aa003806f546a4e934199940c7cc66,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097284255186540822, guid: f2aa003806f546a4e934199940c7cc66,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097284255186540822, guid: f2aa003806f546a4e934199940c7cc66,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1097284253472533467, guid: f2aa003806f546a4e934199940c7cc66,
         type: 3}
       propertyPath: adventurerGetAgent
       value: 
       objectReference: {fileID: 1097284253851962162}
+    - target: {fileID: 1097284254950142914, guid: f2aa003806f546a4e934199940c7cc66,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097284254950142914, guid: f2aa003806f546a4e934199940c7cc66,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097284255186540822, guid: f2aa003806f546a4e934199940c7cc66,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097284255186540822, guid: f2aa003806f546a4e934199940c7cc66,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2aa003806f546a4e934199940c7cc66, type: 3}
 --- !u!224 &1097284253851962160 stripped

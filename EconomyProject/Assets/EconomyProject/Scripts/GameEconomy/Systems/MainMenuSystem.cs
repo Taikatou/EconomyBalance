@@ -1,5 +1,4 @@
 ﻿using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
-using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 {
@@ -11,6 +10,11 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         public override bool CanMove(AdventurerAgent agent)
         {
             return true;
+        }
+
+        private void Update()
+        {
+            RequestDecisions();
         }
     }
 }

@@ -238,10 +238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cc6bf35628d7b4aa025ddf06768859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  broadcastHub:
-    broadcastingBrains:
-    - {fileID: 11400000, guid: d74781d954d0aa34298d77645193389c, type: 2}
-    m_BrainsToControl: []
   m_TrainingConfiguration:
     width: 80
     height: 80
@@ -392,7 +388,7 @@ PrefabInstance:
     - target: {fileID: 1097284254193952131, guid: f2aa003806f546a4e934199940c7cc66,
         type: 3}
       propertyPath: m_Name
-      value: UICanvas
+      value: AdventurerUICanvas
       objectReference: {fileID: 0}
     - target: {fileID: 1097284254193952159, guid: f2aa003806f546a4e934199940c7cc66,
         type: 3}
@@ -502,6 +498,10 @@ PrefabInstance:
     - target: {fileID: 1097284254193952158, guid: f2aa003806f546a4e934199940c7cc66,
         type: 3}
       propertyPath: coreGameSystem
+      value: 
+      objectReference: {fileID: 122471032}
+    - target: {fileID: 287734434, guid: f2aa003806f546a4e934199940c7cc66, type: 3}
+      propertyPath: agentParent
       value: 
       objectReference: {fileID: 122471032}
     m_RemovedComponents: []
@@ -704,5 +704,17 @@ PrefabInstance:
       propertyPath: numLearningAgents
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 977899207482333349, guid: 0d5188c7188b45741b3ae7c3609d4866,
+        type: 3}
+      propertyPath: coreSystemPrefab
+      value: 
+      objectReference: {fileID: 5803332212511212224, guid: a20c16da6c0ea1640b3b57af20fd8de0,
+        type: 3}
+    - target: {fileID: 977899207482333349, guid: 0d5188c7188b45741b3ae7c3609d4866,
+        type: 3}
+      propertyPath: learningAgentPrefab
+      value: 
+      objectReference: {fileID: 7707616417561859250, guid: 7f83e2c93df89ce4fbe3760b4b9b045b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d5188c7188b45741b3ae7c3609d4866, type: 3}

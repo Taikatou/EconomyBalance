@@ -2,8 +2,6 @@ using Assets.RPG.Scripts.Core;
 using Assets.RPG.Scripts.Saving;
 using Assets.RPG.Scripts.Stats;
 using GameDevTV.Utils;
-using RPG.Saving;
-using RPG.Stats;
 using UnityEngine;
 using UnityEngine.Events;
 

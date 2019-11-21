@@ -116,6 +116,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 {
                     ReturnToMain();
                 }
+                RequestDecisions();
             }
         }
 
