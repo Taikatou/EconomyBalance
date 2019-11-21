@@ -267,6 +267,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MarketPlaceScrollList
       objectReference: {fileID: 0}
+    - target: {fileID: 3994146084673341062, guid: f61ece69eb8445a4e857f727e715e156,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3994146084673341063, guid: f61ece69eb8445a4e857f727e715e156,
         type: 3}
       propertyPath: m_LocalPosition.x

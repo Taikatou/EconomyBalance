@@ -12,7 +12,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
         void SelectItem(T item, int number = 1);
     }
 
-    public abstract class LastUpdate : MonoBehaviour
+    public class LastUpdate : MonoBehaviour
     {
         public DateTime LastUpdated { get; set; }
 
@@ -24,27 +24,19 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
 
     public abstract class AbstractScrollList<T, TQ> : MonoBehaviour, IScrollList<T>  where TQ : SampleButton<T>
     {
-        public abstract List<T> ItemList { get; }
         public Transform contentPanel;
+        private DateTime _lastUpdated;
         public SimpleObjectPool buttonObjectPool;
 
+        public abstract List<T> ItemList { get; }
         public abstract LastUpdate LastUpdated { get; }
-
-
-        private DateTime _lastUpdated;
 
         public abstract void SelectItem(T item, int number=1);
 
-        // Use this for initialization
-        void Start()
-        {
-            RefreshDisplay();
-        }
-
-        public virtual void RefreshDisplay()
+        public virtual bool RefreshDisplay()
         {
             RemoveButtons();
-            AddButtons();
+            return AddButtons();
         }
 
         public void RemoveButtons()
@@ -56,9 +48,10 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
             }
         }
 
-        protected void AddButtons()
+        protected bool AddButtons()
         {
-            if (ItemList != null)
+            var valid = ItemList != null;
+            if (valid)
             {
                 foreach (var item in ItemList)
                 {
@@ -69,19 +62,21 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
                     sampleButton.Setup(item, this);
                 }
             }
+
+            return valid;
         }
 
         private void Update()
         {
-            UpdateUi();
-        }
-
-        protected virtual void UpdateUi()
-        {
             if (_lastUpdated != LastUpdated.LastUpdated)
             {
-                _lastUpdated = LastUpdated.LastUpdated;
-                RefreshDisplay();
+                var valid = RefreshDisplay();
+                if (valid)
+                {
+                    _lastUpdated = LastUpdated.LastUpdated;
+                    Debug.Log("Add Button");
+                }
+                Debug.Log("Update");
             }
         }
     }

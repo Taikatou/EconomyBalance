@@ -14,9 +14,9 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
         public int stock;
 
         [HideInInspector]
-        public readonly IAdventurerScroll seller;
+        public readonly ShopAgent seller;
 
-        public ShopItem(ShopItem item, int stock, IAdventurerScroll seller)
+        public ShopItem(ShopItem item, int stock, ShopAgent seller)
         {
             this.inventoryItem = item.inventoryItem;
             this.price = item.price;

@@ -17,7 +17,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
 
         private MarketPlace _marketPlace;
 
-        private IAdventurerScroll _seller;
+        private ShopAgent _seller;
 
         private void Start()
         {
@@ -26,7 +26,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
             saveButton.onClick.AddListener(SaveButton);
         }
 
-        public void SetVisible(ShopItem item, MarketPlace marketPlace, IAdventurerScroll seller)
+        public void SetVisible(ShopItem item, MarketPlace marketPlace, ShopAgent seller)
         {
             _shopItem = item;
             gameObject.SetActive(true);

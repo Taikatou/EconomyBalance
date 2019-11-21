@@ -1,56 +1,45 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using Assets.EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine.UI;
 
 namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
 {
-    public interface IAdventurerScroll
-    {
-        EconomyWallet Wallet { get; }
-        List<ShopItem> ItemList { get; }
-        void RemoveItem(ShopItem itemToRemove);
-        void AddItem(ShopItem item);
-    }
     public class AgentShopScrollList : ShopScrollList
     {
-        public IAdventurerScroll adventurerAgent;
+        public GetCurrentAgent currentAgent;
 
         public Text myGoldDisplay;
 
         public UpdateItemUi updateItem;
 
-        public override List<ShopItem> ItemList => adventurerAgent?.ItemList;
+        public override List<ShopItem> ItemList => ShopAgent.ItemList;
+
+        public ShopAgent ShopAgent => currentAgent.CurrentAgent.GetComponent<ShopAgent>();
 
         public double Gold
         {
             get
             {
-                if (adventurerAgent != null && adventurerAgent.Wallet)
+                if (ShopAgent != null && ShopAgent.Wallet)
                 {
-                    return adventurerAgent.Wallet.Money;
+                    return ShopAgent.Wallet.Money;
                 }
                 return 0;
             }
-            set => adventurerAgent.Wallet?.SetMoney(value);
-        }
-
-        public void UpdateAgent(IAdventurerScroll agent)
-        {
-            adventurerAgent = agent;
-            RefreshDisplay();
+            set => ShopAgent.Wallet?.SetMoney(value);
         }
 
         public override void SelectItem(ShopItem item, int number = 1)
         {
-            updateItem.SetVisible(item, marketPlace, adventurerAgent);
+            updateItem.SetVisible(item, marketPlace, ShopAgent);
         }
 
-        public override void RefreshDisplay()
+        public override bool RefreshDisplay()
         {
-            base.RefreshDisplay();
+            var valid = base.RefreshDisplay();
             myGoldDisplay.text = "Gold: " + Gold.ToString(CultureInfo.InvariantCulture);
+            return valid;
         }
     }
 }

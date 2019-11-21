@@ -8,16 +8,17 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 {
     public class MarketPlace : LastUpdate
     {
-        private Dictionary<ShopItem, IAdventurerScroll> _sellers;
+        private Dictionary<ShopItem, ShopAgent> _sellers;
 
         public List<ShopItem> ItemList => _sellers != null? _sellers.Keys.ToList() : new List<ShopItem>();
 
         private void Start()
         {
-            _sellers = new Dictionary<ShopItem, IAdventurerScroll>();
+            _sellers = new Dictionary<ShopItem, ShopAgent>();
+            Refresh();
         }
 
-        public int SellersItems(IAdventurerScroll seller)
+        public int SellersItems(ShopAgent seller)
         {
             var count = 0;
             foreach (var item in ItemList)
@@ -30,7 +31,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             return count;
         }
 
-        public IAdventurerScroll GetSeller(ShopItem item)
+        public ShopAgent GetSeller(ShopItem item)
         {
             var contains = _sellers.ContainsKey(item);
             if (contains)
@@ -66,7 +67,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
                 otherShop.Gold -= item.price;
 
                 var newItem = new ShopItem(item, 1, seller);
-                otherShop.adventurerAgent.AddItem(newItem);
+                otherShop.ShopAgent.AddItem(newItem);
                 RemoveItem(newItem);
 
                 otherShop.RefreshDisplay();
@@ -76,9 +77,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             Refresh();
         }
 
-        public void AddItem(ShopItem item, IAdventurerScroll shopAgent)
+        public void AddItem(ShopItem item, ShopAgent shopAgent)
         {
-            Refresh();
             var foundItem = FindItem(item);
             if (foundItem != null)
             {
@@ -97,7 +97,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             {
                 var isItem = i.inventoryItem == item.inventoryItem;
                 var isPrice = item.price == i.price;
-                var isSeller = i.seller == item.seller;
                 //Debug.Log(isSeller + "\t" + isItem + "\t" + isPrice);
                 if (isItem && isPrice)
                 {
@@ -108,7 +107,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             return null;
         }
 
-        public void TransferToShop(ShopItem item, IAdventurerScroll seller, int stockNumber = 1)
+        public void TransferToShop(ShopItem item, ShopAgent seller, int stockNumber = 1)
         {
             var newItem = new ShopItem(item, stockNumber, seller);
             AddItem(newItem, seller);

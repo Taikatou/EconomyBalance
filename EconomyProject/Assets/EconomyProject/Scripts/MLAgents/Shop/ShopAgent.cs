@@ -19,7 +19,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
     [RequireComponent(typeof(CraftingAbility))]
     [RequireComponent(typeof(CraftingInventory))]
     [RequireComponent(typeof(AgentInventory))]
-    public class ShopAgent : Agent, IAdventurerScroll
+    public class ShopAgent : Agent
     {
         [HideInInspector]
         public RequestSystem requestSystem;
