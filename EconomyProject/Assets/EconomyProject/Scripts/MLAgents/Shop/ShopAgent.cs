@@ -13,15 +13,21 @@ using ResourceRequest = Assets.EconomyProject.Scripts.GameEconomy.Systems.Reques
 namespace Assets.EconomyProject.Scripts.MLAgents.Shop
 {
     public enum ShopDecision { Ignore, Submit , ChangePriceDown, ChangePriceUp}
+
+    [RequireComponent(typeof(ShopAbility))]
+    [RequireComponent(typeof(EconomyWallet))]
+    [RequireComponent(typeof(CraftingAbility))]
+    [RequireComponent(typeof(CraftingInventory))]
+    [RequireComponent(typeof(AgentInventory))]
     public class ShopAgent : Agent, IAdventurerScroll
     {
-        public ShopAbility ShopAbility => GetComponent<ShopAbility>();
-        public EconomyWallet Wallet => GetComponent<EconomyWallet>();
-        public List<ShopItem> ItemList => ShopAbility.shopItems;
-        public MarketPlace MarketPlace => GetComponentInParent<AgentSpawner>().marketPlace;
-
+        [HideInInspector]
         public RequestSystem requestSystem;
         public CraftsmanScreen CurrentScreen { get; private set; }
+        public List<ShopItem> ItemList => ShopAbility.shopItems;
+        public ShopAbility ShopAbility => GetComponent<ShopAbility>();
+        public EconomyWallet Wallet => GetComponent<EconomyWallet>();
+        public MarketPlace MarketPlace => GetComponentInParent<AgentSpawner>().marketPlace;
         public CraftingAbility CraftingAbility => GetComponent<CraftingAbility>();
         public CraftingInventory CraftingInventory => GetComponent<CraftingInventory>();
         public AgentInventory AgentInventory => GetComponent<AgentInventory>();
@@ -63,7 +69,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             return null;
         }
 
-
         public override void AgentAction(float[] vectorAction, string textAction)
         {
             AgentActionShopping(vectorAction, textAction);
@@ -83,6 +88,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
             AddVectorObs((float)Wallet.Money);
             Wallet.ResetStep();
         }
+
         public void AgentActionShopping(float[] vectorAction, string textAction)
         {
             
