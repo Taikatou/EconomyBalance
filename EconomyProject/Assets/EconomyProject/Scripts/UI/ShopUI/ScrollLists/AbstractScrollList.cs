@@ -41,9 +41,10 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
 
         public void RemoveButtons()
         {
+            Debug.Log(contentPanel);
             while (contentPanel.childCount > 0)
             {
-                var toRemove = transform.GetChild(0).gameObject;
+                var toRemove = contentPanel.GetChild(0).gameObject;
                 buttonObjectPool.ReturnObject(toRemove);
             }
         }
@@ -68,6 +69,7 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
 
         private void Update()
         {
+            Debug.Log(LastUpdated);
             if (_lastUpdated != LastUpdated.LastUpdated)
             {
                 var valid = RefreshDisplay();

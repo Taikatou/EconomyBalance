@@ -1,5 +1,4 @@
 ﻿using Assets.EconomyProject.Scripts.MLAgents.Shop;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,13 +9,10 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
         public Button moveToMarketplaceButton;
         public Button backButton;
         public Button saveButton;
-
         public InputField newPriceField;
 
         private ShopItem _shopItem;
-
         private MarketPlace _marketPlace;
-
         private ShopAgent _seller;
 
         private void Start()

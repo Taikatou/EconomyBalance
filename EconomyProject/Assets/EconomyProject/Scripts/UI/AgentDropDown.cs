@@ -24,10 +24,10 @@ namespace Assets.EconomyProject.Scripts.UI
         {
             foreach (var agent in AgentList)
             {
-                AgentID agentId = agent.GetComponent<AgentID>();
+                var agentId = agent.GetComponent<AgentID>();
                 if (agentId != null)
                 {
-                    string agentIdStr = agentId.agentId.ToString();
+                    var agentIdStr = agentId.agentId.ToString();
                     if (!_agentIds.Contains(agentIdStr))
                     {
                         _agentIds.Add(agentIdStr);
