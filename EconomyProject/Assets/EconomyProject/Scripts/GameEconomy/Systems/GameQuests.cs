@@ -9,21 +9,21 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
     {
         public float spawnTime = 3.0f;
 
-        private float _currentTime;
-
         public GenericLootDropTableGameObject lootDropTable;
 
         public bool finiteMonsters = true;
 
         public bool autoReturn = false;
 
-        private bool _shouldReturn;
-
         public GameAuction auction;
 
         public bool multipleLootDrops = true;
 
         public bool punishFailure = true;
+
+        private bool _shouldReturn;
+
+        private float _currentTime;
 
         public override float Progress => _currentTime / spawnTime;
 

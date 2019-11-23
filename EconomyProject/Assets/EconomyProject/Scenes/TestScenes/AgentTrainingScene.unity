@@ -860,7 +860,7 @@ PrefabInstance:
     - target: {fileID: 1097284254856806852, guid: f2aa003806f546a4e934199940c7cc66,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1097284253472533467, guid: f2aa003806f546a4e934199940c7cc66,
         type: 3}
@@ -926,16 +926,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SystemSpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 8347381408878603647, guid: cbee2cf58de57f745aff94465d71b982,
-        type: 3}
-      propertyPath: numLearningAgents
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8347381408878603647, guid: cbee2cf58de57f745aff94465d71b982,
-        type: 3}
-      propertyPath: numCoreSpawn
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8347381408878603644, guid: cbee2cf58de57f745aff94465d71b982,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -990,6 +980,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347381408878603647, guid: cbee2cf58de57f745aff94465d71b982,
+        type: 3}
+      propertyPath: numLearningAgents
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347381408878603647, guid: cbee2cf58de57f745aff94465d71b982,
+        type: 3}
+      propertyPath: numCoreSpawn
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbee2cf58de57f745aff94465d71b982, type: 3}

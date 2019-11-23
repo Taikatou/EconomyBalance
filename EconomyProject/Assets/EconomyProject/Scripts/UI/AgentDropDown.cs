@@ -11,13 +11,13 @@ namespace Assets.EconomyProject.Scripts.UI
     {
         public Dropdown dropDown;
 
-        private readonly HashSet<string> _agentIds  = new HashSet<string>();
-
-        public Agent[] AgentList => getCurrentAgent.GetAgents;
+        private readonly HashSet<string> _agentIds = new HashSet<string>();
 
         private bool _setOption;
 
         public GetCurrentAgent getCurrentAgent;
+
+        public Agent[] AgentList => getCurrentAgent.GetAgents;
 
         // Update is called once per frame
         private void Update()
@@ -40,13 +40,7 @@ namespace Assets.EconomyProject.Scripts.UI
             {
                 _setOption = true;
                 dropDown.value = 0;
-                UpdateChange();
             }
-        }
-
-        protected virtual void UpdateChange()
-        {
-
         }
 
         private void Start()
@@ -61,7 +55,8 @@ namespace Assets.EconomyProject.Scripts.UI
             var id = dropDown.options[dropDown.value].text;
             foreach (var agent in AgentList)
             {
-                if (agent.GetComponent<AgentID>().agentId == Int32.Parse(id))
+                var agentId = agent.GetComponent<AgentID>();
+                if (agentId.agentId == int.Parse(id))
                 {
                     UpdateAgent(agent);
                 }

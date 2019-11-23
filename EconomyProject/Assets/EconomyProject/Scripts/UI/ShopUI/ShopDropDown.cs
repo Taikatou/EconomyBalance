@@ -1,4 +1,5 @@
 ﻿using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+using MLAgents;
 
 namespace Assets.EconomyProject.Scripts.UI.ShopUI
 {
@@ -6,9 +7,10 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI
     {
         public AgentShopScrollList agentScrollList;
 
-        protected override void UpdateChange()
+        protected override void UpdateAgent(Agent agent)
         {
-            // agentScrollList.UpdateAgent(AgentList[0]);
+            base.UpdateAgent(agent);
+            agentScrollList.RefreshDisplay();
         }
     }
 }
