@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.EconomyProject.Scripts.MLAgents.Shop;
+using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
 {

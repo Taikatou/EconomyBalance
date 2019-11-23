@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
 using UnityEngine;
@@ -25,8 +24,9 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
     public abstract class AbstractScrollList<T, TQ> : MonoBehaviour, IScrollList<T>  where TQ : SampleButton<T>
     {
         public Transform contentPanel;
-        private DateTime _lastUpdated;
         public SimpleObjectPool buttonObjectPool;
+
+        private DateTime _lastUpdated;
 
         public abstract List<T> ItemList { get; }
         public abstract LastUpdate LastUpdated { get; }
@@ -41,7 +41,6 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
 
         public void RemoveButtons()
         {
-            Debug.Log(contentPanel);
             while (contentPanel.childCount > 0)
             {
                 var toRemove = contentPanel.GetChild(0).gameObject;
@@ -69,16 +68,13 @@ namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
 
         private void Update()
         {
-            Debug.Log(LastUpdated);
             if (_lastUpdated != LastUpdated.LastUpdated)
             {
                 var valid = RefreshDisplay();
                 if (valid)
                 {
                     _lastUpdated = LastUpdated.LastUpdated;
-                    Debug.Log("Add Button");
                 }
-                Debug.Log("Update");
             }
         }
     }

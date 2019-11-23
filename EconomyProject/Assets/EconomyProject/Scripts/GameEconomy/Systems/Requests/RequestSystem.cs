@@ -79,6 +79,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
         {
             ResourceRequests = new List<ResourceRequest>();
             _craftingNumber = new Dictionary<CraftingInventory, List<ResourceRequest>>();
+            Refresh();
         }
 
         public bool MakeRequest(CraftingResources resources, CraftingInventory inventory)

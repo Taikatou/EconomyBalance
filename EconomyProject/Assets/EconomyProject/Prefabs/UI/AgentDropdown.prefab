@@ -186,7 +186,6 @@ GameObject:
   - component: {fileID: 6324018288464640173}
   - component: {fileID: 6324018288464640172}
   - component: {fileID: 6324018288464640179}
-  - component: {fileID: 6324018288464640176}
   m_Layer: 5
   m_Name: CraftsmanDropdown
   m_TagString: Untagged
@@ -304,21 +303,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_AlphaFadeSpeed: 0.15
---- !u!114 &6324018288464640176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6324018288464640177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 751c8748c7e56c241bb8e932e966c97d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropDown: {fileID: 6324018288464640179}
-  agentList: {fileID: 0}
-  craftsManMenu: {fileID: 0}
 --- !u!1 &6324018288630406569
 GameObject:
   m_ObjectHideFlags: 0
