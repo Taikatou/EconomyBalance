@@ -458,8 +458,8 @@ namespace MLAgents
         }
 
         /// Helper function that resets all the data structures associated with
-        /// the agent. Typically uepisodesed when the agent is being initialized or reset
-        /// at the end of an .
+        /// the agent. Typically used when the agent is being initialized or reset
+        /// at the end of an episode.
         void ResetData()
         {
             var param = m_PolicyFactory.brainParameters;
