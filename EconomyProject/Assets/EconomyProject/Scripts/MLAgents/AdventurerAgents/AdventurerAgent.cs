@@ -1,7 +1,6 @@
 ﻿using Assets.EconomyProject.Scripts.GameEconomy;
 using Assets.EconomyProject.Scripts.GameEconomy.Systems;
 using Assets.EconomyProject.Scripts.Inventory;
-using MLAgents;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
@@ -10,31 +9,28 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
     public enum AuctionChoice { Ignore, Bid }
 
-    public class AdventurerAgent : Agent, IObsAgent
+    [RequireComponent(typeof(AgentInventory))]
+    [RequireComponent(typeof(AdventurerInventory))]
+    [RequireComponent(typeof(EconomyWallet))]
+    public class AdventurerAgent : Observations
     {
-        public InventoryItem endItem;
-
-        public bool resetOnComplete = false;
-
-        public bool punishLoss = false;
-
         public bool printObservations = false;
 
         public bool canSeeDistribution = true;
 
-        public AgentInventory Inventory => GetComponent<AgentInventory>();
+        public AgentInventory inventory;
 
-        public AdventurerInventory AdventurerInventory => GetComponent<AdventurerInventory>();
+        public AdventurerInventory adventurerInventory;
 
-        public InventoryItem Item => AdventurerInventory.EquipedItem;
+        public EconomyWallet wallet;
 
-        public GameAuction GameAuction => GetComponentInParent<AdventurerSpawner>().gameAuction;
+        public GameAuction gameAuction;
 
-        public PlayerInput PlayerInput => GetComponentInParent<AdventurerSpawner>().playerInput;
+        public PlayerInput playerInput;
 
-        public AgentScreen ChosenScreen => PlayerInput.GetScreen(this);
+        public InventoryItem Item => adventurerInventory.EquipedItem;
 
-        public EconomyWallet Wallet => GetComponent<EconomyWallet>();
+        public AgentScreen ChosenScreen => playerInput.GetScreen(this);
 
         public override void AgentReset()
         {
@@ -44,29 +40,14 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public void ResetEconomyAgent()
         {
-            Inventory.ResetInventory();
-            Wallet.Reset();
+            inventory.ResetInventory();
+            wallet.Reset();
         }
-
 
         public void BoughtItem(InventoryItem item, float cost)
         {
-            Inventory.AddItem(item);
-            Wallet?.SpendMoney(cost);
-
-            if (resetOnComplete && item && endItem)
-            {
-                if (item.itemName == endItem.itemName)
-                {
-                    Done();
-                }
-            }
-            AddReward(item.efficiency / endItem.efficiency);
-        }
-
-        public void DecreaseDurability()
-        {
-            AdventurerInventory.DecreaseDurability();
+            inventory.AddItem(item);
+            wallet.SpendMoney(cost);
         }
 
         public override void AgentAction(float[] vectorAction, string textAction)
@@ -83,16 +64,17 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public virtual void AgentAction(int mainAction, int auctionAction)
         {
-            PlayerInput.SetAgentAction(this, mainAction, auctionAction);
+            playerInput.SetAgentAction(this, mainAction, auctionAction);
         }
 
         private string AddAuctionObs(InventoryItem item)
         {
-            var output = Observations.AddVectorObs(this, item);
-            output += Observations.AddVectorObs(this, true, GameAuction.IsHighestBidder(this), "Is Highest Bidder");
-            output += Observations.AddVectorObs(this, GameAuction.currentItemPrice, "Current Price");
-            AddVectorObs(GameAuction.BidLast);
-            AddVectorObs(GameAuction.BidOn);
+            var output = AddVectorObs(item);
+            var highestBidder = gameAuction.IsHighestBidder(this);
+            output += AddVectorObs(highestBidder, "Is Highest Bidder");
+            output += AddVectorObs(gameAuction.currentItemPrice, "Current Price");
+            AddVectorObs(gameAuction.BidLast);
+            AddVectorObs(gameAuction.BidOn);
 
             return output;
         }
@@ -106,50 +88,21 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         public override void CollectObservations()
         {
             var output = AddVectorObs(ChosenScreen, "Chosen Screen");
-            output += Observations.AddVectorObs(this, Wallet ? (float)Wallet.Money : 0.0f, "Money");
-            output += Observations.AddVectorObs(this, Item);
-            output += Observations.AddVectorObs(this, GameAuction.ItemCount, "Auction Item Count");
-            output += Observations.AddVectorObs(this, Inventory.ItemCount, "Inventory Item Count");
-            output += Observations.AddVectorObs(this, PlayerInput.GetProgress(this), "Progress");
-            output += Observations.AddVectorObs(this, GameAuction.currentItemPrice, "Current Item Price");
-            output += Observations.AddVectorObs(this, canSeeDistribution ? PlayerInput.NumberInAuction : 0, "Number in auction");
-            output += Observations.AddVectorObs(this, canSeeDistribution ? PlayerInput.NumberInQuest : 0, "Number in quest");
+            output += AddVectorObs(wallet ? (float)wallet.Money : 0.0f, "Money");
+            output += AddVectorObs(Item);
+            output += AddVectorObs(gameAuction.ItemCount, "Auction Item Count");
+            output += AddVectorObs(inventory.ItemCount, "Inventory Item Count");
+            output += AddVectorObs(playerInput.GetProgress(this), "Progress");
+            output += AddVectorObs(gameAuction.currentItemPrice, "Current Item Price");
+            output += AddVectorObs(canSeeDistribution ? playerInput.NumberInAuction : 0, "Number in auction");
+            output += AddVectorObs(canSeeDistribution ? playerInput.NumberInQuest : 0, "Number in quest");
 
-            output += AddAuctionObs(GameAuction.auctionedItem);
+            output += AddAuctionObs(gameAuction.auctionedItem);
 
             if (printObservations)
             {
                 Debug.Log(output);
             }
-        }
-
-        public void EarnMoney(float amount)
-        {
-            Wallet.EarnMoney(amount);
-            var reward = (amount / endItem.rewardPrice) / 5;
-        }
-
-        public void LoseMoney(float amount, float punishment=0.1f)
-        {
-            if (punishLoss)
-            {
-                Wallet.LoseMoney(amount);
-            }
-        }
-
-        public new void AddVectorObs(float observation)
-        {
-            base.AddVectorObs(observation);
-        }
-
-        public new void AddVectorObs(int observation)
-        {
-            base.AddVectorObs(observation);
-        }
-
-        public new void AddVectorObs(bool observation)
-        {
-            base.AddVectorObs(observation);
         }
     }
 }

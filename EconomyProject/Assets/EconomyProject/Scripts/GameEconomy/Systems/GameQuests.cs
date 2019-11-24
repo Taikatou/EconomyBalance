@@ -85,13 +85,13 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             if(questSuccess)
             {
                 var money = GenerateItem(agent.Item) / 2;
-                agent.EarnMoney(money);
+                agent.wallet.EarnMoney(money);
             }
             else if (punishFailure)
             {
-                agent.LoseMoney(2);
+                agent.wallet.LoseMoney(2);
             }
-            agent.DecreaseDurability();
+            agent.adventurerInventory.DecreaseDurability();
         }
 
         private float GenerateItem(InventoryItem attackWeapon)

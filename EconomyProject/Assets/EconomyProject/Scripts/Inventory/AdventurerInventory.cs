@@ -5,10 +5,11 @@ using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.Inventory
 {
+    [RequireComponent(typeof(AgentInventory))]
     public class AdventurerInventory : MonoBehaviour
     {
-        public AgentInventory AgentInventory => GetComponent<AgentInventory>();
-        public List<InventoryItem> Items => AgentInventory.Items;
+        public AgentInventory agentInventory;
+        public List<InventoryItem> Items => agentInventory.Items;
 
         public InventoryItem EquipedItem
         {
@@ -26,7 +27,7 @@ namespace Assets.EconomyProject.Scripts.Inventory
 
         public void DecreaseDurability()
         {
-            AgentInventory.DecreaseDurability(EquipedItem);
+            agentInventory.DecreaseDurability(EquipedItem);
         }
     }
 }

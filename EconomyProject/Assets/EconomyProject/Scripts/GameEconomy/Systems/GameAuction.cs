@@ -173,7 +173,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             {
                 var newPrice = currentItemPrice + bidIncrement;
 
-                if (!IsHighestBidder(agent) && agent.Wallet.Money >= newPrice)
+                if (!IsHighestBidder(agent) && agent.wallet.Money >= newPrice)
                 {
                     _currentHighestBidder = agent;
                     currentItemPrice = newPrice;

@@ -1,47 +1,40 @@
 ﻿using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using MLAgents;
-using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents
 {
-    public interface IObsAgent
+    public class Observations : Agent
     {
-        void AddVectorObs(float observation);
-        void AddVectorObs(int observation);
-        void AddVectorObs(bool observation);
-    }
-    public class Observations : MonoBehaviour
-    {
-        public static string AddVectorObs(IObsAgent agent, InventoryItem item, bool condition = true, float defaultObs = 0.0f)
+        public string AddVectorObs(InventoryItem item, bool condition = true, float defaultObs = 0.0f)
         {
             condition = condition && item;
             var output = " Current Item";
-            output += AddVectorObs(agent, condition ? WeaponId.GetWeaponId(item.itemName) : -1, "ItemName");
-            output += AddVectorObs(agent, condition ? item.durability : defaultObs, "Durability");
-            output += AddVectorObs(agent, condition ? item.baseDurability : defaultObs, "Base Durability");
-            output += AddVectorObs(agent, condition ? item.numLootSpawns : defaultObs, "Num Loot Spawn");
-            output += AddVectorObs(agent, condition ? item.efficiency : defaultObs, "Efficiency");
-            output += AddVectorObs(agent, condition, item && item.unBreakable, "Unbreakable");
+            output += AddVectorObs(condition ? WeaponId.GetWeaponId(item.itemName) : -1, "ItemName");
+            output += AddVectorObs(condition ? item.durability : defaultObs, "Durability");
+            output += AddVectorObs(condition ? item.baseDurability : defaultObs, "Base Durability");
+            output += AddVectorObs(condition ? item.numLootSpawns : defaultObs, "Num Loot Spawn");
+            output += AddVectorObs(condition ? item.efficiency : defaultObs, "Efficiency");
+            output += AddVectorObs(item && item.unBreakable, "Unbreakable", condition);
 
             return output;
         }
 
-        public static string AddVectorObs(IObsAgent agent, float observation, string obsName)
+        public string AddVectorObs(float observation, string obsName)
         {
-            agent.AddVectorObs(observation);
+            AddVectorObs(observation);
             return " " + obsName + ": " + observation;
         }
 
-        public static string AddVectorObs(IObsAgent agent, bool valid, bool observation, string obsName)
+        public string AddVectorObs(bool observation, string obsName, bool valid=true)
         {
             if (valid)
             {
-                agent.AddVectorObs(observation ? 1 : 2);
+                AddVectorObs(observation ? 1 : 2);
             }
             else
             {
-                agent.AddVectorObs(0);
+                AddVectorObs(0);
             }
 
             return " " + obsName + ": " + observation;

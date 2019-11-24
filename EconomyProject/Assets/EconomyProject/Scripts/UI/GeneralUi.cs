@@ -51,7 +51,7 @@ namespace Assets.EconomyProject.Scripts.UI
             }
             if(AdventurerAgent)
             {
-                moneyText.text = "MONEY: " + AdventurerAgent.Wallet.Money;
+                moneyText.text = "MONEY: " + AdventurerAgent.wallet.Money;
 
                 if(AdventurerAgent.Item)
                 {

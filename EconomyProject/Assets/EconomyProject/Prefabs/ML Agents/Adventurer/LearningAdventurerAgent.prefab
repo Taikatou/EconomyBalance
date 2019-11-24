@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1817350387931501863}
   - component: {fileID: 2072330097273742403}
   - component: {fileID: 5616954730062649782}
+  - component: {fileID: 2031183246495122174}
   m_Layer: 0
   m_Name: LearningAdventurerAgent
   m_TagString: Untagged
@@ -76,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a01aab7e5f3c274a90a9307fb39ef3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentInventory: {fileID: 1817350387931501863}
 --- !u!114 &1817350387931501863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,11 +128,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentParameters:
     maxStep: 10000
-    resetOnDone: 0
+    resetOnDone: 1
     onDemandDecision: 1
     numberOfActionsBetweenDecisions: 5
-  endItem: {fileID: 11400000, guid: f2ee4c3d87136284f911c5dc145ee12c, type: 2}
-  resetOnComplete: 0
-  punishLoss: 0
   printObservations: 0
   canSeeDistribution: 1
+  inventory: {fileID: 1817350387931501863}
+  adventurerInventory: {fileID: 4250931923004593224}
+  wallet: {fileID: -4706628768726033178}
+  gameAuction: {fileID: 0}
+  playerInput: {fileID: 0}
+--- !u!114 &2031183246495122174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7707616417561859250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 438c0747593a1bb49801648c54cda81c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endItem: {fileID: 11400000, guid: f2ee4c3d87136284f911c5dc145ee12c, type: 2}
+  resetOnComplete: 0
+  completeAgent: {fileID: 5616954730062649782}
+  addReward: 0

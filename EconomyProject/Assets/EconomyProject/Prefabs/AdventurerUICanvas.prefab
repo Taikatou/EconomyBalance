@@ -2740,7 +2740,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropDown: {fileID: 1803083247232106862}
-  agentList: {fileID: 0}
   getCurrentAgent: {fileID: 287734434}
 --- !u!1 &1822334218183296832
 GameObject:

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.MLAgents
 {
@@ -9,13 +10,13 @@ namespace Assets.EconomyProject.Scripts.MLAgents
             for (var i = 0; i < numLearningAgents; i++)
             {
                 var agentPrefab = Spawn(learningAgentPrefab);
-                agentPrefab.transform.parent = gameObject.transform;
             }
         }
 
         public virtual GameObject Spawn(GameObject toSpawnPrefab)
         {
             var agentPrefab = Instantiate(toSpawnPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            agentPrefab.transform.parent = gameObject.transform;
             return agentPrefab;
         }
     }

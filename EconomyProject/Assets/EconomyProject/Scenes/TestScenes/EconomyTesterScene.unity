@@ -504,6 +504,21 @@ PrefabInstance:
       propertyPath: agentParent
       value: 
       objectReference: {fileID: 122471032}
+    - target: {fileID: 1097284254681568235, guid: f2aa003806f546a4e934199940c7cc66,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097284254950142914, guid: f2aa003806f546a4e934199940c7cc66,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097284254950142914, guid: f2aa003806f546a4e934199940c7cc66,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2aa003806f546a4e934199940c7cc66, type: 3}
 --- !u!1 &1513299671
