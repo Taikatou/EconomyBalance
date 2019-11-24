@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 1817350387931501863}
   - component: {fileID: 2072330097273742403}
   - component: {fileID: 5616954730062649782}
-  - component: {fileID: 2031183246495122174}
   m_Layer: 0
   m_Name: LearningAdventurerAgent
   m_TagString: Untagged
@@ -138,19 +137,3 @@ MonoBehaviour:
   wallet: {fileID: -4706628768726033178}
   gameAuction: {fileID: 0}
   playerInput: {fileID: 0}
---- !u!114 &2031183246495122174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7707616417561859250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 438c0747593a1bb49801648c54cda81c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  endItem: {fileID: 11400000, guid: f2ee4c3d87136284f911c5dc145ee12c, type: 2}
-  resetOnComplete: 0
-  completeAgent: {fileID: 5616954730062649782}
-  addReward: 0

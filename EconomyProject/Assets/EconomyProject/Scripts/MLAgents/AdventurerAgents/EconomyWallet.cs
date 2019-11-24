@@ -7,11 +7,10 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
     {
         public double startMoney;
 
-        public double earnedMoney;
-
-        public double spentMoney;
-
+        public double EarnedMoney { get; private set; }
+        public double SpentMoney { get; private set; }
         public double Money { get; private set; }
+
         // Start is called before the first frame update
         void Start()
         {
@@ -23,7 +22,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
             if (amount > 0)
             {
                 Money = Math.Round(Money + amount);
-                earnedMoney += amount;
+                EarnedMoney += amount;
             }
         }
 
@@ -32,7 +31,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
             if (amount < 0)
             {
                 Money = Math.Round(Money + amount);
-                spentMoney += amount;
+                SpentMoney += amount;
             }
         }
 
@@ -56,8 +55,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public void ResetStep()
         {
-            earnedMoney = 0;
-            spentMoney = 0;
+            EarnedMoney = 0;
+            SpentMoney = 0;
         }
     }
 }

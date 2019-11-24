@@ -83,8 +83,8 @@ namespace Assets.EconomyProject.Scripts.MLAgents.Shop
         {
             AddVectorObs(MarketPlace.SellersItems(this));
 
-            AddVectorObs((float)Wallet.earnedMoney);
-            AddVectorObs((float)Wallet.spentMoney);
+            AddVectorObs((float)Wallet.EarnedMoney);
+            AddVectorObs((float)Wallet.SpentMoney);
             AddVectorObs((float)Wallet.Money);
             Wallet.ResetStep();
         }

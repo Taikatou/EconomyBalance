@@ -8,7 +8,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
     {
         public void Reset()
         {
-            AdventurerAgent [] agents = GetComponentsInChildren<AdventurerAgent>();
+            var agents = GetComponentsInChildren<AdventurerAgent>();
             foreach (var agent in agents)
             {
                 agent.ResetEconomyAgent();
@@ -17,7 +17,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
             var gameAuction = GetComponentInChildren<GameAuction>();
             gameAuction?.Reset();
 
-            DataLogger dLogger = GetComponentInChildren<DataLogger>();
+            var dLogger = GetComponentInChildren<DataLogger>();
             dLogger?.Reset();
         }
     }

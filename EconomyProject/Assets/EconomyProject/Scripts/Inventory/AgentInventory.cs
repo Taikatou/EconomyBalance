@@ -59,5 +59,19 @@ namespace Assets.EconomyProject.Scripts.Inventory
                 }
             }
         }
+
+        public bool ContainsItem(InventoryItem searchItem)
+        {
+            var found = false;
+            foreach (var item in Items)
+            {
+                if (item.itemName == searchItem.itemName)
+                {
+                    found = true;
+                }
+            }
+
+            return found;
+        }
     }
 }

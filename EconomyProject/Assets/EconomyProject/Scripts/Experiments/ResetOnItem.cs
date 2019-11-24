@@ -10,22 +10,19 @@ namespace Assets.EconomyProject.Scripts.Experiments
 
         public bool resetOnComplete = false;
 
-        public AdventurerAgent completeAgent;
+        public AdventurerAgent [] Agents => GetComponentsInChildren<AdventurerAgent>();
 
-        public bool addReward;
-
-        public void CheckItem(InventoryItem item)
+        private void Update()
         {
-            if (resetOnComplete && item && endItem)
+            if (resetOnComplete && endItem)
             {
-                if (item.itemName == endItem.itemName)
+                foreach (var agent in Agents)
                 {
-                    if (addReward)
+                    var hasEndItem = agent.inventory.ContainsItem(endItem);
+                    if (hasEndItem)
                     {
-                        var reward = item.efficiency / endItem.efficiency;
-                        completeAgent.AddReward(reward);
+                        agent.Done();
                     }
-                    completeAgent.Done();
                 }
             }
         }
