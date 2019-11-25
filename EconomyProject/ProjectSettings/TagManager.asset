@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Climb
+  - Fly
   - ground
   - target
   - wall
@@ -25,6 +27,8 @@ TagManager:
   - iWall
   - switchOff
   - pit
+  - Animal
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -46,7 +50,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Animal
   - 
   - 
   - 
