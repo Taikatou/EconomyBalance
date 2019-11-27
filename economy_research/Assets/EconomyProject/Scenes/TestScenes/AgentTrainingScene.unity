@@ -779,14 +779,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2011312968382217257, guid: 7984588dcb920ef4d82ce338990a333a,
-        type: 3}
-      propertyPath: coreGameSystem
-      value: 
-      objectReference: {fileID: 938610672}
     - target: {fileID: 2011312968382217258, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
       propertyPath: agentParent
+      value: 
+      objectReference: {fileID: 938610672}
+    - target: {fileID: 2011312968382217257, guid: 7984588dcb920ef4d82ce338990a333a,
+        type: 3}
+      propertyPath: coreGameSystem
       value: 
       objectReference: {fileID: 938610672}
     - target: {fileID: 2011312970123600004, guid: 7984588dcb920ef4d82ce338990a333a,
@@ -876,7 +876,7 @@ PrefabInstance:
     - target: {fileID: 8347381408878603647, guid: cbee2cf58de57f745aff94465d71b982,
         type: 3}
       propertyPath: numLearningAgents
-      value: 1
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8347381408878603647, guid: cbee2cf58de57f745aff94465d71b982,
         type: 3}

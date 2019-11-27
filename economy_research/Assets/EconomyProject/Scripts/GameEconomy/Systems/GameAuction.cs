@@ -147,6 +147,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         public void ReturnToMain()
         {
+            _auctionOn = false;
             foreach (var agent in CurrentPlayers)
             {
                 playerInput.SetMainAction(agent, AgentScreen.Main);
@@ -159,7 +160,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
             {
                 return true;
             }
-            return !(_currentHighestBidder == agent && _currentHighestBidder && agent);
+
+            var valid = _currentHighestBidder && agent;
+            var highestBidder = _currentHighestBidder == agent;
+            return !(highestBidder && valid);
         }
 
         public bool IsHighestBidder(AdventurerAgent agent)

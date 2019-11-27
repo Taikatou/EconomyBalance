@@ -1,5 +1,6 @@
 ﻿using Assets.EconomyProject.Scripts.Inventory;
 using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using UnityEditor;
 using UnityEngine;
 
 namespace Assets.EconomyProject.Scripts.Experiments
@@ -10,7 +11,9 @@ namespace Assets.EconomyProject.Scripts.Experiments
 
         public bool resetOnComplete = false;
 
-        public AdventurerAgent [] Agents => GetComponentsInChildren<AdventurerAgent>();
+        public GameObject agentList;
+
+        public AdventurerAgent [] Agents => agentList?.GetComponentsInChildren<AdventurerAgent>();
 
         private void Update()
         {
@@ -21,6 +24,8 @@ namespace Assets.EconomyProject.Scripts.Experiments
                     var hasEndItem = agent.inventory.ContainsItem(endItem);
                     if (hasEndItem)
                     {
+                        Debug.Log("Complete");
+                        agent.AddReward(1);
                         agent.Done();
                     }
                 }

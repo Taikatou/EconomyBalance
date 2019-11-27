@@ -32,6 +32,11 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public AgentScreen ChosenScreen => playerInput.GetScreen(this);
 
+        private void Start()
+        {
+            agentParameters.onDemandDecision = true;
+        }
+
         public override void AgentReset()
         {
             var reset = GetComponentInParent<ResetScript>();

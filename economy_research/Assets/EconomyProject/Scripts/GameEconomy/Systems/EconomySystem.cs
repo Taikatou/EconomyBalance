@@ -20,7 +20,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         {
             get
             {
-                AdventurerAgent[] playerAgents = agents.GetComponentsInChildren<AdventurerAgent>();
+                var playerAgents = agents.GetComponentsInChildren<AdventurerAgent>();
                 return Array.FindAll(playerAgents, element => element.ChosenScreen == ActionChoice);
             }
         }
