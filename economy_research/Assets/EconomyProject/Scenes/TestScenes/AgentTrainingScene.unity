@@ -881,7 +881,7 @@ PrefabInstance:
     - target: {fileID: 8347381408878603647, guid: cbee2cf58de57f745aff94465d71b982,
         type: 3}
       propertyPath: numCoreSpawn
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8347381408878603644, guid: cbee2cf58de57f745aff94465d71b982,
         type: 3}
