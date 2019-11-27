@@ -11,6 +11,9 @@
 /**/[Mm]emoryCaptures/
 /[Bb]uild_env/
 
+/config/summaries/
+/config/models/
+
 # Never ignore Asset meta data
 !/**/[Aa]ssets/**/*.meta
 

@@ -287,10 +287,10 @@ Basic:
             strength: 1.0
             gamma: 0.9
 
-AdventurerLearningBrain:
+Adventurer:
     normalize: false
     summary_freq: 2000
-    time_horizon: 128
+    time_horizon: 2048
     batch_size: 128
     buffer_size: 2048
     hidden_units: 256

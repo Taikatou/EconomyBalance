@@ -49,8 +49,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMoney: 0
-  earnedMoney: 0
-  spentMoney: 0
 --- !u!114 &5620581771315865838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +110,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_UseHeuristic: 0
-  m_BehaviorName: AdventurerLearningBrain
+  m_BehaviorName: Adventurer
 --- !u!114 &5616954730062649782
 MonoBehaviour:
   m_ObjectHideFlags: 0
