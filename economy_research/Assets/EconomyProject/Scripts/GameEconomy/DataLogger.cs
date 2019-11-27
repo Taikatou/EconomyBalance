@@ -32,8 +32,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
 
     public class DataLogger : MonoBehaviour
     {
-        private List<AuctionItem> _auctionItems;
-
         public static int staticLoggerId = 0;
 
         public string learningEnvironmentId = "agent_id_";
@@ -41,6 +39,8 @@ namespace Assets.EconomyProject.Scripts.GameEconomy
         public int loggerId;
 
         private int _resetCount = 0;
+
+        private List<AuctionItem> _auctionItems;
 
         private Dictionary<InventoryItem, List<float>> _itemPrices;
 

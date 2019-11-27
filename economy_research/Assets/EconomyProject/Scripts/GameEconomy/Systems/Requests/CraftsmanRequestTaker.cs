@@ -5,11 +5,11 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
     public class CraftsmanRequestTaker : RequestTaker
     {
-        public ShopAgent CraftsMan => GetComponent<ShopAgent>();
-        public override List<ResourceRequest> ItemList => CraftsMan.GetCraftingRequests();
+        public ShopAgent craftsMan;
+        public override List<ResourceRequest> ItemList => craftsMan.GetCraftingRequests();
         public override void TakeRequest(ResourceRequest request)
         {
-            CraftsMan.requestSystem.RemoveRequest(request, CraftsMan.CraftingInventory);
+            craftsMan.requestSystem.RemoveRequest(request, craftsMan.CraftingInventory);
         }
     }
 }

@@ -8,10 +8,6 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 {
     public class GameAuction : EconomySystem
     {
-        public int ItemCount => _inventoryItems.Count;
-
-        public float bidIncrement = 5.0f;
-
         [HideInInspector]
         public InventoryItem auctionedItem;
 
@@ -23,15 +19,19 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
 
         public float auctionTime = 5.0f;
 
-        private AdventurerAgent _currentHighestBidder;
+        public float bidIncrement = 5.0f;
 
-        private bool _auctionOn;
+        private AdventurerAgent _currentHighestBidder;
 
         public float addChance = 0.3f;
 
         public float maxInventory = 50;
 
         private List<InventoryItem> _inventoryItems;
+
+        private bool _auctionOn;
+
+        public int ItemCount => _inventoryItems.Count;
 
         public override float Progress => currentAuctionTime / auctionTime;
 
@@ -60,9 +60,9 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
                 _auctionOn = _inventoryItems.Count > 0;
                 if (_auctionOn)
                 {
-                    System.Random rnd = new System.Random();
+                    var rnd = new System.Random();
 
-                    int index = rnd.Next(_inventoryItems.Count);
+                    var index = rnd.Next(_inventoryItems.Count);
 
                     auctionedItem = _inventoryItems[index];
 
@@ -137,7 +137,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
         {
             foreach (var agent in CurrentPlayers)
             {
-                bool notHighest = !IsHighestBidder(agent);
+                var notHighest = !IsHighestBidder(agent);
                 if (notHighest)
                 {
                     agent.RequestDecision();

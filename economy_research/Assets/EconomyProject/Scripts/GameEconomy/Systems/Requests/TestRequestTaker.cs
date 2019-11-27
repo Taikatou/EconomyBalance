@@ -4,11 +4,11 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
     public class TestRequestTaker : AdventurerRequestTaker
     {
+        public float timeToSpawn = 2;
+
         public RequestSystem requestRecord;
 
         private float _currentTime;
-
-        public float timeToSpawn = 2;
         private void Update()
         {
             _currentTime += Time.deltaTime;

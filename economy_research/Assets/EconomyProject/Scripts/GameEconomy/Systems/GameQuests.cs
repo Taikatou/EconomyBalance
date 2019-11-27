@@ -9,17 +9,17 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
     {
         public float spawnTime = 3.0f;
 
-        public GenericLootDropTableGameObject lootDropTable;
-
         public bool finiteMonsters = true;
 
         public bool autoReturn = false;
 
-        public GameAuction auction;
-
         public bool multipleLootDrops = true;
 
         public bool punishFailure = true;
+
+        public GameAuction auction;
+
+        public GenericLootDropTableGameObject lootDropTable;
 
         private bool _shouldReturn;
 

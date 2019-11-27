@@ -7,11 +7,10 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
     public class ResourceRequest
     {
+        private bool _resourceAdded;
         public int Number { get; }
         public CraftingResources Resources { get; }
         public CraftingInventory Inventory { get; }
-
-        private bool _resourceAdded;
 
         public ResourceRequest(CraftingResources resources, CraftingInventory inventory, int number = 1)
         {
@@ -32,11 +31,11 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 
     public class RequestSystem : LastUpdate
     {
+        public RequestRecord requestRecord;
+
         public List<ResourceRequest> ResourceRequests { get; private set; }
 
         private Dictionary<CraftingInventory, List<ResourceRequest>> _craftingNumber;
-
-        public RequestRecord RequestRecord => GetComponent<RequestRecord>();
 
         public List<ResourceRequest> GetCraftingRequests(CraftingInventory inventory)
         {
@@ -114,7 +113,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
         {
             if (ResourceRequests.Contains(takeRequest))
             {
-                RequestRecord.AddRequest(requestTaker, takeRequest);
+                requestRecord.AddRequest(requestTaker, takeRequest);
                 ResourceRequests.Remove(takeRequest);
             }
 
@@ -124,7 +123,7 @@ namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
 
         public void CompleteRequest(RequestTaker taker, ResourceRequest request)
         {
-            RequestRecord.CompleteRequest(taker, request);
+            requestRecord.CompleteRequest(taker, request);
             if (_craftingNumber.ContainsKey(request.Inventory))
             {
                 if (_craftingNumber[request.Inventory].Contains(request))
