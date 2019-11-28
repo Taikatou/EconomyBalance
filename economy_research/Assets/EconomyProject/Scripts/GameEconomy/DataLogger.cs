@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents;
-using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.Inventory;
+using EconomyProject.Scripts.MLAgents;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.GameEconomy
+namespace EconomyProject.Scripts.GameEconomy
 {
 // CODE COURTESY OF https://sushanta1991.blogspot.com/2015/02/how-to-write-data-to-csv-file-in-unity.html
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
+namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
 {
     public class WeaponId
     {

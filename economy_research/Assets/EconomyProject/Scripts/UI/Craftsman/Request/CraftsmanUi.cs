@@ -1,10 +1,10 @@
-﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
-using Assets.EconomyProject.Scripts.MLAgents.Shop;
+﻿using EconomyProject.Scripts.GameEconomy.Systems.Requests;
+using EconomyProject.Scripts.MLAgents.Craftsman;
+using EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request
+namespace EconomyProject.Scripts.UI.Craftsman.Request
 {
     public class CraftsmanUi : MonoBehaviour
     {

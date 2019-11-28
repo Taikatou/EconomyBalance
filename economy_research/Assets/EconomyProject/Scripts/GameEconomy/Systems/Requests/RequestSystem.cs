@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+using EconomyProject.Scripts.MLAgents.Craftsman;
+using EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
+using EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 
-namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
+namespace EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
     public class ResourceRequest
     {

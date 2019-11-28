@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.Inventory.LootBoxes
+namespace EconomyProject.Scripts.Inventory.LootBoxes
 {
     public abstract class GenericLootDropItem<T>
     {

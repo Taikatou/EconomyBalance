@@ -1,9 +1,9 @@
-﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using Assets.EconomyProject.Scripts.UI.Adventurer;
+﻿using EconomyProject.Scripts.GameEconomy.Systems;
+using EconomyProject.Scripts.UI.Adventurer;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI
+namespace EconomyProject.Scripts.UI
 {
     public class AuctionMenu : MonoBehaviour
     {

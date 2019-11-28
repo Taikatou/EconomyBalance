@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.Inventory
+namespace EconomyProject.Scripts.Inventory
 {
     [RequireComponent(typeof(AgentInventory))]
     public class AdventurerInventory : MonoBehaviour

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.UI.Craftsman;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+using EconomyProject.Scripts.Inventory;
+using EconomyProject.Scripts.UI.Craftsman;
+using EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 
-namespace Assets.EconomyProject.Scripts.UI.Inventory
+namespace EconomyProject.Scripts.UI.Inventory
 {
     public class InventoryScrollView : AbstractScrollList<InventoryItem, InventoryScrollButton>
     {

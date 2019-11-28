@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
+using EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
+namespace EconomyProject.Scripts.MLAgents.Craftsman
 {
     public class CraftingInventory : MonoBehaviour
     {

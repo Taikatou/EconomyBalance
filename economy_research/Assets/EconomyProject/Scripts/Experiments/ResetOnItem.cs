@@ -1,9 +1,8 @@
-﻿using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
-using UnityEditor;
+﻿using EconomyProject.Scripts.Inventory;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.Experiments
+namespace EconomyProject.Scripts.Experiments
 {
     public class ResetOnItem : MonoBehaviour
     {

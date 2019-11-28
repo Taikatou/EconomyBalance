@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI
+namespace EconomyProject.Scripts.UI
 {
     public class EndSimulatorUi : MonoBehaviour
     {

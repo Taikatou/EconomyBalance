@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.MLAgents.Shop;
+using EconomyProject.Scripts.MLAgents.Shop;
 
-namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
+namespace EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
     public class CraftsmanRequestTaker : RequestTaker
     {

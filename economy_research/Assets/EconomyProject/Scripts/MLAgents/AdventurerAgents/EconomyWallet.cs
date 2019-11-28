@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
+namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
 {
     public class EconomyWallet : MonoBehaviour
     {

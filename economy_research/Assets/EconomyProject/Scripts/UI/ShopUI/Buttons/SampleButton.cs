@@ -1,8 +1,8 @@
-﻿using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+﻿using EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.ShopUI.Buttons
+namespace EconomyProject.Scripts.UI.ShopUI.Buttons
 {
     public abstract class SampleButton <T> : MonoBehaviour
     {

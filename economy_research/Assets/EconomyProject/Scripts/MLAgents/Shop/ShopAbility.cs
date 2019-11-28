@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+using EconomyProject.Scripts.Inventory;
+using EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.Shop
+namespace EconomyProject.Scripts.MLAgents.Shop
 {
     [System.Serializable]
     public class ShopItem

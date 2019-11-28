@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.Inventory;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
+namespace EconomyProject.Scripts.GameEconomy.Systems
 {
     public class GameAuction : EconomySystem
     {

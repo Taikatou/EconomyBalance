@@ -1,7 +1,7 @@
-﻿using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+﻿using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents
+namespace EconomyProject.Scripts.MLAgents
 {
     public class BaseAgentSpawner : MonoBehaviour
     {

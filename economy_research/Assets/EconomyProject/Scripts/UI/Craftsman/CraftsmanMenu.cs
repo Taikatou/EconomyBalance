@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+using EconomyProject.Scripts.MLAgents.Craftsman;
+using EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.UI.Craftsman
+namespace EconomyProject.Scripts.UI.Craftsman
 {
     public class CraftsmanMenu : BaseMenuManager<CraftsmanScreen>
     {

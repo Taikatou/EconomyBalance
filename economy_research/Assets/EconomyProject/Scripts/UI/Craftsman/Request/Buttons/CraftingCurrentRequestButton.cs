@@ -1,8 +1,8 @@
-﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
-using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
+﻿using EconomyProject.Scripts.GameEconomy.Systems.Requests;
+using EconomyProject.Scripts.UI.ShopUI.Buttons;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.Buttons
+namespace EconomyProject.Scripts.UI.Craftsman.Request.Buttons
 {
     public class CraftingCurrentRequestButton : SampleButton<ResourceRequest>
     {

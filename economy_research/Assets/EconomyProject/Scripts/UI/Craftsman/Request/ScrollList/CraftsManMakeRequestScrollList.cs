@@ -1,12 +1,12 @@
-﻿using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
-using Assets.EconomyProject.Scripts.UI.Craftsman.Request.Buttons;
+﻿using EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
+using EconomyProject.Scripts.UI.Craftsman.Request.Buttons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.EconomyProject.Scripts.MLAgents.Shop;
+using EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
+namespace EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
 {
     public class CraftingResourceUi
     {

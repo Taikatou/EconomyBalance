@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.MLAgents.Shop;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+using EconomyProject.Scripts.MLAgents.Shop;
+using EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 
-namespace Assets.EconomyProject.Scripts.UI.Craftsman.Crafting
+namespace EconomyProject.Scripts.UI.Craftsman.Crafting
 {
     public class CraftsmanCraftingScrollList : AbstractScrollList<CraftingInfo, CraftingRequestButton>
     {

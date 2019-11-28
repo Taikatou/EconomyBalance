@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using Assets.EconomyProject.Scripts.MLAgents.Shop;
+using EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
+namespace EconomyProject.Scripts.UI.ShopUI.ScrollLists
 {
     public class AgentShopScrollList : ShopScrollList
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.UI.ShopUI
+namespace EconomyProject.Scripts.UI.ShopUI
 {
     // A very simple object pooling class
     public class SimpleObjectPool : MonoBehaviour

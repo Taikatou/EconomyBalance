@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.Inventory;
+using EconomyProject.Scripts.Inventory;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements
+namespace EconomyProject.Scripts.MLAgents.Craftsman.Requirements
 {
     public enum CraftingResources { Wood, Metal, Gem, DragonScale }
 

@@ -1,8 +1,8 @@
-﻿using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
-using Assets.EconomyProject.Scripts.MLAgents.Shop;
+﻿using EconomyProject.Scripts.GameEconomy.Systems.Requests;
+using EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
+namespace EconomyProject.Scripts.MLAgents.Craftsman
 {
     public class CraftsmanAgentSpawner : AgentSpawner
     {

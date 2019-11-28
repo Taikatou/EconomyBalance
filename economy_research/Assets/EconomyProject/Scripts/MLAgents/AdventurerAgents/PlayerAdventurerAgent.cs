@@ -1,4 +1,6 @@
-﻿namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
+﻿using EconomyProject.Scripts.MLAgents.AdventurerAgents;
+
+namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
 {
     public class PlayerAdventurerAgent : AdventurerAgent
     {

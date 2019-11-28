@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.Trained
+namespace EconomyProject.Scripts.Trained
 {
     public class SpeedUpEnvironment : MonoBehaviour
     {

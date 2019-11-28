@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.MLAgents;
+using EconomyProject.Scripts.MLAgents;
 using MLAgents;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI
+namespace EconomyProject.Scripts.UI
 {
     public class AgentDropDown : MonoBehaviour
     {

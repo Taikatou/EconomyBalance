@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.Inventory.LootBoxes
+namespace EconomyProject.Scripts.Inventory.LootBoxes
 {
     /// <summary>
     /// Class serves for assigning and picking loot drop items.

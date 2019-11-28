@@ -1,7 +1,7 @@
-﻿using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+﻿using EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using MLAgents;
 
-namespace Assets.EconomyProject.Scripts.UI.ShopUI
+namespace EconomyProject.Scripts.UI.ShopUI
 {
     public class ShopDropDown : AgentDropDown
     {

@@ -1,8 +1,8 @@
-﻿using Assets.EconomyProject.Scripts.UI.Craftsman.Request.ScrollList;
-using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
+﻿using EconomyProject.Scripts.UI.Craftsman.Request.ScrollList;
+using EconomyProject.Scripts.UI.ShopUI.Buttons;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.Craftsman.Request.Buttons
+namespace EconomyProject.Scripts.UI.Craftsman.Request.Buttons
 {
     public class CraftingMakeRequestButton : SampleButton<CraftingResourceUi>
     {

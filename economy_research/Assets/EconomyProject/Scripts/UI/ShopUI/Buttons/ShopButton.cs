@@ -1,7 +1,7 @@
-﻿using Assets.EconomyProject.Scripts.MLAgents.Shop;
+﻿using EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.ShopUI.Buttons
+namespace EconomyProject.Scripts.UI.ShopUI.Buttons
 {
     public class ShopButton : SampleButton<ShopItem>
     {

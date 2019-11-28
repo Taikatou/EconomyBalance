@@ -1,7 +1,7 @@
 ﻿using MLAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents
+namespace EconomyProject.Scripts.MLAgents
 {
     public class EconomyAcademy : Academy
     {

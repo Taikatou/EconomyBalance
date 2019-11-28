@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.GameEconomy.Systems;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.GameEconomy
+namespace EconomyProject.Scripts.GameEconomy
 {
     public class PlayerInput : MonoBehaviour
     {

@@ -1,7 +1,7 @@
-﻿using Assets.EconomyProject.Scripts.MLAgents.Shop;
+﻿using EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents
+namespace EconomyProject.Scripts.MLAgents
 {
     public class AgentSpawner : BaseAgentSpawner
     {

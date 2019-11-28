@@ -1,8 +1,8 @@
-﻿using Assets.EconomyProject.Scripts.MLAgents.Shop;
+﻿using EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.ShopUI
+namespace EconomyProject.Scripts.UI.ShopUI
 {
     public class UpdateItemUi : MonoBehaviour
     {

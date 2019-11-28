@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.MLAgents.Shop;
+using EconomyProject.Scripts.MLAgents.Shop;
 
-namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
+namespace EconomyProject.Scripts.UI.ShopUI.ScrollLists
 {
     public class PooledShopScrollList : ShopScrollList
     {

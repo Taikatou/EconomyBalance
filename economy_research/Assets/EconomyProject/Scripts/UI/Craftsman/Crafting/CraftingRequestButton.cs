@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
-using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
+using EconomyProject.Scripts.MLAgents.Craftsman;
+using EconomyProject.Scripts.UI.ShopUI.Buttons;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.Craftsman.Crafting
+namespace EconomyProject.Scripts.UI.Craftsman.Crafting
 {
     public class CraftingInfo
     {

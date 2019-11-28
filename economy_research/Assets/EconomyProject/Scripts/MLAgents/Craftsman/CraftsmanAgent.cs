@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
-using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
+using EconomyProject.Scripts.GameEconomy.Systems.Requests;
+using EconomyProject.Scripts.Inventory;
+using EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using UnityEngine;
-using ResourceRequest = Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests.ResourceRequest;
+using ResourceRequest = EconomyProject.Scripts.GameEconomy.Systems.Requests.ResourceRequest;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
+namespace EconomyProject.Scripts.MLAgents.Craftsman
 {
     public enum CraftsmanScreen { Stay, Main, Request, Craft }
 

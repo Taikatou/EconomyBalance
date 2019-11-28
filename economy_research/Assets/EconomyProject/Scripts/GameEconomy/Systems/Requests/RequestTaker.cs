@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
+namespace EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
     public abstract class RequestTaker : MonoBehaviour
     {

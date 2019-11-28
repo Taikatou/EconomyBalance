@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
+namespace EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
     public class AdventurerRequestTaker : RequestTaker
     {

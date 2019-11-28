@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests
+namespace EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
     public class TestRequestTaker : AdventurerRequestTaker
     {

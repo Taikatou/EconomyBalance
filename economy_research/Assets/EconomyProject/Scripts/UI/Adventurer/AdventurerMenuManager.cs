@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.GameEconomy;
-using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.GameEconomy;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.UI.Adventurer
+namespace EconomyProject.Scripts.UI.Adventurer
 {
 
     public class AdventurerMenuManager : BaseMenuManager<AgentScreen>

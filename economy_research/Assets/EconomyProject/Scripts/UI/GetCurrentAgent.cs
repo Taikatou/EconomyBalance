@@ -2,7 +2,7 @@
 using MLAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.UI
+namespace EconomyProject.Scripts.UI
 {
     public class GetCurrentAgent : MonoBehaviour
     {

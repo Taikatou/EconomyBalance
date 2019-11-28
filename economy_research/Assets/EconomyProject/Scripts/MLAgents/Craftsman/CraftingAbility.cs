@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
+using EconomyProject.Scripts.Inventory;
+using EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.Craftsman
+namespace EconomyProject.Scripts.MLAgents.Craftsman
 {
     [System.Serializable]
     public struct CraftingMap

@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests;
-using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman;
-using Assets.EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+﻿using System.Collections.Generic;
+using EconomyProject.Scripts.GameEconomy.Systems.Requests;
+using EconomyProject.Scripts.Inventory;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.MLAgents.Craftsman;
+using EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using MLAgents;
 using UnityEngine;
-using ResourceRequest = Assets.EconomyProject.Scripts.GameEconomy.Systems.Requests.ResourceRequest;
+using ResourceRequest = EconomyProject.Scripts.GameEconomy.Systems.Requests.ResourceRequest;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.Shop
+namespace EconomyProject.Scripts.MLAgents.Shop
 {
     public enum ShopDecision { Ignore, Submit , ChangePriceDown, ChangePriceUp}
 

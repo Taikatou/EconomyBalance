@@ -1,6 +1,6 @@
 ﻿using MLAgents;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
+namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
 {
     public class EconomyPredictorAgent : Agent
     {

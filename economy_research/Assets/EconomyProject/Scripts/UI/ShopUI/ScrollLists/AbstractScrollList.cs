@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
+using EconomyProject.Scripts.UI.ShopUI.Buttons;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists
+namespace EconomyProject.Scripts.UI.ShopUI.ScrollLists
 {
 
     public interface IScrollList <T>

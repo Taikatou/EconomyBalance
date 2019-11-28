@@ -1,9 +1,10 @@
 ﻿using System;
-using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using MLAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.GameEconomy.Systems
+namespace EconomyProject.Scripts.GameEconomy.Systems
 {
     public abstract class EconomySystem : MonoBehaviour
     {

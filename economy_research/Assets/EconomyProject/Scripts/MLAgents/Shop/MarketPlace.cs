@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+using EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.Shop
+namespace EconomyProject.Scripts.MLAgents.Shop
 {
     public class MarketPlace : LastUpdate
     {

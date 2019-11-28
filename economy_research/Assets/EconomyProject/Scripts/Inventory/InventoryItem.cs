@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.Inventory
+namespace EconomyProject.Scripts.Inventory
 {
     [CreateAssetMenu]
     public class InventoryItem : ScriptableObject

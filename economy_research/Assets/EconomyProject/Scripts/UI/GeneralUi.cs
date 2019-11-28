@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
-using Assets.EconomyProject.Scripts.MLAgents;
-using Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents;
-using Assets.EconomyProject.Scripts.UI.Adventurer;
+using EconomyProject.Scripts.MLAgents;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
+using EconomyProject.Scripts.UI.Adventurer;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI
+namespace EconomyProject.Scripts.UI
 {
     public class GeneralUi : MonoBehaviour
     {

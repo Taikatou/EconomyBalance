@@ -1,9 +1,10 @@
-﻿using Assets.EconomyProject.Scripts.GameEconomy;
-using Assets.EconomyProject.Scripts.GameEconomy.Systems;
-using Assets.EconomyProject.Scripts.Inventory;
+﻿using EconomyProject.Scripts.GameEconomy;
+using EconomyProject.Scripts.GameEconomy.Systems;
+using EconomyProject.Scripts.Inventory;
+using MLAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
+namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
 {
     public enum AgentScreen { Main, Quest, Auction, Shop }
 
@@ -12,7 +13,7 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
     [RequireComponent(typeof(AgentInventory))]
     [RequireComponent(typeof(AdventurerInventory))]
     [RequireComponent(typeof(EconomyWallet))]
-    public class AdventurerAgent : Observations
+    public class AdventurerAgent : Agent
     {
         public bool printObservations = false;
 
@@ -31,11 +32,6 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
         public InventoryItem Item => adventurerInventory.EquipedItem;
 
         public AgentScreen ChosenScreen => playerInput.GetScreen(this);
-
-        private void Start()
-        {
-            agentParameters.onDemandDecision = true;
-        }
 
         public override void AgentReset()
         {
@@ -108,6 +104,40 @@ namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
             {
                 Debug.Log(output);
             }
+        }
+        
+        public string AddVectorObs(InventoryItem item, bool condition = true, float defaultObs = 0.0f)
+        {
+            condition = condition && item;
+            var output = " Current Item";
+            output += AddVectorObs(condition ? WeaponId.GetWeaponId(item.itemName) : -1, "ItemName");
+            output += AddVectorObs(condition ? item.durability : defaultObs, "Durability");
+            output += AddVectorObs(condition ? item.baseDurability : defaultObs, "Base Durability");
+            output += AddVectorObs(condition ? item.numLootSpawns : defaultObs, "Num Loot Spawn");
+            output += AddVectorObs(condition ? item.efficiency : defaultObs, "Efficiency");
+            output += AddVectorObs(item && item.unBreakable, "Unbreakable", condition);
+
+            return output;
+        }
+
+        public string AddVectorObs(float observation, string obsName)
+        {
+            AddVectorObs(observation);
+            return " " + obsName + ": " + observation;
+        }
+
+        public string AddVectorObs(bool observation, string obsName, bool valid=true)
+        {
+            if (valid)
+            {
+                AddVectorObs(observation ? 1 : 2);
+            }
+            else
+            {
+                AddVectorObs(0);
+            }
+
+            return " " + obsName + ": " + observation;
         }
     }
 }

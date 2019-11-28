@@ -1,7 +1,7 @@
-﻿using Assets.EconomyProject.Scripts.MLAgents;
+﻿using EconomyProject.Scripts.MLAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts
+namespace EconomyProject.Scripts
 {
     public class CoreSystemSpawner : MonoBehaviour
     {

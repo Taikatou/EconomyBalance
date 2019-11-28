@@ -1,8 +1,8 @@
-﻿using Assets.EconomyProject.Scripts.GameEconomy;
-using Assets.EconomyProject.Scripts.GameEconomy.Systems;
+﻿using EconomyProject.Scripts.GameEconomy;
+using EconomyProject.Scripts.GameEconomy.Systems;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.UI.Adventurer
+namespace EconomyProject.Scripts.UI.Adventurer
 {
     public class UiAccessor : MonoBehaviour
     {

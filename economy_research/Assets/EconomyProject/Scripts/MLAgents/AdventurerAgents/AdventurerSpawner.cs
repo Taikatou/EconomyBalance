@@ -1,8 +1,9 @@
-﻿using Assets.EconomyProject.Scripts.GameEconomy;
-using Assets.EconomyProject.Scripts.GameEconomy.Systems;
+﻿using EconomyProject.Scripts.GameEconomy;
+using EconomyProject.Scripts.GameEconomy.Systems;
+using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
-namespace Assets.EconomyProject.Scripts.MLAgents.AdventurerAgents
+namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
 {
     public class AdventurerSpawner : BaseAgentSpawner
     {

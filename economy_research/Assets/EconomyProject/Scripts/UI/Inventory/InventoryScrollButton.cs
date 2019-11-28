@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
-using Assets.EconomyProject.Scripts.Inventory;
-using Assets.EconomyProject.Scripts.UI.ShopUI.Buttons;
+using EconomyProject.Scripts.Inventory;
+using EconomyProject.Scripts.UI.ShopUI.Buttons;
 using UnityEngine.UI;
 
-namespace Assets.EconomyProject.Scripts.UI.Inventory
+namespace EconomyProject.Scripts.UI.Inventory
 {
     public class InventoryScrollButton : SampleButton<InventoryItem>
     {
