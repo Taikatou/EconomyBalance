@@ -51,7 +51,7 @@ namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
             wallet.SpendMoney(cost);
         }
 
-        public override void AgentAction(float[] vectorAction, string textAction)
+        public override void AgentAction(float[] vectorAction)
         {
             var mainAction = Mathf.FloorToInt(vectorAction[0]);
             var auctionAction = Mathf.FloorToInt(vectorAction[1]);

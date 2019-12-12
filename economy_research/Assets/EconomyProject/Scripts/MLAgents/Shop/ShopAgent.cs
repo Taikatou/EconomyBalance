@@ -67,9 +67,9 @@ namespace EconomyProject.Scripts.MLAgents.Shop
             return null;
         }
 
-        public override void AgentAction(float[] vectorAction, string textAction)
+        public override void AgentAction(float[] vectorAction)
         {
-            AgentActionShopping(vectorAction, textAction);
+            AgentActionShopping(vectorAction);
         }
 
         public override void CollectObservations()
@@ -87,7 +87,7 @@ namespace EconomyProject.Scripts.MLAgents.Shop
             Wallet.ResetStep();
         }
 
-        public void AgentActionShopping(float[] vectorAction, string textAction)
+        public void AgentActionShopping(float[] vectorAction)
         {
             
         }
