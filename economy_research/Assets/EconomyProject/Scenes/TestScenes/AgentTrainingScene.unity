@@ -127,6 +127,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4076455654097727618, guid: 3c797386b92562740896eda4336a2bb2,
+        type: 3}
+      propertyPath: requestRecord
+      value: 
+      objectReference: {fileID: 1894916630}
     - target: {fileID: 4076455654097727619, guid: 3c797386b92562740896eda4336a2bb2,
         type: 3}
       propertyPath: m_Name
@@ -187,11 +192,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4076455654097727618, guid: 3c797386b92562740896eda4336a2bb2,
-        type: 3}
-      propertyPath: requestRecord
-      value: 
-      objectReference: {fileID: 1894916630}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c797386b92562740896eda4336a2bb2, type: 3}
 --- !u!1 &705507993
@@ -292,11 +292,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1219752778071651191, guid: 8a4316fb76e00e94487ad9acfb327b3a,
-        type: 3}
-      propertyPath: m_Name
-      value: EconomyAcademy
-      objectReference: {fileID: 0}
     - target: {fileID: 1219752778071651189, guid: 8a4316fb76e00e94487ad9acfb327b3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -351,6 +346,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1219752778071651191, guid: 8a4316fb76e00e94487ad9acfb327b3a,
+        type: 3}
+      propertyPath: m_Name
+      value: EconomyAcademy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a4316fb76e00e94487ad9acfb327b3a, type: 3}
@@ -669,11 +669,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 883289776}
     m_Modifications:
-    - target: {fileID: 2011312968382217253, guid: 7984588dcb920ef4d82ce338990a333a,
-        type: 3}
-      propertyPath: m_Name
-      value: AdventurerMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 2011312968382217252, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -779,35 +774,35 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2011312968382217258, guid: 7984588dcb920ef4d82ce338990a333a,
+    - target: {fileID: 2011312968382217253, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
-      propertyPath: agentParent
-      value: 
-      objectReference: {fileID: 938610672}
+      propertyPath: m_Name
+      value: AdventurerMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 2011312968382217257, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
       propertyPath: coreGameSystem
       value: 
       objectReference: {fileID: 938610672}
-    - target: {fileID: 2011312970123600004, guid: 7984588dcb920ef4d82ce338990a333a,
+    - target: {fileID: 2011312968382217258, guid: 7984588dcb920ef4d82ce338990a333a,
+        type: 3}
+      propertyPath: agentParent
+      value: 
+      objectReference: {fileID: 938610672}
+    - target: {fileID: 2011312968967483973, guid: 7984588dcb920ef4d82ce338990a333a,
+        type: 3}
+      propertyPath: accessor
+      value: 
+      objectReference: {fileID: 1919604394}
+    - target: {fileID: 2011312969035971480, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1919604392}
-    - target: {fileID: 2011312970123600004, guid: 7984588dcb920ef4d82ce338990a333a,
+    - target: {fileID: 2011312969035971480, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartQuest
-      objectReference: {fileID: 0}
-    - target: {fileID: 2011312970250671552, guid: 7984588dcb920ef4d82ce338990a333a,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1919604392}
-    - target: {fileID: 2011312970250671552, guid: 7984588dcb920ef4d82ce338990a333a,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartAuction
+      value: MainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 2011312969433993160, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
@@ -819,30 +814,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 2011312969035971480, guid: 7984588dcb920ef4d82ce338990a333a,
+    - target: {fileID: 2011312970040883492, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1919604392}
-    - target: {fileID: 2011312969035971480, guid: 7984588dcb920ef4d82ce338990a333a,
+    - target: {fileID: 2011312970040883492, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MainMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 2011312968967483973, guid: 7984588dcb920ef4d82ce338990a333a,
-        type: 3}
-      propertyPath: accessor
-      value: 
-      objectReference: {fileID: 1919604394}
-    - target: {fileID: 2011312970040883492, guid: 7984588dcb920ef4d82ce338990a333a,
+    - target: {fileID: 2011312970123600004, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1919604392}
-    - target: {fileID: 2011312970040883492, guid: 7984588dcb920ef4d82ce338990a333a,
+    - target: {fileID: 2011312970123600004, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MainMenu
+      value: StartQuest
       objectReference: {fileID: 0}
     - target: {fileID: 2011312970172320375, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
@@ -854,6 +844,16 @@ PrefabInstance:
       propertyPath: getAgent
       value: 
       objectReference: {fileID: 1919604393}
+    - target: {fileID: 2011312970250671552, guid: 7984588dcb920ef4d82ce338990a333a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1919604392}
+    - target: {fileID: 2011312970250671552, guid: 7984588dcb920ef4d82ce338990a333a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartAuction
+      objectReference: {fileID: 0}
     - target: {fileID: 3938304320996689114, guid: 7984588dcb920ef4d82ce338990a333a,
         type: 3}
       propertyPath: getCurrentAgent
@@ -868,21 +868,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8347381408878603646, guid: cbee2cf58de57f745aff94465d71b982,
-        type: 3}
-      propertyPath: m_Name
-      value: SystemSpawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 8347381408878603647, guid: cbee2cf58de57f745aff94465d71b982,
-        type: 3}
-      propertyPath: numLearningAgents
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8347381408878603647, guid: cbee2cf58de57f745aff94465d71b982,
-        type: 3}
-      propertyPath: numCoreSpawn
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8347381408878603644, guid: cbee2cf58de57f745aff94465d71b982,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -937,6 +922,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347381408878603646, guid: cbee2cf58de57f745aff94465d71b982,
+        type: 3}
+      propertyPath: m_Name
+      value: SystemSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347381408878603647, guid: cbee2cf58de57f745aff94465d71b982,
+        type: 3}
+      propertyPath: numLearningAgents
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347381408878603647, guid: cbee2cf58de57f745aff94465d71b982,
+        type: 3}
+      propertyPath: numCoreSpawn
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbee2cf58de57f745aff94465d71b982, type: 3}

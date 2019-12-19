@@ -29,8 +29,6 @@ namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public PlayerInput playerInput;
 
-        public InventoryItem Item => adventurerInventory.EquipedItem;
-
         public AgentScreen ChosenScreen => playerInput.GetScreen(this);
 
         public override void AgentReset()
@@ -90,7 +88,7 @@ namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
         {
             var output = AddVectorObs(ChosenScreen, "Chosen Screen");
             output += AddVectorObs(wallet ? (float)wallet.Money : 0.0f, "Money");
-            output += AddVectorObs(Item);
+            output += AddVectorObs(adventurerInventory.EquipedItem);
             output += AddVectorObs(gameAuction.ItemCount, "Auction Item Count");
             output += AddVectorObs(inventory.ItemCount, "Inventory Item Count");
             output += AddVectorObs(playerInput.GetProgress(this), "Progress");

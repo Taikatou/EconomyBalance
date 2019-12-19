@@ -80,12 +80,14 @@ namespace EconomyProject.Scripts.GameEconomy.Systems
             }
         }
 
-        public void RunQuests(AdventurerAgent agent)
+        private void RunQuests(AdventurerAgent agent)
         {
-            var questSuccess = Random.value < (agent.Item.efficiency / 100);
+            var item = agent.adventurerInventory.EquipedItem;
+            
+            var questSuccess = Random.value < (item.efficiency / 100);
             if(questSuccess)
             {
-                var money = GenerateItem(agent.Item) / 2;
+                var money = GenerateItem(item) / 2;
                 agent.wallet.EarnMoney(money);
             }
             else if (punishFailure)

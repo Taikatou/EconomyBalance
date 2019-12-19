@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce000fa4147eec844b7cdd831ec766ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startMoney: 0
 --- !u!114 &5620581771315865838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f617471791d546b4298d88923d578558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentId: 0
 --- !u!114 &4250931923004593224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,6 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a01aab7e5f3c274a90a9307fb39ef3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentInventory: {fileID: 1817350387931501863}
 --- !u!114 &1817350387931501863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,6 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf88a2c3c27c9b4b804eeb1c5a32011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startInventory:
+  - {fileID: 11400000, guid: 91bd7ff49920f4841b311f0aad3678e3, type: 2}
 --- !u!114 &2072330097273742403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +109,7 @@ MonoBehaviour:
     vectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_UseHeuristic: 0
+  m_BehaviorType: 0
   m_BehaviorName: Adventurer
 --- !u!114 &5616954730062649782
 MonoBehaviour:

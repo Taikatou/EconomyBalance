@@ -9,17 +9,28 @@ namespace EconomyProject.Scripts.Inventory
     public class AdventurerInventory : MonoBehaviour
     {
         public AgentInventory agentInventory;
-        public List<InventoryItem> Items => agentInventory.Items;
+        private List<InventoryItem> Items => agentInventory.Items;
 
         public InventoryItem EquipedItem
         {
             get
             {
-                if (Items.Count > 0)
+                if (Items != null)
                 {
-                    var max = Items.Max(x => x.efficiency);
-                    var maxWeapon = Items.First(x => Math.Abs(x.efficiency - max) < 0.01);
-                    return maxWeapon;
+                    if (Items.Count > 0)
+                    {
+                        var max = Items.Max(x => x.efficiency);
+                        var maxWeapon = Items.First(x => Math.Abs(x.efficiency - max) < 0.01);
+                        return maxWeapon;
+                    }
+                    else
+                    {
+                        Debug.Log("Items = 0");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Null");
                 }
                 return null;
             }

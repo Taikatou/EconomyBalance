@@ -43,3 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b345f355f0a4947a28cc98d8ac4136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
+  agents: {fileID: 0}
+  gameAuction: {fileID: 0}

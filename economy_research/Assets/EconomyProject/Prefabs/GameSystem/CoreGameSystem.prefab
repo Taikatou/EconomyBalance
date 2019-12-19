@@ -301,6 +301,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5803332212511212225}
     m_Modifications:
+    - target: {fileID: 4065588338389896107, guid: 83c0dd6f0e813fd4f95364afb6d8f4ef,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerInput
+      objectReference: {fileID: 0}
     - target: {fileID: 5068984172073472844, guid: 83c0dd6f0e813fd4f95364afb6d8f4ef,
         type: 3}
       propertyPath: gameAuction
@@ -370,11 +375,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4065588338389896107, guid: 83c0dd6f0e813fd4f95364afb6d8f4ef,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerInput
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83c0dd6f0e813fd4f95364afb6d8f4ef, type: 3}
@@ -458,6 +458,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3598907528760838742, guid: 388a52fab21e3034ba80f473eb8f33c1,
+        type: 3}
+      propertyPath: m_Name
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 3598907528760838743, guid: 388a52fab21e3034ba80f473eb8f33c1,
         type: 3}
       propertyPath: playerInput
@@ -468,11 +473,11 @@ PrefabInstance:
       propertyPath: agents
       value: 
       objectReference: {fileID: 5803332211051719864}
-    - target: {fileID: 3598907528760838742, guid: 388a52fab21e3034ba80f473eb8f33c1,
+    - target: {fileID: 3598907528760838743, guid: 388a52fab21e3034ba80f473eb8f33c1,
         type: 3}
-      propertyPath: m_Name
-      value: MainMenu
-      objectReference: {fileID: 0}
+      propertyPath: gameAuction
+      value: 
+      objectReference: {fileID: 5803332211948300132}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 388a52fab21e3034ba80f473eb8f33c1, type: 3}
 --- !u!4 &5803332212507616756 stripped
@@ -500,25 +505,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5803332212511212225}
     m_Modifications:
-    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
+    - target: {fileID: 2736416197373676488, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
         type: 3}
-      propertyPath: playerInput
-      value: 
-      objectReference: {fileID: 1644154546455500952}
-    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
-        type: 3}
-      propertyPath: agents
-      value: 
-      objectReference: {fileID: 5803332211051719864}
-    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
-        type: 3}
-      propertyPath: bidIncrement
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
-        type: 3}
-      propertyPath: auctionTime
-      value: 2
+      propertyPath: m_Name
+      value: GameAuction
       objectReference: {fileID: 0}
     - target: {fileID: 2736416197373676490, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
         type: 3}
@@ -575,10 +565,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2736416197373676488, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
+    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
         type: 3}
-      propertyPath: m_Name
-      value: GameAuction
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 1644154546455500952}
+    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
+        type: 3}
+      propertyPath: agents
+      value: 
+      objectReference: {fileID: 5803332211051719864}
+    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
+        type: 3}
+      propertyPath: bidIncrement
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2736416197373676491, guid: a25284d75dcf3544ebf8c5cd1ee5d80d,
+        type: 3}
+      propertyPath: auctionTime
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a25284d75dcf3544ebf8c5cd1ee5d80d, type: 3}

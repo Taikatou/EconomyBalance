@@ -12,7 +12,13 @@ namespace EconomyProject.Scripts.Experiments
 
         public GameObject agentList;
 
-        public AdventurerAgent [] Agents => agentList?.GetComponentsInChildren<AdventurerAgent>();
+        public AdventurerAgent[] Agents
+        {
+            get
+            {
+                return agentList? agentList.GetComponentsInChildren<AdventurerAgent>() : new AdventurerAgent[]{};
+            }
+        }
 
         private void Update()
         {

@@ -54,13 +54,14 @@ namespace EconomyProject.Scripts.UI
             {
                 moneyText.text = "MONEY: " + AdventurerAgent.wallet.Money;
 
-                if(AdventurerAgent.Item)
+                var item = AdventurerAgent.adventurerInventory.EquipedItem;
+                if(item)
                 {
-                    durabilityText.text = "DURABILITY: " + (AdventurerAgent.Item.unBreakable? "∞" : AdventurerAgent.Item.durability.ToString());
+                    durabilityText.text = "DURABILITY: " + (item.unBreakable? "∞" : item.durability.ToString());
 
-                    currentItemText.text = "CURRENT ITEM: " + AdventurerAgent.Item.itemName;
+                    currentItemText.text = "CURRENT ITEM: " + item.itemName;
 
-                    efficiencyText.text = "EFFICIENCY: " + AdventurerAgent.Item.efficiency;
+                    efficiencyText.text = "EFFICIENCY: " + item.efficiency;
                 }
             }
 
