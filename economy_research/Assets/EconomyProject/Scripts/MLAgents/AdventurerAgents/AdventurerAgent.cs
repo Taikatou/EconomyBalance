@@ -15,10 +15,6 @@ namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
     [RequireComponent(typeof(EconomyWallet))]
     public class AdventurerAgent : Agent
     {
-        public bool printObservations = false;
-
-        public bool canSeeDistribution = true;
-
         public AgentInventory inventory;
 
         public AdventurerInventory adventurerInventory;
@@ -53,11 +49,7 @@ namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
         {
             var mainAction = Mathf.FloorToInt(vectorAction[0]);
             var auctionAction = Mathf.FloorToInt(vectorAction[1]);
-
-            if (printObservations)
-            {
-                Debug.Log("MainAction: " + mainAction + " AuctionAction: " + auctionAction);
-            }
+            
             AgentAction(mainAction, auctionAction);
         }
 
@@ -66,75 +58,36 @@ namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
             playerInput.SetAgentAction(this, mainAction, auctionAction);
         }
 
-        private string AddAuctionObs(InventoryItem item)
-        {
-            var output = AddVectorObs(item);
-            var highestBidder = gameAuction.IsHighestBidder(this);
-            output += AddVectorObs(highestBidder, "Is Highest Bidder");
-            output += AddVectorObs(gameAuction.currentItemPrice, "Current Price");
-            AddVectorObs(gameAuction.BidLast);
-            AddVectorObs(gameAuction.BidOn);
-
-            return output;
-        }
-
-        protected string AddVectorObs(AgentScreen observation, string obsName)
-        {
-            AddVectorObs((int)observation);
-            return obsName + ": " + observation;
-        }
-
         public override void CollectObservations()
         {
-            var output = AddVectorObs(ChosenScreen, "Chosen Screen");
-            output += AddVectorObs(wallet ? (float)wallet.Money : 0.0f, "Money");
-            output += AddVectorObs(adventurerInventory.EquipedItem);
-            output += AddVectorObs(gameAuction.ItemCount, "Auction Item Count");
-            output += AddVectorObs(inventory.ItemCount, "Inventory Item Count");
-            output += AddVectorObs(playerInput.GetProgress(this), "Progress");
-            output += AddVectorObs(gameAuction.currentItemPrice, "Current Item Price");
-            output += AddVectorObs(canSeeDistribution ? playerInput.NumberInAuction : 0, "Number in auction");
-            output += AddVectorObs(canSeeDistribution ? playerInput.NumberInQuest : 0, "Number in quest");
-
-            output += AddAuctionObs(gameAuction.auctionedItem);
-
-            if (printObservations)
-            {
-                Debug.Log(output);
-            }
+            // Player Observations
+            AddVectorObs((int)ChosenScreen);
+            AddVectorObs(wallet ? (float)wallet.Money : 0.0f);
+            AddVectorObs(adventurerInventory.EquipedItem);
+            
+            // Player Input Observations
+            AddVectorObs(playerInput.GetProgress(this));
+            AddVectorObs(playerInput.GetNumberInAuction());
+            AddVectorObs(playerInput.GetNumberInQuest());
+            
+            // Auction Observations
+            var highestBidder = gameAuction.IsHighestBidder(this);
+            
+            AddVectorObs(gameAuction.auctionedItem);
+            AddVectorObs(highestBidder);
+            AddVectorObs(gameAuction.currentItemPrice);
+            AddVectorObs(gameAuction.BidLast);
+            AddVectorObs(gameAuction.BidOn);
         }
         
-        public string AddVectorObs(InventoryItem item, bool condition = true, float defaultObs = 0.0f)
+        private void AddVectorObs(InventoryItem item, bool condition = true, float defaultObs = 0.0f)
         {
             condition = condition && item;
-            var output = " Current Item";
-            output += AddVectorObs(condition ? WeaponId.GetWeaponId(item.itemName) : -1, "ItemName");
-            output += AddVectorObs(condition ? item.durability : defaultObs, "Durability");
-            output += AddVectorObs(condition ? item.numLootSpawns : defaultObs, "Num Loot Spawn");
-            output += AddVectorObs(condition ? item.efficiency : defaultObs, "Efficiency");
-            output += AddVectorObs(item && item.unBreakable, "Unbreakable", condition);
-
-            return output;
-        }
-
-        public string AddVectorObs(float observation, string obsName)
-        {
-            AddVectorObs(observation);
-            return " " + obsName + ": " + observation;
-        }
-
-        public string AddVectorObs(bool observation, string obsName, bool valid=true)
-        {
-            if (valid)
-            {
-                AddVectorObs(observation ? 1 : 2);
-            }
-            else
-            {
-                AddVectorObs(0);
-            }
-
-            return " " + obsName + ": " + observation;
+            AddVectorObs(condition ? WeaponId.GetWeaponId(item.itemName) : -1);
+            AddVectorObs(condition ? item.durability : defaultObs);
+            AddVectorObs(condition ? item.numLootSpawns : defaultObs);
+            AddVectorObs(condition ? item.efficiency : defaultObs);
+            AddVectorObs(condition ? (item.unBreakable ? 1 : 2): 0);
         }
     }
 }

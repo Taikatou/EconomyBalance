@@ -16,9 +16,21 @@ namespace EconomyProject.Scripts.GameEconomy
 
         public MainMenuSystem mainMenuSystem;
 
-        public int NumberInAuction => gameAuction.CurrentPlayers.Length;
+        private bool _canSeeDistribution = true;
+        
+        private int GetSeeDistributionNumber(int value)
+        {
+            return _canSeeDistribution ? value : -1;
+        }
+        public int GetNumberInAuction()
+        {
+            return GetSeeDistributionNumber(gameAuction.CurrentPlayers.Length);
+        }
 
-        public int NumberInQuest => gameQuests.CurrentPlayers.Length;
+        public int GetNumberInQuest()
+        {
+            return GetSeeDistributionNumber(gameQuests.CurrentPlayers.Length);
+        }
 
         public void Start()
         {
