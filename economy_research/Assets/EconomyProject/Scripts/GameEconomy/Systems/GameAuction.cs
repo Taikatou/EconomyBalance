@@ -146,7 +146,7 @@ namespace EconomyProject.Scripts.GameEconomy.Systems
             }
         }
 
-        public void ReturnToMain()
+        private void ReturnToMain()
         {
             _auctionOn = false;
             foreach (var agent in CurrentPlayers)

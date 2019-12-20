@@ -12,7 +12,7 @@ namespace EconomyProject.Scripts.Experiments
 
         public GameObject agentList;
 
-        public AdventurerAgent[] Agents
+        private AdventurerAgent[] Agents
         {
             get
             {

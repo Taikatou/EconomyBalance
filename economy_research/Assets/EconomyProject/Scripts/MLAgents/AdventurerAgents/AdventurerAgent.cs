@@ -1,4 +1,5 @@
-﻿using EconomyProject.Scripts.GameEconomy;
+﻿using System.Linq;
+using EconomyProject.Scripts.GameEconomy;
 using EconomyProject.Scripts.GameEconomy.Systems;
 using EconomyProject.Scripts.Inventory;
 using MLAgents;
@@ -6,7 +7,8 @@ using UnityEngine;
 
 namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
 {
-    public enum AgentScreen { Main, Quest, Auction, Shop }
+    // Main and Shop is not used by agent
+    public enum AgentScreen { Quest, Auction, Main, Shop }
 
     public enum AuctionChoice { Ignore, Bid }
 
@@ -48,7 +50,8 @@ namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
         public override void AgentAction(float[] vectorAction)
         {
             var mainAction = Mathf.FloorToInt(vectorAction[0]);
-            var auctionAction = Mathf.FloorToInt(vectorAction[1]);
+            
+            var auctionAction = Mathf.FloorToInt(vectorAction.Last());
             
             AgentAction(mainAction, auctionAction);
         }

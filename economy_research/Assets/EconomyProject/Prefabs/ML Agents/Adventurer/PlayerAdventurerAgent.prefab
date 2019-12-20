@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1813628144}
   - component: {fileID: 1448652206014252578}
   - component: {fileID: -6630053473780852842}
+  - component: {fileID: 8964506041788486015}
   m_Layer: 0
   m_Name: PlayerAdventurerAgent
   m_TagString: Untagged
@@ -73,19 +74,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d35e0a37d7e1314da36558b050203a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brain: {fileID: 11400000, guid: 68170fbe4fa33744eb64b254db70629e, type: 2}
   agentParameters:
-    agentCameras: []
-    agentRenderTextures: []
     maxStep: 0
     resetOnDone: 1
     onDemandDecision: 1
     numberOfActionsBetweenDecisions: 1
-  endItem: {fileID: 0}
-  resetOnComplete: 0
-  punishLoss: 0
-  printObservations: 1
-  canSeeDistribution: 1
+  inventory: {fileID: 0}
+  adventurerInventory: {fileID: 0}
+  wallet: {fileID: 0}
+  gameAuction: {fileID: 0}
+  playerInput: {fileID: 0}
 --- !u!114 &-6630053473780852842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,3 +97,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentId: 0
+--- !u!114 &8964506041788486015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864355610370000414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    vectorObservationSize: 19
+    numStackedVectorObservations: 1
+    vectorActionSize: 0300000002000000
+    vectorActionDescriptions: []
+    vectorActionSpaceType: 0
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: Adventurer
+  m_useChildSensors: 1

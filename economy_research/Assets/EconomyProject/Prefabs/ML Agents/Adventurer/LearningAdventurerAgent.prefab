@@ -102,9 +102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 22
+    vectorObservationSize: 19
     numStackedVectorObservations: 1
-    vectorActionSize: 0300000002000000
+    vectorActionSize: 02000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
   m_Model: {fileID: 0}
@@ -129,8 +129,6 @@ MonoBehaviour:
     resetOnDone: 1
     onDemandDecision: 1
     numberOfActionsBetweenDecisions: 5
-  printObservations: 0
-  canSeeDistribution: 1
   inventory: {fileID: 1817350387931501863}
   adventurerInventory: {fileID: 4250931923004593224}
   wallet: {fileID: -4706628768726033178}
