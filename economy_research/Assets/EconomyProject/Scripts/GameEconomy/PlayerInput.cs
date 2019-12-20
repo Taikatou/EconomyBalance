@@ -80,7 +80,7 @@ namespace EconomyProject.Scripts.GameEconomy
             }
         }
 
-        public void SetAuctionChoice(AdventurerAgent agent, int choice)
+        private void SetAuctionChoice(AdventurerAgent agent, int choice)
         {
             if (choice >= 0)
             {
@@ -101,8 +101,9 @@ namespace EconomyProject.Scripts.GameEconomy
             }
         }
 
-        public void SetMainAction(AdventurerAgent agent, int choice)
+        private void SetMainAction(AdventurerAgent agent, int choice)
         {
+            print("main action: " + choice);
             if (choice >= 0)
             {
                 AgentScreen action = (AgentScreen)choice;

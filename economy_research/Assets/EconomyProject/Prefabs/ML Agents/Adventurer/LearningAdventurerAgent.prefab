@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 24
+    vectorObservationSize: 22
     numStackedVectorObservations: 1
     vectorActionSize: 0300000002000000
     vectorActionDescriptions: []
@@ -111,6 +111,7 @@ MonoBehaviour:
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Adventurer
+  m_useChildSensors: 1
 --- !u!114 &5616954730062649782
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -61,7 +61,7 @@ namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
             AgentAction(mainAction, auctionAction);
         }
 
-        public virtual void AgentAction(int mainAction, int auctionAction)
+        protected virtual void AgentAction(int mainAction, int auctionAction)
         {
             playerInput.SetAgentAction(this, mainAction, auctionAction);
         }
@@ -110,7 +110,6 @@ namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
             var output = " Current Item";
             output += AddVectorObs(condition ? WeaponId.GetWeaponId(item.itemName) : -1, "ItemName");
             output += AddVectorObs(condition ? item.durability : defaultObs, "Durability");
-            output += AddVectorObs(condition ? item.baseDurability : defaultObs, "Base Durability");
             output += AddVectorObs(condition ? item.numLootSpawns : defaultObs, "Num Loot Spawn");
             output += AddVectorObs(condition ? item.efficiency : defaultObs, "Efficiency");
             output += AddVectorObs(item && item.unBreakable, "Unbreakable", condition);
