@@ -1,7 +1,6 @@
 ﻿using EconomyProject.Scripts.Inventory;
 using EconomyProject.Scripts.Inventory.LootBoxes.Generated;
 using EconomyProject.Scripts.MLAgents.AdventurerAgents;
-using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace EconomyProject.Scripts.GameEconomy.Systems

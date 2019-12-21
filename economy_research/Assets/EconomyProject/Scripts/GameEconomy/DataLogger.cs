@@ -6,7 +6,6 @@ using System.Text;
 using EconomyProject.Scripts.Inventory;
 using EconomyProject.Scripts.MLAgents;
 using EconomyProject.Scripts.MLAgents.AdventurerAgents;
-using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace EconomyProject.Scripts.GameEconomy

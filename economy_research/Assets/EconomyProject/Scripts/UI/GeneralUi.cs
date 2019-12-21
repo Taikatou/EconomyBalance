@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using EconomyProject.Scripts.MLAgents;
 using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using EconomyProject.Scripts.UI.Adventurer;
-using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,6 +1,4 @@
 ﻿using EconomyProject.Scripts.MLAgents.AdventurerAgents;
-using EconomyProject.Scripts.MLAgents.AdventurerAgents;
-using UnityEngine;
 
 namespace EconomyProject.Scripts.GameEconomy.Systems
 {

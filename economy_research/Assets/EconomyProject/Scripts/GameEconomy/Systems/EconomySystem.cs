@@ -1,7 +1,5 @@
 ﻿using System;
 using EconomyProject.Scripts.MLAgents.AdventurerAgents;
-using EconomyProject.Scripts.MLAgents.AdventurerAgents;
-using MLAgents;
 using UnityEngine;
 
 namespace EconomyProject.Scripts.GameEconomy.Systems

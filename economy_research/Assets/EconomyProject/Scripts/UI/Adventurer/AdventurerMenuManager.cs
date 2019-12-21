@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using EconomyProject.Scripts.GameEconomy;
 using EconomyProject.Scripts.MLAgents.AdventurerAgents;
-using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace EconomyProject.Scripts.UI.Adventurer
