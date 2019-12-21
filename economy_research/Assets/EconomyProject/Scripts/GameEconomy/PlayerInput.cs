@@ -115,7 +115,6 @@ namespace EconomyProject.Scripts.GameEconomy
 
         private void SetMainAction(AdventurerAgent agent, int choice)
         {
-            print("main action: " + choice);
             if (choice >= 0)
             {
                 AgentScreen action = (AgentScreen)choice;
