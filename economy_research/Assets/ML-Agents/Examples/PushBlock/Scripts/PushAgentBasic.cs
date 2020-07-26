@@ -2,7 +2,7 @@
 
 using System.Collections;
 using UnityEngine;
-using MLAgents;
+using Unity.MLAgents;
 
 public class PushAgentBasic : Agent
 {
@@ -19,7 +19,7 @@ public class PushAgentBasic : Agent
     [HideInInspector]
     public Bounds areaBounds;
 
-    PushBlockAcademy m_Academy;
+    PushBlockSettings m_PushBlockSettings;
 
     /// <summary>
     /// The goal to push the block to.
@@ -48,14 +48,15 @@ public class PushAgentBasic : Agent
     /// </summary>
     Renderer m_GroundRenderer;
 
+    EnvironmentParameters m_ResetParams;
+
     void Awake()
     {
-        m_Academy = FindObjectOfType<PushBlockAcademy>(); //cache the academy
+        m_PushBlockSettings = FindObjectOfType<PushBlockSettings>();
     }
 
-    public override void InitializeAgent()
+    public override void Initialize()
     {
-        base.InitializeAgent();
         goalDetect = block.GetComponent<GoalDetect>();
         goalDetect.agent = this;
 
@@ -70,6 +71,8 @@ public class PushAgentBasic : Agent
         // Starting material
         m_GroundMaterial = m_GroundRenderer.material;
 
+        m_ResetParams = Academy.Instance.EnvironmentParameters;
+
         SetResetParameters();
     }
 
@@ -82,11 +85,11 @@ public class PushAgentBasic : Agent
         var randomSpawnPos = Vector3.zero;
         while (foundNewSpawnLocation == false)
         {
-            var randomPosX = Random.Range(-areaBounds.extents.x * m_Academy.spawnAreaMarginMultiplier,
-                areaBounds.extents.x * m_Academy.spawnAreaMarginMultiplier);
+            var randomPosX = Random.Range(-areaBounds.extents.x * m_PushBlockSettings.spawnAreaMarginMultiplier,
+                areaBounds.extents.x * m_PushBlockSettings.spawnAreaMarginMultiplier);
 
-            var randomPosZ = Random.Range(-areaBounds.extents.z * m_Academy.spawnAreaMarginMultiplier,
-                areaBounds.extents.z * m_Academy.spawnAreaMarginMultiplier);
+            var randomPosZ = Random.Range(-areaBounds.extents.z * m_PushBlockSettings.spawnAreaMarginMultiplier,
+                areaBounds.extents.z * m_PushBlockSettings.spawnAreaMarginMultiplier);
             randomSpawnPos = ground.transform.position + new Vector3(randomPosX, 1f, randomPosZ);
             if (Physics.CheckBox(randomSpawnPos, new Vector3(2.5f, 0.01f, 2.5f)) == false)
             {
@@ -105,10 +108,10 @@ public class PushAgentBasic : Agent
         AddReward(5f);
 
         // By marking an agent as done AgentReset() will be called automatically.
-        Done();
+        EndEpisode();
 
         // Swap ground material for a bit to indicate we scored.
-        StartCoroutine(GoalScoredSwapGroundMaterial(m_Academy.goalScoredMaterial, 0.5f));
+        StartCoroutine(GoalScoredSwapGroundMaterial(m_PushBlockSettings.goalScoredMaterial, 0.5f));
     }
 
     /// <summary>
@@ -131,7 +134,6 @@ public class PushAgentBasic : Agent
 
         var action = Mathf.FloorToInt(act[0]);
 
-        // Goalies and Strikers have slightly different action spaces.
         switch (action)
         {
             case 1:
@@ -154,41 +156,41 @@ public class PushAgentBasic : Agent
                 break;
         }
         transform.Rotate(rotateDir, Time.fixedDeltaTime * 200f);
-        m_AgentRb.AddForce(dirToGo * m_Academy.agentRunSpeed,
+        m_AgentRb.AddForce(dirToGo * m_PushBlockSettings.agentRunSpeed,
             ForceMode.VelocityChange);
     }
 
     /// <summary>
     /// Called every step of the engine. Here the agent takes an action.
     /// </summary>
-    public override void AgentAction(float[] vectorAction)
+    public override void OnActionReceived(float[] vectorAction)
     {
         // Move the agent using the action.
         MoveAgent(vectorAction);
 
         // Penalty given each step to encourage agent to finish task quickly.
-        AddReward(-1f / agentParameters.maxStep);
+        AddReward(-1f / MaxStep);
     }
 
-    public override float[] Heuristic()
+    public override void Heuristic(float[] actionsOut)
     {
+        actionsOut[0] = 0;
         if (Input.GetKey(KeyCode.D))
         {
-            return new float[] { 3 };
+            actionsOut[0] = 3;
         }
-        if (Input.GetKey(KeyCode.W))
+        else if (Input.GetKey(KeyCode.W))
         {
-            return new float[] { 1 };
+            actionsOut[0] = 1;
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
-            return new float[] { 4 };
+            actionsOut[0] = 4;
         }
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
-            return new float[] { 2 };
+            actionsOut[0] = 2;
         }
-        return new float[] { 0 };
     }
 
     /// <summary>
@@ -210,7 +212,7 @@ public class PushAgentBasic : Agent
     /// In the editor, if "Reset On Done" is checked then AgentReset() will be
     /// called automatically anytime we mark done = true in an agent script.
     /// </summary>
-    public override void AgentReset()
+    public override void OnEpisodeBegin()
     {
         var rotation = Random.Range(0, 4);
         var rotationAngle = rotation * 90f;
@@ -226,27 +228,23 @@ public class PushAgentBasic : Agent
 
     public void SetGroundMaterialFriction()
     {
-        var resetParams = m_Academy.FloatProperties;
-
         var groundCollider = ground.GetComponent<Collider>();
 
-        groundCollider.material.dynamicFriction = resetParams.GetPropertyWithDefault("dynamic_friction", 0);
-        groundCollider.material.staticFriction = resetParams.GetPropertyWithDefault("static_friction", 0);
+        groundCollider.material.dynamicFriction = m_ResetParams.GetWithDefault("dynamic_friction", 0);
+        groundCollider.material.staticFriction = m_ResetParams.GetWithDefault("static_friction", 0);
     }
 
     public void SetBlockProperties()
     {
-        var resetParams = m_Academy.FloatProperties;
-
-        var scale = resetParams.GetPropertyWithDefault("block_scale", 2);
+        var scale = m_ResetParams.GetWithDefault("block_scale", 2);
         //Set the scale of the block
         m_BlockRb.transform.localScale = new Vector3(scale, 0.75f, scale);
 
         // Set the drag of the block
-        m_BlockRb.drag = resetParams.GetPropertyWithDefault("block_drag", 0.5f);
+        m_BlockRb.drag = m_ResetParams.GetWithDefault("block_drag", 0.5f);
     }
 
-    public void SetResetParameters()
+    void SetResetParameters()
     {
         SetGroundMaterialFriction();
         SetBlockProperties();

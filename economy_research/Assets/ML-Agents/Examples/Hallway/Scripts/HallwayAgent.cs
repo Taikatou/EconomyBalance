@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using MLAgents;
+using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
 
 public class HallwayAgent : Agent
 {
@@ -14,23 +15,22 @@ public class HallwayAgent : Agent
     Rigidbody m_AgentRb;
     Material m_GroundMaterial;
     Renderer m_GroundRenderer;
-    HallwayAcademy m_Academy;
+    HallwaySettings m_HallwaySettings;
     int m_Selection;
 
-    public override void InitializeAgent()
+    public override void Initialize()
     {
-        base.InitializeAgent();
-        m_Academy = FindObjectOfType<HallwayAcademy>();
+        m_HallwaySettings = FindObjectOfType<HallwaySettings>();
         m_AgentRb = GetComponent<Rigidbody>();
         m_GroundRenderer = ground.GetComponent<Renderer>();
         m_GroundMaterial = m_GroundRenderer.material;
     }
 
-    public override void CollectObservations()
+    public override void CollectObservations(VectorSensor sensor)
     {
         if (useVectorObs)
         {
-            AddVectorObs(GetStepCount() / (float)agentParameters.maxStep);
+            sensor.AddObservation(StepCount / (float)MaxStep);
         }
     }
 
@@ -63,12 +63,12 @@ public class HallwayAgent : Agent
                 break;
         }
         transform.Rotate(rotateDir, Time.deltaTime * 150f);
-        m_AgentRb.AddForce(dirToGo * m_Academy.agentRunSpeed, ForceMode.VelocityChange);
+        m_AgentRb.AddForce(dirToGo * m_HallwaySettings.agentRunSpeed, ForceMode.VelocityChange);
     }
 
-    public override void AgentAction(float[] vectorAction)
+    public override void OnActionReceived(float[] vectorAction)
     {
-        AddReward(-1f / agentParameters.maxStep);
+        AddReward(-1f / MaxStep);
         MoveAgent(vectorAction);
     }
 
@@ -80,39 +80,39 @@ public class HallwayAgent : Agent
                 (m_Selection == 1 && col.gameObject.CompareTag("symbol_X_Goal")))
             {
                 SetReward(1f);
-                StartCoroutine(GoalScoredSwapGroundMaterial(m_Academy.goalScoredMaterial, 0.5f));
+                StartCoroutine(GoalScoredSwapGroundMaterial(m_HallwaySettings.goalScoredMaterial, 0.5f));
             }
             else
             {
                 SetReward(-0.1f);
-                StartCoroutine(GoalScoredSwapGroundMaterial(m_Academy.failMaterial, 0.5f));
+                StartCoroutine(GoalScoredSwapGroundMaterial(m_HallwaySettings.failMaterial, 0.5f));
             }
-            Done();
+            EndEpisode();
         }
     }
 
-    public override float[] Heuristic()
+    public override void Heuristic(float[] actionsOut)
     {
+        actionsOut[0] = 0;
         if (Input.GetKey(KeyCode.D))
         {
-            return new float[] { 3 };
+            actionsOut[0] = 3;
         }
-        if (Input.GetKey(KeyCode.W))
+        else if (Input.GetKey(KeyCode.W))
         {
-            return new float[] { 1 };
+            actionsOut[0] = 1;
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
-            return new float[] { 4 };
+            actionsOut[0] = 4;
         }
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
-            return new float[] { 2 };
+            actionsOut[0] = 2;
         }
-        return new float[] { 0 };
     }
 
-    public override void AgentReset()
+    public override void OnEpisodeBegin()
     {
         var agentOffset = -15f;
         var blockOffset = 0f;

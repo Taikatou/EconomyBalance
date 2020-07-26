@@ -1,15 +1,22 @@
+using System;
+using MLAgentsExamples;
 using UnityEngine;
-using MLAgents;
+using Unity.MLAgents;
+using Unity.MLAgentsExamples;
+using Unity.MLAgents.Sensors;
+using BodyPart = Unity.MLAgentsExamples.BodyPart;
+using Random = UnityEngine.Random;
 
 public class WalkerAgent : Agent
 {
-    [Header("Specific to Walker")]
-    [Header("Target To Walk Towards")]
-    [Space(10)]
-    public Transform target;
+    public float maximumWalkingSpeed = 999; //The max walk velocity magnitude an agent will be rewarded for
+    Vector3 m_WalkDir; //Direction to the target
+//    Quaternion m_WalkDirLookRot; //Will hold the rotation to our target
 
-    Vector3 m_DirToTarget;
-    public Transform hips;
+    [Header("Target To Walk Towards")] [Space(10)]
+    public TargetController target; //Target the agent will walk towards.
+
+    [Header("Body Parts")] [Space(10)] public Transform hips;
     public Transform chest;
     public Transform spine;
     public Transform head;
@@ -25,18 +32,21 @@ public class WalkerAgent : Agent
     public Transform armR;
     public Transform forearmR;
     public Transform handR;
+
+    [Header("Orientation")] [Space(10)]
+    //This will be used as a stabilized model space reference point for observations
+    //Because ragdolls can move erratically during training, using a stabilized reference transform improves learning
+    public OrientationCubeController orientationCube;
+
     JointDriveController m_JdController;
-    bool m_IsNewDecisionStep;
-    int m_CurrentDecisionStep;
 
-    Rigidbody m_HipsRb;
-    Rigidbody m_ChestRb;
-    Rigidbody m_SpineRb;
+    EnvironmentParameters m_ResetParams;
 
-    IFloatProperties m_ResetParams;
-
-    public override void InitializeAgent()
+    public override void Initialize()
     {
+        orientationCube.UpdateOrientation(hips, target.transform);
+
+        //Setup each body part
         m_JdController = GetComponent<JointDriveController>();
         m_JdController.SetupBodyPart(hips);
         m_JdController.SetupBodyPart(chest);
@@ -55,12 +65,26 @@ public class WalkerAgent : Agent
         m_JdController.SetupBodyPart(forearmR);
         m_JdController.SetupBodyPart(handR);
 
-        m_HipsRb = hips.GetComponent<Rigidbody>();
-        m_ChestRb = chest.GetComponent<Rigidbody>();
-        m_SpineRb = spine.GetComponent<Rigidbody>();
+        m_ResetParams = Academy.Instance.EnvironmentParameters;
 
-        var academy = FindObjectOfType<WalkerAcademy>();
-        m_ResetParams = academy.FloatProperties;
+        SetResetParameters();
+    }
+
+    /// <summary>
+    /// Loop over body parts and reset them to initial conditions.
+    /// </summary>
+    public override void OnEpisodeBegin()
+    {
+        //Reset all of the body parts
+        foreach (var bodyPart in m_JdController.bodyPartsDict.Values)
+        {
+            bodyPart.Reset(bodyPart);
+        }
+
+        //Random start rotation to help generalize
+        transform.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
+
+        orientationCube.UpdateOrientation(hips, target.transform);
 
         SetResetParameters();
     }
@@ -68,145 +92,141 @@ public class WalkerAgent : Agent
     /// <summary>
     /// Add relevant information on each body part to observations.
     /// </summary>
-    public void CollectObservationBodyPart(BodyPart bp)
+    public void CollectObservationBodyPart(BodyPart bp, VectorSensor sensor)
     {
-        var rb = bp.rb;
-        AddVectorObs(bp.groundContact.touchingGround ? 1 : 0); // Is this bp touching the ground
-        AddVectorObs(rb.velocity);
-        AddVectorObs(rb.angularVelocity);
-        var localPosRelToHips = hips.InverseTransformPoint(rb.position);
-        AddVectorObs(localPosRelToHips);
+        //GROUND CHECK
+        sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
 
-        if (bp.rb.transform != hips && bp.rb.transform != handL && bp.rb.transform != handR &&
-            bp.rb.transform != footL && bp.rb.transform != footR && bp.rb.transform != head)
+        //Get velocities in the context of our orientation cube's space
+        //Note: You can get these velocities in world space as well but it may not train as well.
+        sensor.AddObservation(orientationCube.transform.InverseTransformDirection(bp.rb.velocity));
+        sensor.AddObservation(orientationCube.transform.InverseTransformDirection(bp.rb.angularVelocity));
+
+        //Get position relative to hips in the context of our orientation cube's space
+        sensor.AddObservation(orientationCube.transform.InverseTransformDirection(bp.rb.position - hips.position));
+
+        if (bp.rb.transform != hips && bp.rb.transform != handL && bp.rb.transform != handR)
         {
-            AddVectorObs(bp.currentXNormalizedRot);
-            AddVectorObs(bp.currentYNormalizedRot);
-            AddVectorObs(bp.currentZNormalizedRot);
-            AddVectorObs(bp.currentStrength / m_JdController.maxJointForceLimit);
+            sensor.AddObservation(bp.rb.transform.localRotation);
+            sensor.AddObservation(bp.currentStrength / m_JdController.maxJointForceLimit);
         }
     }
 
     /// <summary>
     /// Loop over body parts to add them to observation.
     /// </summary>
-    public override void CollectObservations()
+    public override void CollectObservations(VectorSensor sensor)
     {
-        m_JdController.GetCurrentJointForces();
+        sensor.AddObservation(Quaternion.FromToRotation(hips.forward, orientationCube.transform.forward));
+        sensor.AddObservation(Quaternion.FromToRotation(head.forward, orientationCube.transform.forward));
 
-        AddVectorObs(m_DirToTarget.normalized);
-        AddVectorObs(m_JdController.bodyPartsDict[hips].rb.position);
-        AddVectorObs(hips.forward);
-        AddVectorObs(hips.up);
+        sensor.AddObservation(orientationCube.transform.InverseTransformPoint(target.transform.position));
 
-        foreach (var bodyPart in m_JdController.bodyPartsDict.Values)
+        foreach (var bodyPart in m_JdController.bodyPartsList)
         {
-            CollectObservationBodyPart(bodyPart);
+            CollectObservationBodyPart(bodyPart, sensor);
         }
     }
 
-    public override void AgentAction(float[] vectorAction)
+    public override void OnActionReceived(float[] vectorAction)
     {
-        m_DirToTarget = target.position - m_JdController.bodyPartsDict[hips].rb.position;
+        var bpDict = m_JdController.bodyPartsDict;
+        var i = -1;
 
-        // Apply action to all relevant body parts.
-        if (m_IsNewDecisionStep)
-        {
-            var bpDict = m_JdController.bodyPartsDict;
-            var i = -1;
+        bpDict[chest].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], vectorAction[++i]);
+        bpDict[spine].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], vectorAction[++i]);
 
-            bpDict[chest].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], vectorAction[++i]);
-            bpDict[spine].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], vectorAction[++i]);
+        bpDict[thighL].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
+        bpDict[thighR].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
+        bpDict[shinL].SetJointTargetRotation(vectorAction[++i], 0, 0);
+        bpDict[shinR].SetJointTargetRotation(vectorAction[++i], 0, 0);
+        bpDict[footR].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], vectorAction[++i]);
+        bpDict[footL].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], vectorAction[++i]);
 
-            bpDict[thighL].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
-            bpDict[thighR].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
-            bpDict[shinL].SetJointTargetRotation(vectorAction[++i], 0, 0);
-            bpDict[shinR].SetJointTargetRotation(vectorAction[++i], 0, 0);
-            bpDict[footR].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], vectorAction[++i]);
-            bpDict[footL].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], vectorAction[++i]);
+        bpDict[armL].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
+        bpDict[armR].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
+        bpDict[forearmL].SetJointTargetRotation(vectorAction[++i], 0, 0);
+        bpDict[forearmR].SetJointTargetRotation(vectorAction[++i], 0, 0);
+        bpDict[head].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
 
+        //update joint strength settings
+        bpDict[chest].SetJointStrength(vectorAction[++i]);
+        bpDict[spine].SetJointStrength(vectorAction[++i]);
+        bpDict[head].SetJointStrength(vectorAction[++i]);
+        bpDict[thighL].SetJointStrength(vectorAction[++i]);
+        bpDict[shinL].SetJointStrength(vectorAction[++i]);
+        bpDict[footL].SetJointStrength(vectorAction[++i]);
+        bpDict[thighR].SetJointStrength(vectorAction[++i]);
+        bpDict[shinR].SetJointStrength(vectorAction[++i]);
+        bpDict[footR].SetJointStrength(vectorAction[++i]);
+        bpDict[armL].SetJointStrength(vectorAction[++i]);
+        bpDict[forearmL].SetJointStrength(vectorAction[++i]);
+        bpDict[armR].SetJointStrength(vectorAction[++i]);
+        bpDict[forearmR].SetJointStrength(vectorAction[++i]);
+    }
 
-            bpDict[armL].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
-            bpDict[armR].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
-            bpDict[forearmL].SetJointTargetRotation(vectorAction[++i], 0, 0);
-            bpDict[forearmR].SetJointTargetRotation(vectorAction[++i], 0, 0);
-            bpDict[head].SetJointTargetRotation(vectorAction[++i], vectorAction[++i], 0);
-
-            //update joint strength settings
-            bpDict[chest].SetJointStrength(vectorAction[++i]);
-            bpDict[spine].SetJointStrength(vectorAction[++i]);
-            bpDict[head].SetJointStrength(vectorAction[++i]);
-            bpDict[thighL].SetJointStrength(vectorAction[++i]);
-            bpDict[shinL].SetJointStrength(vectorAction[++i]);
-            bpDict[footL].SetJointStrength(vectorAction[++i]);
-            bpDict[thighR].SetJointStrength(vectorAction[++i]);
-            bpDict[shinR].SetJointStrength(vectorAction[++i]);
-            bpDict[footR].SetJointStrength(vectorAction[++i]);
-            bpDict[armL].SetJointStrength(vectorAction[++i]);
-            bpDict[forearmL].SetJointStrength(vectorAction[++i]);
-            bpDict[armR].SetJointStrength(vectorAction[++i]);
-            bpDict[forearmR].SetJointStrength(vectorAction[++i]);
-        }
-
-        IncrementDecisionTimer();
-
+    void FixedUpdate()
+    {
+        var cubeForward = orientationCube.transform.forward;
+        orientationCube.UpdateOrientation(hips, target.transform);
         // Set reward for this step according to mixture of the following elements.
         // a. Velocity alignment with goal direction.
+        var moveTowardsTargetReward = Vector3.Dot(cubeForward,
+            Vector3.ClampMagnitude(m_JdController.bodyPartsDict[hips].rb.velocity, maximumWalkingSpeed));
+        if (float.IsNaN(moveTowardsTargetReward))
+        {
+            throw new ArgumentException(
+                "NaN in moveTowardsTargetReward.\n" +
+                $" cubeForward: {cubeForward}\n"+
+                $" hips.velocity: {m_JdController.bodyPartsDict[hips].rb.velocity}\n"+
+                $" maximumWalkingSpeed: {maximumWalkingSpeed}"
+            );
+        }
+
         // b. Rotation alignment with goal direction.
-        // c. Encourage head height.
-        // d. Discourage head movement.
+        var lookAtTargetReward = Vector3.Dot(cubeForward, head.forward);
+        if (float.IsNaN(lookAtTargetReward))
+        {
+            throw new ArgumentException(
+                "NaN in lookAtTargetReward.\n" +
+                $" cubeForward: {cubeForward}\n"+
+                $" head.forward: {head.forward}"
+            );
+        }
+
+        // c. Encourage head height. //Should normalize to ~1
+        var headHeightOverFeetReward =
+            ((head.position.y - footL.position.y) + (head.position.y - footR.position.y) / 10);
+        if (float.IsNaN(headHeightOverFeetReward))
+        {
+            throw new ArgumentException(
+                "NaN in headHeightOverFeetReward.\n" +
+                $" head.position: {head.position}\n"+
+                $" footL.position: {footL.position}\n"+
+                $" footR.position: {footR.position}"
+            );
+        }
+
         AddReward(
-            +0.03f * Vector3.Dot(m_DirToTarget.normalized, m_JdController.bodyPartsDict[hips].rb.velocity)
-            + 0.01f * Vector3.Dot(m_DirToTarget.normalized, hips.forward)
-            + 0.02f * (head.position.y - hips.position.y)
-            - 0.01f * Vector3.Distance(m_JdController.bodyPartsDict[head].rb.velocity,
-                m_JdController.bodyPartsDict[hips].rb.velocity)
+            + 0.02f * moveTowardsTargetReward
+            + 0.02f * lookAtTargetReward
+            + 0.005f * headHeightOverFeetReward
         );
     }
 
     /// <summary>
-    /// Only change the joint settings based on decision frequency.
+    /// Agent touched the target
     /// </summary>
-    public void IncrementDecisionTimer()
+    public void TouchedTarget()
     {
-        if (m_CurrentDecisionStep == agentParameters.numberOfActionsBetweenDecisions ||
-            agentParameters.numberOfActionsBetweenDecisions == 1)
-        {
-            m_CurrentDecisionStep = 1;
-            m_IsNewDecisionStep = true;
-        }
-        else
-        {
-            m_CurrentDecisionStep++;
-            m_IsNewDecisionStep = false;
-        }
-    }
-
-    /// <summary>
-    /// Loop over body parts and reset them to initial conditions.
-    /// </summary>
-    public override void AgentReset()
-    {
-        if (m_DirToTarget != Vector3.zero)
-        {
-            transform.rotation = Quaternion.LookRotation(m_DirToTarget);
-        }
-
-        foreach (var bodyPart in m_JdController.bodyPartsDict.Values)
-        {
-            bodyPart.Reset(bodyPart);
-        }
-
-        m_IsNewDecisionStep = true;
-        m_CurrentDecisionStep = 1;
-        SetResetParameters();
+        AddReward(1f);
     }
 
     public void SetTorsoMass()
     {
-        m_ChestRb.mass = m_ResetParams.GetPropertyWithDefault("chest_mass", 8);
-        m_SpineRb.mass = m_ResetParams.GetPropertyWithDefault("spine_mass", 10);
-        m_HipsRb.mass = m_ResetParams.GetPropertyWithDefault("hip_mass", 15);
+        m_JdController.bodyPartsDict[chest].rb.mass = m_ResetParams.GetWithDefault("chest_mass", 8);
+        m_JdController.bodyPartsDict[spine].rb.mass = m_ResetParams.GetWithDefault("spine_mass", 8);
+        m_JdController.bodyPartsDict[hips].rb.mass = m_ResetParams.GetWithDefault("hip_mass", 8);
     }
 
     public void SetResetParameters()

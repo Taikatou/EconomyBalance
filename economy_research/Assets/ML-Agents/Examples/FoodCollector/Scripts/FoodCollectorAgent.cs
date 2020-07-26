@@ -1,9 +1,10 @@
 using UnityEngine;
-using MLAgents;
+using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
 
 public class FoodCollectorAgent : Agent
 {
-    FoodCollectorAcademy m_MyAcademy;
+    FoodCollectorSettings m_FoodCollecterSettings;
     public GameObject area;
     FoodCollectorArea m_MyArea;
     bool m_Frozen;
@@ -27,27 +28,26 @@ public class FoodCollectorAgent : Agent
     public bool contribute;
     public bool useVectorObs;
 
+    EnvironmentParameters m_ResetParams;
 
-    public override void InitializeAgent()
+    public override void Initialize()
     {
-        base.InitializeAgent();
         m_AgentRb = GetComponent<Rigidbody>();
-        Monitor.verticalOffset = 1f;
         m_MyArea = area.GetComponent<FoodCollectorArea>();
-        m_MyAcademy = FindObjectOfType<FoodCollectorAcademy>();
-
+        m_FoodCollecterSettings = FindObjectOfType<FoodCollectorSettings>();
+        m_ResetParams = Academy.Instance.EnvironmentParameters;
         SetResetParameters();
     }
 
-    public override void CollectObservations()
+    public override void CollectObservations(VectorSensor sensor)
     {
         if (useVectorObs)
         {
             var localVelocity = transform.InverseTransformDirection(m_AgentRb.velocity);
-            AddVectorObs(localVelocity.x);
-            AddVectorObs(localVelocity.z);
-            AddVectorObs(System.Convert.ToInt32(m_Frozen));
-            AddVectorObs(System.Convert.ToInt32(m_Shoot));
+            sensor.AddObservation(localVelocity.x);
+            sensor.AddObservation(localVelocity.z);
+            sensor.AddObservation(m_Frozen);
+            sensor.AddObservation(m_Shoot);
         }
     }
 
@@ -202,35 +202,36 @@ public class FoodCollectorAgent : Agent
         gameObject.GetComponentInChildren<Renderer>().material = normalMaterial;
     }
 
-    public override void AgentAction(float[] vectorAction)
+    public override void OnActionReceived(float[] vectorAction)
     {
         MoveAgent(vectorAction);
     }
 
-    public override float[] Heuristic()
+    public override void Heuristic(float[] actionsOut)
     {
-        var action = new float[4];
+        actionsOut[0] = 0f;
+        actionsOut[1] = 0f;
+        actionsOut[2] = 0f;
         if (Input.GetKey(KeyCode.D))
         {
-            action[2] = 2f;
+            actionsOut[2] = 2f;
         }
         if (Input.GetKey(KeyCode.W))
         {
-            action[0] = 1f;
+            actionsOut[0] = 1f;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            action[2] = 1f;
+            actionsOut[2] = 1f;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            action[0] = 2f;
+            actionsOut[0] = 2f;
         }
-        action[3] = Input.GetKey(KeyCode.Space) ? 1.0f : 0.0f;
-        return action;
+        actionsOut[3] = Input.GetKey(KeyCode.Space) ? 1.0f : 0.0f;
     }
 
-    public override void AgentReset()
+    public override void OnEpisodeBegin()
     {
         Unfreeze();
         Unpoison();
@@ -255,7 +256,7 @@ public class FoodCollectorAgent : Agent
             AddReward(1f);
             if (contribute)
             {
-                m_MyAcademy.totalScore += 1;
+                m_FoodCollecterSettings.totalScore += 1;
             }
         }
         if (collision.gameObject.CompareTag("badFood"))
@@ -266,23 +267,19 @@ public class FoodCollectorAgent : Agent
             AddReward(-1f);
             if (contribute)
             {
-                m_MyAcademy.totalScore -= 1;
+                m_FoodCollecterSettings.totalScore -= 1;
             }
         }
     }
 
-    public override void AgentOnDone()
-    {
-    }
-
     public void SetLaserLengths()
     {
-        m_LaserLength = m_MyAcademy.FloatProperties.GetPropertyWithDefault("laser_length", 1.0f);
+        m_LaserLength = m_ResetParams.GetWithDefault("laser_length", 1.0f);
     }
 
     public void SetAgentScale()
     {
-        float agentScale = m_MyAcademy.FloatProperties.GetPropertyWithDefault("agent_scale", 1.0f);
+        float agentScale = m_ResetParams.GetWithDefault("agent_scale", 1.0f);
         gameObject.transform.localScale = new Vector3(agentScale, agentScale, agentScale);
     }
 

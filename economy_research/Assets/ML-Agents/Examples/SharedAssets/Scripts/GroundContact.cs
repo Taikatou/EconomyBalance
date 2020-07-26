@@ -1,6 +1,7 @@
 using UnityEngine;
+using Unity.MLAgents;
 
-namespace MLAgents
+namespace Unity.MLAgentsExamples
 {
     /// <summary>
     /// This class contains logic for locomotion agents with joints which might make contact with the ground.
@@ -33,7 +34,7 @@ namespace MLAgents
 
                 if (agentDoneOnGroundContact)
                 {
-                    agent.Done();
+                    agent.EndEpisode();
                 }
             }
         }

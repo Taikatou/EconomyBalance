@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MLAgents
+namespace Unity.MLAgentsExamples
 {
     public class FlyCamera : MonoBehaviour
     {

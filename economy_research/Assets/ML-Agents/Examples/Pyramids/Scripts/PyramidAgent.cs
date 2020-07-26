@@ -2,42 +2,31 @@ using System;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using MLAgents;
+using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
 
 public class PyramidAgent : Agent
 {
     public GameObject area;
     PyramidArea m_MyArea;
     Rigidbody m_AgentRb;
-    RayPerception m_RayPer;
     PyramidSwitch m_SwitchLogic;
     public GameObject areaSwitch;
     public bool useVectorObs;
 
-    public override void InitializeAgent()
+    public override void Initialize()
     {
-        base.InitializeAgent();
         m_AgentRb = GetComponent<Rigidbody>();
         m_MyArea = area.GetComponent<PyramidArea>();
-        m_RayPer = GetComponent<RayPerception>();
         m_SwitchLogic = areaSwitch.GetComponent<PyramidSwitch>();
     }
 
-    public override void CollectObservations()
+    public override void CollectObservations(VectorSensor sensor)
     {
         if (useVectorObs)
         {
-            const float rayDistance = 35f;
-            float[] rayAngles = { 20f, 90f, 160f, 45f, 135f, 70f, 110f };
-            float[] rayAngles1 = { 25f, 95f, 165f, 50f, 140f, 75f, 115f };
-            float[] rayAngles2 = { 15f, 85f, 155f, 40f, 130f, 65f, 105f };
-
-            string[] detectableObjects = { "block", "wall", "goal", "switchOff", "switchOn", "stone" };
-            AddVectorObs(m_RayPer.Perceive(rayDistance, rayAngles, detectableObjects));
-            AddVectorObs(m_RayPer.Perceive(rayDistance, rayAngles1, detectableObjects, 0f, 5f));
-            AddVectorObs(m_RayPer.Perceive(rayDistance, rayAngles2, detectableObjects, 0f, 10f));
-            AddVectorObs(m_SwitchLogic.GetState());
-            AddVectorObs(transform.InverseTransformDirection(m_AgentRb.velocity));
+            sensor.AddObservation(m_SwitchLogic.GetState());
+            sensor.AddObservation(transform.InverseTransformDirection(m_AgentRb.velocity));
         }
     }
 
@@ -66,34 +55,34 @@ public class PyramidAgent : Agent
         m_AgentRb.AddForce(dirToGo * 2f, ForceMode.VelocityChange);
     }
 
-    public override void AgentAction(float[] vectorAction)
+    public override void OnActionReceived(float[] vectorAction)
     {
-        AddReward(-1f / agentParameters.maxStep);
+        AddReward(-1f / MaxStep);
         MoveAgent(vectorAction);
     }
 
-    public override float[] Heuristic()
+    public override void Heuristic(float[] actionsOut)
     {
+        actionsOut[0] = 0;
         if (Input.GetKey(KeyCode.D))
         {
-            return new float[] { 3 };
+            actionsOut[0] = 3;
         }
-        if (Input.GetKey(KeyCode.W))
+        else if (Input.GetKey(KeyCode.W))
         {
-            return new float[] { 1 };
+            actionsOut[0] = 1;
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
-            return new float[] { 4 };
+            actionsOut[0] = 4;
         }
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
-            return new float[] { 2 };
+            actionsOut[0] = 2;
         }
-        return new float[] { 0 };
     }
 
-    public override void AgentReset()
+    public override void OnEpisodeBegin()
     {
         var enumerable = Enumerable.Range(0, 9).OrderBy(x => Guid.NewGuid()).Take(9);
         var items = enumerable.ToArray();
@@ -118,11 +107,7 @@ public class PyramidAgent : Agent
         if (collision.gameObject.CompareTag("goal"))
         {
             SetReward(2f);
-            Done();
+            EndEpisode();
         }
-    }
-
-    public override void AgentOnDone()
-    {
     }
 }
