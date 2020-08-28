@@ -14,22 +14,22 @@ namespace EconomyProject.Scripts.UI.Adventurer
 
         public GameObject mainMenu;
 
-        public GetCurrentAgent getCurrentAgent;
+        public GetCurrentAdventurerAgent getCurrentAgent;
 
         public UiAccessor uiAccessor;
 
-        public AdventurerAgent AdventurerAgent => getCurrentAgent.CurrentAgent.GetComponent<AdventurerAgent>();
+        private AdventurerAgent AdventurerAgent => getCurrentAgent.CurrentAgent.GetComponent<AdventurerAgent>();
 
-        public PlayerInput PlayerInput => uiAccessor.PlayerInput;
+        private PlayerInput PlayerInput => uiAccessor.PlayerInput;
 
-        public override Dictionary<AgentScreen, OpenedMenu> OpenedMenus => new Dictionary<AgentScreen, OpenedMenu>
+        protected override Dictionary<AgentScreen, OpenedMenu> OpenedMenus => new Dictionary<AgentScreen, OpenedMenu>
         {
             { AgentScreen.Auction, new OpenedMenu(new List<GameObject>{auctionMenu}, new List<GameObject>{questMenu, mainMenu}) },
             { AgentScreen.Main, new OpenedMenu(new List<GameObject>{mainMenu}, new List<GameObject>{questMenu, auctionMenu}) },
             { AgentScreen.Quest, new OpenedMenu(new List<GameObject>{questMenu}, new List<GameObject>{mainMenu, auctionMenu}) }
         };
 
-        public override bool Compare(AgentScreen a, AgentScreen b)
+        protected override bool Compare(AgentScreen a, AgentScreen b)
         {
             return a == b;
         }
@@ -39,7 +39,7 @@ namespace EconomyProject.Scripts.UI.Adventurer
             var playerInput = PlayerInput;
             if (getCurrentAgent.CurrentAgent != null && playerInput != null)
             {
-                var screen = playerInput.GetScreen(AdventurerAgent);
+                var screen = playerInput.GetScreen(AdventurerAgent, AgentScreen.Main);
                 
                 SwitchMenu(screen);
             }
@@ -47,17 +47,17 @@ namespace EconomyProject.Scripts.UI.Adventurer
 
         public void StartAuction()
         {
-            PlayerInput.SetMainAction(AdventurerAgent, AgentScreen.Auction);
+            PlayerInput.ChangeScreen(AdventurerAgent, AgentScreen.Auction);
         }
 
         public void StartQuest()
         {
-            PlayerInput.SetMainAction(AdventurerAgent, AgentScreen.Quest);
+            PlayerInput.ChangeScreen(AdventurerAgent, AgentScreen.Quest);
         }
 
         public void MainMenu()
         {
-            PlayerInput.SetMainAction(AdventurerAgent, AgentScreen.Main);
+            PlayerInput.ChangeScreen(AdventurerAgent, AgentScreen.Main);
         }
 
         public void Bid()

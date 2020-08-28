@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace EconomyProject.Scripts.GameEconomy.Systems
 {
-    public class GameAuction : EconomySystem
+    public class GameAuction : EconomySystem<AdventurerAgent, AgentScreen>
     {
         [HideInInspector]
         public InventoryItem auctionedItem;
@@ -150,7 +150,7 @@ namespace EconomyProject.Scripts.GameEconomy.Systems
             _auctionOn = false;
             foreach (var agent in CurrentPlayers)
             {
-                playerInput.SetMainAction(agent, AgentScreen.Main);
+                playerInput.ChangeScreen(agent, AgentScreen.Main);
             }
         }
 

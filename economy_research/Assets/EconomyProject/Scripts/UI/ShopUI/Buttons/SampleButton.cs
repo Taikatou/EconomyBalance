@@ -8,9 +8,9 @@ namespace EconomyProject.Scripts.UI.ShopUI.Buttons
     {
         public Button buttonComponent;
 
-        protected IScrollList<T> scrollList;
+        private IScrollList<T> _scrollList;
 
-        protected T itemDetails;
+        protected T ItemDetails;
 
         // Use this for initialization
         private void Start()
@@ -20,17 +20,17 @@ namespace EconomyProject.Scripts.UI.ShopUI.Buttons
 
         public void Setup(T currentItemDetails, IScrollList<T> currentScrollList)
         {
-            itemDetails = currentItemDetails;
-            scrollList = currentScrollList;
+            ItemDetails = currentItemDetails;
+            _scrollList = currentScrollList;
             SetupButton();
         }
 
-        public abstract void SetupButton();
+        protected abstract void SetupButton();
 
-        public void HandleClick()
+        private void HandleClick()
         {
             var number = 1;
-            scrollList.SelectItem(itemDetails, number);
+            _scrollList.SelectItem(ItemDetails, number);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace EconomyProject.Scripts.Experiments
                     {
                         Debug.Log("Complete");
                         agent.AddReward(1);
-                        agent.Done();
+                        agent.EndEpisode();
                     }
                 }
             }

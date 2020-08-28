@@ -7,7 +7,7 @@ namespace EconomyProject.Scripts.GameEconomy.Systems.Requests
     {
         public RequestSystem recordSystem;
         public AdventurerAgent craftsMan;
-        public override List<ResourceRequest> ItemList => recordSystem.ResourceRequests;
+        public override List<ResourceRequest> ItemList => recordSystem.GetAllCraftingRequests();
         public override void TakeRequest(ResourceRequest request)
         {
             recordSystem.TakeRequest(this, request);

@@ -2,21 +2,31 @@
 using EconomyProject.Scripts.MLAgents.Craftsman;
 using EconomyProject.Scripts.MLAgents.Craftsman.Requirements;
 using EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+using UnityEngine;
 
 namespace EconomyProject.Scripts.GameEconomy.Systems.Requests
 {
     public class ResourceRequest
     {
         private bool _resourceAdded;
-        public int Number { get; }
-        public CraftingResources Resources { get; }
+        public CraftingResources Resource { get; }
         public CraftingInventory Inventory { get; }
+        public int Number { get; set; }
+        public int Price { get; set; }
 
-        public ResourceRequest(CraftingResources resources, CraftingInventory inventory, int number = 1)
+        private static readonly Dictionary<CraftingResources, int> _defaultPrice = new Dictionary<CraftingResources, int> {
+            {CraftingResources.Wood, 5},
+            {CraftingResources.Metal, 6},
+            {CraftingResources.Gem, 7},
+            {CraftingResources.DragonScale, 8}
+        };
+
+        public ResourceRequest(CraftingResources resource, CraftingInventory inventory, int number = 1)
         {
-            Resources = resources;
+            Resource = resource;
             Inventory = inventory;
             Number = number;
+            Price = _defaultPrice[resource];
         }
 
         public void TransferResource()
@@ -24,7 +34,7 @@ namespace EconomyProject.Scripts.GameEconomy.Systems.Requests
             if (!_resourceAdded)
             {
                 _resourceAdded = true;
-                Inventory.AddResource(Resources, Number);
+                Inventory.AddResource(Resource, Number);
             }
         }
     }
@@ -33,37 +43,45 @@ namespace EconomyProject.Scripts.GameEconomy.Systems.Requests
     {
         public RequestRecord requestRecord;
 
-        public List<ResourceRequest> ResourceRequests { get; private set; }
+        private Dictionary<CraftingInventory, Dictionary<CraftingResources, ResourceRequest>> _craftingNumber;
 
-        private Dictionary<CraftingInventory, List<ResourceRequest>> _craftingNumber;
-
-        public List<ResourceRequest> GetCraftingRequests(CraftingInventory inventory)
+        public Dictionary<CraftingResources, ResourceRequest> GetCraftingRequests(CraftingInventory inventory)
         {
-            if (_craftingNumber != null)
+            if (_craftingNumber.ContainsKey(inventory))
             {
-                if (_craftingNumber.ContainsKey(inventory))
-                {
-                    return _craftingNumber[inventory];
-                }
+                return _craftingNumber[inventory];
             }
 
-            return new List<ResourceRequest>();
+            return new Dictionary<CraftingResources, ResourceRequest>();
         }
 
         public List<ResourceRequest> GetAllCraftingRequests()
         {
             var returnList = new List<ResourceRequest>();
-            foreach (KeyValuePair<CraftingInventory, List<ResourceRequest>> entry in _craftingNumber)
+            foreach (var entry in _craftingNumber)
             {
-                foreach (var item in entry.Value)
+                foreach (var entry2 in entry.Value)
                 {
-                    returnList.Add(item);
+                    returnList.Add(entry2.Value);
                 }
             }
 
             return returnList;
         }
 
+        private int GetRequestNumber(CraftingInventory inventory, CraftingResources resources)
+        {
+            if (_craftingNumber.ContainsKey(inventory))
+            {
+                if (_craftingNumber[inventory].ContainsKey(resources))
+                {
+                    return _craftingNumber[inventory][resources].Number;
+                }
+            }
+
+            return 0;
+        }
+        
         public int GetRequestNumber(CraftingInventory inventory)
         {
             if (_craftingNumber.ContainsKey(inventory))
@@ -76,45 +94,79 @@ namespace EconomyProject.Scripts.GameEconomy.Systems.Requests
 
         private void Start()
         {
-            ResourceRequests = new List<ResourceRequest>();
-            _craftingNumber = new Dictionary<CraftingInventory, List<ResourceRequest>>();
+            _craftingNumber = new Dictionary<CraftingInventory, Dictionary<CraftingResources, ResourceRequest>>();
             Refresh();
         }
 
         public bool MakeRequest(CraftingResources resources, CraftingInventory inventory)
         {
-            if (!_craftingNumber.ContainsKey(inventory))
-            {
-                _craftingNumber.Add(inventory, new List<ResourceRequest>());
-            }
+            CheckInventory(inventory);
 
-            bool canRequest = GetRequestNumber(inventory) < 5;
+            var requestNumber = GetRequestNumber(inventory, resources);
+            var canRequest = requestNumber < 5;
             if (canRequest)
             {
-                var request = new ResourceRequest(resources, inventory);
-                ResourceRequests.Add(request);
-
-                _craftingNumber[inventory].Add(request);
+                var containsKey = _craftingNumber[inventory].ContainsKey(resources);
+                if (!containsKey)
+                {
+                    _craftingNumber[inventory].Add(resources, new ResourceRequest(resources, inventory));
+                }
+                else
+                {
+                    _craftingNumber[inventory][resources].Number++;
+                }
             }
 
             Refresh();
             return canRequest;
         }
 
-        public void RemoveRequest(ResourceRequest takeRequest, CraftingInventory inventory)
+        private void CheckInventory(CraftingInventory inventory)
         {
-            ResourceRequests.Remove(takeRequest);
+            if (!_craftingNumber.ContainsKey(inventory))
+            {
+                _craftingNumber.Add(inventory, new Dictionary<CraftingResources, ResourceRequest>());
+            }
+        }
 
-            _craftingNumber[inventory].Remove(takeRequest);
+        public void IncreasePrice(CraftingResources resources, CraftingInventory inventory)
+        {
+            ChangePrice(resources, inventory, 1);
+        }
+        
+        public void DecreasePrice(CraftingResources resources, CraftingInventory inventory)
+        {
+            ChangePrice(resources, inventory, -1);
+        }
+
+        private void ChangePrice(CraftingResources resources, CraftingInventory inventory, int number)
+        {
+            CheckInventory(inventory);
+            var containsKey = _craftingNumber[inventory].ContainsKey(resources);
+            if (containsKey)
+            {
+                if(_craftingNumber[inventory].ContainsKey(resources))
+                {
+                    _craftingNumber[inventory][resources].Price += number;
+                    Debug.Log("price change");
+                }
+            }
+            Refresh();
+        }
+
+        public void RemoveRequest(CraftingResources resource, CraftingInventory inventory)
+        {
+            _craftingNumber[inventory].Remove(resource);
+
             Refresh();
         }
 
         public bool TakeRequest(RequestTaker requestTaker, ResourceRequest takeRequest)
         {
-            if (ResourceRequests.Contains(takeRequest))
+            if (_craftingNumber[takeRequest.Inventory].ContainsKey(takeRequest.Resource))
             {
                 requestRecord.AddRequest(requestTaker, takeRequest);
-                ResourceRequests.Remove(takeRequest);
+                _craftingNumber[takeRequest.Inventory].Remove(takeRequest.Resource);
             }
 
             Refresh();
@@ -126,9 +178,9 @@ namespace EconomyProject.Scripts.GameEconomy.Systems.Requests
             requestRecord.CompleteRequest(taker, request);
             if (_craftingNumber.ContainsKey(request.Inventory))
             {
-                if (_craftingNumber[request.Inventory].Contains(request))
+                if (_craftingNumber[request.Inventory].ContainsKey(request.Resource))
                 {
-                    _craftingNumber[request.Inventory].Remove(request);
+                    _craftingNumber[request.Inventory].Remove(request.Resource);
                     var count = _craftingNumber[request.Inventory].Count;
                     if (count == 0)
                     {

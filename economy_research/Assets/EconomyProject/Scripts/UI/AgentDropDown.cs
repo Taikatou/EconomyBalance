@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using EconomyProject.Scripts.GameEconomy;
 using EconomyProject.Scripts.MLAgents;
-using MLAgents;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace EconomyProject.Scripts.UI
 {
-    public class AgentDropDown : MonoBehaviour
+    public abstract class AgentDropDown<TAgent, T> : MonoBehaviour where TAgent : AgentScreen<T>
     {
         public Dropdown dropDown;
 
@@ -15,9 +14,9 @@ namespace EconomyProject.Scripts.UI
 
         private bool _setOption;
 
-        public GetCurrentAgent getCurrentAgent;
+        protected abstract GetCurrentAgent<TAgent> GetCurrentAgent { get; }
 
-        public Agent[] AgentList => getCurrentAgent.GetAgents;
+        private TAgent[] AgentList => GetCurrentAgent.GetAgents;
 
         // Update is called once per frame
         private void Update()
@@ -50,7 +49,7 @@ namespace EconomyProject.Scripts.UI
             });
         }
 
-        protected virtual void HandleChange()
+        protected void HandleChange()
         {
             var id = dropDown.options[dropDown.value].text;
             foreach (var agent in AgentList)
@@ -63,9 +62,9 @@ namespace EconomyProject.Scripts.UI
             }
         }
 
-        protected virtual void UpdateAgent(Agent agent)
+        protected void UpdateAgent(TAgent agent)
         {
-            getCurrentAgent.UpdateAgent(agent);
+            GetCurrentAgent.UpdateAgent(agent);
         }
     }
 }

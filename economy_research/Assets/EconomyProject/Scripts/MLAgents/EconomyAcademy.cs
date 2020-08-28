@@ -1,13 +1,9 @@
-﻿using MLAgents;
-using UnityEngine;
+﻿using Unity.MLAgents;
 
 namespace EconomyProject.Scripts.MLAgents
 {
-    public class EconomyAcademy : Academy
-    {
-        public override void InitializeAcademy()
-        {
-            Monitor.SetActive(true);
-        }
-    }
+    //public class EconomyAcademy : Academy
+    //{
+        
+    //}
 }

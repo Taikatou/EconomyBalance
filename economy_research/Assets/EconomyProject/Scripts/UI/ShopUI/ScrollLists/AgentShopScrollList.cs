@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using EconomyProject.Scripts.MLAgents.Shop;
+using Unity.MLAgents;
 using UnityEngine.UI;
 
 namespace EconomyProject.Scripts.UI.ShopUI.ScrollLists
 {
     public class AgentShopScrollList : ShopScrollList
     {
-        public GetCurrentAgent currentAgent;
+        public GetCurrentAgent<Agent> currentAgent;
 
         public Text myGoldDisplay;
 

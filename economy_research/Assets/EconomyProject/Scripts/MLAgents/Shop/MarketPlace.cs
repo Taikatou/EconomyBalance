@@ -23,7 +23,7 @@ namespace EconomyProject.Scripts.MLAgents.Shop
             var count = 0;
             foreach (var item in ItemList)
             {
-                if (item.seller == seller)
+                if (item.Seller == seller)
                 {
                     count++;
                 }

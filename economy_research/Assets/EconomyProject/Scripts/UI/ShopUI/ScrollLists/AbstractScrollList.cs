@@ -13,11 +13,10 @@ namespace EconomyProject.Scripts.UI.ShopUI.ScrollLists
 
     public class LastUpdate : MonoBehaviour
     {
-        public DateTime LastUpdated { get; set; }
-
+        public DateTime LastUpdated { get; private set; }
         public void Refresh()
         {
-            LastUpdated = DateTime.Now;
+            LastUpdated = DateTime.Now;;
         }
     }
 

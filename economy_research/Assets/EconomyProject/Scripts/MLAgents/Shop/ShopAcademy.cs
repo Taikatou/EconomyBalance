@@ -1,9 +1,9 @@
-﻿using MLAgents;
+﻿
 
 namespace EconomyProject.Scripts.MLAgents.Shop
 {
-    public class ShopAcademy : Academy
-    {
+    //public class ShopAcademy : Academy
+    //{
     
-    }
+    //}
 }

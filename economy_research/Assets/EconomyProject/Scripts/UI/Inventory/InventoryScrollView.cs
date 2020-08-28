@@ -13,7 +13,7 @@ namespace EconomyProject.Scripts.UI.Inventory
 
         public CraftsmanUIControls craftsmanMenu;
 
-        public AgentInventory AgentInventory => craftsmanMenu.CraftsmanAgent.AgentInventory;
+        private AgentInventory AgentInventory => craftsmanMenu.CraftsmanAgent.AgentInventory;
 
         public override void SelectItem(InventoryItem item, int number = 1)
         {

@@ -10,10 +10,10 @@ namespace EconomyProject.Scripts.UI.Craftsman.Request.Buttons
         public Image iconImage;
         public Text numberText;
 
-        public override void SetupButton()
+        protected override void SetupButton()
         {
-            nameLabel.text = itemDetails.resourceType.ToString();
-            numberText.text = "INVENTORY: " + itemDetails.inventoryNumber;
+            nameLabel.text = ItemDetails.ResourceType.ToString();
+            numberText.text = "INVENTORY: " + ItemDetails.InventoryNumber;
         }
     }
 }

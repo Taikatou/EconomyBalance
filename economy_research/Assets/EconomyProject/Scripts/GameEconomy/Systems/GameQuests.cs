@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EconomyProject.Scripts.GameEconomy.Systems
 {
-    public class GameQuests : EconomySystem
+    public class GameQuests : EconomySystem<AdventurerAgent, AgentScreen>
     {
         public float spawnTime = 3.0f;
 
@@ -69,7 +69,8 @@ namespace EconomyProject.Scripts.GameEconomy.Systems
                         _shouldReturn = false;
                         foreach (var agent in CurrentPlayers)
                         {
-                            playerInput.SetMainAction(agent, AgentScreen.Main);
+                            Debug.Log("Exit Quest");
+                            playerInput.ChangeScreen(agent, AgentScreen.Main);
                         }
                         _shouldReturn = true;
                     }

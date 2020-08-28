@@ -96,8 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMoney: 100
-  earnedMoney: 0
-  spentMoney: 0
 --- !u!114 &1698003909039440842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe44ab26e9b99c4388ec065bf6b9cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  craftsMan: {fileID: 2696612896792117499}
 --- !u!114 &1690807225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,15 +170,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 4
-    numStackedVectorObservations: 1
-    vectorActionSize: 010000000100000001000000
-    vectorActionDescriptions: []
-    vectorActionSpaceType: 0
+    VectorObservationSize: 4
+    NumStackedVectorObservations: 1
+    VectorActionSize: 010000000100000001000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_UseHeuristic: 0
+  m_BehaviorType: 0
   m_BehaviorName: Shop Agent
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_ObservableAttributeHandling: 0
 --- !u!114 &2696612896792117499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +196,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentParameters:
     maxStep: 0
-    resetOnDone: 1
-    onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 1
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
   requestSystem: {fileID: 0}

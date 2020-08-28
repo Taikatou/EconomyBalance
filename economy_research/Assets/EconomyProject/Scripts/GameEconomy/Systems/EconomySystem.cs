@@ -1,26 +1,27 @@
 ﻿using System;
-using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using UnityEngine;
 
 namespace EconomyProject.Scripts.GameEconomy.Systems
 {
-    public abstract class EconomySystem : MonoBehaviour
+    public abstract class EconomySystem<TAgent, TScreen> : MonoBehaviour where TAgent : AgentScreen<TScreen> where TScreen : Enum
     {
-        public PlayerInput playerInput;
-
         public GameObject agents;
+        
+        public AgentInput<TAgent, TScreen> playerInput;
 
-        public abstract float Progress { get; }
-        protected abstract AgentScreen ActionChoice { get; }
+        public ShopInput ShopInput { get; set; }
+        protected abstract TScreen ActionChoice { get; }
 
-        public abstract bool CanMove(AdventurerAgent agent);
+        public abstract bool CanMove(TAgent agent);
+        
+        public virtual float Progress => 0.0f;
 
-        public AdventurerAgent[] CurrentPlayers
+        public TAgent[] CurrentPlayers
         {
             get
             {
-                var playerAgents = agents.GetComponentsInChildren<AdventurerAgent>();
-                return Array.FindAll(playerAgents, element => element.ChosenScreen == ActionChoice);
+                var playerAgents = agents.GetComponentsInChildren<TAgent>();
+                return Array.FindAll(playerAgents, element => element.ChosenScreen.Equals(ActionChoice));
             }
         }
 
@@ -28,13 +29,13 @@ namespace EconomyProject.Scripts.GameEconomy.Systems
         {
             foreach(var agent in CurrentPlayers)
             {
-                if (agent.agentParameters.onDemandDecision)
-                {
-                    agent.RequestDecision();
-                }
+                agent.RequestDecision();
             }
         }
 
-        // public abstract void SetChoice(CurrentAgent agent, int input1, int input2);
+        public virtual void SetChoice(TAgent agent, int input)
+        {
+            
+        }
     }
 }

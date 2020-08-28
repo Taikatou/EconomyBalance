@@ -12,16 +12,15 @@ namespace EconomyProject.Scripts.MLAgents.Shop
         public int price;
 
         public int stock;
-
-        [HideInInspector]
-        public readonly ShopAgent seller;
+        
+        public readonly ShopAgent Seller;
 
         public ShopItem(ShopItem item, int stock, ShopAgent seller)
         {
-            this.inventoryItem = item.inventoryItem;
-            this.price = item.price;
+            inventoryItem = item.inventoryItem;
+            price = item.price;
             this.stock = stock;
-            this.seller = seller;
+            Seller = seller;
         }
 
         public string ItemName => inventoryItem ? inventoryItem.itemName : "";
@@ -80,7 +79,7 @@ namespace EconomyProject.Scripts.MLAgents.Shop
             }
         }
 
-        public ShopItem FindShopItem(InventoryItem item)
+        private ShopItem FindShopItem(InventoryItem item)
         {
             foreach (var shopItem in shopItems)
             {

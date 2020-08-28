@@ -1,4 +1,4 @@
-﻿using EconomyProject.Scripts.MLAgents.Craftsman;
+﻿using EconomyProject.Scripts.GameEconomy;
 using EconomyProject.Scripts.MLAgents.Shop;
 using UnityEngine;
 
@@ -6,22 +6,25 @@ namespace EconomyProject.Scripts.UI.Craftsman
 {
     public class CraftsmanUIControls : MonoBehaviour
     {
-        public GetCurrentAgent getCurrentAgent;
+        public GetCurrentShopAgent getCurrentAgent;
+
+        public ShopInput shopInput;
 
         public ShopAgent CraftsmanAgent => getCurrentAgent.CurrentAgent.GetComponent<ShopAgent>();
+        
         public void MoveToRequest()
         {
-            CraftsmanAgent?.ChangeAgentScreen(CraftsmanScreen.Request);
+            shopInput.ChangeScreen(getCurrentAgent.CurrentAgent, EShopScreen.Request);
         }
 
         public void MoveToCraft()
         {
-            CraftsmanAgent?.ChangeAgentScreen(CraftsmanScreen.Craft);
+            shopInput.ChangeScreen(getCurrentAgent.CurrentAgent, EShopScreen.Craft);
         }
 
         public void ReturnToMain()
         {
-            CraftsmanAgent?.ChangeAgentScreen(CraftsmanScreen.Main);
+            shopInput.ChangeScreen(getCurrentAgent.CurrentAgent, EShopScreen.Main);
         }
     }
 }

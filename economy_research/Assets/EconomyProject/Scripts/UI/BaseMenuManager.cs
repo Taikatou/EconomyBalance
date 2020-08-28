@@ -7,22 +7,22 @@ namespace EconomyProject.Scripts.UI
 {
     public class OpenedMenu
     {
-        public List<GameObject> openedMenus;
-        public List<GameObject> closedMenus;
+        private readonly List<GameObject> _openedMenus;
+        private readonly List<GameObject> _closedMenus;
 
         public OpenedMenu(List<GameObject> openedMenus, List<GameObject> closedMenus)
         {
-            this.openedMenus = openedMenus;
-            this.closedMenus = closedMenus;
+            _openedMenus = openedMenus;
+            _closedMenus = closedMenus;
         }
 
         public void Activate()
         {
-            OpenClose(true, openedMenus);
-            OpenClose(false, closedMenus);
+            OpenClose(true, _openedMenus);
+            OpenClose(false, _closedMenus);
         }
 
-        public void OpenClose(bool open, List<GameObject> menus)
+        private void OpenClose(bool open, List<GameObject> menus)
         {
             foreach (var toOpen in menus)
             {
@@ -32,20 +32,23 @@ namespace EconomyProject.Scripts.UI
     }
     public abstract class BaseMenuManager <T> : MonoBehaviour
     {
-        public T CacheAgentScreen { get; protected set; }
+        private bool _valid;
+        private T CacheAgentScreen { get; set; }
 
-        public abstract Dictionary<T, OpenedMenu> OpenedMenus { get; }
+        protected abstract Dictionary<T, OpenedMenu> OpenedMenus { get; }
 
-        public abstract bool Compare(T a, T b);
+        protected abstract bool Compare(T a, T b);
 
-        public virtual void SwitchMenu(T whichMenu)
+        protected virtual void SwitchMenu(T whichMenu)
         {
             var same = Compare(whichMenu, CacheAgentScreen);
-            if (!same)
+            if (!same || !_valid)
             {
+                _valid = true;
                 CacheAgentScreen = whichMenu;
                 var openedMenu = OpenedMenus[whichMenu];
                 openedMenu.Activate();
+                Debug.Log(openedMenu);
             }
         }
     }

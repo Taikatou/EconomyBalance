@@ -10,12 +10,12 @@ namespace EconomyProject.Scripts.UI.ShopUI.Buttons
         public Text priceText;
         public Text stockText;
 
-        public override void SetupButton()
+        protected override void SetupButton()
         {
-            nameLabel.text = itemDetails.ItemName;
+            nameLabel.text = ItemDetails.ItemName;
             //iconImage.sprite = _item.icon;
-            priceText.text = itemDetails.price.ToString();
-            stockText.text = "x" + itemDetails.stock;
+            priceText.text = ItemDetails.price.ToString();
+            stockText.text = "x" + ItemDetails.stock;
         }
     }
 }

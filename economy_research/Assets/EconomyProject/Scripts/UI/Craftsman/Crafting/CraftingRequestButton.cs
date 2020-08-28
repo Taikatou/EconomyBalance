@@ -22,14 +22,15 @@ namespace EconomyProject.Scripts.UI.Craftsman.Crafting
         public Image iconImage;
         public Text timeToCreated;
         public Text specsText;
-        public override void SetupButton()
+
+        protected override void SetupButton()
         {
-            nameLabel.text = itemDetails.craftingMap.resource.ResultingItemName;
-            timeToCreated.text = itemDetails.craftingMap.resource.timeToCreation.ToString(CultureInfo.InvariantCulture);
+            nameLabel.text = ItemDetails.craftingMap.resource.ResultingItemName;
+            timeToCreated.text = ItemDetails.craftingMap.resource.timeToCreation.ToString(CultureInfo.InvariantCulture);
             var outputText = "";
-            foreach (var requirement in itemDetails.craftingMap.resource.resourcesRequirements)
+            foreach (var requirement in ItemDetails.craftingMap.resource.resourcesRequirements)
             {
-                var currentInventory = itemDetails.craftingInventory.GetResourceNumber(requirement.type);
+                var currentInventory = ItemDetails.craftingInventory.GetResourceNumber(requirement.type);
                 outputText += requirement.type + "\t" + requirement.number + "/" + currentInventory + "\n";
             }
 

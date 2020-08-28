@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using EconomyProject.Scripts.MLAgents.AdventurerAgents;
 using EconomyProject.Scripts.UI.Adventurer;
+using Unity.MLAgents;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +21,7 @@ namespace EconomyProject.Scripts.UI
 
         public UiAccessor accessor;
 
-        public GetCurrentAgent getAgent;
+        public GetCurrentAgent<Agent> getAgent;
 
         public Dropdown dropDown;
 

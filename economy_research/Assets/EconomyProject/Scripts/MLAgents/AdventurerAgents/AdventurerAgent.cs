@@ -1,21 +1,17 @@
-﻿using System.Linq;
-using EconomyProject.Scripts.GameEconomy;
+﻿using EconomyProject.Scripts.GameEconomy;
 using EconomyProject.Scripts.GameEconomy.Systems;
 using EconomyProject.Scripts.Inventory;
-using MLAgents;
+using Unity.MLAgents.Sensors;
 using UnityEngine;
 
 namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
 {
     // Main and Shop is not used by agent
-    public enum AgentScreen { Quest, Auction, Main, Shop }
+    public enum AgentScreen { Main, Quest, Auction, Request }
 
     public enum AuctionChoice { Ignore, Bid }
-
-    [RequireComponent(typeof(AgentInventory))]
-    [RequireComponent(typeof(AdventurerInventory))]
-    [RequireComponent(typeof(EconomyWallet))]
-    public class AdventurerAgent : Agent
+    
+    public class AdventurerAgent : AgentScreen<AgentScreen>
     {
         public AgentInventory inventory;
 
@@ -27,9 +23,9 @@ namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
 
         public PlayerInput playerInput;
 
-        public AgentScreen ChosenScreen => playerInput.GetScreen(this);
+        public override AgentScreen ChosenScreen => playerInput.GetScreen(this, AgentScreen.Main);
 
-        public override void AgentReset()
+        public override void OnEpisodeBegin()
         {
             var reset = GetComponentInParent<ResetScript>();
             reset.Reset();
@@ -41,56 +37,45 @@ namespace EconomyProject.Scripts.MLAgents.AdventurerAgents
             wallet.Reset();
         }
 
+        public override void Heuristic(float[] actionsOut)
+        {
+            actionsOut[0] = NumberKey;
+
+            // WUCC check for errors. 
+        }
+
         public void BoughtItem(InventoryItem item, float cost)
         {
             inventory.AddItem(item);
             wallet.SpendMoney(cost);
         }
 
-        public override void AgentAction(float[] vectorAction)
+        public override void OnActionReceived(float[] vectorAction)
         {
-            var mainAction = Mathf.FloorToInt(vectorAction[0]);
-            
-            var auctionAction = Mathf.FloorToInt(vectorAction.Last());
-            
-            AgentAction(mainAction, auctionAction);
+            var action = Mathf.FloorToInt(vectorAction[0]);
+            playerInput.SetAgentAction(this, action);
         }
 
-        protected virtual void AgentAction(int mainAction, int auctionAction)
-        {
-            playerInput.SetAgentAction(this, mainAction, auctionAction);
-        }
-
-        public override void CollectObservations()
+        public override void CollectObservations(VectorSensor sensor)
         {
             // Player Observations
-            AddVectorObs((int)ChosenScreen);
-            AddVectorObs(wallet ? (float)wallet.Money : 0.0f);
-            AddVectorObs(adventurerInventory.EquipedItem);
+            sensor.AddObservation((int)ChosenScreen);
+            sensor.AddObservation(wallet ? (float)wallet.Money : 0.0f);
+            sensor.AddObservation(adventurerInventory.EquipedItem);
             
             // Player Input Observations
-            AddVectorObs(playerInput.GetProgress(this));
-            AddVectorObs(playerInput.GetNumberInAuction());
-            AddVectorObs(playerInput.GetNumberInQuest());
+            sensor.AddObservation(playerInput.GetProgress(this));
+            //sensor.AddObservation(playerInput.gameAuction.getnu);
+            //sensor.AddObservation(playerInput.GetNumberInQuest());
             
             // Auction Observations
             var highestBidder = gameAuction.IsHighestBidder(this);
             
-            AddVectorObs(gameAuction.auctionedItem);
-            AddVectorObs(highestBidder);
-            AddVectorObs(gameAuction.currentItemPrice);
-            AddVectorObs(gameAuction.BidLast);
-            AddVectorObs(gameAuction.BidOn);
-        }
-        
-        private void AddVectorObs(InventoryItem item, bool condition = true, float defaultObs = 0.0f)
-        {
-            condition = condition && item;
-            AddVectorObs(condition ? WeaponId.GetWeaponId(item.itemName) : -1);
-            AddVectorObs(condition ? item.durability : defaultObs);
-            AddVectorObs(condition ? item.numLootSpawns : defaultObs);
-            AddVectorObs(condition ? item.efficiency : defaultObs);
-            AddVectorObs(condition ? (item.unBreakable ? 1 : 2): 0);
+            sensor.AddObservation(gameAuction.auctionedItem);
+            sensor.AddObservation(highestBidder);
+            sensor.AddObservation(gameAuction.currentItemPrice);
+            sensor.AddObservation(gameAuction.BidLast);
+            sensor.AddObservation(gameAuction.BidOn);
         }
     }
 }

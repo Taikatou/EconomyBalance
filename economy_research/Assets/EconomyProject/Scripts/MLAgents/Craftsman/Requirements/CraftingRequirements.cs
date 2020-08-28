@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using EconomyProject.Scripts.Inventory;
 using UnityEngine;
 
 namespace EconomyProject.Scripts.MLAgents.Craftsman.Requirements
 {
+    public static class CraftingUtils
+    {
+        public static IEnumerable<CraftingResources> CraftingResources => Enum.GetValues(typeof(CraftingResources)).Cast<CraftingResources>();
+    }
     public enum CraftingResources { Wood, Metal, Gem, DragonScale }
 
     [System.Serializable]

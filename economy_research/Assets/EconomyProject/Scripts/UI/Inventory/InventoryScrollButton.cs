@@ -10,10 +10,11 @@ namespace EconomyProject.Scripts.UI.Inventory
         public Text nameLabel;
         public Text effectiveText;
         public Image iconImage;
-        public override void SetupButton()
+
+        protected override void SetupButton()
         {
-            nameLabel.text = itemDetails.itemName;
-            effectiveText.text = itemDetails.efficiency.ToString(CultureInfo.InvariantCulture);
+            nameLabel.text = ItemDetails.itemName;
+            effectiveText.text = ItemDetails.efficiency.ToString(CultureInfo.InvariantCulture);
         }
     }
 }

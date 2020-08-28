@@ -4,26 +4,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using EconomyProject.Scripts.MLAgents.Shop;
+using Unity.MLAgents;
 using UnityEngine;
 
 namespace EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
 {
     public class CraftingResourceUi
     {
-        public CraftingResources resourceType;
-        public int inventoryNumber;
+        public readonly CraftingResources ResourceType;
+        public readonly int InventoryNumber;
 
         public CraftingResourceUi (CraftingResources resourceType, int inventoryNumber)
         {
-            this.resourceType = resourceType;
-            this.inventoryNumber = inventoryNumber;
+            ResourceType = resourceType;
+            InventoryNumber = inventoryNumber;
         }
     }
     public class CraftsManMakeRequestScrollList : CraftingScrollList<CraftingResourceUi, CraftingMakeRequestButton>
     {
-        public GetCurrentAgent getCurrentAgent;
+        public GetCurrentShopAgent getCurrentAgent;
 
-        public ShopAgent CraftsmanAgent => getCurrentAgent.CurrentAgent.GetComponent<ShopAgent>();
+        private ShopAgent CraftsmanAgent => getCurrentAgent.CurrentAgent;
 
         // Start is called before the first frame update
         public override List<CraftingResourceUi> ItemList
@@ -33,7 +34,7 @@ namespace EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
                 if (CraftsmanAgent)
                 {
                     var items = new List<CraftingResourceUi>();
-                    var resources = Enum.GetValues(typeof(CraftingResources)).Cast<CraftingResources>().ToList();
+                    var resources = CraftingUtils.CraftingResources;
                     foreach (var resource in resources)
                     {
                         var inventoryNumber = CraftsmanAgent.CraftingInventory.GetResourceNumber(resource);
@@ -48,7 +49,7 @@ namespace EconomyProject.Scripts.UI.Craftsman.Request.ScrollList
 
         public override void SelectItem(CraftingResourceUi item, int number = 1)
         {
-            CraftsmanAgent.MakeRequest(item.resourceType);
+            requestSystem.MakeChoice(CraftsmanAgent, item.ResourceType);
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using EconomyProject.Scripts.MLAgents.Craftsman;
+using EconomyProject.Scripts.MLAgents.Shop;
 using EconomyProject.Scripts.UI.ShopUI.ScrollLists;
 using UnityEngine;
 
 namespace EconomyProject.Scripts.UI.Craftsman
 {
-    public class CraftsmanMenu : BaseMenuManager<CraftsmanScreen>
+    public class CraftsmanMenu : BaseMenuManager<EShopScreen>
     {
         public GameObject requestMenu;
 
@@ -13,33 +14,38 @@ namespace EconomyProject.Scripts.UI.Craftsman
 
         public GameObject mainMenu;
 
-        public CraftsmanUIControls CraftsmanUiControls => GetComponent<CraftsmanUIControls>();
+        private CraftsmanUIControls CraftsmanUiControls => GetComponent<CraftsmanUIControls>();
 
         private void Update()
         {
             if (CraftsmanUiControls.CraftsmanAgent)
             {
-                var nextScreen = CraftsmanUiControls.CraftsmanAgent.CurrentScreen;
+                var nextScreen = CraftsmanUiControls.CraftsmanAgent.ChosenScreen;
                 SwitchMenu(nextScreen);
             }
         }
 
-        public override Dictionary<CraftsmanScreen, OpenedMenu> OpenedMenus => new Dictionary<CraftsmanScreen, OpenedMenu>
+        protected override Dictionary<EShopScreen, OpenedMenu> OpenedMenus => new Dictionary<EShopScreen, OpenedMenu>
         {
-            { CraftsmanScreen.Main, new OpenedMenu(new List<GameObject>{mainMenu}, new List<GameObject>{ craftMenu, requestMenu}) },
-            { CraftsmanScreen.Craft, new OpenedMenu(new List<GameObject>{craftMenu}, new List<GameObject>{ requestMenu, mainMenu}) },
-            { CraftsmanScreen.Request, new OpenedMenu(new List<GameObject>{requestMenu}, new List<GameObject>{ mainMenu, craftMenu }) }
+            { EShopScreen.Main, new OpenedMenu(new List<GameObject>{mainMenu}, new List<GameObject>{ craftMenu, requestMenu}) },
+            { EShopScreen.Craft, new OpenedMenu(new List<GameObject>{craftMenu}, new List<GameObject>{ requestMenu, mainMenu}) },
+            { EShopScreen.Request, new OpenedMenu(new List<GameObject>{requestMenu}, new List<GameObject>{ mainMenu, craftMenu }) }
         };
 
-        public override bool Compare(CraftsmanScreen a, CraftsmanScreen b)
+        protected override bool Compare(EShopScreen a, EShopScreen b)
         {
             return a == b;
         }
 
-        public override void SwitchMenu(CraftsmanScreen whichMenu)
+        protected override void SwitchMenu(EShopScreen whichMenu)
         {
             base.SwitchMenu(whichMenu);
-            craftMenu.GetComponentInChildren<LastUpdate>()?.Refresh();
+            
+            var children = craftMenu.GetComponentsInChildren<LastUpdate>();
+            foreach (var child in children)
+            {
+                child.Refresh();
+            }
         }
     }
 }

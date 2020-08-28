@@ -2,10 +2,8 @@
 
 namespace EconomyProject.Scripts.GameEconomy.Systems
 {
-    public class MainMenuSystem : EconomySystem
-    {
-        public GameAuction gameAuction;
-        public override float Progress => 0;
+    public class MainMenuSystem : EconomySystem<AdventurerAgent, AgentScreen>
+    { 
         protected override AgentScreen ActionChoice => AgentScreen.Main;
         public override bool CanMove(AdventurerAgent agent)
         {
@@ -14,17 +12,7 @@ namespace EconomyProject.Scripts.GameEconomy.Systems
 
         private void Update()
         {
-            if (gameAuction.ItemCount > 0)
-            {
-                RequestDecisions();
-            }
-            else
-            {
-                foreach (var agent in CurrentPlayers)
-                {
-                    playerInput.SetMainAction(agent, AgentScreen.Quest);
-                }
-            }
+            RequestDecisions();
         }
     }
 }

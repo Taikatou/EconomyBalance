@@ -1,18 +1,18 @@
 ﻿using System;
-using MLAgents;
+using Unity.MLAgents;
 using UnityEngine;
 
 namespace EconomyProject.Scripts.UI
 {
-    public class GetCurrentAgent : MonoBehaviour
+    public abstract class GetCurrentAgent<TAgent> : MonoBehaviour where TAgent : Agent
     {
         public GameObject agentParent;
 
-        public int Index { get; set; }
+        private int Index { get; set; }
 
-        public Agent[] GetAgents => agentParent.GetComponentsInChildren<Agent>();
+        public TAgent[] GetAgents => agentParent.GetComponentsInChildren<TAgent>();
 
-        public Agent CurrentAgent
+        public TAgent CurrentAgent
         {
             get
             {
@@ -24,7 +24,7 @@ namespace EconomyProject.Scripts.UI
             }
         }
 
-        public void UpdateAgent(Agent agent)
+        public void UpdateAgent(TAgent agent)
         {
             var index = Array.FindIndex(GetAgents, a => a == agent);
             if (index >= 0)

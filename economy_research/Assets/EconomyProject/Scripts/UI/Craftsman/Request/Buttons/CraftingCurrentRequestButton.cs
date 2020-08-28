@@ -7,13 +7,15 @@ namespace EconomyProject.Scripts.UI.Craftsman.Request.Buttons
     public class CraftingCurrentRequestButton : SampleButton<ResourceRequest>
     {
         public Text nameLabel;
-        public Image iconImage;
         public Text stockText;
-        public override void SetupButton()
+        public Text price;
+
+        protected override void SetupButton()
         {
-            nameLabel.text = itemDetails.Resources.ToString();
+            nameLabel.text = ItemDetails.Resource.ToString();
             //iconImage.sprite = _item.icon;
-            stockText.text = "x" + itemDetails.Number;
+            stockText.text = "x" + ItemDetails.Number;
+            price.text = ItemDetails.Price.ToString();
         }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using EconomyProject.Scripts.MLAgents.Shop;
 using EconomyProject.Scripts.UI.ShopUI.ScrollLists;
+using Unity.MLAgents;
 
 namespace EconomyProject.Scripts.UI.Craftsman.Crafting
 {
     public class CraftsmanCraftingScrollList : AbstractScrollList<CraftingInfo, CraftingRequestButton>
     {
-        public GetCurrentAgent getCurrentAgent;
+        public GetCurrentShopAgent getCurrentAgent;
+        private ShopAgent Agent => getCurrentAgent.CurrentAgent;
         public override LastUpdate LastUpdated => GetComponent<CraftingLastUpdate>();
-        public ShopAgent Agent => getCurrentAgent.CurrentAgent.GetComponent<ShopAgent>();
 
         public override List<CraftingInfo> ItemList
         {
